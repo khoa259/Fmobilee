@@ -1,15 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import { Container } from "react-bootstrap";
+import Footer from "./component/Footer";
+import Header from "./component/Header";
+import HomeScreen from "./screens/homeScreen";
 const App = () => {
   return (
     <div className="App">
-      <h1>
-        Welcome to Fmobile
-        
-      </h1>
+      <Header />
+      <Container>
+        <main>
+          <HomeScreen />
+        </main>
+      </Container>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
