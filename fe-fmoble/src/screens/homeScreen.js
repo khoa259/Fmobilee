@@ -5,11 +5,11 @@ import product from "../product";
 const HomeScreen = () => {
   return (
     <>
-      <h1>Lastest Products</h1>
+      <h1 className="mt-3">Lastest Products</h1>
       <Row>
-        {product.map((products) => (
-          <Col sm={12} md={6} lg={4}>
-            <Products products={products} />
+        {product.map((product) => (
+          <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+            <Products product={product} />
           </Col>
         ))}
       </Row>

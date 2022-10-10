@@ -1,6 +1,9 @@
 main{
   min-height: 100vh;
 }
+h3{
+   padding: 1rem;
+}
 .rating span {
   padding: 0.1rem;
 }
