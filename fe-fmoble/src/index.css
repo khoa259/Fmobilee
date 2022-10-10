@@ -1,9 +1,51 @@
 main{
   min-height: 100vh;
+  background:#f5f5f7;
+  /* margin-top: 5.55rem; */
 }
+#navbar{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  transition:top 0.3s;
+  display: block;
+  z-index: 2;
+}
+
 h3{
    padding: 1rem;
 }
 .rating span {
   padding: 0.1rem;
+}
+
+/* Banner */
+:root {
+  --light: white;
+  --height-panigation: 6px;
+  --width-panigation: 18px;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: var(--light) !important;
+  padding: 0 105px;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 40px !important;
+  font-weight: bolder;
+  
+}
+.swiper-pagination-bullet {
+  border-radius: 0 !important;
+  width: var(--width-panigation) !important;
+  height: var(--height-panigation) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--light) !important;
+  border-radius: 0 !important;
+  width: var(--width-panigation) !important;
+  height: var(--height-panigation) !important;
 }

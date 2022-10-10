@@ -29,7 +29,7 @@ const products = [
   },
   {
     _id: "3",
-    name: "iPhone 14 Pro Max",
+    name: "iPhone 14 Pro Max 512GB",
     image:
       "https://cdn1.viettelstore.vn/images/Product/ProductImage/medium/iPhone_14_Pro_Max-Pur1.jpg",
     description:
@@ -51,6 +51,20 @@ const products = [
     brand: "Apple",
     category: "iphone",
     price: 1029.99,
+    countInStock: 5,
+    rating: 3,
+    numReviews: 12,
+  },
+  {
+    _id: "5",
+    name: "MacBook Air M2 2022 13 inch 16GB 256GB",
+    image:
+      "https://images.fpt.shop/unsafe/fit-in/214x214/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2022/9/27/637998746527119144_macbook-air-m2-2022-vang-dd-fstudio.jpg",
+    description:
+      "Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design",
+    brand: "Apple",
+    category: "mac",
+    price: 1329.99,
     countInStock: 5,
     rating: 3,
     numReviews: 12,
