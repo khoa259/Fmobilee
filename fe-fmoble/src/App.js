@@ -1,18 +1,16 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import Footer from "./component/Footer";
-import Header from "./component/Header";
+import { Route, Routes } from "react-router-dom";
+import WebSiteLayout from "./layouts/webSiteLayout";
 import HomeScreen from "./screens/homeScreen";
 const App = () => {
   return (
     <div className="App">
-      <Header />
-      <Container>
-        <main>
-          <HomeScreen />
-        </main>
-      </Container>
-      <Footer />
+      <Routes>
+        <Route path="/" element={<WebSiteLayout />}>
+          <Route index element={<HomeScreen />} />
+          <Route path="/products" element={<h1>Products Page</h1>} />
+        </Route>
+      </Routes>
     </div>
   );
 };
