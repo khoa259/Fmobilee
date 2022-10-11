@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node be-fmobile/server",
     "server": "nodemon be-fmobile/server",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/khoadeu25890/Fmobilee#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2"
   },
   "devDependencies": {
