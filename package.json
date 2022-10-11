@@ -4,7 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node be-fmobile/server"
+    "start": "node be-fmobile/server",
+    "server": "nodemon be-fmobile/server",
+    "client": "npm start --prefix fe-fmoble",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -18,5 +21,9 @@
   "homepage": "https://github.com/khoadeu25890/Fmobilee#readme",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.4.0",
+    "nodemon": "^2.0.20"
   }
 }
