@@ -14,7 +14,7 @@ const ProductsScreen = () => {
       setProducts(data);
     };
     getProducts();
-  }, []);
+  }, [id]);
   return (
     <>
       <Link className="btn btn-light my-3" to={"/"}>

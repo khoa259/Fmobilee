@@ -9,8 +9,8 @@
     "server": "nodemon be-fmobile/server",
     "client": "npm start --prefix fe-fmoble",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "data:import" : "node be-fmobile/seeder",
-    "data:destroy" : "node be-fmobile/seeder -d"
+    "data:import": "node be-fmobile/seeder",
+    "data:destroy": "node be-fmobile/seeder -d"
   },
   "repository": {
     "type": "git",
