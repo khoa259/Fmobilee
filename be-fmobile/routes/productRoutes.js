@@ -12,7 +12,6 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const products = await Product.find({});
-    res.status(401);
     res.json(products);
   })
 );
