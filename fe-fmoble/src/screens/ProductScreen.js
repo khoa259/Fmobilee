@@ -9,8 +9,8 @@ import {
   Image,
   Card,
 } from "react-bootstrap";
-import { useParams, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
 import Loader from "../component/Loader";
@@ -114,7 +114,7 @@ const ProductsScreen = () => {
                     <Button
                       className="btn-block"
                       type="button"
-                      onClick={addToCartHandler()}
+                      onClick={addToCartHandler}
                     >
                       Add To Cart
                     </Button>
