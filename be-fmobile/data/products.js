@@ -51,6 +51,19 @@ const products = [
     rating: 3,
     numReviews: 12,
   },
+  {
+    name: "iPhone 13 Pro Max 512GB",
+    image:
+      "https://cdn1.viettelstore.vn/images/Product/ProductImage/medium/1051159192.jpeg",
+    description:
+      "Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design",
+    brand: "Apple",
+    category: "iphone",
+    price: 1029.99,
+    countInStock: 0,
+    rating: 5,
+    numReviews: 12,
+  },
 ];
 
 export default products;
