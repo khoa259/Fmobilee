@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Badge, Container, Nav, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -11,11 +12,21 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Link href="/gio-hang">
-                <i className="px-1 fas fa-shopping-cart"></i> Giỏ hàng
+                <i className="px-1 fas fa-shopping-cart"></i>
+                {/* <div className="counter_cart">
+                  <span className="">0</span>
+                </div> */}
+                <Badge bg="dark ">0</Badge>
               </Nav.Link>
-              <Nav.Link href="/login">
-                <i className="px-1 fas fa-user"></i>Đăng nhập
-              </Nav.Link>
+              <div className="dropdown">
+                <button className="dropbtn">
+                  <i className="px-1 fas fa-user"></i>
+                </button>
+                <div className="dropdown-content">
+                  <Link to="/register">đăng ký</Link>
+                  <Link to="/login">đăng nhập</Link>
+                </div>
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Container>
