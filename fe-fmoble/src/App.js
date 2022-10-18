@@ -1,18 +1,20 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import Footer from "./component/Footer";
-import Header from "./component/Header";
-import HomeScreen from "./screens/homeScreen";
+import { Route, Routes } from "react-router-dom";
+import WebSiteLayout from "./layouts/webSiteLayout";
+import Login from "./pages/auth/logIn";
+import Register from "./pages/auth/register";
+import HomePage from "./pages/homePage";
+
 const App = () => {
   return (
     <div className="App">
-      <Header />
-      <Container>
-        <main>
-          <HomeScreen />
-        </main>
-      </Container>
-      <Footer />
+      <Routes>
+        <Route path="/" element={<WebSiteLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+      </Routes>
     </div>
   );
 };
