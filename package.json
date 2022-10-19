@@ -33,6 +33,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "react-toast": "^1.0.3",
+    "react-toastify": "^9.0.8"
   }
 }
