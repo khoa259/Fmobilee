@@ -9,7 +9,8 @@ const Login = () => {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
               <div
                 className="card shadow-2-strong"
-                style={{ borderRadius: "1rem" }}>
+                style={{ borderRadius: "1rem" }}
+              >
                 <div className="card-body p-5 ">
                   <h3 className="mb-5 text-center">Đăng nhập</h3>
                   <div className="form-outline mb-4">
@@ -32,7 +33,7 @@ const Login = () => {
                       Mật Khẩu
                     </label>
                   </div>
-                  {/* Checkbox */}
+
                   <div className="form-check d-flex justify-content-start mb-4">
                     <input
                       className="form-check-input"
@@ -47,14 +48,16 @@ const Login = () => {
                   </div>
                   <button
                     className="btn btn-primary btn-lg btn-block"
-                    type="submit">
+                    type="submit"
+                  >
                     Đăng ký
                   </button>
                   <hr className="my-4" />
                   <button
                     className="btn btn-lg btn-block btn-primary"
                     style={{ backgroundColor: "#dd4b39" }}
-                    type="submit">
+                    type="submit"
+                  >
                     <i className="fab fa-google mx-2" /> Đăng nhập bằng Google
                   </button>
                 </div>
