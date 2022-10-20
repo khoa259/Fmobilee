@@ -5,12 +5,12 @@ import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 import HomePage from "./pages/homePage";
 import RegisterComplete from "./pages/auth/registerComplete";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
     <div className="App">
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Routes>
         <Route path="/" element={<WebSiteLayout />}>
           <Route index element={<HomePage />} />
