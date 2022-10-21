@@ -1,39 +1,52 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState } from "react";
+import { auth } from "../../firebase";
 import { toast } from "react-toastify";
-import { fireAuth } from "../../firebase";
-import { sendSignInLinkToEmail } from "firebase/auth";
 
 const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const [email, setEmail] = useState("");
 
-  const onSubmit = async (data) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log("ENV --->", process.env.REACT_APP_REGISTER_REDIRECT_URL);
     const config = {
-      url: "http://localhost:3000/register/complete",
+      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
     };
-    // gửi email đến tài khoản đăng ký
-    await sendSignInLinkToEmail(fireAuth, data.email, config);
+
+    await auth.sendSignInLinkToEmail(email, config);
     toast.success(
-      `Email is send to ${data.email}. Click the link to complete your registration`
+      `Email is sent to ${email}. Click the link to complete your registration.`
     );
-    window.localStorage.setItem("emailForRegistraion", data.email);
-    reset();
+    // save user email in local storage
+    window.localStorage.setItem("emailForRegistration", email);
+    // clear state
+    setEmail("");
   };
+
+  const registerForm = () => (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        className="form-control"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        autoFocus
+      />
+
+      <button type="submit" className="btn btn-raised">
+        Register
+      </button>
+    </form>
+  );
+
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("email")} />
-        {errors.email && <p>invalid email address</p>}
-        <button type="submit">Sign Up</button>
-      </form>
+    <div className="container p-5">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <h4>Register</h4>
+          {registerForm()}
+        </div>
+      </div>
     </div>
   );
 };

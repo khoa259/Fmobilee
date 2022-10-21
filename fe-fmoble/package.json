@@ -3,22 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.6",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^5.2.2",
-    "firebase": "^9.12.1",
-    "react": "^18.0.0",
+    "firebase": "^7.19.0",
+    "react": "^16.13.1",
     "react-bootstrap": "^2.5.0",
-    "react-dom": "^18.0.0",
+    "react-dom": "^16.13.1",
     "react-hook-form": "^7.38.0",
     "react-redux": "^7.2.1",
-    "react-router-dom": "^6.4.2",
-    "react-scripts": "5.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "react-toastify": "^6.0.8",
     "redux": "^4.0.5",
-    "swiper": "^8.4.3",
-    "web-vitals": "^2.1.4"
+    "serviceworker": "^0.1.7",
+    "swiper": "^8.4.4",
+    "web-vitals": "^3.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -55,5 +56,9 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "url": "^0.11.0"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
