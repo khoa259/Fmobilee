@@ -13,7 +13,7 @@ const Header = () => {
       type: "LOGOUT",
       payload: null,
     });
-    history.push("/");
+    history.push("/login");
   };
   const { user } = useSelector((state) => ({ ...state }));
   console.log("user", user);
