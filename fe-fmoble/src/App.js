@@ -10,6 +10,7 @@ import HomePage from "./pages/homePage";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
 import RegisterComplete from "./pages/auth/registerComplete";
+import ForgotPassword from "./pages/auth/forgotPassword";
 import { auth } from "./firebase";
 
 const App = () => {
@@ -41,6 +42,7 @@ const App = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/register/complete" component={RegisterComplete} />
+        <Route exact path="/forgot/password" component={ForgotPassword} />
       </Switch>
       <Footer />
     </>

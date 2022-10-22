@@ -3,6 +3,7 @@ import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Login = ({ history }) => {
           placeholder="Your password"
         />
       </div>
-
+      <Link to="/forgot/password">Forgot Password</Link>
       <br />
       <Button
         onClick={handleSubmit}
@@ -64,8 +65,7 @@ const Login = ({ history }) => {
         block
         shape="round"
         size="large"
-        disabled={!email || password.length < 6}
-      >
+        disabled={!email || password.length < 6}>
         Login with Email/Password
       </Button>
     </form>
@@ -108,8 +108,7 @@ const Login = ({ history }) => {
             className="mb-3"
             block
             shape="round"
-            size="large"
-          >
+            size="large">
             Login with Google
           </Button>
         </div>

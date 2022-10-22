@@ -19,6 +19,7 @@
     "react-toastify": "^6.0.8",
     "redux": "^4.0.5",
     "serviceworker": "^0.1.7",
+    "redux-devtools-extension": "^2.13.8",
     "swiper": "^8.4.4",
     "web-vitals": "^3.0.4"
   },
