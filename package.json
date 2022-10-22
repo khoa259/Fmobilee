@@ -22,33 +22,19 @@
   },
   "homepage": "https://github.com/khoadeu25890/Fmobilee#readme",
   "dependencies": {
-    "antd": "^4.23.6",
-    "body-parser": "^1.20.1",
-    "concurrently": "^7.4.0",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "express-jwt": "^7.7.5",
-    "firebase": "^9.12.1",
-    "firebase-admin": "^11.1.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "firebase-admin": "^9.1.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.6.5",
+    "mongoose": "^5.10.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.20",
-    "react-toast": "^1.0.3",
-    "react-toastify": "^9.0.8",
+    "nodemon": "^2.0.4",
     "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
-    "assert": "^2.0.0",
-    "buffer": "^6.0.3",
-    "crypto-browserify": "^3.12.0",
-    "https-browserify": "^1.0.0",
-    "os-browserify": "^0.3.0",
-    "process": "^0.11.10",
-    "react-app-rewired": "^2.2.1",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.2.0",
-    "url": "^0.11.0"
+    "concurrently": "^7.5.0"
   }
 }

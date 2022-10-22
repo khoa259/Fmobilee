@@ -25,7 +25,6 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <Nav.Link href="/gio-hang"></Nav.Link>
               <Nav.Link href="/gio-hang">
                 <i className="px-1 fas fa-shopping-cart"></i>
                 {/* <div className="counter_cart">
@@ -34,14 +33,14 @@ const Header = () => {
                 <Badge bg="dark ">0</Badge>
               </Nav.Link>
               <div className="dropdown">
-                <p className="text-white pl-2 pt-3">
-                  {user.email && user.email.split("@")[0]}
-                </p>
                 {!user.email && (
                   <button className="dropbtn">
                     <i className="px-1 fas fa-user"></i>
                   </button>
                 )}
+                <div className="text-white pl-2 pt-3">
+                  {user.email && user.email.split("@")[0]}
+                </div>
                 {!user.email && (
                   <div className="dropdown-content">
                     <Link to="/register">đăng ký</Link>
