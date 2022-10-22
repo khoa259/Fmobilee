@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/khoadeu25890/Fmobilee#readme",
   "dependencies": {
+    "antd": "^4.23.6",
     "body-parser": "^1.20.1",
     "concurrently": "^7.4.0",
     "cors": "^2.8.5",

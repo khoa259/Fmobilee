@@ -2,7 +2,7 @@ import firebase from "firebase";
 import React from "react";
 import { Badge, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const history = useHistory();
@@ -13,8 +13,10 @@ const Header = () => {
       type: "LOGOUT",
       payload: null,
     });
-    history.push("/login");
+    history.push("/");
   };
+  const { user } = useSelector((state) => ({ ...state }));
+  console.log("user", user);
 
   return (
     <div>
@@ -25,6 +27,10 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Link href="/gio-hang">
+                {user?.email}
+                <Nav.Link />
+              </Nav.Link>
+              <Nav.Link href="/gio-hang">
                 <i className="px-1 fas fa-shopping-cart"></i>
                 {/* <div className="counter_cart">
                   <span className="">0</span>
@@ -32,20 +38,24 @@ const Header = () => {
                 <Badge bg="dark ">0</Badge>
               </Nav.Link>
 
-              <div>
-                <Link to="/register">đăng ký</Link>
-              </div>
-
-              <div className="dropdown">
-                <button className="dropbtn">
-                  <i className="px-1 fas fa-user"></i>
-                </button>
-                <div className="dropdown-content">
-                  <Link to={""} onClick={logout}>
-                    Đăng xuất
-                  </Link>
+              {!user.email && (
+                <div>
+                  <Link to="/register">đăng ký</Link>
                 </div>
-              </div>
+              )}
+
+              {user.email && (
+                <div className="dropdown">
+                  <button className="dropbtn">
+                    <i className="px-1 fas fa-user"></i>
+                  </button>
+                  <div className="dropdown-content">
+                    <Link to={""} onClick={logout}>
+                      Đăng xuất
+                    </Link>
+                  </div>
+                </div>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
