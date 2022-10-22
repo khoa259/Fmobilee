@@ -13,10 +13,9 @@ const Header = () => {
       type: "LOGOUT",
       payload: null,
     });
-    history.push("/login");
+    history.push("/");
   };
   const { user } = useSelector((state) => ({ ...state }));
-  console.log("user", user);
 
   return (
     <div>
@@ -26,10 +25,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <Nav.Link href="/gio-hang">
-                {user?.email}
-                <Nav.Link />
-              </Nav.Link>
+              <Nav.Link href="/gio-hang"></Nav.Link>
               <Nav.Link href="/gio-hang">
                 <i className="px-1 fas fa-shopping-cart"></i>
                 {/* <div className="counter_cart">
@@ -37,25 +33,30 @@ const Header = () => {
                 </div> */}
                 <Badge bg="dark ">0</Badge>
               </Nav.Link>
-
-              {!user.email && (
-                <div>
-                  <Link to="/register">đăng ký</Link>
-                </div>
-              )}
-
-              {user.email && (
-                <div className="dropdown">
+              <div className="dropdown">
+                <p className="text-white pl-2 pt-3">
+                  {user.email && user.email.split("@")[0]}
+                </p>
+                {!user.email && (
                   <button className="dropbtn">
                     <i className="px-1 fas fa-user"></i>
                   </button>
+                )}
+                {!user.email && (
                   <div className="dropdown-content">
-                    <Link to={""} onClick={logout}>
-                      Đăng xuất
+                    <Link to="/register">đăng ký</Link>
+                    <Link to="/login">đăng nhập</Link>
+                  </div>
+                )}
+                {user.email && (
+                  <div className="dropdown-content">
+                    <Link to="/">đơn hàng</Link>
+                    <Link to="/" onClick={logout}>
+                      đăng xuất
                     </Link>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Container>
