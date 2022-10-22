@@ -2,14 +2,35 @@ import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
+import { useDispatch } from "react-redux";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = ({ history }) => {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("buitoai2031@gmail.com");
+  const [password, setPassword] = useState("toaibui140902");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    console.table(email, password);
+    // console.table(email, password);
+    try {
+      const result = await auth.signInWithEmailAndPassword(email, password);
+      // console.log("result", result);
+      const { user } = result;
+      const idTokenResult = await user.getIdTokenResult();
+      dispatch({
+        type: "LOGGED_IN_USER",
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+      });
+      history.push("/");
+    } catch (error) {
+      toast.error(error.message);
+      setLoading(false);
+    }
   };
 
   const loginForm = () => (
