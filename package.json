@@ -35,7 +35,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "react-toast": "^1.0.3",
-    "react-toastify": "^9.0.8"
+    "react-toastify": "^9.0.8",
+    "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
     "assert": "^2.0.0",

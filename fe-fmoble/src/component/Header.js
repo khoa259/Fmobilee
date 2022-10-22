@@ -1,8 +1,21 @@
+import firebase from "firebase";
 import React from "react";
 import { Badge, Container, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const logout = () => {
+    firebase.auth().signOut();
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    history.push("/login");
+  };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -18,13 +31,19 @@ const Header = () => {
                 </div> */}
                 <Badge bg="dark ">0</Badge>
               </Nav.Link>
+
+              <div>
+                <Link to="/register">đăng ký</Link>
+              </div>
+
               <div className="dropdown">
                 <button className="dropbtn">
                   <i className="px-1 fas fa-user"></i>
                 </button>
                 <div className="dropdown-content">
-                  <Link to="/register">đăng ký</Link>
-                  <Link to="/login">đăng nhập</Link>
+                  <Link to={""} onClick={logout}>
+                    Đăng xuất
+                  </Link>
                 </div>
               </div>
             </Nav>
