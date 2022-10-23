@@ -4,6 +4,9 @@ import cors from "cors";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 
+//import Router
+import AuthRoute from "./routes/Auth.js";
+
 // app
 const app = express();
 
@@ -23,6 +26,8 @@ app.get("/api", (req, res) => {
     data: "hey you hit node API",
   });
 });
+
+app.use("/api", AuthRoute);
 
 // port
 const port = process.env.PORT || 8000;
