@@ -1,11 +1,11 @@
-import { Router } from "express";
+import express from "express";
 
-const router = Router();
+const authRoute = express.Router();
 
-router.get("/create-or-update-user", (req, res) => {
-  res.json({
-    data: "hey you hit create-or-update-user API endpoint",
+authRoute.get("/user", (req, res) => {
+  res.status(200).json({
+    data: "hey you hit user API endpoint",
   });
 });
 
-export default router;
+export default authRoute;

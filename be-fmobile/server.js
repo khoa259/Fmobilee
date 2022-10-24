@@ -3,12 +3,12 @@ import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-
 //import Router
-import AuthRoute from "./routes/Auth.js";
+import authRoute from "./routes/auth.js";
 
-// app
+// variable
 const app = express();
+// app
 
 app.use(morgan("dev"));
 app.use(cors());
@@ -26,9 +26,8 @@ app.get("/api", (req, res) => {
     data: "hey you hit node API",
   });
 });
-
-app.use("/api", AuthRoute);
-
+// Route middleware
+app.use("/api", authRoute);
 // port
 const port = process.env.PORT || 8000;
 
