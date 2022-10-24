@@ -4,6 +4,19 @@ import { toast } from "react-toastify";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+const createOrUpdateUser = async (authToken) => {
+  return await axios.post(
+    `http://localhost:8000/api/create-or-update-user`,
+    {},
+    {
+      headers: {
+        authToken: authToken,
+      },
+    }
+  );
+};
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -15,6 +28,7 @@ const Login = ({ history }) => {
 
   useEffect(() => {
     if (user && user.token) history.push("/");
+    console.log(user);
   }, [user]);
 
   const handleSubmit = async (e) => {
@@ -23,9 +37,14 @@ const Login = ({ history }) => {
     // console.table(email, password);
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
-      // console.log("result", result);
+      console.log("result", result);
       const { user } = result;
       const idTokenResult = await user.getIdTokenResult();
+
+      createOrUpdateUser(idTokenResult.token)
+        .then((res) => console.log("CREATE OR UPDATE USER", res))
+        .catch();
+
       dispatch({
         type: "LOGGED_IN_USER",
         payload: {
@@ -71,7 +90,8 @@ const Login = ({ history }) => {
         block
         shape="round"
         size="large"
-        disabled={!email || password.length < 6}>
+        disabled={!email || password.length < 6}
+      >
         Login with Email/Password
       </Button>
     </form>
@@ -114,7 +134,8 @@ const Login = ({ history }) => {
             className="mb-3"
             block
             shape="round"
-            size="large">
+            size="large"
+          >
             Login with Google
           </Button>
         </div>

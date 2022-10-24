@@ -1,6 +1,6 @@
 import fireAdmin from "../firebase/index.js";
 
 export const authCheck = (req, res, next) => {
-  console.log(req.header); //token
+  console.log(req.headers); //token
   next();
 };

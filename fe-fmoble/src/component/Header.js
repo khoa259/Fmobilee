@@ -33,13 +33,13 @@ const Header = () => {
                 <Badge bg="dark ">0</Badge>
               </Nav.Link>
               <div className="dropdown">
-                {!user.email && (
+                {!user?.email && (
                   <button className="dropbtn">
                     <i className="px-1 fas fa-user"></i>
                   </button>
                 )}
                 <div className="text-white pl-2 pt-3">
-                  {user.email && user.email.split("@")[0]}
+                  {user?.email && user?.email.split("@")[0]}
                 </div>
                 {!user.email && (
                   <div className="dropdown-content">
