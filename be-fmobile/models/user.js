@@ -1,7 +1,7 @@
-import mongoose, { Schema } from "mongoose";
-const ObjectId = mongoose.Types.ObjectId;
+import mongoose from "mongoose";
+const { ObjectId } = mongoose.Schema;
 
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     name: String,
     email: {
@@ -11,16 +11,14 @@ const userSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      default: "subcriber",
+      default: "subscriber",
     },
     cart: {
       type: Array,
       default: [],
     },
-    address: {
-      type: String,
-    },
-    // wishlist: [{type: ObjectId, ref: "Product"}],
+    address: String,
+    //   wishlist: [{ type: ObjectId, ref: "Product" }],
   },
   { timestamps: true }
 );
