@@ -12,10 +12,10 @@ const myMiddleware = (req, res, next) => {
 
 const authRoute = express.Router();
 authRoute.post("/create-or-update-user", authCheck, createOrUpdateUser);
-authRoute.get("/testing", myMiddleware, (req, res) => {
-  res.json({
-    data: "YOU SUCCESSFULY TRIED MIDDLEWARE",
-  });
-});
+// authRoute.get("/testing", myMiddleware, (req, res) => {
+//   res.json({
+//     data: "YOU SUCCESSFULY TRIED MIDDLEWARE",
+//   });
+// });
 
 export default authRoute;
