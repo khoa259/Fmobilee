@@ -1,7 +1,7 @@
 import express from "express";
 // middleware
 
-import { authCheck } from "../middleware/auth.js";
+import { authCheck, adminCheck } from "../middleware/auth.js";
 // import Controller
 import { createOrUpdateUser, currentUser } from "../controller/auth.js";
 
@@ -13,10 +13,6 @@ const myMiddleware = (req, res, next) => {
 const authRoute = express.Router();
 authRoute.post("/create-or-update-user", authCheck, createOrUpdateUser);
 authRoute.post("/current-user", authCheck, currentUser);
-// authRoute.get("/testing", myMiddleware, (req, res) => {
-//   res.json({
-//     data: "YOU SUCCESSFULY TRIED MIDDLEWARE",
-//   });
-// });
+authRoute.post("/current-admin", authCheck, adminCheck, currentUser);
 
 export default authRoute;
