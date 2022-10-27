@@ -1,10 +1,16 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import UserNavbar from "./userNavbar";
 const History = () => {
   return (
     <div>
       <Container>
-        <h1>user history page</h1>
+        <div className="row mt-4">
+          <div className="col-md-2">
+            <UserNavbar />
+          </div>
+          <div className="col text-center">user history page</div>
+        </div>
       </Container>
     </div>
   );

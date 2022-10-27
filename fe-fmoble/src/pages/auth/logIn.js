@@ -30,7 +30,7 @@ const Login = ({ history }) => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    // console.table(email, password);
+    console.table(email, password);
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
       console.log("result", result);
@@ -50,9 +50,10 @@ const Login = ({ history }) => {
             },
           });
           roleBasedRedirect(res);
+          console.log("23123");
         })
-        .catch();
-      //   history.push("/");
+        .catch((err) => console.log("failed", err));
+      history.push("/");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
@@ -117,7 +118,7 @@ const Login = ({ history }) => {
             roleBasedRedirect(res);
           })
           .catch();
-        history.push("/");
+        // history.push("/");
       })
       .catch((err) => {
         console.log(err);
