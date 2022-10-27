@@ -8,8 +8,8 @@ import { createOrUpdateUser } from "../../functions/auth";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("buitoai2031@gmail.com");
-  const [password, setPassword] = useState("toaibui140902");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));
@@ -90,7 +90,8 @@ const Login = ({ history }) => {
         block
         shape="round"
         size="large"
-        disabled={!email || password.length < 6}>
+        disabled={!email || password.length < 6}
+      >
         Login with Email/Password
       </Button>
     </form>
@@ -141,7 +142,8 @@ const Login = ({ history }) => {
             className="mb-3"
             block
             shape="round"
-            size="large">
+            size="large"
+          >
             Login with Google
           </Button>
         </div>
