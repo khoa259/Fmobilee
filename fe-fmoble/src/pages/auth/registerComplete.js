@@ -10,6 +10,7 @@ const RegisterComplete = ({ history }) => {
   const [password, setPassword] = useState("");
 
   const { user } = useSelector((state) => ({ ...state }));
+  console.log("user", user);
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("emailForRegistration"));

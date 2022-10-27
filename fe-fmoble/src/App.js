@@ -13,12 +13,15 @@ import Register from "./pages/auth/register";
 import HomePage from "./pages/homePage";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
+import UserRoute from "./component/routes/userRoute";
+import AdminRoute from "./component/routes/adminRoute";
+// Router
 import RegisterComplete from "./pages/auth/registerComplete";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import History from "./pages/user/history";
-import UserRoute from "./component/routes/userRoute";
 import Password from "./pages/user/Password.js";
 import Wishlist from "./pages/user/Wishlist.js";
+import Dashboard from "./pages/admin/Dashboard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -57,9 +60,12 @@ const App = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/signup/complete" component={RegisterComplete} />
         <Route exact path="/forgot/password" component={ForgotPassword} />
+        {/* User route */}
         <UserRoute exact path="/user/history" component={History} />
         <UserRoute exact path="/user/password" component={Password} />
         <UserRoute exact path="/user/wishlist" component={Wishlist} />
+        {/* Admin route */}
+        <AdminRoute exact path="/admin/dashboard" component={Dashboard} />
       </Switch>
       <Footer />
     </>
