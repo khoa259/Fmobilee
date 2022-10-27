@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { auth } from "./firebase";
 import { currentUser } from "./functions/auth.js";
 // Components
-import Login from "./pages/auth/Login.js";
+import Login from "./pages/auth/logIn.js";
 import Register from "./pages/auth/register";
 import HomePage from "./pages/homePage";
 import Header from "./component/Header";
