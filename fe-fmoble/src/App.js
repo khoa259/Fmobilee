@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 
-import Login from "./pages/auth/login.js";
+import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 import HomePage from "./pages/homePage";
 import Header from "./component/Header";
@@ -12,6 +12,7 @@ import Footer from "./component/Footer";
 import RegisterComplete from "./pages/auth/registerComplete";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import { auth } from "./firebase";
+import { currentUser } from "./functions/auth.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,13 +22,20 @@ const App = () => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-        });
+        currentUser(idTokenResult.token)
+          .then((res) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: res.data.name,
+                email: res.data.email,
+                role: res.data.role,
+                _id: res.data._id,
+                token: idTokenResult.token,
+              },
+            });
+          })
+          .catch((err) => console.log(err));
       }
     });
     // cleanup

@@ -3,7 +3,7 @@ import express from "express";
 
 import { authCheck } from "../middleware/auth.js";
 // import Controller
-import { createOrUpdateUser } from "../controller/auth.js";
+import { createOrUpdateUser, currentUser } from "../controller/auth.js";
 
 const myMiddleware = (req, res, next) => {
   console.log("I am a middlware");
@@ -12,6 +12,7 @@ const myMiddleware = (req, res, next) => {
 
 const authRoute = express.Router();
 authRoute.post("/create-or-update-user", authCheck, createOrUpdateUser);
+authRoute.post("/current-user", authCheck, currentUser);
 // authRoute.get("/testing", myMiddleware, (req, res) => {
 //   res.json({
 //     data: "YOU SUCCESSFULY TRIED MIDDLEWARE",
