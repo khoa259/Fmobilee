@@ -1,17 +1,14 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const UserNavbar = () => {
   return (
     <div>
-      <Nav defaultActiveKey="/home" variant="pills" className="flex-column">
-        <Nav.Link href="/home">History</Nav.Link>
-        <Nav.Link href="/" eventKey="link-1">
-          Password
-        </Nav.Link>
-        <Nav.Link href="/" eventKey="link-2">
-          Wishlist
-        </Nav.Link>
+      <Nav variant="pills" className="flex-column">
+        <Nav.Link href="/user/history">History</Nav.Link>
+        <Nav.Link href="/user/password">Password</Nav.Link>
+        <Nav.Link href="/user/wishlist">Wishlist</Nav.Link>
       </Nav>
     </div>
   );
