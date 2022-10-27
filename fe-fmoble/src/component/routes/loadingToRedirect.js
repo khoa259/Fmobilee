@@ -11,7 +11,7 @@ const LoadingToRedirect = () => {
     // chuyen trang khi = 0
     count === 0 && history.push("/");
     return () => clearInterval(interval);
-  }, [count]);
+  }, [count, history]);
   return (
     <div className="text-center pt-4">
       <p>Bạn sẽ được chuyển hướng sau {count} giây nữa</p>
