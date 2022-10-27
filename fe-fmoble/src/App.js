@@ -13,6 +13,8 @@ import RegisterComplete from "./pages/auth/registerComplete";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import { auth } from "./firebase";
 import { currentUser } from "./functions/auth.js";
+import History from "./pages/user/history";
+import UserRoute from "./component/routes/userRoute";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -51,6 +53,7 @@ const App = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/signup/complete" component={RegisterComplete} />
         <Route exact path="/forgot/password" component={ForgotPassword} />
+        <UserRoute exact path="/user/history" component={History} />
       </Switch>
       <Footer />
     </>
