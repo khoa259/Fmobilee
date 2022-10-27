@@ -1,12 +1,12 @@
 import express from "express";
 import { authCheck, adminCheck } from "../middleware/auth.js";
-import { create, read, update, remove, list } from "../controller/category";
+import { create, read, update, remove, list } from "../controller/category.js";
 
-const router = express.Router();
-router.post("/category", authCheck, adminCheck, create);
-router.post("/categories", list);
-router.post("/category/:slug", authCheck, adminCheck, read);
-router.post("/category/:slug", authCheck, adminCheck, update);
-router.post("/category/:slug", authCheck, adminCheck, remove);
+const routerCategory = express.Router();
+routerCategory.post("/category", authCheck, adminCheck, create);
+routerCategory.get("/categories", list);
+routerCategory.get("/category/:slug", authCheck, adminCheck, read);
+routerCategory.put("/category/:slug", authCheck, adminCheck, update);
+routerCategory.delete("/category/:slug", authCheck, adminCheck, remove);
 
-export default router;
+export default routerCategory;
