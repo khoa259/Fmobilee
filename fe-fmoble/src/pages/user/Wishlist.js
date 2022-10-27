@@ -1,7 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import UserNav from "../../component/userNavbar/userNavbar";
-const History = () => {
+
+const Wishlist = () => {
   return (
     <div>
       <Container>
@@ -10,7 +11,7 @@ const History = () => {
             <UserNav />
           </div>
           <div className="col text-center">
-            <h3 className="center">History about user</h3>
+            <h3 className="center">Wish list </h3>
           </div>
         </div>
       </Container>
@@ -18,4 +19,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default Wishlist;
