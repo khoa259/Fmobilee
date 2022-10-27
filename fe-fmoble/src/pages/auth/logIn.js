@@ -19,6 +19,14 @@ const Login = ({ history }) => {
     console.log(user);
   }, [user]);
 
+  const roleBasedRedirect = (res) => {
+    if (res.data.role === "admin") {
+      history.push("/admin/dashboard");
+    } else {
+      history.push("/user/history");
+    }
+  };
+
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -41,9 +49,10 @@ const Login = ({ history }) => {
               token: idTokenResult.token,
             },
           });
+          roleBasedRedirect(res);
         })
         .catch();
-      history.push("/");
+      //   history.push("/");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
@@ -105,6 +114,7 @@ const Login = ({ history }) => {
                 token: idTokenResult.token,
               },
             });
+            roleBasedRedirect(res);
           })
           .catch();
         history.push("/");
