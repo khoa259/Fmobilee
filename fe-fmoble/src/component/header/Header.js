@@ -4,7 +4,8 @@ import { Badge, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { MenuList } from "./data-menu/data-menu";
+import { MenuList } from "../data-menu/data-menu";
+import "./header.css";
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Header = () => {
         <Container>
           <Navbar.Brand href="/">Fmobile</Navbar.Brand>
           <Nav as="ul" className="ml-auto mt-2">
-            <Nav.Link href="/gio-hang">
+            <Nav.Link href="/gio-hang" className="icon-cart">
               <i className="fas fa-shopping-cart"></i>
               {/* <div className="counter_cart">
                   <span className="">0</span>
@@ -73,8 +74,7 @@ const Header = () => {
         className="nav-child"
         variant="dark"
         expand="lg"
-        collapseOnSelect="false"
-      >
+        collapseOnSelect="false">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center ">
           <Nav as="ul">

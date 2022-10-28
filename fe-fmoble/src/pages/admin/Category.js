@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import AdminNav from "../../component/adminNav/adminNavbar";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import {
@@ -9,6 +7,7 @@ import {
   getCategories,
   removeCategory,
 } from "../../functions/category";
+import { Table } from "react-bootstrap";
 
 const Category = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -75,31 +74,39 @@ const Category = () => {
   );
   return (
     <div>
-      <Container>
-        <div className="row mt-4">
-          <div className="col-md-2">
-            <AdminNav />
-          </div>
-          <div className="col text-center">
-            {loading ? (
-              <h4 className="text-danger">Loading..</h4>
-            ) : (
-              <h4>Create category</h4>
-            )}
-            {CategoryForm()}
-            <hr />
-            {categories.map((c) => (
-              <div className="alert alert-secondary" key={c._id}>
-                {c.name}
-                <button onClick={() => handleRemove(c.slug)}>Remove</button>
-                <Link to={`/admin/category/${c.slug}`}>
-                  <button>Update</button>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Container>
+      <div className="text-center">
+        {loading ? (
+          <h4 className="text-danger">Loading..</h4>
+        ) : (
+          <h4>Create category</h4>
+        )}
+        {CategoryForm()}
+        <hr />
+
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên Danh Mục</th>
+              <th>Xử lý</th>
+            </tr>
+          </thead>
+          {categories.map((c, index) => (
+            <tbody key={index}>
+              <tr>
+                <td>{index + 1}</td>
+                <td>{c.name}</td>
+                <td>
+                  <button onClick={() => handleRemove(c.slug)}>Remove</button>
+                  <Link to={`/admin/category/${c.slug}`}>
+                    <button>Update</button>
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </Table>
+      </div>
     </div>
   );
 };
