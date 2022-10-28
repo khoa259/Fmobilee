@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import AdminNav from "../../component/adminNav/adminNavbar";
 import { toast } from "react-toastify";
@@ -35,6 +36,25 @@ const Category = () => {
         if (err.response.status === 400) return toast.error(err.response.data);
       });
   };
+  const handleRemove = async (slug) => {
+    // let answer = window.confirm("Delete?");
+    // console.log(answer, slug);
+    if (window.confirm("Delete?")) {
+      setLoading(true);
+      removeCategory(slug, user.token)
+        .then((res) => {
+          setLoading(false);
+          toast.error(`${res.data.name} deleted`);
+          loadCategory();
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            setLoading(false);
+            toast.error(err.response.data);
+          }
+        });
+    }
+  };
   const CategoryForm = () => (
     <div>
       <form onSubmit={handleSubmit}>
@@ -68,7 +88,15 @@ const Category = () => {
             )}
             {CategoryForm()}
             <hr />
-            {JSON.stringify(categories)}
+            {categories.map((c) => (
+              <div className="alert alert-secondary" key={c._id}>
+                {c.name}
+                <button onClick={() => handleRemove(c.slug)}>Remove</button>
+                <Link to={`/admin/category/${c.slug}`}>
+                  <button>Update</button>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </Container>
