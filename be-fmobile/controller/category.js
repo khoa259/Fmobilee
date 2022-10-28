@@ -6,8 +6,7 @@ export const create = async (req, res) => {
     const { name } = req.body;
     res.json(await new Category({ name, slug: slugify(name) }).save());
   } catch (error) {
-    console.log(err);
-    res.status(400).send("create category failed");
+    res.status(400).send("Create category failed");
   }
 };
 export const list = async (req, res) => {
