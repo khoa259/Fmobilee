@@ -50,7 +50,14 @@ const Header = () => {
               {/* Nếu user có tồn tại  */}
               {user?.email && user.role === "subcriber" && (
                 <div className="dropdown-content">
-                  <Link to="/">đơn hàng</Link>
+                  <Link to="/" onClick={logout}>
+                    đăng xuất
+                  </Link>
+                </div>
+              )}
+              {user && user.role === "admin" && (
+                <div className="dropdown-content">
+                  <Link to="/admin/dashboard">ADMIN PAGE</Link>
                   <Link to="/" onClick={logout}>
                     đăng xuất
                   </Link>
