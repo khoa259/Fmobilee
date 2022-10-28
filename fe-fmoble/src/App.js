@@ -21,7 +21,9 @@ import ForgotPassword from "./pages/auth/forgotPassword";
 import History from "./pages/user/history";
 import Password from "./pages/user/Password.js";
 import Wishlist from "./pages/user/Wishlist.js";
+// Router Admin
 import Dashboard from "./pages/admin/Dashboard";
+import Category from "./pages/admin/Category";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -66,6 +68,7 @@ const App = () => {
         <UserRoute exact path="/user/wishlist" component={Wishlist} />
         {/* Admin route */}
         <AdminRoute exact path="/admin/dashboard" component={Dashboard} />
+        <AdminRoute exact path="/admin/category" component={Category} />
       </Switch>
       <Footer />
     </>
