@@ -32,7 +32,8 @@ const Header = () => {
               <Badge bg="none">0</Badge>
             </Nav.Link>
             <div className="dropdown">
-              {!user?.email && (
+              {/* nếu user không tồn tai */}
+              {!user.email && (
                 <button className="dropbtn">
                   <i className=" fas fa-user"></i>
                 </button>
@@ -46,12 +47,22 @@ const Header = () => {
                   <Link to="/login">đăng nhập</Link>
                 </div>
               )}
-              {user.email && (
+              {/* Nếu user có tồn tại  */}
+              {user?.email && user.role === "subcriber" && (
                 <div className="dropdown-content">
                   <Link to="/">đơn hàng</Link>
                   <Link to="/" onClick={logout}>
                     đăng xuất
                   </Link>
+                  <Link to="/user/history">Dashboard</Link>
+                </div>
+              )}
+              {user?.email && user.role === "admin" && (
+                <div className="dropdown-content">
+                  <Link to="/" onClick={logout}>
+                    đăng xuất
+                  </Link>
+                  <Link to="/admin/dashboard">Dashboard</Link>
                 </div>
               )}
             </div>
@@ -63,7 +74,8 @@ const Header = () => {
         className="nav-child"
         variant="dark"
         expand="lg"
-        collapseOnSelect="false">
+        collapseOnSelect="false"
+      >
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center ">
           <Nav as="ul">
