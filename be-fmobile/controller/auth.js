@@ -1,4 +1,4 @@
-import Users from "../models/user.js";
+import Users from "../models/User.js";
 
 export const createOrUpdateUser = async (req, res) => {
   const { name, picture, email } = req.user;
