@@ -27,7 +27,7 @@ import Category from "./pages/admin/Category";
 // import AdminNav from "./component/adminNav/adminNavbar";
 import WebSiteLayout from "./layouts/webSiteLayout.js";
 import AdminLayout from "./layouts/adminLayout";
-
+import Page404 from "./pages/404Page";
 const App = () => {
   const dispatch = useDispatch();
 
@@ -76,6 +76,7 @@ const App = () => {
               <UserRoute exact path="/user/history" component={History} />
               <UserRoute exact path="/user/password" component={Password} />
               <UserRoute exact path="/user/wishlist" component={Wishlist} />
+              <Route path="*" component={Page404} />
             </Switch>
           </WebSiteLayout>
           {/* <Footer /> */}

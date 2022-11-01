@@ -28,6 +28,7 @@ const Category = () => {
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is created`);
+        loadCategory();
       })
       .catch((err) => {
         console.log(err);

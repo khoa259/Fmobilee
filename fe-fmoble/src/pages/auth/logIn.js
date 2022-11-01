@@ -50,7 +50,6 @@ const Login = ({ history }) => {
             },
           });
           roleBasedRedirect(res);
-          console.log("23123");
         })
         .catch((err) => console.log("failed", err));
       history.push("/");
@@ -91,8 +90,7 @@ const Login = ({ history }) => {
         block
         shape="round"
         size="large"
-        disabled={!email || password.length < 6}
-      >
+        disabled={!email || password.length < 6}>
         Login with Email/Password
       </Button>
     </form>
@@ -143,8 +141,7 @@ const Login = ({ history }) => {
             className="mb-3"
             block
             shape="round"
-            size="large"
-          >
+            size="large">
             Login with Google
           </Button>
         </div>
