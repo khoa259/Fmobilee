@@ -1,5 +1,5 @@
 import fireAdmin from "../firebase/index.js";
-import User from "../models/user.js";
+import User from "../models/User.js";
 
 export const authCheck = async (req, res, next) => {
   // console.log(req.headers); //token

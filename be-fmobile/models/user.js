@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 const { ObjectId } = mongoose.Schema;
-
 const userSchema = new mongoose.Schema(
   {
     name: String,
@@ -9,6 +8,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       index: true,
     },
+    picture: String,
     role: {
       type: String,
       default: "subscriber",
@@ -18,9 +18,13 @@ const userSchema = new mongoose.Schema(
       default: [],
     },
     address: String,
-    //   wishlist: [{ type: ObjectId, ref: "Product" }],
+    // wishlist: [
+    //     {
+    //         type: ObjectId,
+    //         ref: 'product'
+    //     }
+    // ]
   },
   { timestamps: true }
 );
-
-export default mongoose.model("Users", userSchema);
+export default mongoose.model("User", userSchema);
