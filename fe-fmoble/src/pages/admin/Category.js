@@ -76,11 +76,7 @@ const Category = () => {
   return (
     <div>
       <div className="text-center">
-        {loading ? (
-          <h4 className="text-danger">Loading..</h4>
-        ) : (
-          <h4>Create category</h4>
-        )}
+        {loading ? <Spiner /> : <h4>Create category</h4>}
         {CategoryForm()}
         <hr />
 

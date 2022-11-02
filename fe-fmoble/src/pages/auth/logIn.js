@@ -5,6 +5,7 @@ import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
+import Spiner from "../../component/spiner";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -30,7 +31,6 @@ const Login = ({ history }) => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    console.table(email, password);
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
       console.log("result", result);
@@ -129,11 +129,7 @@ const Login = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          {loading ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4>Login</h4>
-          )}
+          {loading ? <Spiner /> : <h4>Login</h4>}
           {loginForm()}
           <Button
             onClick={googleLogin}

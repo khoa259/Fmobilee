@@ -62,11 +62,7 @@ const CategoryUpdate = ({ history, match }) => {
           <AdminNav />
         </div>
         <div className="col">
-          {loading ? (
-            <h4 className="text-danger">Loading..</h4>
-          ) : (
-            <h4>Update category</h4>
-          )}
+          {loading ? <Spiner /> : <h4>Update category</h4>}
           {categoryForm()}
           <hr />
         </div>
