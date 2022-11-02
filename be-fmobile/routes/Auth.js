@@ -8,6 +8,6 @@ import { createOrUpdateUser, currentUser } from "../controller/auth.js";
 const authRoute = express.Router();
 authRoute.post("/create-or-update-user", authCheck, createOrUpdateUser);
 authRoute.post("/current-user", authCheck, currentUser);
-authRoute.post("/current-admin", currentUser);
+authRoute.post("/current-admin", authCheck, adminCheck, currentUser);
 
 export default authRoute;

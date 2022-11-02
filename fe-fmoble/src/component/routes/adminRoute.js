@@ -11,7 +11,8 @@ const AdminRoute = ({ children, ...rest }) => {
   useEffect(() => {
     console.log("user", user);
     if (user && user.token) {
-      currentAdmin({ email: user.email })
+      currentAdmin(user.token)
+        // currentAdmin({ email: user.email })
         .then((res) => {
           console.log("CURRENT ADMIN RES", res);
           setOk(true);
