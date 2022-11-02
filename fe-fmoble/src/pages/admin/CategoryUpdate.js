@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getCategory, updateCategory } from "../../functions/category";
 import AdminNav from "../../component/adminNav/adminNavbar";
+import Spiner from "../../component/spiner";
 
 const CategoryUpdate = ({ history, match }) => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -62,7 +63,13 @@ const CategoryUpdate = ({ history, match }) => {
           <AdminNav />
         </div>
         <div className="col">
-          {loading ? <Spiner /> : <h4>Update category</h4>}
+          {loading ? (
+            <div>
+              <Spiner />
+            </div>
+          ) : (
+            <h4>Update category</h4>
+          )}
           {categoryForm()}
           <hr />
         </div>

@@ -8,6 +8,7 @@ import {
   removeCategory,
 } from "../../functions/category";
 import { Table } from "react-bootstrap";
+import Spiner from "../../component/spiner";
 
 const Category = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -76,7 +77,13 @@ const Category = () => {
   return (
     <div>
       <div className="text-center">
-        {loading ? <Spiner /> : <h4>Create category</h4>}
+        {loading ? (
+          <div>
+            <Spiner />
+          </div>
+        ) : (
+          <h4>Create category</h4>
+        )}
         {CategoryForm()}
         <hr />
 
