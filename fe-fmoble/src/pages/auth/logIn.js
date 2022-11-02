@@ -35,8 +35,9 @@ const Login = ({ history }) => {
       const result = await auth.signInWithEmailAndPassword(email, password);
       console.log("result", result);
       const { user } = result;
+      console.log("user", user);
       const idTokenResult = await user.getIdTokenResult();
-
+      console.log("idTokenResult", idTokenResult);
       createOrUpdateUser(idTokenResult.token)
         .then((res) => {
           dispatch({
@@ -50,6 +51,7 @@ const Login = ({ history }) => {
             },
           });
           roleBasedRedirect(res);
+          console.log("res", res);
         })
         .catch((err) => console.log("failed", err));
       history.push("/");

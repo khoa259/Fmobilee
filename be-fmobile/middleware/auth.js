@@ -18,9 +18,10 @@ export const authCheck = async (req, res, next) => {
 };
 
 export const adminCheck = async (req, res, next) => {
-  const { email } = req.user;
+  const { email } = req.body;
+  // console.log("email", email);
   const adminUser = await User.findOne({ email }).exec();
-  if (adminUser.role !== "admin") {
+  if (adminUser?.role !== "admin") {
     res.status(403).json({
       err: "Admin resource. Access dinied",
     });

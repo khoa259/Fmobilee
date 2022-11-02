@@ -34,22 +34,22 @@ const Header = () => {
             </Nav.Link>
             <div className="dropdown">
               {/* nếu user không tồn tai */}
-              {!user.email && (
+              {!user?.email && (
                 <button className="dropbtn">
                   <i className=" fas fa-user"></i>
                 </button>
               )}
               <div className="text-white pl-2 pt-3">
-                {user.email && user.email.split("@")[0]}
+                {user?.email && user?.email.split("@")[0]}
               </div>
-              {!user.email && (
+              {!user?.email && (
                 <div className="dropdown-content">
                   <Link to="/register">đăng ký</Link>
                   <Link to="/login">đăng nhập</Link>
                 </div>
               )}
               {/* Nếu user có tồn tại  */}
-              {user.email && user.role === "subscriber" && (
+              {user?.email && user?.role === "subscriber" && (
                 <div className="dropdown-content">
                   <Link to="/" onClick={logout}>
                     đăng xuất
@@ -57,7 +57,7 @@ const Header = () => {
                 </div>
               )}
 
-              {user.email && user.role === "admin" && (
+              {user?.email && user?.role === "admin" && (
                 <div className="dropdown-content">
                   <Link to="/" onClick={logout}>
                     đăng xuất

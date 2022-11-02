@@ -3,6 +3,7 @@ import React from "react";
 import AdminNav from "../../component/adminNav/adminNavbar";
 
 const Dashboard = () => {
+  console.log("dashboard");
   return (
     <div className="Container">
       <div className="row">
