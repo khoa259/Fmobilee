@@ -9,15 +9,15 @@ import Spiner from "../../component/spiner";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("khoa10688@gmail.com");
+  const [password, setPassword] = useState("123456");
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     if (user && user.token) history.push("/");
-    console.log(user);
+    console.log("user logIn", user);
   }, [user, history]);
 
   const roleBasedRedirect = (res) => {
@@ -35,9 +35,9 @@ const Login = ({ history }) => {
       const result = await auth.signInWithEmailAndPassword(email, password);
       console.log("result", result);
       const { user } = result;
-      console.log("user", user);
+      console.log("user handleSubmit", user);
       const idTokenResult = await user.getIdTokenResult();
-      console.log("idTokenResult", idTokenResult);
+      console.log("idTokenResult Login", idTokenResult);
       createOrUpdateUser(idTokenResult.token)
         .then((res) => {
           dispatch({
@@ -53,9 +53,10 @@ const Login = ({ history }) => {
           roleBasedRedirect(res);
           console.log("res", res);
         })
-        .catch((err) => console.log("failed", err));
-      history.push("/");
+        .catch((err) => console.log("loi roi", err));
+      // history.push("/");
     } catch (error) {
+      console.log("loi 59 login", error);
       toast.error(error.message);
       setLoading(false);
     }

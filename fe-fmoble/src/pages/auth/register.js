@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
 const Register = ({ history }) => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("khoa10688@gmail.com");
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
@@ -14,7 +14,8 @@ const Register = ({ history }) => {
     e.preventDefault();
     // console.log("ENV --->", process.env.REACT_APP_REGISTER_REDIRECT_URL);
     const config = {
-      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      // url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      url: "http://localhost:3000/register/complete",
       handleCodeInApp: true,
     };
 

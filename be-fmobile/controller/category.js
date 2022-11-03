@@ -9,19 +9,23 @@ export const create = async (req, res) => {
     res.status(400).send("Create category failed");
   }
 };
+
 export const list = async (req, res) => {
   res.json(await Category.find({}).sort({ createdAt: -1 }).exec());
 };
+
 export const read = async (req, res) => {
   const { slug } = req.params;
   let category = await Category.findOne({ slug: slug }).exec();
-  await res.json(category);
+  res.json(category);
 };
+
 export const update = async (req, res) => {
   const { name } = req.body;
+  const { slug } = req.params;
   try {
     const updated = await Category.findOneAndUpdate(
-      { slug: req.params.slug },
+      { slug: slug },
       { name, slug: slugify(name) },
       { new: true }
     );

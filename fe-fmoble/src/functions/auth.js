@@ -3,7 +3,6 @@ export const createOrUpdateUser = async (authToken) => {
   return await axios.post(
     // `http://localhost:8000/api/create-or-update-user`,
     `${process.env.REACT_APP_API}/create-or-update-user`,
-
     {},
     {
       headers: {
