@@ -23,7 +23,7 @@ export const createOrUpdateUser = async (req, res) => {
 };
 
 export const currentUser = async (req, res) => {
-  Users.findOne({ email: req.user.email }).exec((err, user) => {
+  User.findOne({ email: req.user.email }).exec((err, user) => {
     if (err) throw new Error(err);
     res.json(user);
   });

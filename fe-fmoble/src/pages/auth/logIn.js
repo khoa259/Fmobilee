@@ -5,6 +5,7 @@ import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
+import Spiner from "../../component/spiner";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -30,13 +31,13 @@ const Login = ({ history }) => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    console.table(email, password);
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
       console.log("result", result);
       const { user } = result;
+      console.log("user", user);
       const idTokenResult = await user.getIdTokenResult();
-
+      console.log("idTokenResult", idTokenResult);
       createOrUpdateUser(idTokenResult.token)
         .then((res) => {
           dispatch({
@@ -50,7 +51,7 @@ const Login = ({ history }) => {
             },
           });
           roleBasedRedirect(res);
-          console.log("23123");
+          console.log("res", res);
         })
         .catch((err) => console.log("failed", err));
       history.push("/");
@@ -91,8 +92,7 @@ const Login = ({ history }) => {
         block
         shape="round"
         size="large"
-        disabled={!email || password.length < 6}
-      >
+        disabled={!email || password.length < 6}>
         Login with Email/Password
       </Button>
     </form>
@@ -131,11 +131,7 @@ const Login = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          {loading ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4>Login</h4>
-          )}
+          {loading ? <Spiner /> : <h4>Login</h4>}
           {loginForm()}
           <Button
             onClick={googleLogin}
@@ -143,8 +139,7 @@ const Login = ({ history }) => {
             className="mb-3"
             block
             shape="round"
-            size="large"
-          >
+            size="large">
             Login with Google
           </Button>
         </div>

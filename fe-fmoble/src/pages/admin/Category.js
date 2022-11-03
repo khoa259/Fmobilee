@@ -8,6 +8,7 @@ import {
   removeCategory,
 } from "../../functions/category";
 import { Table } from "react-bootstrap";
+import Spiner from "../../component/spiner";
 
 const Category = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -28,6 +29,7 @@ const Category = () => {
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is created`);
+        loadCategory();
       })
       .catch((err) => {
         console.log(err);
@@ -76,7 +78,9 @@ const Category = () => {
     <div>
       <div className="text-center">
         {loading ? (
-          <h4 className="text-danger">Loading..</h4>
+          <div>
+            <Spiner />
+          </div>
         ) : (
           <h4>Create category</h4>
         )}

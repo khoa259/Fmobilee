@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import UserNav from "../../component/userNavbar/userNavbar";
-const history = () => {
+const History = () => {
   return (
     <div>
       <Container>
@@ -17,4 +17,4 @@ const history = () => {
     </div>
   );
 };
-export default history;
+export default History;
