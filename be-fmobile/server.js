@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 //import Router
 import authRoute from "./routes/auth.js";
 import routerCategory from "./routes/category.js";
+import routerProducts from "./routes/product.js";
 
 // variable
 const app = express();
@@ -30,6 +31,7 @@ app.get("/api", (req, res) => {
 // Route middleware
 app.use("/api", authRoute);
 app.use("/api", routerCategory);
+app.use("/api", routerProducts);
 // port
 const port = process.env.PORT || 8000;
 
