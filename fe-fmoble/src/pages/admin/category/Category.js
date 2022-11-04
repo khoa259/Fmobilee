@@ -6,9 +6,9 @@ import {
   createCategory,
   getCategories,
   removeCategory,
-} from "../../functions/category";
+} from "../../../functions/category";
 import { Table } from "react-bootstrap";
-import Spiner from "../../component/spiner";
+import Spiner from "../../../component/spiner";
 
 const Category = () => {
   const { user } = useSelector((state) => ({ ...state }));

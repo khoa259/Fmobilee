@@ -23,8 +23,9 @@ import Password from "./pages/user/Password.js";
 import Wishlist from "./pages/user/Wishlist.js";
 // Router Admin
 import Dashboard from "./pages/admin/Dashboard";
-import Category from "./pages/admin/Category";
-import CategoryUpdate from "./pages/admin/CategoryUpdate";
+import Category from "./pages/admin/category/Category";
+import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
+import ProductCreate from "./pages/admin/product/productCreate";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -68,6 +69,7 @@ const App = () => {
         <UserRoute exact path="/user/wishlist" component={Wishlist} />
         <AdminRoute exact path="/admin/dashboard" component={Dashboard} />
         <AdminRoute exact path="/admin/category" component={Category} />
+        <AdminRoute exact path="/admin/product" component={ProductCreate} />
         <AdminRoute
           exact
           path="/admin/category/:slug"

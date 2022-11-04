@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { getCategory, updateCategory } from "../../functions/category";
-import AdminNav from "../../component/adminNav/adminNavbar";
-import Spiner from "../../component/spiner";
+import { getCategory, updateCategory } from "../../../functions/category";
+import AdminNav from "../../../component/adminNav/adminNavbar";
+import Spiner from "../../../component/spiner";
 
 const CategoryUpdate = ({ history, match }) => {
   const { user } = useSelector((state) => ({ ...state }));
