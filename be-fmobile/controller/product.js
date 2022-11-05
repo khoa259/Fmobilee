@@ -3,7 +3,6 @@ import slugify from "slugify";
 
 export const create = async (req, res) => {
   try {
-    console.log(req.body);
     req.body.slug = slugify(req.body.title);
     const newProduct = await new Product(req.body).save();
     res.json(newProduct);
