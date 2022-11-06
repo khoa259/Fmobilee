@@ -48,7 +48,7 @@ const ProductCreate = ({ history }) => {
       .then((res) => {
         console.log(res);
         history.push("/");
-        toast.success("Product is created");
+        toast.success(`${value.title} is created`);
       })
       .catch((err) => {
         if (err.response.status === 400) return toast.error(err.response.data);
