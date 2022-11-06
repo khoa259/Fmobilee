@@ -28,38 +28,30 @@ const productSchema = new mongoose.Schema(
       trim: true,
       maxlength: 32,
     },
-    category: {
-      type: ObjectId,
-      ref: "Category",
-    },
+    // category: {
+    //   type: ObjectId,
+    //   ref: "Category",
+    // },
+
     quantity: Number,
     sold: {
       type: Number,
       default: 0,
     },
-    images: {
-      type: Array,
-    },
+    // images: {
+    //   type: Array,
+    // },
     shipping: {
       type: String,
       enum: ["Yes", "No"],
     },
     color: {
       type: String,
-      enum: [
-        "Black",
-        "Gold",
-        "Silver",
-        "Pacific Blue",
-        "White",
-        "Green",
-        "Blue",
-        "Midnight ",
-      ],
+      enum: ["Black", "Brown", "Silver", "White", "Blue"],
     },
     brand: {
       type: String,
-      enum: ["iphone", "macbook", "imac", "Apple Watch", "Phụ kiện"],
+      enum: ["Apple", "Samsung", "Microsoft", "Lenovo", "ASUS"],
     },
     // ratings: [
     //   {

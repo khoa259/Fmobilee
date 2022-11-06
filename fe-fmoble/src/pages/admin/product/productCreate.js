@@ -2,37 +2,34 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { createProduct } from "../../../functions/category";
 import { Table } from "react-bootstrap";
 import Spiner from "../../../component/spiner";
 import AdminNav from "../../../component/adminNav/adminNavbar";
+import { createProduct } from "../../../functions/products";
 
 const initialState = {
   title: "",
   description: "",
   price: "",
-  categories: "",
+  categories: [],
   category: "",
+  subs: [],
   shipping: "",
   quantity: "",
-  image: [],
+  images: [],
   colors: ["Black", "Brown", "Silver", "White", "Blue"],
-  brand: ["iphone", "macbook", "imac", "Apple Watch", "Phụ kiện"],
+  brands: ["Apple", "Samsung", "Microsoft", "Lenovo", "ASUS"],
+  color: "",
+  brand: "",
 };
 
-const handleSubmit = (e) => {
-  console.log();
-  e.preventDefault();
-  //
-};
-
-const handleChange = (data) => {
-  //
-  console.log(data);
-};
-
-const ProductCreate = () => {
+const ProductCreate = ({ history }) => {
   const [value, setValue] = useState(initialState);
+
+  // getUser by react-redux
+
+  const { user } = useSelector((state) => ({ ...state }));
+
   const {
     title,
     description,
@@ -43,8 +40,26 @@ const ProductCreate = () => {
     quantity,
     image,
     colors,
-    brand,
+    brands,
   } = value;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createProduct(value, user.token)
+      .then((res) => {
+        console.log(res);
+        history.push("/");
+        toast.success("Product is created");
+      })
+      .catch((err) => {
+        if (err.response.status === 400) return toast.error(err.response.data);
+      });
+    //
+  };
+
+  const handleChange = (e) => {
+    setValue({ ...value, [e.target.name]: e.target.value });
+    // console.log(e.target.name, " ----- ", e.target.value);
+  };
   return (
     <div className="container-fluid">
       <div className="row">
@@ -53,6 +68,7 @@ const ProductCreate = () => {
         </div>
         <div className="col">
           <h4>Thêm Sản Phẩm</h4>
+          {JSON.stringify(value)}
           <hr />
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -136,7 +152,7 @@ const ProductCreate = () => {
                 onChange={handleChange}
               >
                 <option>Please select</option>
-                {brand.map((b) => (
+                {brands.map((b) => (
                   <option key={b} value={b}>
                     {b}
                   </option>
