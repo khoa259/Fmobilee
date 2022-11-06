@@ -51,7 +51,7 @@ const ProductCreate = ({ history }) => {
         toast.success(`${value.title} is created`);
       })
       .catch((err) => {
-        if (err.response.status === 400) return toast.error(err.response.data);
+        toast.error(err.response.data.err);
       });
     //
   };
