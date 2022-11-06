@@ -1,18 +1,18 @@
 //library
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 // fire base
 import { auth } from "./firebase";
 import { currentUser } from "./functions/auth.js";
+// layout
+import WebSiteLayout from "./layouts/webSiteLayout";
+import AdminLayout from "./layouts/adminLayout";
 // Components
 import Login from "./pages/auth/logIn.js";
 import Register from "./pages/auth/register";
 import HomePage from "./pages/homePage";
-import Header from "./component/header/Header";
-import Footer from "./component/Footer";
 import UserRoute from "./component/routes/userRoute";
 import AdminRoute from "./component/routes/adminRoute";
 // Router
@@ -26,6 +26,8 @@ import Dashboard from "./pages/admin/Dashboard";
 import Category from "./pages/admin/category/Category";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 import ProductCreate from "./pages/admin/product/productCreate";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Page404 from "./pages/404Page";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,7 +58,7 @@ const App = () => {
   }, [dispatch]);
   return (
     <>
-      <Header />
+      {/* <Header />
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -75,7 +77,37 @@ const App = () => {
           path="/admin/category/:slug"
           component={CategoryUpdate}
         />
-      </Switch>
+      </Switch> */}
+      <BrowserRouter>
+        <ToastContainer />
+        <Routes>
+          <Route path="/" element={<WebSiteLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/register/complete" element={<RegisterComplete />} />
+            <Route path="/forgot/password" element={<ForgotPassword />} />
+            <Route path="/user/history" element={<History />} />
+            <Route path="/user/password" element={<Password />} />
+            <Route path="/user/wishlist" element={<Wishlist />} />
+          </Route>
+          <Route
+            path="admin"
+            element={
+              <AdminRoute>
+                <AdminLayout />
+              </AdminRoute>
+            }>
+            <Route index path="dashboard" element={<Dashboard />} />
+            <Route path="category" element={<Category />}>
+              <Route path=":slug" element={<CategoryUpdate />} />
+            </Route>
+            <Route path="product" element={<ProductCreate />} />
+          </Route>
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </BrowserRouter>
+      {/* <AdminRoute /> */}
     </>
   );
 };

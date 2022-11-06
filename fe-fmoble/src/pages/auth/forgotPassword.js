@@ -10,7 +10,7 @@ const ForgotPassword = ({ history }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
-    if (user && user.token) history.push("/");
+    if (user && user.token) history("/");
   }, [user, history]);
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,13 +1,13 @@
 import firebase from "firebase";
 import React from "react";
 import { Badge, Container, Nav, Navbar } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import { MenuList } from "../data-menu/data-menu";
 import "./header.css";
 const Header = () => {
-  const history = useHistory();
+  const history = useNavigate();
   const dispatch = useDispatch();
   const logout = () => {
     firebase.auth().signOut();
@@ -15,7 +15,7 @@ const Header = () => {
       type: "LOGOUT",
       payload: null,
     });
-    history.push("/");
+    history("/");
   };
   const { user } = useSelector((state) => ({ ...state }));
 

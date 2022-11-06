@@ -5,10 +5,11 @@ import { useSelector } from "react-redux";
 import { getCategory, updateCategory } from "../../../functions/category";
 import AdminNav from "../../../component/adminNav/adminNavbar";
 import Spiner from "../../../component/spiner";
+import { useNavigate } from "react-router-dom";
 
-const CategoryUpdate = ({ history, match }) => {
+const CategoryUpdate = ({ match }) => {
+  const history = useNavigate();
   const { user } = useSelector((state) => ({ ...state }));
-
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -25,11 +26,11 @@ const CategoryUpdate = ({ history, match }) => {
     setLoading(true);
     updateCategory(match.params.slug, { name }, user.token)
       .then((res) => {
-        // console.log(res)
+        console.log(res);
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is updated`);
-        history.push("/admin/category");
+        history("/admin/category");
       })
       .catch((err) => {
         console.log(err);
@@ -59,9 +60,7 @@ const CategoryUpdate = ({ history, match }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
-          <AdminNav />
-        </div>
+        <div className="col-md-2">{/* <AdminNav /> */}</div>
         <div className="col">
           {loading ? (
             <div>

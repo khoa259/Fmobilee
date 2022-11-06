@@ -4,7 +4,6 @@ import "./index.css";
 import "./bootstrap.min.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter } from "react-router-dom";
 
 import { legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
@@ -17,9 +16,7 @@ const store = createStore(rootReducer, composeWithDevTools());
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   </Provider>,
   // </React.StrictMode>,
   document.getElementById("root")
