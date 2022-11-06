@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const LoadingToRedirect = () => {
   const [count, setCount] = useState(5);
-  let history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((currentCount) => --currentCount);
     }, 1000);
     // chuyen trang khi = 0
-    count === 0 && history.push("/");
+    count === 0 && history("/");
     return () => clearInterval(interval);
   }, [count, history]);
   return (

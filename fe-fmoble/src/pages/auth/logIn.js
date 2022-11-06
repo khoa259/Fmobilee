@@ -3,11 +3,12 @@ import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
 import Spiner from "../../component/spiner";
 
-const Login = ({ history }) => {
+const Login = () => {
+  const history = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,15 +17,15 @@ const Login = ({ history }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
-    if (user && user.token) history.push("/");
+    if (user && user.token) history("/");
     console.log(user);
   }, [user, history]);
 
   const roleBasedRedirect = (res) => {
     if (res.data.role === "admin") {
-      history.push("/admin/dashboard");
+      history("/admin/dashboard");
     } else {
-      history.push("/user/history");
+      history("/user/history");
     }
   };
 
@@ -54,7 +55,7 @@ const Login = ({ history }) => {
           console.log("res", res);
         })
         .catch((err) => console.log("failed", err));
-      history.push("/");
+      history("/");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);

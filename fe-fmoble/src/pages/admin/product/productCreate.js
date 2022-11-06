@@ -11,9 +11,7 @@ const ProductCreate = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
-          <AdminNav />
-        </div>
+        <div className="col-md-2">{/* <AdminNav /> */}</div>
         <div className="col">
           <h4>Thêm Sản Phẩm</h4>
           {/* {categoryForm()} */}

@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div className="Container">
       <div className="row">
-        <AdminNav />
+        {/* <AdminNav /> */}
         <div className="col text-center">
           <h3 className="center">Admin dashboard</h3>
         </div>

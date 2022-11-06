@@ -1,30 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Route } from "react-router-dom";
+import { Navigate, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoadingToRedirect from "./loadingToRedirect";
 import { currentAdmin } from "../../functions/auth";
 
-const AdminRoute = ({ children, ...rest }) => {
+const AdminRoute = ({ children }) => {
   const { user } = useSelector((state) => ({ ...state }));
-  const [ok, setOk] = useState(false);
+  console.log("AdminRoute", user);
 
-  useEffect(() => {
-    console.log("user", user);
-    if (user && user.token) {
-      currentAdmin(user.token)
-        // currentAdmin({ email: user.email })
-        .then((res) => {
-          console.log("CURRENT ADMIN RES", res);
-          setOk(true);
-        })
-        .catch((err) => {
-          console.log("ADMIN ROUTE ERR", err);
-          setOk(false);
-        });
-    }
-  }, [user]);
-
-  return ok ? <Route {...rest} /> : <LoadingToRedirect />;
+  if (!user?.role) {
+    return <Navigate to="/" />;
+  }
+  return children;
 };
 
 export default AdminRoute;

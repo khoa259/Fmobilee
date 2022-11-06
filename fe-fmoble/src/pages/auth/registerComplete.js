@@ -3,8 +3,10 @@ import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrUpdateUser } from "../../functions/auth";
+import { useNavigate } from "react-router-dom";
 
-const RegisterComplete = ({ history }) => {
+const RegisterComplete = () => {
+  const history = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,7 +63,7 @@ const RegisterComplete = ({ history }) => {
           })
           .catch((err) => console.log(err));
         // redirect
-        history.push("/");
+        history("/");
       }
     } catch (error) {
       console.log(error);
