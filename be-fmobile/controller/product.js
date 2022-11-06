@@ -13,3 +13,8 @@ export const create = async (req, res) => {
     });
   }
 };
+
+export const read = async (req, res) => {
+  const products = await Product.find({});
+  res.json(products);
+};
