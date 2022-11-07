@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      maxlength: 32,
+      maxlength: 60,
       text: true,
     },
     slug: {
@@ -28,10 +28,10 @@ const productSchema = new mongoose.Schema(
       trim: true,
       maxlength: 32,
     },
-    // category: {
-    //   type: ObjectId,
-    //   ref: "Category",
-    // },
+    category: {
+      type: ObjectId,
+      ref: "Category",
+    },
 
     quantity: Number,
     sold: {
@@ -49,10 +49,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       enum: ["Black", "Brown", "Silver", "White", "Blue"],
     },
-    brand: {
-      type: String,
-      enum: ["Apple", "Samsung", "Microsoft", "Lenovo", "ASUS"],
-    },
+    // brand: {
+    //   type: String,
+    //   enum: ["iPhone", "Macbook", "iMac", "Apple Watch", "Phụ kiện"],
+    // },
     // ratings: [
     //   {
     //     star: Number,

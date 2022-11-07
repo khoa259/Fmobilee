@@ -17,10 +17,11 @@ const Category = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    loadCategory();
+    loadCategories();
   }, []);
 
-  const loadCategory = () => getCategories().then((c) => setCategories(c.data));
+  const loadCategories = () =>
+    getCategories().then((c) => setCategories(c.data));
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -29,7 +30,7 @@ const Category = () => {
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is created`);
-        loadCategory();
+        loadCategories();
       })
       .catch((err) => {
         console.log(err);
@@ -46,7 +47,7 @@ const Category = () => {
         .then((res) => {
           setLoading(false);
           toast.error(`${res.data.name} deleted`);
-          loadCategory();
+          loadCategories();
         })
         .catch((err) => {
           if (err.response.status === 400) {
