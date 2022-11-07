@@ -1,9 +1,22 @@
 .navAdmin {
-    background: #363a40 !important;
+    background: #404e66 !important;
     min-height: 100vh;
-    width: 100%;
+    width: 15%;
+    position: fixed;
+    border-top-right-radius: 5px;
+    border-botom-left-radius: 5px;
+    justify-content: center;
 }
 
 .navUl, .navItem {
-    padding: 1.5rem 0.5rem !important;
+    padding: 1.5rem 0 !important;
+}
+
+ul li a {
+    color: #ffffff !important;
+}
+
+ul li:hover {
+    background: #71a6eb !important;
+    box-shadow: inset 0 -3px 0 #49525f;
 }

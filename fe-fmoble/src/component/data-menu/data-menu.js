@@ -7,7 +7,7 @@ export const MenuList = [
 ];
 
 export const MenuAdmin = [
-  { id: 1, label: "Dashboard", path: "/admin/dasboard" },
+  { id: 1, icon: "", label: "Dashboard", path: "/admin/dashboard" },
   { id: 2, label: "Quản lý danh mục", path: "/admin/category" },
   { id: 3, label: "Quản lý sản phẩm", path: "/admin/product" },
   { id: 4, label: "Quản lý đơn hàng", path: "/admin/order" },

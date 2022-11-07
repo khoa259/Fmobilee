@@ -6,6 +6,7 @@ import "./adminNavbar.css";
 const AdminNav = () => {
   return (
     <nav className="navAdmin">
+      <h3 className="text-center pt-4">Fmobile Admin</h3>
       <ul className="nav navUl flex-column">
         {MenuAdmin.map((item, index) => (
           <li className="nav-item navItem" key={index}>
