@@ -15,6 +15,7 @@ const Category = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     loadCategories();
@@ -57,6 +58,11 @@ const Category = () => {
         });
     }
   };
+  const handleSearchChange = (e) => {
+    e.preventDefault();
+    setKeyword(e.target.value.toLowerCase());
+  };
+  const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
   const CategoryForm = () => (
     <div>
       <form onSubmit={handleSubmit}>
@@ -73,6 +79,12 @@ const Category = () => {
           <button className="btn btn-outline-primary">Save</button>
         </div>
       </form>
+      <input
+        type="text"
+        placeholder="search category"
+        className="form-control"
+        onChange={handleSearchChange}
+      />
     </div>
   );
   return (
@@ -96,7 +108,7 @@ const Category = () => {
               <th>Xử lý</th>
             </tr>
           </thead>
-          {categories.map((c, index) => (
+          {categories.filter(searched(keyword)).map((c, index) => (
             <tbody key={index}>
               <tr>
                 <td>{index + 1}</td>

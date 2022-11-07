@@ -11,6 +11,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.containerLayoutAdmin {
+  width: 100%;
+}
+
 /* form Login && Register */
 .card {
   width: 500px !important;

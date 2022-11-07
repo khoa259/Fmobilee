@@ -5,7 +5,7 @@ import "./adminNavbar.css";
 
 const AdminNav = () => {
   return (
-    <nav className="navAdmin ">
+    <nav className="navAdmin">
       <ul className="nav navUl flex-column">
         {MenuAdmin.map((item, index) => (
           <li className="nav-item navItem" key={index}>
