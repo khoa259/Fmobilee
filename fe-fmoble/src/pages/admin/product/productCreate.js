@@ -68,6 +68,17 @@ const ProductCreate = () => {
     setValue({ ...value, [e.target.name]: e.target.value });
     // console.log(e.target.name, " ----- ", e.target.value);
   };
+
+  //format price VND
+  const formatCash = (str) => {
+    return str
+      .split("")
+      .reverse()
+      .reduce((prev, next, index) => {
+        return (index % 3 ? next : next + ",") + prev;
+      });
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
