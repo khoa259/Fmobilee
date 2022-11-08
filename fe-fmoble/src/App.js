@@ -90,6 +90,7 @@ const App = () => {
             <Route path="/user/history" element={<History />} />
             <Route path="/user/password" element={<Password />} />
             <Route path="/user/wishlist" element={<Wishlist />} />
+            <Route path="/iphone" element={<h1>PageIphone</h1>} />
           </Route>
           <Route
             path="admin"
