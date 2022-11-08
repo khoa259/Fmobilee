@@ -28,6 +28,7 @@ import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 import ProductCreate from "./pages/admin/product/productCreate";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Page404 from "./pages/404Page";
+import ListProducts from "./pages/admin/product/listProducts";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -104,6 +105,7 @@ const App = () => {
               <Route path=":slug" element={<CategoryUpdate />} />
             </Route>
             <Route path="product" element={<ProductCreate />} />
+            <Route path="products" element={<ListProducts />} />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>
