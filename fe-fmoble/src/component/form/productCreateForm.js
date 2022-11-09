@@ -9,7 +9,7 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
     category,
     shipping,
     quantity,
-    image,
+    images,
     colors,
     // brands,
   } = value;

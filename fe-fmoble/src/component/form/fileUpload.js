@@ -22,12 +22,12 @@ const FileUpload = ({ value, setValue, setLoading }) => {
           "JPEG",
           100,
           0,
-          (uri) => {
+          (url) => {
             // console.log(uri);
             axios
               .post(
                 `${process.env.REACT_APP_API}/uploadimages`,
-                { image: uri },
+                { image: url },
                 {
                   headers: {
                     authtoken: user ? user.token : "",
@@ -43,7 +43,7 @@ const FileUpload = ({ value, setValue, setLoading }) => {
               })
               .catch((err) => {
                 setLoading(false);
-                console.log("CLOUDINARY UPLOAD ERR", err);
+                console.log("CLOUDINARY UPLOAD ERROR", err);
               });
           },
           "base64"
