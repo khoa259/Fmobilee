@@ -1,6 +1,7 @@
 import React from "react";
 // import { Container } from "react-bootstrap";
 import AdminNav from "../../component/adminNav/adminNavbar";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   console.log("dashboard");

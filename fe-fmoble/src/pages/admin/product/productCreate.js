@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { Table } from "react-bootstrap";
-import Spiner from "../../../component/spiner";
-import AdminNav from "../../../component/adminNav/adminNavbar";
+// import { Table } from "react-bootstrap";
+// import Spiner from "../../../component/spiner";
+// import AdminNav from "../../../component/adminNav/adminNavbar";
 import { createProduct } from "../../../functions/products";
 import { getCategories } from "../../../functions/category";
 import ProductCreateForm from "../../../component/form/productCreateForm";
@@ -29,7 +29,7 @@ const initialState = {
 const ProductCreate = () => {
   const history = useNavigate();
   const [value, setValue] = useState(initialState);
-
+  const [loading, setLoading] = useState(false);
   // getUser by react-redux
 
   const { user } = useSelector((state) => ({ ...state }));
@@ -74,9 +74,13 @@ const ProductCreate = () => {
       <div className="row">
         <div className="col">
           <h4 className="text-center">Thêm Sản Phẩm</h4>
-          {/* {JSON.stringify(value)} */}
+          {JSON.stringify(value.images)}
           <hr />
-          <FileUpload />
+          <FileUpload
+            value={value}
+            setValue={setValue}
+            setLoading={setLoading}
+          />
           <ProductCreateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
