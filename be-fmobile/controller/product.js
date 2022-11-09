@@ -14,7 +14,11 @@ export const create = async (req, res) => {
   }
 };
 
-export const read = async (req, res) => {
-  const products = await Product.find({});
+export const listAll = async (req, res) => {
+  let products = await Product.find({})
+    .limit(parseInt(req.params.count))
+    .populate("category")
+    .sort([["createdAt", "desc"]])
+    .exec();
   res.json(products);
 };
