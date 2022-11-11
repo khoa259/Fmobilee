@@ -24,7 +24,7 @@ const Header = () => {
       <Navbar variant="light" sticky="stickky-top">
         <Container>
           <Navbar.Brand href="/">Fmobile</Navbar.Brand>
-          <Nav as="ul" className="ml-auto mt-2">
+          <Nav as="ul" className="ulHeader ml-auto mt-2">
             <Nav.Link href="/gio-hang" className="icon-cart">
               <i className="fas fa-shopping-cart"></i>
               {/* <div className="counter_cart">
@@ -77,9 +77,9 @@ const Header = () => {
         collapseOnSelect="false">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center ">
-          <Nav as="ul">
+          <Nav as="ul" className="Ul">
             {MenuList.map((data, index) => (
-              <Nav.Item as="li" key={index}>
+              <Nav.Item as="li" className="LI" key={index}>
                 <Nav.Link href={data.path}>{data.label}</Nav.Link>
               </Nav.Item>
             ))}

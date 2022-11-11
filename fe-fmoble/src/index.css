@@ -26,6 +26,10 @@ main {
 
 }
 
+.text-red {
+  color: red;
+}
+
 /* hide arrow form input number */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

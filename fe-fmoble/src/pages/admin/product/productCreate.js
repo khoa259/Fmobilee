@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-// import { Table } from "react-bootstrap";
-// import Spiner from "../../../component/spiner";
-// import AdminNav from "../../../component/adminNav/adminNavbar";
 import { createProduct } from "../../../functions/products";
 import { getCategories } from "../../../functions/category";
 import ProductCreateForm from "../../../component/form/productCreateForm";
@@ -60,14 +57,6 @@ const ProductCreate = () => {
   };
 
   //format price VND
-  const formatCash = (str) => {
-    return str
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ",") + prev;
-      });
-  };
 
   return (
     <div className="container-fluid">
