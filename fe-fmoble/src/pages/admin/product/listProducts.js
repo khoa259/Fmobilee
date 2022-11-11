@@ -7,7 +7,9 @@ import Spiner from "../../../component/spinner/spinner";
 const ListProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { title, description, images } = products;
 
+  console.log("prd", products);
   useEffect(() => {
     loadAllProducts();
   }, []);
@@ -88,19 +90,6 @@ const ListProducts = () => {
         return (index % 3 ? next : next + ".") + prev;
       });
   };
-  // const dataSource = products.map((item, index) => {
-  //   return {
-  //     key: index + 1,
-  //     title: item.title,
-  //     price: formatCash(`${item.price}`),
-  //     images: item.images,
-  //     //   description: item.description,
-  //     category: item.category,
-  //     color: item.color,
-  //     quantity: item.quantity,
-  //     shipping: item.shipping,
-  //   };
-  // });
 
   return (
     <div>
@@ -136,7 +125,13 @@ const ListProducts = () => {
           {products.map((item, index) => (
             <tr key={index}>
               <td>
-                <img src={item.images} alt="#" />
+                <img
+                  src={
+                    item.images && item.images.length ? item.images[0].url : ""
+                  }
+                  style={{ height: "150px", objectFit: "cover" }}
+                  className="m-2"
+                />
               </td>
               <td>{item.title}</td>
               <td>{formatCash(`${item.price}`)}</td>
