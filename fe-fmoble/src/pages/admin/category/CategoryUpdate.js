@@ -1,34 +1,35 @@
 import React, { useState, useEffect } from "react";
-
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { getCategory, updateCategory } from "../../../functions/category";
-import AdminNav from "../../../component/adminNav/adminNavbar";
-import Spiner from "../../../component/spiner";
-import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CategoryUpdate = ({ match }) => {
+import { getCategory, updateCategory } from "../../../functions/category";
+import Spiner from "../../../component/spiner";
+
+const CategoryUpdate = () => {
   const history = useNavigate();
   const { user } = useSelector((state) => ({ ...state }));
-  const [name, setName] = useState("");
+  const { slug } = useParams();
   const [loading, setLoading] = useState(false);
 
+  const { register, handleSubmit, reset } = useForm();
+
   useEffect(() => {
+    const loadCategory = async () => {
+      const { data } = await getCategory(slug);
+      reset(data);
+      console.log(data);
+    };
     loadCategory();
   }, []);
-
-  const loadCategory = () =>
-    getCategory(match.params.slug).then((c) => setName(c.data.name));
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log(name);
+  const onSubmit = async (data) => {
     setLoading(true);
-    updateCategory(match.params.slug, { name }, user.token)
+    await updateCategory(slug, data, user.token)
       .then((res) => {
         console.log(res);
         setLoading(false);
-        setName("");
+        // setName("");
         toast.success(`"${res.data.name}" is updated`);
         history("/admin/category");
       })
@@ -38,17 +39,16 @@ const CategoryUpdate = ({ match }) => {
         if (err.response.status === 400) toast.error(err.response.data);
       });
   };
-
   const categoryForm = () => (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
         <label>Name</label>
         <input
           type="text"
           className="form-control"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          autoFocus
+          // onChange={(e) => setName(e.target.value)}
+          {...register("name", { required: true })}
+          // autoFocus
           required
         />
         <br />
@@ -60,7 +60,6 @@ const CategoryUpdate = ({ match }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">{/* <AdminNav /> */}</div>
         <div className="col">
           {loading ? (
             <div>

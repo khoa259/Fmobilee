@@ -101,9 +101,8 @@ const App = () => {
               </AdminRoute>
             }>
             <Route index path="dashboard" element={<Dashboard />} />
-            <Route path="category" element={<Category />}>
-              <Route path=":slug" element={<CategoryUpdate />} />
-            </Route>
+            <Route path="category" element={<Category />} />
+            <Route path="category/:slug" element={<CategoryUpdate />} />
             <Route path="product" element={<ProductCreate />} />
             <Route path="products" element={<ListProducts />} />
           </Route>

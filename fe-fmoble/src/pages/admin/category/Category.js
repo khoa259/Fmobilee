@@ -76,7 +76,9 @@ const Category = () => {
             autoFocus
           />
           <br />
-          <button className="btn btn-outline-primary">Save</button>
+          <button className="btn btn-outline-primary" disabled={name === ""}>
+            Save
+          </button>
         </div>
       </form>
       <input

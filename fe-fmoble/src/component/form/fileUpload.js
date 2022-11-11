@@ -7,9 +7,9 @@ const FileUpload = ({ value, setValue, setLoading }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   const fileUploadAndResize = (e) => {
-    // console.log(e.target.files);
     // resize
     let files = e.target.files; // 3
+    console.log(files);
     let allUploadedFiles = value.images;
 
     if (files) {

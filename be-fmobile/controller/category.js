@@ -13,8 +13,7 @@ export const list = async (req, res) => {
   res.json(await Category.find({}).sort({ createdAt: -1 }).exec());
 };
 export const read = async (req, res) => {
-  const { slug } = req.params;
-  let category = await Category.findOne({ slug: slug }).exec();
+  let category = await Category.findOne({ slug: req.params.slug }).exec();
   await res.json(category);
 };
 export const update = async (req, res) => {
