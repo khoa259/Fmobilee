@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authCheck, adminCheck } from "../middleware/auth.js";
-import { upload, remove } from "../controller/cloudinary";
+import { upload, remove } from "../controller/cloudinary.js";
+
 const router = Router();
 
 router.post("/uploadimages", authCheck, adminCheck, upload);

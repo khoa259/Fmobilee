@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import authRoute from "./routes/auth.js";
 import routerCategory from "./routes/category.js";
 import routerProducts from "./routes/product.js";
+import routeImage from "./routes/cloudinary.js";
 
 // variable
 const app = express();
@@ -32,6 +33,7 @@ app.get("/api", (req, res) => {
 app.use("/api", authRoute);
 app.use("/api", routerCategory);
 app.use("/api", routerProducts);
+app.use("/api", routeImage);
 // port
 const port = process.env.PORT || 8000;
 

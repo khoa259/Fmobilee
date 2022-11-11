@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary");
+import cloudinary from "cloudinary";
 
 // config
 cloudinary.config({
