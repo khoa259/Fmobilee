@@ -8,7 +8,7 @@ const Spiner = () => {
     //   </div>
     // );
     <div className="text-center spinner">
-      <div class="lds-ring">
+      <div className="lds-ring">
         <div></div>
         <div></div>
         <div></div>
