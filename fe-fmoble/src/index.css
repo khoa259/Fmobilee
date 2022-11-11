@@ -41,10 +41,18 @@ input::-webkit-inner-spin-button {
   width: 100%;
 }
 
-/* form Login && Register */
-.card {
-  width: 500px !important;
+.price {
+  color: blue;
 }
+
+a {
+  text-decoration: none !important;
+}
+
+/* form Login && Register */
+/* .card {
+  width: 500px !important;
+} */
 
 .form-control {
   height: 3rem !important;
