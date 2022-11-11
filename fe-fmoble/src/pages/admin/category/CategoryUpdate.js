@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { getCategory, updateCategory } from "../../../functions/category";
-import Spiner from "../../../component/spiner";
+import Spiner from "../../../component/spinner/spinner";
 
 const CategoryUpdate = () => {
   const history = useNavigate();

@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 
 import { getProductsByCount } from "../../../functions/products";
-import Spiner from "../../../component/spiner";
+import Spiner from "../../../component/spinner/spinner";
 const ListProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);

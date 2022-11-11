@@ -4,7 +4,7 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 import Banner from "../component/banner/banner";
-import Spiner from "../component/spiner";
+import Spiner from "../component/spinner/spinner";
 
 const HomePage = () => {
   const [products, setProduct] = useState([]);

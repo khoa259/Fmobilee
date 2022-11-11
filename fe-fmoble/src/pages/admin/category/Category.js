@@ -8,7 +8,7 @@ import {
   removeCategory,
 } from "../../../functions/category";
 import { Table } from "react-bootstrap";
-import Spiner from "../../../component/spiner";
+import Spiner from "../../../component/spinner/spinner";
 
 const Category = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -46,7 +46,7 @@ const Category = () => {
       setLoading(true);
       removeCategory(slug, user.token)
         .then((res) => {
-          setLoading(false);
+          setLoading(true);
           toast.error(`${res.data.name} deleted`);
           loadCategories();
         })

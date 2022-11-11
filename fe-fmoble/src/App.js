@@ -29,6 +29,7 @@ import ProductCreate from "./pages/admin/product/productCreate";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Page404 from "./pages/404Page";
 import ListProducts from "./pages/admin/product/listProducts";
+// import Spiner from "./component/spinner/spinner";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -59,26 +60,7 @@ const App = () => {
   }, [dispatch]);
   return (
     <>
-      {/* <Header />
-      <ToastContainer />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/register/complete" component={RegisterComplete} />
-        <Route exact path="/forgot/password" component={ForgotPassword} />
-        <UserRoute exact path="/user/history" component={History} />
-        <UserRoute exact path="/user/password" component={Password} />
-        <UserRoute exact path="/user/wishlist" component={Wishlist} />
-        <AdminRoute exact path="/admin/dashboard" component={Dashboard} />
-        <AdminRoute exact path="/admin/category" component={Category} />
-        <AdminRoute exact path="/admin/product" component={ProductCreate} />
-        <AdminRoute
-          exact
-          path="/admin/category/:slug"
-          component={CategoryUpdate}
-        />
-      </Switch> */}
+      {/* <Spiner /> */}
       <BrowserRouter>
         <ToastContainer />
         <Routes>
@@ -109,7 +91,6 @@ const App = () => {
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
-      {/* <AdminRoute /> */}
     </>
   );
 };

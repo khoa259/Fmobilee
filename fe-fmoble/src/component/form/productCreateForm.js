@@ -32,7 +32,7 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
         <textarea
           type="text"
           name="description"
-          cols={200}
+          cols={60}
           rows={10}
           value={description}
           onChange={handleChange}></textarea>

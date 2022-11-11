@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../component/header/Header";
 import Footer from "../component/Footer";
 import { Outlet } from "react-router-dom";
-const WebSiteLayout = ({ children }) => {
+const WebSiteLayout = () => {
   return (
     <div>
       <Header />

@@ -5,7 +5,7 @@ import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
-import Spiner from "../../component/spiner";
+import Spiner from "../../component/spinner/spinner";
 
 const Login = () => {
   const history = useNavigate();
