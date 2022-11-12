@@ -29,7 +29,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
           {quantity > 0 ? quantity : <p className="text-red">hết hàng</p>}
         </td>
         <td>
-          <Link to="">Sửa</Link>
+          <Link to={`/admin/product/${slug}`}>Sửa</Link>
           <button onClick={() => handleRemove(slug)}> Xóa</button>
         </td>
       </tr>

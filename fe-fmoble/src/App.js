@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
 // fire base
 import { auth } from "./firebase";
 import { currentUser } from "./functions/auth.js";
@@ -26,7 +28,7 @@ import Dashboard from "./pages/admin/Dashboard";
 import Category from "./pages/admin/category/Category";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 import ProductCreate from "./pages/admin/product/productCreate";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import ProductUpdate from "./pages/admin/product/ProductUpdate";
 import Page404 from "./pages/404Page";
 import ListProducts from "./pages/admin/product/listProducts";
 // import Spiner from "./component/spinner/spinner";
@@ -81,12 +83,14 @@ const App = () => {
               <AdminRoute>
                 <AdminLayout />
               </AdminRoute>
-            }>
+            }
+          >
             <Route index path="dashboard" element={<Dashboard />} />
             <Route path="category" element={<Category />} />
             <Route path="category/:slug" element={<CategoryUpdate />} />
             <Route path="product" element={<ProductCreate />} />
             <Route path="products" element={<ListProducts />} />
+            <Route path="product/:slug" element={<ProductUpdate />} />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>
