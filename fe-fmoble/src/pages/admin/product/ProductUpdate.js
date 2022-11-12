@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { getProduct } from "../../../functions/products";
 import { getCategories } from "../../../functions/category";
 import FileUpload from "../../../component/form/fileUpload";
+import ProductUpdateForm from "../../../component/form/ProductUpdateForm";
 
 const ProductUpdate = ({ match }) => {
   const initialState = {
@@ -37,13 +38,26 @@ const ProductUpdate = ({ match }) => {
       setValue({ ...value, ...p.data });
     });
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  const handleChange = (e) => {
+    setValue({ ...value, [e.target.name]: e.target.value });
+    // console.log(e.target.name, " ----- ", e.target.value);
+  };
 
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col">
           <h4 className="text-center">Product Update</h4>
-          {JSON.stringify(value)}
+          {/* {JSON.stringify(value)} */}
+          <ProductUpdateForm
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            setValues={setValue}
+            values={value}
+          />
         </div>
       </div>
     </div>

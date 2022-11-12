@@ -11,7 +11,7 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
     quantity,
     images,
     colors,
-    // brands,
+    brands,
   } = value;
   return (
     <form onSubmit={handleSubmit}>
@@ -35,7 +35,8 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
           cols={60}
           rows={10}
           value={description}
-          onChange={handleChange}></textarea>
+          onChange={handleChange}
+        ></textarea>
       </div>
 
       <div className="form-group">
@@ -43,7 +44,8 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
         <select
           name="category"
           className="form-control"
-          onChange={handleChange}>
+          onChange={handleChange}
+        >
           <option>Please select</option>
           {categories.length > 0 &&
             categories.map((c) => (
@@ -93,27 +95,25 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
         <select
           name="shipping"
           className="form-control"
-          onChange={handleChange}>
+          onChange={handleChange}
+        >
           <option>Please select</option>
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>
       </div>
 
-      {/* <div className="form-group">
-      <label>Brand</label>
-      <select
-        name="brand"
-        className="form-control"
-        onChange={handleChange}>
-        <option>Please select</option>
-        {brands.map((b) => (
-          <option key={b} value={b}>
-            {b}
-          </option>
-        ))}
-      </select>
-    </div> */}
+      <div className="form-group">
+        <label>Brand</label>
+        <select name="brand" className="form-control" onChange={handleChange}>
+          <option>Please select</option>
+          {brands.map((b) => (
+            <option key={b} value={b}>
+              {b}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <button className="btn btn-outline-primary">Save</button>
     </form>
