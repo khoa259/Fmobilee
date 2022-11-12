@@ -51,7 +51,7 @@ const ProductUpdate = ({ match }) => {
       <div className="row">
         <div className="col">
           <h4 className="text-center">Product Update</h4>
-          {/* {JSON.stringify(value)} */}
+          {JSON.stringify(value)}
           <ProductUpdateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
