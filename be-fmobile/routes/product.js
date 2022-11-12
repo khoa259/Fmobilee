@@ -8,6 +8,6 @@ const routerProducts = express.Router();
 // routes
 routerProducts.post("/product", authCheck, adminCheck, create);
 routerProducts.get("/products/:count", listAll);
-routerProducts.delete("product/:slug", authCheck, adminCheck, remove);
+routerProducts.delete("/product/:slug", authCheck, adminCheck, remove);
 
 export default routerProducts;

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
-
-import { getProductsByCount } from "../../../functions/products";
+import { getProductsByCount, removeProduct } from "../../../functions/products";
 import Spiner from "../../../component/spinner/spinner";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import AdminProductCard from "../../../component/cards/AdminProductCard";
 const ListProducts = () => {
+  const { user } = useSelector((state) => ({ ...state }));
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const { title, description, images } = products;
@@ -25,6 +28,21 @@ const ListProducts = () => {
         setLoading(false);
         console.log("error list products", err);
       });
+  };
+  const handleRemove = (slug) => {
+    // let answer = window.confirm("Delete?");
+    if (window.confirm("Delete?")) {
+      console.log("send delete request", slug);
+      removeProduct(slug, user.token)
+        .then((res) => {
+          loadAllProducts();
+          toast.error(`${res.data.title} is deleted`);
+        })
+        .catch((err) => {
+          if (err.response.status === 400) toast.error(err.response.data);
+          console.log(err);
+        });
+    }
   };
 
   // panigation
@@ -82,14 +100,6 @@ const ListProducts = () => {
   //     key: "remove",
   //   },
   // ];
-  const formatCash = (str) => {
-    return str
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
-  };
 
   return (
     <div>
@@ -122,32 +132,10 @@ const ListProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((item, index) => (
-            <tr key={index}>
-              <td>
-                <img
-                  src={
-                    item.images && item.images.length ? item.images[0].url : ""
-                  }
-                  style={{ height: "150px", objectFit: "cover" }}
-                  className="m-2"
-                />
-              </td>
-              <td>{item.title}</td>
-              <td>{formatCash(`${item.price}`)}</td>
-              <td>{item.color}</td>
-              <td>
-                {item.quantity > 0 ? (
-                  item.quantity
-                ) : (
-                  <p className="text-red">hết hàng</p>
-                )}
-              </td>
-              <td>
-                <Link to="">Sửa</Link>
-                <button> Xóa</button>
-              </td>
-            </tr>
+          {products.map((product, index) => (
+            <div key={product._id} className="col-md-4">
+              <AdminProductCard product={product} handleRemove={handleRemove} />
+            </div>
           ))}
         </tbody>
       </Table>
