@@ -1,6 +1,12 @@
 import express from "express";
 // controller
-import { create, listAll, read, remove } from "../controller/product.js";
+import {
+  create,
+  listAll,
+  read,
+  remove,
+  update,
+} from "../controller/product.js";
 // middlewares
 import { authCheck, adminCheck } from "../middleware/auth.js";
 const routerProducts = express.Router();
@@ -10,5 +16,6 @@ routerProducts.post("/product", authCheck, adminCheck, create);
 routerProducts.get("/product/:slug", read);
 routerProducts.get("/products/:count", listAll);
 routerProducts.delete("/product/:slug", authCheck, adminCheck, remove);
+routerProducts.put("/product/:slug", authCheck, adminCheck, update);
 
 export default routerProducts;
