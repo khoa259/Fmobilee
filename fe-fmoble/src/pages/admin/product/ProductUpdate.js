@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { getProduct } from "../../../functions/products";
+
+import { getProduct, updateProduct } from "../../../functions/products";
 import { getCategories } from "../../../functions/category";
 import FileUpload from "../../../component/form/fileUpload";
 import ProductUpdateForm from "../../../component/form/ProductUpdateForm";
@@ -21,7 +22,7 @@ const initialState = {
   color: "",
   // brand: "Apple",
 };
-const ProductUpdate = ({ match }) => {
+const ProductUpdate = () => {
   const { slug } = useParams();
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ const ProductUpdate = ({ match }) => {
   // getUser by react-redux
 
   const { user } = useSelector((state) => ({ ...state }));
+  const history = useNavigate();
 
   useEffect(() => {
     loadProduct();
@@ -48,6 +50,20 @@ const ProductUpdate = ({ match }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
+    value.category = value.category;
+    updateProduct(slug, value, user.token)
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        // toast.success(`"${res.title}" is update`);
+        history("/admin/products");
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        toast.error(err.response);
+      });
   };
   const handleChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
@@ -66,15 +82,12 @@ const ProductUpdate = ({ match }) => {
         <div className="col">
           <h4 className="text-center">Product Update</h4>
           {/* {JSON.stringify(value)} */}
-          {loading ? (
-            <Spiner />
-          ) : (
-            <FileUpload
-              value={value}
-              setValue={setValue}
-              setLoading={setLoading}
-            />
-          )}
+
+          <FileUpload
+            value={value}
+            setValue={setValue}
+            setLoading={setLoading}
+          />
           <ProductUpdateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
