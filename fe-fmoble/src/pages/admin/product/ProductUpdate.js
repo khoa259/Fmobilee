@@ -6,6 +6,7 @@ import { getProduct } from "../../../functions/products";
 import { getCategories } from "../../../functions/category";
 import FileUpload from "../../../component/form/fileUpload";
 import ProductUpdateForm from "../../../component/form/ProductUpdateForm";
+import Spiner from "../../../component/spinner/spinner";
 
 const initialState = {
   title: "",
@@ -65,7 +66,15 @@ const ProductUpdate = ({ match }) => {
         <div className="col">
           <h4 className="text-center">Product Update</h4>
           {/* {JSON.stringify(value)} */}
-
+          {loading ? (
+            <Spiner />
+          ) : (
+            <FileUpload
+              value={value}
+              setValue={setValue}
+              setLoading={setLoading}
+            />
+          )}
           <ProductUpdateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}

@@ -84,13 +84,13 @@ const FileUpload = ({ value, setValue, setLoading }) => {
       <div className="row">
         {value.images &&
           value.images.map((image, index) => (
-            <div className="avatar">
+            <div className="avatar" key={index}>
               <img src={image.url} className="avatar-img" />
               <button
                 className="avatar-button"
                 key={index}
                 onClick={() => handleImageRemove(image.public_id)}>
-                <i class="fa-solid fa-x"></i>
+                <i className="fa-solid fa-x"></i>
               </button>
             </div>
           ))}
