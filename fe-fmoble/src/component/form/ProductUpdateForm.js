@@ -5,6 +5,8 @@ const ProductUpdateForm = ({
   handleChange,
   setValues,
   values,
+  handleCatagoryChange,
+  categories,
 }) => {
   const {
     title,
@@ -12,10 +14,12 @@ const ProductUpdateForm = ({
     price,
     shipping,
     quantity,
+    images,
     colors,
     brands,
     color,
     brand,
+    category,
   } = values;
 
   return (
@@ -75,6 +79,22 @@ const ProductUpdateForm = ({
           value={quantity}
           onChange={handleChange}
         />
+      </div>
+      <div className="form-group">
+        <label>Category</label>
+        <select
+          name="category"
+          className="form-control"
+          onChange={handleCatagoryChange}
+        >
+          <option>{category ? category.name : "Please select"}</option>
+          {categories.length > 0 &&
+            categories.map((c) => (
+              <option key={c._id} value={c._id}>
+                {c.name}
+              </option>
+            ))}
+        </select>
       </div>
 
       <div className="form-group">
