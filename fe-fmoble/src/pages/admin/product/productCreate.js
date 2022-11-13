@@ -62,7 +62,6 @@ const ProductCreate = () => {
       <div className="row">
         <div className="col">
           <h4 className="text-center">Thêm Sản Phẩm</h4>
-          {JSON.stringify(value.images)}
           <hr />
           <FileUpload
             value={value}

@@ -7,20 +7,21 @@ import { getCategories } from "../../../functions/category";
 import FileUpload from "../../../component/form/fileUpload";
 import ProductUpdateForm from "../../../component/form/ProductUpdateForm";
 
+const initialState = {
+  title: "",
+  description: "",
+  price: "",
+  category: "",
+  shipping: "",
+  quantity: "",
+  images: [],
+  colors: ["Black", "Brown", "Silver", "White", "Blue"],
+  brands: ["iPhone", "Macbook", "iMac", "Apple Watch", "Phụ kiện"],
+  color: "Brown",
+  // brand: "Apple",
+};
 const ProductUpdate = ({ match }) => {
-  const initialState = {
-    title: "",
-    description: "",
-    price: "",
-    categories: [],
-    shipping: "",
-    quantity: "",
-    images: [],
-    colors: ["Black", "Brown", "Silver", "White", "Blue"],
-    brands: ["iPhone", "Macbook", "iMac", "Apple Watch", "Phụ kiện"],
-    color: "Brown",
-    // brand: "Apple",
-  };
+  const [category, setCategory] = useState([]);
   const { slug } = useParams();
   const history = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,7 @@ const ProductUpdate = ({ match }) => {
 
   useEffect(() => {
     loadProduct();
+    loadCategories();
   }, []);
   const loadProduct = () => {
     getProduct(slug).then((p) => {
@@ -38,12 +40,24 @@ const ProductUpdate = ({ match }) => {
       setValue({ ...value, ...p.data });
     });
   };
+  const loadCategories = () =>
+    getCategories().then((c) => {
+      console.log("GET CATEGORIES IN UPDATE PRODUCT", c.data);
+      setCategory(c.data);
+    });
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   const handleChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
     // console.log(e.target.name, " ----- ", e.target.value);
+  };
+
+  const handleCatagoryChange = (e) => {
+    e.preventDefault();
+    console.log("CLICKED CATEGORY", e.target.value);
+    setValue({ ...value, category: e.target.value });
   };
 
   return (
@@ -57,6 +71,8 @@ const ProductUpdate = ({ match }) => {
             handleChange={handleChange}
             setValues={setValue}
             values={value}
+            handleCatagoryChange={handleCatagoryChange}
+            categories={category}
           />
         </div>
       </div>
