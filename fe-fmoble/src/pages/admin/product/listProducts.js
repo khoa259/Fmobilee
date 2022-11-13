@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import { Pagination } from "antd";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
 import { getProductsByCount, removeProduct } from "../../../functions/products";
 import Spiner from "../../../component/spinner/spinner";
+
 const ListProducts = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const { images } = product;
 
-  console.log("prd", products);
   useEffect(() => {
     loadAllProducts();
   }, []);
@@ -30,8 +28,8 @@ const ListProducts = () => {
         console.log("error list products", err);
       });
   };
+
   const handleRemove = (slug) => {
-    // let answer = window.confirm("Delete?");
     if (window.confirm("Delete?")) {
       console.log("send delete request", slug);
       removeProduct(slug, user.token)
@@ -54,61 +52,6 @@ const ListProducts = () => {
         return (index % 3 ? next : next + ".") + prev;
       });
   };
-  // panigation
-
-  // const columns = [
-  //   {
-  //     title: "#",
-  //     dataIndex: "key",
-  //     key: "key",
-  //   },
-  //   {
-  //     title: "Ảnh",
-  //     dataIndex: "images",
-  //     key: "images",
-  //   },
-  //   {
-  //     title: "Tên sản phẩm",
-  //     dataIndex: "title",
-  //     key: "title",
-  //   },
-  //   {
-  //     title: "Giá tiền",
-  //     dataIndex: "price",
-  //     key: "price",
-  //   },
-  //   {
-  //     title: "Màu sắc",
-  //     dataIndex: "color",
-  //     key: "color",
-  //   },
-  //   {
-  //     title: "Danh mục",
-  //     dataIndex: "category",
-  //     key: "name",
-  //   },
-
-  //   {
-  //     title: "Số lượng",
-  //     dataIndex: "quantity",
-  //     key: "quantity",
-  //   },
-  //   {
-  //     title: "Vận chuyển",
-  //     dataIndex: "shipping",
-  //     key: "shipping",
-  //   },
-  //   {
-  //     title: "Sửa",
-  //     dataIndex: "edit",
-  //     key: "edit",
-  //   },
-  //   {
-  //     title: "Xóa",
-  //     dataIndex: "remove",
-  //     key: "remove",
-  //   },
-  // ];
 
   return (
     <div>
@@ -166,10 +109,24 @@ const ListProducts = () => {
                 )}
               </td>
               <td>
-                <Link to={`/admin/product/${product.slug}`}>Sửa</Link>
-                <button onClick={() => handleRemove(`${product.slug}`)}>
-                  Xóa
-                </button>
+                <div className="handle">
+                  <Link
+                    className="btn-fix"
+                    to={`/admin/product/${product.slug}`}>
+                    <i className="fa-solid fa-wrench"></i> Sửa
+                  </Link>
+                  <br />
+                  <button
+                    className="btn-remove"
+                    onClick={() => handleRemove(`${product.slug}`)}>
+                    <i className="fa-solid fa-trash pr-1 "></i>
+                    Xóa
+                  </button>
+                  <br />
+                  <Link to={`/${product.slug}`}>
+                    <i className="fa-regular fa-eye btn-eye"></i>
+                  </Link>
+                </div>
               </td>
             </tr>
           ))}

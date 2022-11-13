@@ -6,6 +6,7 @@ import { createProduct } from "../../../functions/products";
 import { getCategories } from "../../../functions/category";
 import ProductCreateForm from "../../../component/form/productCreateForm";
 import FileUpload from "../../../component/form/fileUpload";
+import Spiner from "../../../component/spinner/spinner";
 
 const initialState = {
   title: "Apple iPhone 14 Pro Max - Chính Hãng VN/A ",
@@ -17,9 +18,7 @@ const initialState = {
   quantity: "10",
   images: [],
   colors: ["Black", "Brown", "Silver", "White", "Blue"],
-  brands: ["iPhone", "Macbook", "iMac", "Apple Watch", "Phụ kiện"],
-  color: "Brown",
-  // brand: "Apple",
+  color: "",
 };
 
 const ProductCreate = () => {
@@ -63,11 +62,15 @@ const ProductCreate = () => {
         <div className="col">
           <h4 className="text-center">Thêm Sản Phẩm</h4>
           <hr />
-          <FileUpload
-            value={value}
-            setValue={setValue}
-            setLoading={setLoading}
-          />
+          {loading ? (
+            <Spiner />
+          ) : (
+            <FileUpload
+              value={value}
+              setValue={setValue}
+              setLoading={setLoading}
+            />
+          )}
           <ProductCreateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}

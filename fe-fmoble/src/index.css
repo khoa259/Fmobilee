@@ -89,3 +89,55 @@ a {
   width: var(--width-panigation) !important;
   height: var(--height-panigation) !important;
 }
+
+
+/* avatar image */
+.avatar {
+  /* box-shadow: 7px 1px 6px 1px gainsboro; */
+  padding: 10px;
+  border: 2px solid rgb(217, 212, 212);
+  border-radius: 6px;
+  border-style: dashed;
+  margin-bottom: 10px;
+}
+
+.avatar-img {
+  vertical-align: middle;
+  max-width: 160px;
+  max-height: 160px;
+  border-radius: 2px;
+}
+
+.avatar-button {
+  float: right;
+  color: #f1f1f1;
+  background: #eb0e0e;
+  border: none;
+  border-radius: 50px;
+}
+
+.avatar-button:focus {
+  outline: none;
+}
+
+.handle {
+  text-align: center;
+  float: left;
+}
+
+.btn-fix {
+  margin-top: 10px;
+  background: rgb(248, 248, 7);
+  padding: 1px 4px;
+}
+
+.btn-remove {
+  border: none;
+  margin-top: 10px;
+  background: #eb0e0e;
+
+}
+
+.btn-eye {
+  padding-top: 10px;
+}

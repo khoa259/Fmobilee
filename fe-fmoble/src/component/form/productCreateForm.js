@@ -55,6 +55,17 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
       </div>
 
       <div className="form-group">
+        <label>Giá tiền</label>
+        <input
+          type="number"
+          name="price"
+          className="form-control"
+          value={price}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div className="form-group">
         <label>Màu sắc</label>
         <select name="color" className="form-control" onChange={handleChange}>
           <option>Please select</option>
@@ -64,17 +75,6 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
             </option>
           ))}
         </select>
-      </div>
-
-      <div className="form-group">
-        <label>Giá tiền</label>
-        <input
-          type="number"
-          name="price"
-          className="form-control"
-          value={price}
-          onChange={handleChange}
-        />
       </div>
 
       <div className="form-group">

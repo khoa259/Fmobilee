@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getProduct } from "../../../functions/products";
@@ -17,13 +17,12 @@ const initialState = {
   images: [],
   colors: ["Black", "Brown", "Silver", "White", "Blue"],
   brands: ["iPhone", "Macbook", "iMac", "Apple Watch", "Phụ kiện"],
-  color: "Brown",
+  color: "",
   // brand: "Apple",
 };
 const ProductUpdate = ({ match }) => {
-  const [category, setCategory] = useState([]);
   const { slug } = useParams();
-  const history = useNavigate();
+  const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(initialState);
   // getUser by react-redux
@@ -65,7 +64,8 @@ const ProductUpdate = ({ match }) => {
       <div className="row">
         <div className="col">
           <h4 className="text-center">Product Update</h4>
-          {JSON.stringify(value)}
+          {/* {JSON.stringify(value)} */}
+
           <ProductUpdateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
