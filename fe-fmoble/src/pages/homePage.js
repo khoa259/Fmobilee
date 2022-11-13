@@ -46,7 +46,11 @@ const HomePage = () => {
                     <NavLink to={`/product/${product.slug}`}>
                       <Card.Img
                         className="img-fluid"
-                        src={product.image}
+                        src={
+                          product.images && product.images.length
+                            ? product.images[0].url
+                            : ""
+                        }
                         variant="top"
                       />
                     </NavLink>

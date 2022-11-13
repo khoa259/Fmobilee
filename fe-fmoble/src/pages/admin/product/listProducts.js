@@ -144,7 +144,6 @@ const ListProducts = () => {
           {products.map((product, index) => (
             <tr key={index}>
               <td>
-                {console.log(product.images)}
                 <img
                   src={
                     product.images && product.images.length
