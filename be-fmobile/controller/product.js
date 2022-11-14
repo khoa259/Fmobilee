@@ -15,6 +15,7 @@ export const create = async (req, res) => {
 };
 
 export const listAll = async (req, res) => {
+  const { sort, limit, order } = req.body;
   let products = await Product.find({})
     .limit(parseInt(req.params.count))
     .populate("category")

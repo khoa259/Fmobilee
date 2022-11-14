@@ -17,5 +17,6 @@ routerProducts.get("/product/:slug", read);
 routerProducts.get("/products/:count", listAll);
 routerProducts.delete("/product/:slug", authCheck, adminCheck, remove);
 routerProducts.put("/product/:slug", authCheck, adminCheck, update);
+routerProducts.post('/products', listAll) 
 
-export default routerProducts;
+export default routerProducts;  

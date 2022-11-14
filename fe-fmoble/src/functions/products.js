@@ -29,3 +29,11 @@ export const updateProduct = async (slug, product, authtoken) => {
     },
   });
 };
+
+export const getProducts = async (sort, order, limit) => {
+  await axios.post(`http://localhost:8000/api/product`, {
+    sort,
+    order,
+    limit,
+  });
+};
