@@ -4,6 +4,7 @@ import {
   create,
   list,
   listAll,
+  productsCount,
   read,
   remove,
   update,
@@ -14,6 +15,8 @@ const routerProducts = express.Router();
 
 // routes
 routerProducts.post("/product", authCheck, adminCheck, create);
+routerProducts.get("/products/total", productsCount);
+
 routerProducts.get("/product/:slug", read);
 routerProducts.get("/products/:count", listAll);
 routerProducts.delete("/product/:slug", authCheck, adminCheck, remove);
