@@ -3,11 +3,10 @@ import { getProducts } from "../../functions/products";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-import Banner from "../../component/banner/banner";
 import Spinner from "../../component/spinner/spinner";
 import { useSelector } from "react-redux";
 
-const NewArrivels = () => {
+const BestSeller = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [products, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -34,13 +33,11 @@ const NewArrivels = () => {
 
   return (
     <div>
-      <Banner />
       <Container>
         {loading ? (
           <Spinner />
         ) : (
           <div className="mt-4">
-            <h2 className="text-center">Các sản phẩm mới</h2>
             <Row>
               {products.map((product, index) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
@@ -82,4 +79,4 @@ const NewArrivels = () => {
   );
 };
 
-export default NewArrivels;
+export default BestSeller;
