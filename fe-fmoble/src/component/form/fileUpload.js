@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Spiner from "../spinner/spinner";
 
-const FileUpload = ({ value, setValue, setLoading }) => {
+const FileUpload = ({ value, setValue, setLoading, loading }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   const fileUploadAndResize = (e) => {
@@ -81,20 +82,24 @@ const FileUpload = ({ value, setValue, setLoading }) => {
 
   return (
     <>
-      <div className="row">
-        {value.images &&
-          value.images.map((image, index) => (
-            <div className="avatar" key={index}>
-              <img src={image.url} className="avatar-img" />
-              <button
-                className="avatar-button"
-                key={index}
-                onClick={() => handleImageRemove(image.public_id)}>
-                <i className="fa-solid fa-x"></i>
-              </button>
-            </div>
-          ))}
-      </div>
+      {loading ? (
+        <Spiner />
+      ) : (
+        <div className="row">
+          {value.images &&
+            value.images.map((image, index) => (
+              <div className="avatar" key={index}>
+                <img src={image.url} className="avatar-img" />
+                <button
+                  className="avatar-button"
+                  key={index}
+                  onClick={() => handleImageRemove(image.public_id)}>
+                  <i className="fa-solid fa-x"></i>
+                </button>
+              </div>
+            ))}
+        </div>
+      )}
       <div className="row">
         <label className="btn btn-primary">
           Choose File

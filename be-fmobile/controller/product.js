@@ -61,14 +61,18 @@ export const update = async (req, res) => {
   }
 };
 export const list = async (req, res) => {
+  console.table(req.body);
   try {
     // createdAt/updatedAt, desc/asc, 3
-    const { sort, order, limit } = req.body;
+    const { sort, order, page } = req.body;
+    const currentPage = page || 1;
+    const perPgae = 4;
     const products = await Product.find({})
+      .skip((currentPage - 1) * perPgae)
       .populate("category")
       .populate("subs")
       .sort([[sort, order]])
-      .limit(limit)
+      .limit(perPgae)
       .exec();
 
     res.json(products);

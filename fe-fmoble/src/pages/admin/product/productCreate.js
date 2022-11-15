@@ -62,15 +62,12 @@ const ProductCreate = () => {
         <div className="col">
           <h4 className="text-center">Thêm Sản Phẩm</h4>
           <hr />
-          {loading ? (
-            <Spiner />
-          ) : (
-            <FileUpload
-              value={value}
-              setValue={setValue}
-              setLoading={setLoading}
-            />
-          )}
+          <FileUpload
+            value={value}
+            setValue={setValue}
+            loading={loading}
+            setLoading={setLoading}
+          />
           <ProductCreateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}

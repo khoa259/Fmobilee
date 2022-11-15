@@ -141,3 +141,25 @@ a {
 .btn-eye {
   padding-top: 10px;
 }
+
+.ant-pagination {
+  display: flex !important;
+  list-style: none !important;
+  justify-content: end !important;
+}
+
+.ant-pagination-item {
+  cursor: pointer;
+  border: 1px;
+  background: rgb(195, 196, 197);
+  padding: 13px !important;
+  margin: 0 6px 0 6px;
+  border-radius: 3px;
+}
+
+.ant-pagination-item-link {
+  padding: 15px;
+  background: white;
+  font-size: 10px;
+  font-weight: 600 !important;
+}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getProducts } from "../../functions/products";
+import { getProducts, getProductCount } from "../../functions/products";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { Pagination } from "antd";
 
 import Banner from "../../component/banner/banner";
 import Spinner from "../../component/spinner/spinner";
@@ -11,14 +12,19 @@ const NewArrivels = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [products, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [productsCount, setProductsCount] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     loadAllProduct();
-  }, []);
+  }, [page]);
 
+  useEffect(() => {
+    getProductCount().then((res) => setProductsCount(res.data));
+  }, []);
   const loadAllProduct = () => {
     setLoading(false);
-    getProducts("createAt", "desc", 3).then((res) => {
+    getProducts("createdAt", "desc", page).then((res) => {
       setProduct(res.data);
     });
   };
@@ -40,7 +46,9 @@ const NewArrivels = () => {
           <Spinner />
         ) : (
           <div className="mt-4">
-            <h2 className="text-center">Các sản phẩm mới</h2>
+            <h2 className="text-center p-3 mt-5 mb-5 jumbotron">
+              Các sản phẩm mới
+            </h2>
             <Row>
               {products.map((product, index) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
@@ -77,6 +85,11 @@ const NewArrivels = () => {
             </Row>
           </div>
         )}
+        <Pagination
+          current={page}
+          total={(productsCount / 4) * 10}
+          onChange={(value) => setPage(value)}
+        />
       </Container>
     </div>
   );

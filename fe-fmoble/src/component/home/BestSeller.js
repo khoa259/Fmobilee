@@ -17,7 +17,7 @@ const BestSeller = () => {
 
   const loadAllProduct = () => {
     setLoading(false);
-    getProducts("createAt", "desc", 3).then((res) => {
+    getProducts("createdAt", "desc", 4).then((res) => {
       setProduct(res.data);
     });
   };
@@ -38,6 +38,9 @@ const BestSeller = () => {
           <Spinner />
         ) : (
           <div className="mt-4">
+            <h2 className="text-center p-3 mt-5 mb-5 jumbotron">
+              Sản phẩm bán chạy
+            </h2>
             <Row>
               {products.map((product, index) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
