@@ -53,7 +53,7 @@ const NewArrivels = () => {
               {products.map((product, index) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                   <Card className="my-3 p-2 rounded card-prd" key={index}>
-                    <NavLink to={`/product/${product.slug}`}>
+                    <NavLink to={`/${product.slug}`}>
                       <Card.Img
                         className="img-fluid"
                         src={

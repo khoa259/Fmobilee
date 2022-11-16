@@ -31,6 +31,7 @@ import ProductCreate from "./pages/admin/product/productCreate";
 import ProductUpdate from "./pages/admin/product/ProductUpdate";
 import Page404 from "./pages/404Page";
 import ListProducts from "./pages/admin/product/listProducts";
+import ProductDetail from "./pages/productDetail";
 // import Spiner from "./component/spinner/spinner";
 
 const App = () => {
@@ -76,6 +77,7 @@ const App = () => {
             <Route path="/user/password" element={<Password />} />
             <Route path="/user/wishlist" element={<Wishlist />} />
             <Route path="/iphone" element={<h1>PageIphone</h1>} />
+            <Route path="/:slug" element={<ProductDetail />} />
           </Route>
           <Route
             path="admin"
@@ -83,8 +85,7 @@ const App = () => {
               <AdminRoute>
                 <AdminLayout />
               </AdminRoute>
-            }
-          >
+            }>
             <Route index path="dashboard" element={<Dashboard />} />
             <Route path="category" element={<Category />} />
             <Route path="category/:slug" element={<CategoryUpdate />} />
