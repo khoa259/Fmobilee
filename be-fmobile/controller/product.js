@@ -40,7 +40,6 @@ export const remove = async (req, res) => {
 export const read = async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug })
     .populate("category")
-    .populate("subs")
     .exec();
   res.json(product);
 };

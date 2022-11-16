@@ -69,11 +69,11 @@ const BestSeller = () => {
                         <h5>{product.title}</h5>
                       </NavLink>
                       {/* <Card.Text as="div">
-              <Rating
-                value={product.rating}
-                text={`${product.numReviews} reviews`}
-                />
-              </Card.Text> */}
+                        <Rating
+                          value={product.rating}
+                          text={`${product.numReviews} reviews`}
+                          />
+                        </Card.Text> */}
                       <Card.Text as="p" className="price">
                         {formatCash(`${product.price}`)} đ
                       </Card.Text>

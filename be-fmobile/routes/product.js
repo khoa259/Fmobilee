@@ -17,8 +17,9 @@ const routerProducts = express.Router();
 // routes
 routerProducts.post("/product", authCheck, adminCheck, create);
 routerProducts.get("/products/total", productsCount);
-
+// details page
 routerProducts.get("/product/:slug", read);
+
 routerProducts.get("/products/:count", listAll);
 routerProducts.delete("/product/:slug", authCheck, adminCheck, remove);
 routerProducts.put("/product/:slug", authCheck, adminCheck, update);

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+//import lib
+import StarRating from "react-star-ratings";
 
-import { getProducts } from "../functions/products";
-const ProductDetail = () => {
+import { useParams } from "react-router-dom";
+import { getProduct } from "../functions/products";
+const ProductDetail = ({ product }) => {
   const [products, setProduct] = useState();
-  const { slug } = useParams();
+  const { slug, id } = useParams();
 
   useEffect(() => {
     const getProudct = async () => {
-      const { data } = await getProducts(slug);
+      const { data } = await getProduct(slug);
       setProduct(data);
     };
     getProudct();
@@ -16,7 +18,16 @@ const ProductDetail = () => {
   return (
     <div>
       <h1>detail page</h1>
-      {JSON.stringify(products)}
+
+      <StarRating
+        name={slug}
+        numberOfStars={5}
+        rating={2}
+        changeRating={(newRating, name) =>
+          console.log("New Rating", newRating, "name", name)
+        }
+        isSelectable={true}
+      />
     </div>
   );
 };
