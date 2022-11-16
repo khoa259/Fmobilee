@@ -4,9 +4,10 @@ import StarRating from "react-star-ratings";
 
 import { useParams } from "react-router-dom";
 import { getProduct } from "../functions/products";
+import RatingModal from "../component/modals/RatingModals";
 const ProductDetail = ({ product }) => {
   const [products, setProduct] = useState();
-  const { slug, id } = useParams();
+  const { slug } = useParams();
 
   useEffect(() => {
     const getProudct = async () => {
@@ -18,16 +19,18 @@ const ProductDetail = ({ product }) => {
   return (
     <div>
       <h1>detail page</h1>
-
-      <StarRating
-        name={slug}
-        numberOfStars={5}
-        rating={2}
-        changeRating={(newRating, name) =>
-          console.log("New Rating", newRating, "name", name)
-        }
-        isSelectable={true}
-      />
+      {JSON.stringify(products)}
+      <RatingModal>
+        <StarRating
+          name={slug}
+          numberOfStars={5}
+          rating={2}
+          changeRating={(newRating, name) =>
+            console.log("New Rating", newRating, "name", name)
+          }
+          isSelectable={true}
+        />
+      </RatingModal>
     </div>
   );
 };
