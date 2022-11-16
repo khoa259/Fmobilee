@@ -52,12 +52,12 @@ const productSchema = new mongoose.Schema(
     //   type: String,
     //   enum: ["iPhone", "Macbook", "iMac", "Apple Watch", "Phụ kiện"],
     // },
-    // ratings: [
-    //   {
-    //     star: Number,
-    //     postedBy: { type: ObjectId, ref: "User" },
-    //   },
-    // ],
+    ratings: [
+      {
+        star: Number,
+        postedBy: { type: ObjectId, ref: "User" },
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -87,7 +87,7 @@ const NewArrivels = () => {
         )}
         <Pagination
           current={page}
-          total={(productsCount / 4) * 10}
+          total={(productsCount / 2) * 5}
           onChange={(value) => setPage(value)}
         />
       </Container>
