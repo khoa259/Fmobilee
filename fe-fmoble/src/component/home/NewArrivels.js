@@ -6,6 +6,7 @@ import { Pagination } from "antd";
 
 import Banner from "../../component/banner/banner";
 import Spinner from "../../component/spinner/spinner";
+import { formatCash } from "../formatCash";
 import { useSelector } from "react-redux";
 
 const NewArrivels = () => {
@@ -27,15 +28,6 @@ const NewArrivels = () => {
     getProducts("createdAt", "desc", page).then((res) => {
       setProduct(res.data);
     });
-  };
-
-  const formatCash = (str) => {
-    return str
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
   };
 
   return (

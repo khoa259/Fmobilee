@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { Pagination } from "antd";
 
 import Spinner from "../../component/spinner/spinner";
+import { formatCash } from "../formatCash";
 import { useSelector } from "react-redux";
 
 const BestSeller = () => {
@@ -27,15 +28,6 @@ const BestSeller = () => {
     getProducts("createdAt", "desc", page).then((res) => {
       setProduct(res.data);
     });
-  };
-
-  const formatCash = (str) => {
-    return str
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
   };
 
   return (

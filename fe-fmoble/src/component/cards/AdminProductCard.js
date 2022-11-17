@@ -1,17 +1,11 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
+import { formatCash } from "../formatCash";
 import { Link } from "react-router-dom";
 
 const AdminProductCard = ({ product, handleRemove }) => {
   const { title, images, price, slug, quantity, color } = product;
-  const formatCash = (str) => {
-    return str
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
-  };
+
   return (
     <tbody>
       <tr>

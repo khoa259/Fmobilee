@@ -1,0 +1,34 @@
+#thumbnail {
+    display: flex !important;
+}
+
+.rate-start i {
+    font-size: 16px;
+    color: rgb(232, 232, 19);
+}
+
+.price-detail {
+    color: rgb(222, 29, 29);
+    text-transform: lowercase !important;
+}
+
+.inputs {
+    display: flex;
+}
+
+.inputs input {
+    width: 50px;
+    text-align: center;
+    font-weight: 700;
+    font-size: larger;
+    cursor: default;
+    z-index: 10;
+}
+
+.increments {
+    padding: 5px 15px !important;
+}
+
+.decrements {
+    padding: 5px 15px !important;
+}

@@ -31,7 +31,7 @@ import ProductCreate from "./pages/admin/product/productCreate";
 import ProductUpdate from "./pages/admin/product/ProductUpdate";
 import Page404 from "./pages/404Page";
 import ListProducts from "./pages/admin/product/listProducts";
-import ProductDetail from "./pages/productDetail";
+import ProductDetail from "./pages/productDetail/productDetail";
 // import Spiner from "./component/spinner/spinner";
 
 const App = () => {

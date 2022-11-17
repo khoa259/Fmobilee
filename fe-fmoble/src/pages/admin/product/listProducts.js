@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 import { getProductsByCount, removeProduct } from "../../../functions/products";
 import Spiner from "../../../component/spinner/spinner";
+import { formatCash } from "../../../component/formatCash";
 
 const ListProducts = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -42,15 +43,6 @@ const ListProducts = () => {
           console.log("lỗi", err);
         });
     }
-  };
-
-  const formatCash = (str) => {
-    return str
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
   };
 
   return (
