@@ -15,6 +15,7 @@ const RatingModal = ({ children }) => {
     setShow(false);
   };
   const handleClose = () => {
+    setShow(false);
     toast.success("Thanks for your review. It will apper soon");
   };
   const handleShow = () => setShow(true);
@@ -29,7 +30,7 @@ const RatingModal = ({ children }) => {
         Launch demo modal
       </Button>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Rating star</Modal.Title>
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
