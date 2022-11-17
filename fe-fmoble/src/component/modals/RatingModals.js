@@ -3,12 +3,12 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { StarOutlined } from "@ant-design/icons";
-
 const RatingModal = ({ children }) => {
   const { user } = useSelector((state) => ({ ...state }));
   const [modalVisible, setModalVisible] = useState(false);
-
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
   const handleCancle = () => {
@@ -18,15 +18,21 @@ const RatingModal = ({ children }) => {
     setShow(false);
     toast.success("Thanks for your review. It will apper soon");
   };
-  const handleShow = () => setShow(true);
+  const hanleModale = () => {
+    if (user && user.token) {
+      setShow(true);
+    } else {
+      navigate("/register");
+    }
+  };
 
   return (
     <>
-      <div onClick={() => setModalVisible(true)}>
+      <div onClick={() => hanleModale()}>
         <StarOutlined className="text-danger" /> <br />{" "}
         {user ? "Leave rating" : "Login to leave rating"}
       </div>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={hanleModale}>
         Launch demo modal
       </Button>
       <Modal show={show} onHide={handleClose}>
