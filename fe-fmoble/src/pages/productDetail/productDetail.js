@@ -9,8 +9,8 @@ import { useParams } from "react-router-dom";
 import { getProduct } from "../../functions/products";
 import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
-const ProductDetail = ({ product }) => {
-  const [products, setProduct] = useState();
+const ProductDetail = () => {
+  const [product, setProduct] = useState({});
   const { slug } = useParams();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const ProductDetail = ({ product }) => {
   return (
     <div>
       <h1>detail page</h1>
-      {JSON.stringify(products)}
+      {/* {JSON.stringify(product)} */}
       <RatingModal>
         <StarRating
           name={slug}
@@ -38,35 +38,31 @@ const ProductDetail = ({ product }) => {
 
       <div className="container mt-5 mb-5">
         <div className="card">
+          _id: {product._id}
           <div className="row g-0">
             <div className="col-md-6 border-end">
               <div className=" ">
                 <Carousel showArrows={true} infiniteLoop>
-                  <div>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe9nfz7V-pKKGG5rv5_lACTeU1BDi82uk53w&usqp=CAU" />
-                  </div>
-                  <div>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe9nfz7V-pKKGG5rv5_lACTeU1BDi82uk53w&usqp=CAU" />
-                  </div>
-                  <div>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe9nfz7V-pKKGG5rv5_lACTeU1BDi82uk53w&usqp=CAU" />
-                  </div>
+                  {product.images &&
+                    product.images.map((i) => (
+                      <img src={i.url} key={i.public_id} />
+                    ))}
                 </Carousel>
               </div>
             </div>
             <div className="col-md-6">
               <div className="p-3 right-side">
                 <div className="d-flex justify-content-between align-items-center">
-                  <h3>Tên sản phẩm</h3>
+                  <h3>{product.title}</h3>
                   <span className="heart">
                     <i className="bx bx-heart" />
                   </span>
                 </div>
                 <div className="mt-2 pr-3 content">
-                  <p>Mô tả sản phẩm</p>
+                  <p>{product.description}</p>
                 </div>
                 <span>441 reviews</span>
-                <h3>$430.99</h3>
+                <h3 className="price">{formatCash(`${product.price}`)}đ</h3>
 
                 <div className="mt-2">
                   <span className="fw-bold">Color</span>
