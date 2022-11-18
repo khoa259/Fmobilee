@@ -25,6 +25,16 @@ const ProductDetail = () => {
     getProudct();
   }, [slug]);
 
+  // show user Ratings
+  useEffect(() => {
+    if (product.ratings && user) {
+      let existingRatingObject = product.ratings.find(
+        (ele) => ele.postedBy.toString() === user._id.toString()
+      );
+      existingRatingObject && setStar(existingRatingObject.star); // current user's star
+    }
+  });
+
   const onStarClick = (newRating, name) => {
     setStar(newRating);
     console.table(newRating, name);
