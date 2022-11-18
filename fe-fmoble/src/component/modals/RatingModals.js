@@ -22,7 +22,7 @@ const RatingModal = ({ children }) => {
     if (user && user.token) {
       setShow(true);
     } else {
-      navigate("/register");
+      navigate("/login");
     }
   };
 

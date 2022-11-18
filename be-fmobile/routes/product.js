@@ -26,6 +26,6 @@ routerProducts.put("/product/:slug", authCheck, adminCheck, update);
 // list all
 routerProducts.post("/products", list);
 // rating
-routerProducts.put("/products/star/:productId", authCheck, productStar);
+routerProducts.put("/product/star/:productId", authCheck, productStar);
 
 export default routerProducts;
