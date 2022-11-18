@@ -10,6 +10,7 @@
 .price-detail {
     color: rgb(222, 29, 29);
     text-transform: lowercase !important;
+    padding-top: 6px;
 }
 
 .inputs {
@@ -31,4 +32,9 @@
 
 .decrements {
     padding: 5px 15px !important;
+}
+
+.namecate {
+    font-size: 18px;
+    font-weight: 700;
 }

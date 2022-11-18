@@ -5,13 +5,14 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 
 import "./productDetail.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getProduct } from "../../functions/products";
 import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
 const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const { slug } = useParams();
+  const { category } = product;
 
   useEffect(() => {
     const getProudct = async () => {
@@ -22,8 +23,7 @@ const ProductDetail = () => {
   }, []);
   return (
     <div>
-      <h1>detail page</h1>
-      {/* {JSON.stringify(product)} */}
+      {/* {JSON.stringify(product.category)} */}
       <RatingModal>
         <StarRating
           name={slug}
@@ -37,8 +37,18 @@ const ProductDetail = () => {
       </RatingModal>
 
       <div className="container mt-5 mb-5">
+        <div className="pb-3">
+          {category && (
+            <div>
+              <Link className="namecate" to={`/${category.slug}`}>
+                {category.name} /
+              </Link>
+              <span> {product.title}</span>
+            </div>
+          )}
+        </div>
         <div className="card">
-          _id: {product._id}
+          {/* _id: {product._id} */}
           <div className="row g-0">
             <div className="col-md-6 border-end">
               <div className=" ">
@@ -52,6 +62,11 @@ const ProductDetail = () => {
             </div>
             <div className="col-md-6">
               <div className="p-3 right-side">
+                <div className="pb-3">
+                  {category && (
+                    <Link to={`/${category.slug}`}> {category.name}</Link>
+                  )}
+                </div>
                 <div className="d-flex justify-content-between align-items-center">
                   <h3>{product.title}</h3>
                   <span className="heart">
@@ -62,7 +77,9 @@ const ProductDetail = () => {
                   <p>{product.description}</p>
                 </div>
                 <span>441 reviews</span>
-                <h3 className="price">{formatCash(`${product.price}`)}đ</h3>
+                <h3 className="price-detail">
+                  {formatCash(`${product.price}`)}đ
+                </h3>
 
                 <div className="mt-2">
                   <span className="fw-bold">Color</span>
