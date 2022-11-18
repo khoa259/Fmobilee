@@ -5,18 +5,19 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { StarOutlined } from "@ant-design/icons";
-const RatingModal = ({ children }) => {
+const RatingModal = ({ children, product }) => {
   const { user } = useSelector((state) => ({ ...state }));
   const [modalVisible, setModalVisible] = useState(false);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  const { title } = product;
 
   const handleCancle = () => {
     setShow(false);
   };
   const handleClose = () => {
     setShow(false);
-    toast.success("Thanks for your review. It will apper soon");
+    toast.success(`Cảm ơn bạn đã đánh giá sản phẩm ${product.title}`);
   };
   const hanleModale = () => {
     if (user && user.token) {
@@ -29,12 +30,13 @@ const RatingModal = ({ children }) => {
   return (
     <>
       <div onClick={() => hanleModale()}>
-        <StarOutlined className="text-danger" /> <br />{" "}
-        {user ? "Leave rating" : "Login to leave rating"}
+        {user ? (
+          <span className="rate">đánh giá</span>
+        ) : (
+          "Login to leave rating"
+        )}
       </div>
-      <Button variant="primary" onClick={hanleModale}>
-        Launch demo modal
-      </Button>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
           <Modal.Title>Rating star</Modal.Title>

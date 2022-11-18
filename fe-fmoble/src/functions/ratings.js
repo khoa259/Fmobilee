@@ -22,7 +22,7 @@ export const showAverage = (p) => {
     console.log("result", result);
 
     return (
-      <div className="text-center pt-1 pb-3">
+      <div className=" pt-1 pb-3">
         <span>
           <StarRating rating={result} />
         </span>

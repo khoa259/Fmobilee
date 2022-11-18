@@ -50,16 +50,6 @@ const ProductDetail = () => {
   return (
     <div>
       {/* {JSON.stringify(product.category)} */}
-      <RatingModal>
-        <StarRating
-          name={product._id}
-          numberOfStars={5}
-          rating={star}
-          changeRating={onStarClick}
-          isSelectable={true}
-          starRatedColor="red"
-        />
-      </RatingModal>
 
       <div className="container mt-5 mb-5">
         <div className="pb-3">
@@ -94,13 +84,29 @@ const ProductDetail = () => {
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                   <h3>{product.title}</h3>
-                  {product && product.ratings && product.ratings.length > 0
-                    ? showAverage(product)
-                    : "No rating yet"}
-                  <span className="heart">
-                    <i className="bx bx-heart" />
-                  </span>
                 </div>
+                {product && product.ratings && product.ratings.length > 0 ? (
+                  showAverage(product)
+                ) : (
+                  <div className="d-flex">
+                    <p className="text-danger pr-5">chưa có đánh giá</p>
+                    <div>
+                      <RatingModal product={product}>
+                        <StarRating
+                          name={product._id}
+                          numberOfStars={5}
+                          rating={star}
+                          changeRating={onStarClick}
+                          isSelectable={true}
+                          starRatedColor="red"
+                        />
+                      </RatingModal>
+                    </div>
+                  </div>
+                )}
+                <span className="heart">
+                  <i className="bx bx-heart" />
+                </span>
                 <div className="mt-2 pr-3 content">
                   <p>{product.description}</p>
                 </div>
