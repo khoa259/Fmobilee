@@ -10,12 +10,14 @@ import { getProduct, productStar } from "../../functions/products";
 import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
 import { useSelector } from "react-redux";
+import { showAverage } from "../../functions/ratings";
 const ProductDetail = () => {
   // redux get user state
   const { user } = useSelector((state) => ({ ...state }));
   const [product, setProduct] = useState({});
   const [star, setStar] = useState(0);
   const { slug } = useParams();
+  console.log(user._id);
 
   useEffect(() => {
     const getProudct = async () => {
@@ -29,7 +31,7 @@ const ProductDetail = () => {
   useEffect(() => {
     if (product.ratings && user) {
       let existingRatingObject = product.ratings.find(
-        (ele) => ele.postedBy.toString() === user._id.toString()
+        (ele) => ele.postedBy === user._id
       );
       existingRatingObject && setStar(existingRatingObject.star); // current user's star
     }
@@ -76,6 +78,9 @@ const ProductDetail = () => {
               <div className="p-3 right-side">
                 <div className="d-flex justify-content-between align-items-center">
                   <h3>{product.title}</h3>
+                  {product && product.ratings && product.ratings.length > 0
+                    ? showAverage(product)
+                    : "No rating yet"}
                   <span className="heart">
                     <i className="bx bx-heart" />
                   </span>
