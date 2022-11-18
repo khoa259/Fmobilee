@@ -18,7 +18,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [star, setStar] = useState(0);
   const { slug } = useParams();
-
+  const { category } = product;
   console.log(user._id);
 
   useEffect(() => {
