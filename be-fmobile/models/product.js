@@ -48,10 +48,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       enum: ["Black", "Brown", "Silver", "White", "Blue"],
     },
-    // brand: {
-    //   type: String,
-    //   enum: ["iPhone", "Macbook", "iMac", "Apple Watch", "Phụ kiện"],
-    // },
     ratings: [
       {
         star: Number,

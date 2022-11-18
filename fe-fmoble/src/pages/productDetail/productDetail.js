@@ -6,11 +6,15 @@ import { Carousel } from "react-responsive-carousel";
 
 import "./productDetail.css";
 import { useParams } from "react-router-dom";
-import { getProduct } from "../../functions/products";
+import { getProduct, productStar } from "../../functions/products";
 import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
+import { useSelector } from "react-redux";
 const ProductDetail = () => {
+  // redux get user state
+  const { user } = useSelector((state) => ({ ...state }));
   const [product, setProduct] = useState({});
+  const [star, setStar] = useState(0);
   const { slug } = useParams();
 
   useEffect(() => {
@@ -19,20 +23,28 @@ const ProductDetail = () => {
       setProduct(data);
     };
     getProudct();
-  }, []);
+  }, [slug]);
+
+  const onStarClick = (newRating, name) => {
+    setStar(newRating);
+    console.table(newRating, name);
+    productStar(name, newRating, user.token).then((res) => {
+      console.log("rating clicked", res);
+      console.log(product);
+    });
+  };
   return (
     <div>
       <h1>detail page</h1>
       {/* {JSON.stringify(product)} */}
       <RatingModal>
         <StarRating
-          name={slug}
+          name={product._id}
           numberOfStars={5}
-          rating={2}
-          changeRating={(newRating, name) =>
-            console.log("New Rating", newRating, "name", name)
-          }
+          rating={star}
+          changeRating={onStarClick}
           isSelectable={true}
+          starRatedColor="red"
         />
       </RatingModal>
 
