@@ -23,6 +23,7 @@ import ForgotPassword from "./pages/auth/forgotPassword";
 import History from "./pages/user/history";
 import Password from "./pages/user/Password.js";
 import Wishlist from "./pages/user/Wishlist.js";
+import CategoryHome from "./pages/Category/CategoryHome";
 // Router Admin
 import Dashboard from "./pages/admin/Dashboard";
 import Category from "./pages/admin/category/Category";
@@ -78,6 +79,7 @@ const App = () => {
             <Route path="/user/wishlist" element={<Wishlist />} />
             <Route path="/iphone" element={<h1>PageIphone</h1>} />
             <Route path="/:slug" element={<ProductDetail />} />
+            <Route path="category/:slug" element={<CategoryHome />} />
           </Route>
           <Route
             path="admin"
@@ -85,7 +87,8 @@ const App = () => {
               <AdminRoute>
                 <AdminLayout />
               </AdminRoute>
-            }>
+            }
+          >
             <Route index path="dashboard" element={<Dashboard />} />
             <Route path="category" element={<Category />} />
             <Route path="category/:slug" element={<CategoryUpdate />} />

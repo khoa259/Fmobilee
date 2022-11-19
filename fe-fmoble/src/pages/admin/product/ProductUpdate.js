@@ -7,7 +7,7 @@ import { getProduct, updateProduct } from "../../../functions/products";
 import { getCategories } from "../../../functions/category";
 import FileUpload from "../../../component/form/fileUpload";
 import ProductUpdateForm from "../../../component/form/ProductUpdateForm";
-import Spiner from "../../../component/spinner/spinner";
+// import Spiner from "../../../component/spinner/spinner";
 
 const initialState = {
   title: "",
