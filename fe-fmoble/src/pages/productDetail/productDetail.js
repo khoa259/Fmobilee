@@ -7,7 +7,7 @@ import { Carousel } from "react-responsive-carousel";
 import "./productDetail.css";
 
 import { useParams, Link } from "react-router-dom";
-import { getProduct, productStar } from "../../functions/products";
+import { getProduct, productStar, getRelated } from "../../functions/products";
 import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
 import { useSelector } from "react-redux";
@@ -16,17 +16,14 @@ const ProductDetail = () => {
   // redux get user state
   const { user } = useSelector((state) => ({ ...state }));
   const [product, setProduct] = useState({});
+  const [related, setRelated] = useState([]);
   const [star, setStar] = useState(0);
   const { slug } = useParams();
   const { category } = product;
   console.log(user._id);
 
   useEffect(() => {
-    const getProudct = async () => {
-      const { data } = await getProduct(slug);
-      setProduct(data);
-    };
-    getProudct();
+    loadSingleProduct();
   }, [slug]);
 
   // show user Ratings
@@ -38,6 +35,14 @@ const ProductDetail = () => {
       existingRatingObject && setStar(existingRatingObject.star); // current user's star
     }
   });
+
+  const loadSingleProduct = () => {
+    getProduct(slug).then((res) => {
+      setProduct(res.data);
+      // load related
+      getRelated(res.data._id).then((res) => setRelated(res.data));
+    });
+  };
 
   const onStarClick = (newRating, name) => {
     setStar(newRating);
@@ -152,6 +157,8 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+      <h1 className="text-center mt-5">Related Products</h1>
+      {JSON.stringify(related)}
     </div>
   );
 };
