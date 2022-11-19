@@ -1,14 +1,17 @@
 import firebase from "firebase";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Badge, Container, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
+import { getCategories } from "../../functions/category";
 import { MenuList } from "../data-menu/data-menu";
 import "./header.css";
 const Header = () => {
+  const [categories, setCategories] = useState([]);
   const history = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => ({ ...state }));
   const logout = () => {
     firebase.auth().signOut();
     dispatch({
@@ -17,8 +20,12 @@ const Header = () => {
     });
     history("/");
   };
-  const { user } = useSelector((state) => ({ ...state }));
 
+  useEffect(() => {
+    getCategories().then((c) => {
+      setCategories(c.data);
+    });
+  }, []);
   return (
     <div>
       <Navbar variant="light">
@@ -79,9 +86,9 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center">
           <Nav as="ul" className="Ul">
-            {MenuList.map((data, index) => (
-              <Nav.Item as="li" className="LI" key={index}>
-                <Nav.Link href={data.path}>{data.label}</Nav.Link>
+            {categories.map((c) => (
+              <Nav.Item as="li" className="LI" key={c._id}>
+                <Nav.Link href={`/category/${c.slug}`}>{c.name}</Nav.Link>
               </Nav.Item>
             ))}
           </Nav>

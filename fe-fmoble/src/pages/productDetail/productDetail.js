@@ -119,7 +119,7 @@ const ProductDetail = () => {
                 <h3 className="price-detail">
                   {formatCash(`${product.price}`)}đ
                 </h3>
-
+                <hr />
                 <div className="mt-2">
                   <span className="fw-bold">Color</span>
                   <div className="colors">

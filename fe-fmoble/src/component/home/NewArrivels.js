@@ -8,7 +8,6 @@ import Banner from "../../component/banner/banner";
 import Spinner from "../../component/spinner/spinner";
 import { formatCash } from "../formatCash";
 import { useSelector } from "react-redux";
-import { showAverage } from "../../functions/ratings";
 
 const NewArrivels = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -17,7 +16,6 @@ const NewArrivels = () => {
   const [productsCount, setProductsCount] = useState(0);
   const [page, setPage] = useState(1);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     loadAllProduct();
   }, [page]);
@@ -63,18 +61,6 @@ const NewArrivels = () => {
                       <NavLink to={`/product/${product.slug}`}>
                         <h5>{product.title}</h5>
                       </NavLink>
-                      {/* show ratings about products */}
-                      <h3>
-                        {product &&
-                        product.ratings &&
-                        product.ratings.length > 0 ? (
-                          showAverage(product)
-                        ) : (
-                          <div className="text-center pt-1 pb-3">
-                            No rating yet
-                          </div>
-                        )}
-                      </h3>
                       {/* <Card.Text as="div">
               <Rating
                 value={product.rating}

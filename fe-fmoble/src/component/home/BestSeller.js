@@ -62,17 +62,7 @@ const BestSeller = () => {
                         <h5>{product.title}</h5>
                       </NavLink>
                       {/* show ratings about products */}
-                      <h3>
-                        {product &&
-                        product.ratings &&
-                        product.ratings.length > 0 ? (
-                          showAverage(product)
-                        ) : (
-                          <div className="text-center pt-1 pb-3">
-                            No rating yet
-                          </div>
-                        )}
-                      </h3>
+
                       {/* <Card.Text as="div">
                         <Rating
                           value={product.rating}
