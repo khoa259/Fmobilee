@@ -9,6 +9,7 @@ import {
   remove,
   update,
   productStar,
+  listRelated,
 } from "../controller/product.js";
 // middlewares
 import { authCheck, adminCheck } from "../middleware/auth.js";
@@ -27,5 +28,7 @@ routerProducts.put("/product/:slug", authCheck, adminCheck, update);
 routerProducts.post("/products", list);
 // rating
 routerProducts.put("/product/star/:productId", authCheck, productStar);
+// related
+routerProducts.get("/product/related/:productId", listRelated);
 
 export default routerProducts;
