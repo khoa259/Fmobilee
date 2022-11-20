@@ -38,13 +38,11 @@ const NewArrivels = () => {
           <Spinner />
         ) : (
           <div className="mt-4">
-            <h2 className="text-center p-3 mt-5 mb-5 jumbotron">
-              Các sản phẩm mới
-            </h2>
+            <h2 className="text-center p-3 mt-5 mb-5">Các sản phẩm mới</h2>
             <Row>
               {products.map((product, index) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                  <Card className="my-3 p-2 rounded card-prd" key={index}>
+                  <Card className="  card-prd" key={index}>
                     <NavLink to={`/${product.slug}`}>
                       <Card.Img
                         className="img-fluid"
@@ -59,7 +57,7 @@ const NewArrivels = () => {
 
                     <Card.Body>
                       <NavLink to={`/product/${product.slug}`}>
-                        <h5>{product.title}</h5>
+                        <span className="span">{product.title}</span>
                       </NavLink>
                       {/* <Card.Text as="div">
               <Rating
@@ -68,7 +66,7 @@ const NewArrivels = () => {
                 />
               </Card.Text> */}
                       <Card.Text as="p" className="price">
-                        {formatCash(`${product.price}`)} đ
+                        Giá từ {formatCash(`${product.price}`)} đ
                       </Card.Text>
                     </Card.Body>
                   </Card>

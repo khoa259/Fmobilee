@@ -38,13 +38,11 @@ const BestSeller = () => {
           <Spinner />
         ) : (
           <div className="mt-4">
-            <h2 className="text-center p-3 mt-5 mb-5 jumbotron">
-              Sản phẩm bán chạy
-            </h2>
+            <h2 className="text-center p-3 mt-5 mb-5 ">Sản phẩm bán chạy</h2>
             <Row>
               {products.map((product, index) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                  <Card className="my-3 p-2 rounded card-prd" key={index}>
+                  <Card className=" card-prd" key={index}>
                     <NavLink to={`/${product.slug}`}>
                       <Card.Img
                         className="img-fluid"
@@ -59,16 +57,10 @@ const BestSeller = () => {
 
                     <Card.Body>
                       <NavLink to={`/product/${product.slug}`}>
-                        <h5>{product.title}</h5>
+                        <span className="span">{product.title}</span>
                       </NavLink>
-                      {/* show ratings about products */}
-
-                      {/* <Card.Text as="div">
-                        <Rating
-                          value={product.rating}
-                          text={`${product.numReviews} reviews`}
-                          />
-                        </Card.Text> */}
+                    </Card.Body>
+                    <Card.Body>
                       <Card.Text as="p" className="price">
                         {formatCash(`${product.price}`)} đ
                       </Card.Text>

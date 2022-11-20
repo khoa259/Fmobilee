@@ -5,7 +5,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f5f5f7;
 }
 
 /* Handle */
@@ -20,8 +20,8 @@
   background: #555;
 }
 
-main {
-  background: #f5f5f7;
+.main {
+  background: #eeeeee;
   min-height: 100vh;
 
 }
@@ -41,9 +41,7 @@ input::-webkit-inner-spin-button {
   width: 100%;
 }
 
-.price {
-  color: blue;
-}
+
 
 a {
   text-decoration: none !important;
@@ -90,6 +88,40 @@ a {
   height: var(--height-panigation) !important;
 }
 
+.card-body {
+  padding: 1.5rem 0 !important;
+}
+
+.card-prd {
+  border-radius: 9px !important;
+  border: none !important;
+  background: #fff;
+  padding: 30px 20px 20px 20px;
+  box-sizing: border-box !important;
+}
+
+.card-prd:hover {
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #02010100;
+  box-shadow: 4px 4px 28px 5px rgb(0 0 0 / 12%);
+  transition-duration: 0.6s;
+
+}
+
+.span {
+  font-size: 16px !important;
+  font-weight: 600;
+  padding: 20px 0;
+}
+
+.price {
+  color: #0066CC;
+  padding: 20px 0px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 20px;
+}
 
 /* avatar image */
 .avatar {
@@ -151,8 +183,8 @@ a {
 .ant-pagination-item {
   cursor: pointer;
   border: 1px;
-  background: rgb(195, 196, 197);
-  padding: 13px !important;
+  background: rgb(102, 102, 99);
+  padding: 10px !important;
   margin: 0 6px 0 6px;
   border-radius: 3px;
 }

@@ -6,7 +6,7 @@ const WebSiteLayout = () => {
   return (
     <div>
       <Header />
-      <div>
+      <div className="main">
         <Outlet />
       </div>
       <Footer />
