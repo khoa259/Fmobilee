@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-//import lib
-import StarRating from "react-star-ratings";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Row, Col, Card } from "react-bootstrap";
+import { useParams, Link, NavLink, json } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
+import StarRating from "react-star-ratings";
+import _ from "lodash";
+//import lib
 
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import "./productDetail.css";
 
-import { useParams, Link, NavLink } from "react-router-dom";
 import { getProduct, productStar, getRelated } from "../../functions/products";
 import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
-import { useSelector } from "react-redux";
 import { showAverage } from "../../functions/ratings";
-import { Card, Col, Row } from "react-bootstrap";
+
 const ProductDetail = () => {
   // redux get user state
   const { user } = useSelector((state) => ({ ...state }));
@@ -51,6 +53,25 @@ const ProductDetail = () => {
       console.log("rating clicked", res);
       console.log(product);
     });
+  };
+
+  const handleAddToCart = () => {
+    let cart = [];
+    if (typeof window !== "undefined") {
+      //if cart is in localstorage GET it
+      if (localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"));
+      }
+      // push new product to cart
+      cart.push({
+        ...product,
+        count: 1,
+      });
+      //remove duplicates
+      let unique = _.uniqWith(cart, _.isEqual);
+      //save to localStorage
+      localStorage.setItem("cart", JSON.stringify(unique));
+    }
   };
   return (
     <div className="container containerDetail">
@@ -146,7 +167,7 @@ const ProductDetail = () => {
                 </div>
                 <div className="buttons d-flex flex-row mt-2  gap-3">
                   {/* <button className="btn btn-outline-dark">Mua ngay</button> */}
-                  <button className="btn btn-dark">
+                  <button onClick={handleAddToCart} className="btn btn-dark">
                     <i className="fa-solid fa-cart-plus mr-2"></i>
                     Thêm vào giỏ hàng
                   </button>
