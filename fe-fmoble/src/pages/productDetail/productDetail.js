@@ -6,12 +6,13 @@ import { Carousel } from "react-responsive-carousel";
 
 import "./productDetail.css";
 
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, NavLink } from "react-router-dom";
 import { getProduct, productStar, getRelated } from "../../functions/products";
 import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
 import { useSelector } from "react-redux";
 import { showAverage } from "../../functions/ratings";
+import { Card, Col, Row } from "react-bootstrap";
 const ProductDetail = () => {
   // redux get user state
   const { user } = useSelector((state) => ({ ...state }));
@@ -20,7 +21,6 @@ const ProductDetail = () => {
   const [star, setStar] = useState(0);
   const { slug } = useParams();
   const { category } = product;
-  console.log(user._id);
 
   useEffect(() => {
     loadSingleProduct();
@@ -53,10 +53,9 @@ const ProductDetail = () => {
     });
   };
   return (
-    <div>
+    <div className="container">
       {/* {JSON.stringify(product.category)} */}
-
-      <div className="container mt-5 mb-5">
+      <div className=" mt-5 mb-5">
         <div className="pb-3">
           {category && (
             <div>
@@ -157,8 +156,34 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <h1 className="text-center mt-5">Related Products</h1>
-      {JSON.stringify(related)}
+      <h3 className="text-center mt-5">Related Products</h3>
+      {/* {JSON.stringify(related)} */}
+      <Row>
+        {related.map((item, index) => (
+          <Col key={item._id} sm={12} md={6} lg={4} xl={3}>
+            <Card className=" card-prd" key={index}>
+              <NavLink to={`/${item.slug}`}>
+                <Card.Img
+                  className="img-fluid"
+                  src={
+                    item.images && item.images.length ? item.images[0].url : ""
+                  }
+                  variant="top"
+                />
+              </NavLink>
+
+              <Card.Body>
+                <NavLink to={`/${item.slug}`}>
+                  <span className="span">{item.title}</span>
+                </NavLink>
+                <Card.Text as="p" className="price">
+                  {formatCash(`${item.price}`)} đ
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </div>
   );
 };

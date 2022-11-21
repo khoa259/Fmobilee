@@ -23,7 +23,7 @@
 .main {
   background: #eeeeee;
   min-height: 100vh;
-
+  padding-bottom: 6rem !important;
 }
 
 .text-red {

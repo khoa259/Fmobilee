@@ -56,7 +56,7 @@ const BestSeller = () => {
                     </NavLink>
 
                     <Card.Body>
-                      <NavLink to={`/product/${product.slug}`}>
+                      <NavLink to={`/${product.slug}`}>
                         <span className="span">{product.title}</span>
                       </NavLink>
                       <Card.Text as="p" className="price">
