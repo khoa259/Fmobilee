@@ -82,24 +82,20 @@ const FileUpload = ({ value, setValue, setLoading, loading }) => {
 
   return (
     <>
-      {loading ? (
-        <Spiner />
-      ) : (
-        <div className="row">
-          {value.images &&
-            value.images.map((image, index) => (
-              <div className="avatar" key={index}>
-                <img src={image.url} className="avatar-img" />
-                <button
-                  className="avatar-button"
-                  key={index}
-                  onClick={() => handleImageRemove(image.public_id)}>
-                  <i className="fa-solid fa-x"></i>
-                </button>
-              </div>
-            ))}
-        </div>
-      )}
+      <div className="row">
+        {value.images &&
+          value.images.map((image, index) => (
+            <div className="avatar" key={index}>
+              <img src={image.url} className="avatar-img" />
+              <button
+                className="avatar-button"
+                key={index}
+                onClick={() => handleImageRemove(image.public_id)}>
+                <i className="fa-solid fa-x"></i>
+              </button>
+            </div>
+          ))}
+      </div>
       <div className="row">
         <label className="btn btn-primary">
           Choose File

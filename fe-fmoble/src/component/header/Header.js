@@ -27,7 +27,7 @@ const Header = () => {
     });
   }, []);
   return (
-    <div>
+    <div className="fixed-top ">
       <Navbar variant="light">
         <Container>
           <Navbar.Brand href="/">Fmobile</Navbar.Brand>

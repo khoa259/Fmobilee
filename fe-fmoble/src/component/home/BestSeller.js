@@ -38,11 +38,16 @@ const BestSeller = () => {
           <Spinner />
         ) : (
           <div className="mt-4">
-            <h2 className="text-center p-3 mt-5 mb-5 ">Sản phẩm bán chạy</h2>
+            <h2 className="text-center p-3 mt-2 mb-1 ">Sản phẩm bán chạy</h2>
             <Row>
               {products.map((product, index) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                   <Card className=" card-prd" key={index}>
+                    {product?.quantity !== 0 ? (
+                      <div className="position-absolute stock">còn hàng</div>
+                    ) : (
+                      <div className="position-absolute is-stock">hết hàng</div>
+                    )}
                     <NavLink to={`/${product.slug}`}>
                       <Card.Img
                         className="img-fluid"
@@ -60,7 +65,7 @@ const BestSeller = () => {
                         <span className="span">{product.title}</span>
                       </NavLink>
                       <Card.Text as="p" className="price">
-                        {formatCash(`${product.price}`)} đ
+                        {formatCash(`${product.price}`)}đ
                       </Card.Text>
                     </Card.Body>
                   </Card>

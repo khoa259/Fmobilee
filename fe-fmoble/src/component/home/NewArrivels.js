@@ -29,7 +29,6 @@ const NewArrivels = () => {
       setProduct(res.data);
     });
   };
-
   return (
     <div>
       <Banner />
@@ -38,11 +37,16 @@ const NewArrivels = () => {
           <Spinner />
         ) : (
           <div className="mt-4">
-            <h2 className="text-center p-3 mt-5 mb-5">Các sản phẩm mới</h2>
+            <h2 className="text-center p-3 mt-2 mb-1">Các sản phẩm mới</h2>
             <Row>
               {products.map((product, index) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                  <Card className="  card-prd" key={index}>
+                  <Card className="card-prd" key={index}>
+                    {product?.quantity !== 0 ? (
+                      <div className="position-absolute stock">còn hàng</div>
+                    ) : (
+                      <div className="position-absolute is-stock">hết hàng</div>
+                    )}
                     <NavLink to={`/${product.slug}`}>
                       <Card.Img
                         className="img-fluid"
@@ -56,17 +60,12 @@ const NewArrivels = () => {
                     </NavLink>
 
                     <Card.Body>
-                      <NavLink to={`/product/${product.slug}`}>
+                      <NavLink to={`${product.slug}`}>
                         <span className="span">{product.title}</span>
                       </NavLink>
-                      {/* <Card.Text as="div">
-              <Rating
-                value={product.rating}
-                text={`${product.numReviews} reviews`}
-                />
-              </Card.Text> */}
+
                       <Card.Text as="p" className="price">
-                        Giá từ {formatCash(`${product.price}`)} đ
+                        Giá từ {formatCash(`${product.price}`)}đ
                       </Card.Text>
                     </Card.Body>
                   </Card>

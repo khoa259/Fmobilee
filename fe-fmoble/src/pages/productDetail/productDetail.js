@@ -53,7 +53,7 @@ const ProductDetail = () => {
     });
   };
   return (
-    <div className="container">
+    <div className="container containerDetail">
       {/* {JSON.stringify(product.category)} */}
       <div className=" mt-5 mb-5">
         <div className="pb-3">
@@ -158,32 +158,44 @@ const ProductDetail = () => {
       </div>
       <h3 className="text-center mt-5">Related Products</h3>
       {/* {JSON.stringify(related)} */}
-      <Row>
-        {related.map((item, index) => (
-          <Col key={item._id} sm={12} md={6} lg={4} xl={3}>
-            <Card className=" card-prd" key={index}>
-              <NavLink to={`/${item.slug}`}>
-                <Card.Img
-                  className="img-fluid"
-                  src={
-                    item.images && item.images.length ? item.images[0].url : ""
-                  }
-                  variant="top"
-                />
-              </NavLink>
 
-              <Card.Body>
+      {related.length == 0 ? (
+        <span className="text-center">không có sản phẩm liên quan</span>
+      ) : (
+        <Row>
+          {related.map((item, index) => (
+            <Col key={item._id} sm={12} md={6} lg={4} xl={3}>
+              <Card className=" card-prd" key={index}>
+                {product?.quantity !== 0 ? (
+                  <div className="position-absolute stock">còn hàng</div>
+                ) : (
+                  <div className="position-absolute is-stock">hết hàng</div>
+                )}
                 <NavLink to={`/${item.slug}`}>
-                  <span className="span">{item.title}</span>
+                  <Card.Img
+                    className="img-fluid"
+                    src={
+                      item.images && item.images.length
+                        ? item.images[0].url
+                        : ""
+                    }
+                    variant="top"
+                  />
                 </NavLink>
-                <Card.Text as="p" className="price">
-                  {formatCash(`${item.price}`)} đ
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+
+                <Card.Body>
+                  <NavLink to={`/${item.slug}`}>
+                    <span className="span">{item.title}</span>
+                  </NavLink>
+                  <Card.Text as="p" className="price">
+                    {formatCash(`${item.price}`)} đ
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </div>
   );
 };
