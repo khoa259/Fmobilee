@@ -90,7 +90,14 @@
 
 }
 
+.icon-cart {
+    color: rgb(22, 21, 21) !important;
+}
+
 .badge {
     font-size: 16px !important;
-    padding: 0 !important;
+    background: rgb(218, 6, 6);
+    color: rgb(221, 214, 214);
+    border-radius: 50%;
+    font-size: 14px !important;
 }

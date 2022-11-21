@@ -11,7 +11,7 @@ const Header = () => {
   const [categories, setCategories] = useState([]);
   const history = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user, cart } = useSelector((state) => ({ ...state }));
   const logout = () => {
     firebase.auth().signOut();
     dispatch({
@@ -35,10 +35,8 @@ const Header = () => {
           <Nav as="ul" className="ulHeader ml-auto mt-2">
             <Nav.Link href="/gio-hang" className="icon-cart">
               <i className="fas fa-shopping-cart"></i>
-              {/* <div className="counter_cart">
-                  <span className="">0</span>
-                </div> */}
-              <Badge bg="none">0</Badge>
+
+              <Badge bg="none">{cart.length}</Badge>
             </Nav.Link>
             <div className="dropdown">
               {/* nếu user không tồn tai */}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { useParams, Link, NavLink, json } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import StarRating from "react-star-ratings";
 import _ from "lodash";
@@ -17,7 +17,8 @@ import { showAverage } from "../../functions/ratings";
 
 const ProductDetail = () => {
   // redux get user state
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user, cart } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
   const [product, setProduct] = useState({});
   const [related, setRelated] = useState([]);
   const [star, setStar] = useState(0);
@@ -71,6 +72,12 @@ const ProductDetail = () => {
       let unique = _.uniqWith(cart, _.isEqual);
       //save to localStorage
       localStorage.setItem("cart", JSON.stringify(unique));
+
+      //add to redux state
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: unique,
+      });
     }
   };
   return (

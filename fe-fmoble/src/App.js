@@ -15,7 +15,6 @@ import AdminLayout from "./layouts/adminLayout";
 import Login from "./pages/auth/logIn.js";
 import Register from "./pages/auth/register";
 import HomePage from "./pages/homePage";
-import UserRoute from "./component/routes/userRoute";
 import AdminRoute from "./component/routes/adminRoute";
 // Router
 import RegisterComplete from "./pages/auth/registerComplete";
