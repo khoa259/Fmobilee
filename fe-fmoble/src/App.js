@@ -1,9 +1,9 @@
 //library
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, useLocation, Route, Routes } from "react-router-dom";
 
 // fire base
 import { auth } from "./firebase";
@@ -35,6 +35,14 @@ import ListProducts from "./pages/admin/product/listProducts";
 import ProductDetail from "./pages/productDetail/productDetail";
 // import Spiner from "./component/spinner/spinner";
 
+const Wrapper = ({ children }) => {
+  const location = useLocation();
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+  return children;
+};
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -62,42 +70,44 @@ const App = () => {
     // cleanup
     return () => unsubscribe();
   }, [dispatch]);
+
   return (
     <>
       {/* <Spiner /> */}
       <BrowserRouter>
-        <ToastContainer />
-        <Routes>
-          <Route path="/" element={<WebSiteLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/register/complete" element={<RegisterComplete />} />
-            <Route path="/forgot/password" element={<ForgotPassword />} />
-            <Route path="/user/history" element={<History />} />
-            <Route path="/user/password" element={<Password />} />
-            <Route path="/user/wishlist" element={<Wishlist />} />
-            <Route path="/iphone" element={<h1>PageIphone</h1>} />
-            <Route path="/:slug" element={<ProductDetail />} />
-            <Route path="category/:slug" element={<CategoryHome />} />
-          </Route>
-          <Route
-            path="admin"
-            element={
-              <AdminRoute>
-                <AdminLayout />
-              </AdminRoute>
-            }
-          >
-            <Route index path="dashboard" element={<Dashboard />} />
-            <Route path="category" element={<Category />} />
-            <Route path="category/:slug" element={<CategoryUpdate />} />
-            <Route path="product" element={<ProductCreate />} />
-            <Route path="products" element={<ListProducts />} />
-            <Route path="product/:slug" element={<ProductUpdate />} />
-          </Route>
-          <Route path="*" element={<Page404 />} />
-        </Routes>
+        <Wrapper>
+          <ToastContainer />
+          <Routes>
+            <Route path="/" element={<WebSiteLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/register/complete" element={<RegisterComplete />} />
+              <Route path="/forgot/password" element={<ForgotPassword />} />
+              <Route path="/user/history" element={<History />} />
+              <Route path="/user/password" element={<Password />} />
+              <Route path="/user/wishlist" element={<Wishlist />} />
+              <Route path="/iphone" element={<h1>PageIphone</h1>} />
+              <Route path="/:slug" element={<ProductDetail />} />
+              <Route path="category/:slug" element={<CategoryHome />} />
+            </Route>
+            <Route
+              path="admin"
+              element={
+                <AdminRoute>
+                  <AdminLayout />
+                </AdminRoute>
+              }>
+              <Route index path="dashboard" element={<Dashboard />} />
+              <Route path="category" element={<Category />} />
+              <Route path="category/:slug" element={<CategoryUpdate />} />
+              <Route path="product" element={<ProductCreate />} />
+              <Route path="products" element={<ListProducts />} />
+              <Route path="product/:slug" element={<ProductUpdate />} />
+            </Route>
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </Wrapper>
       </BrowserRouter>
     </>
   );
