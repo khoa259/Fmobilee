@@ -1,9 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { formatCash } from "../../component/formatCash";
 
 const Cart = () => {
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
+  const getTotal = () => {
+    return cart.reduce((currentValue, nextValue) => {
+      return currentValue + nextValue.count * nextValue.price;
+    }, 0);
+  };
   return (
     <div>
       {JSON.stringify(cart)}
@@ -226,85 +233,45 @@ const Cart = () => {
           </div>
         </div>
       </section> */}
-      <section className="h-100 ">
-        <div className="container py-5">
-          <div className="  my-4">
-            <div className="card mb-4">
-              <div className="card-header py-3">
-                <h5 className="mb-0">Giỏ hàng - {cart.length} sản phẩm</h5>
-              </div>
-              <div className="card-body">
-                {/* Single item */}
-                <div className="row">
-                  <div className="col-xl-3  mb-4 mb-lg-0">
-                    {/* Image */}
-                    <div className="bg-image hover-overlay hover-zoom ripple rounded">
-                      <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
-                        className="w-100"
-                        alt="Blue Jeans Jacket"
-                      />
-                    </div>
-                    {/* Image */}
-                  </div>
-                  <div className="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                    {/* Data */}
-                    <p>
-                      <strong></strong>
-                    </p>
-                    <p>Color: blue</p>
-                    <p>Size: M</p>
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-sm me-1 mb-2"
-                      data-mdb-toggle="tooltip"
-                      title="Remove item">
-                      <i className="fas fa-trash" />
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-sm mb-2"
-                      data-mdb-toggle="tooltip"
-                      title="Move to the wish list">
-                      <i className="fas fa-heart" />
-                    </button>
-                    {/* Data */}
-                  </div>
-                  <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    {/* Quantity */}
-                    <div className="d-flex mb-4" style={{ maxWidth: 100 }}>
-                      <button className="">
-                        <i className="fas fa-minus" />
-                      </button>
-                      <div className="form-outline">
-                        <input
-                          id="form1"
-                          min={0}
-                          name="quantity"
-                          defaultValue={1}
-                          type="number"
-                          className="form-control"
-                        />
-                        <label className="form-label" htmlFor="form1">
-                          Quantity
-                        </label>
-                      </div>
-                      <button className=" ">
-                        <i className="fas fa-plus" />
-                      </button>
-                    </div>
+      <div className="container-fluid pt-2">
+        <div className="row">
+          <div className="col-md-8">
+            <h4>Cart / {cart.length} Product</h4>
 
-                    <p className="text-start ">
-                      <strong>$17.99</strong>
-                    </p>
-                    {/* Price */}
-                  </div>
-                </div>
+            {!cart.length ? (
+              <p>
+                No products in cart. <Link to="/shop">Continue Shopping.</Link>
+              </p>
+            ) : (
+              "show cart items"
+            )}
+          </div>
+          <div className="col-md-4">
+            <h4>Order Summary</h4>
+            <hr />
+            <p>Products</p>
+            {cart.map((c, i) => (
+              <div key={i}>
+                <p>
+                  {c.title} x {c.count} = ${c.price * c.count}
+                </p>
               </div>
-            </div>
+            ))}
+            <hr />
+            Total: <b>${getTotal()}</b>
+            <hr />
+            {user ? (
+              <button className="btn btn-sm btn-primary mt-2">
+                Proceed to Checkout
+              </button>
+            ) : (
+              <button className="btn btn-sm btn-primary mt-2">
+                Login to Checkout
+              </button>
+            )}
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
