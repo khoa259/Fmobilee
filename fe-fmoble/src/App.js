@@ -32,6 +32,7 @@ import ProductUpdate from "./pages/admin/product/ProductUpdate";
 import Page404 from "./pages/404Page";
 import ListProducts from "./pages/admin/product/listProducts";
 import ProductDetail from "./pages/productDetail/productDetail";
+import Cart from "./pages/cart/cart";
 // import Spiner from "./component/spinner/spinner";
 
 const Wrapper = ({ children }) => {
@@ -83,6 +84,7 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/register/complete" element={<RegisterComplete />} />
               <Route path="/forgot/password" element={<ForgotPassword />} />
+              <Route path="/gio-hang" element={<Cart />} />
               <Route path="/user/history" element={<History />} />
               <Route path="/user/password" element={<Password />} />
               <Route path="/user/wishlist" element={<Wishlist />} />

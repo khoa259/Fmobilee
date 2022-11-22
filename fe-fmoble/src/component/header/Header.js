@@ -31,7 +31,7 @@ const Header = () => {
       <Navbar variant="light">
         <Container>
           <Navbar.Brand href="/">Fmobile</Navbar.Brand>
-
+          <Navbar.Toggle aria-controls="offcanvasNavbar-expand-xl" />
           <Nav as="ul" className="ulHeader ml-auto mt-2">
             <Nav.Link href="/gio-hang" className="icon-cart">
               <i className="fas fa-shopping-cart"></i>
