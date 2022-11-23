@@ -7,6 +7,9 @@ const CheckOut = () => {
     <div className="container">
       <div className="py-5 text-center">
         <h2>Thanh Toán Đơn Hàng</h2>
+        {cart.map((c) => (
+          <h2>{c._id}</h2>
+        ))}
       </div>
       <div className="row">
         <div className="col-md-4 order-md-2 mb-4">
@@ -59,7 +62,7 @@ const CheckOut = () => {
           </form>
         </div>
         <div className="col-md-8 order-md-1">
-          <h4 className="mb-3">ĐỊA CHỈ THANH TOÁN</h4>
+          <h4 className="mb-3">Thông Tin Đặt hàng</h4>
           <form className="needs-validation" noValidate>
             <div className="row">
               <div className="col-md-6 mb-3">
@@ -68,7 +71,7 @@ const CheckOut = () => {
                   type="text"
                   className="form-control"
                   id="firstName"
-                  placeholder
+                  placeholder="Họ Tên"
                   defaultValue
                   required
                 />
@@ -126,7 +129,7 @@ const CheckOut = () => {
                   type="text"
                   className="form-control"
                   id="zip"
-                  placeholder
+                  placeholder="Phường Xã"
                   required
                 />
                 <div className="invalid-feedback">Zip code required.</div>
@@ -214,7 +217,7 @@ const CheckOut = () => {
                   type="text"
                   className="form-control"
                   id="cc-name"
-                  placeholder
+                  placeholder="Tên Chủ Thẻ"
                   required
                 />
                 <small className="text-muted">
@@ -228,7 +231,7 @@ const CheckOut = () => {
                   type="text"
                   className="form-control"
                   id="cc-number"
-                  placeholder
+                  placeholder="Số Thẻ"
                   required
                 />
                 <div className="invalid-feedback">
@@ -243,7 +246,6 @@ const CheckOut = () => {
                   type="text"
                   className="form-control"
                   id="cc-expiration"
-                  placeholder
                   required
                 />
                 <div className="invalid-feedback">Expiration date required</div>
@@ -254,7 +256,6 @@ const CheckOut = () => {
                   type="text"
                   className="form-control"
                   id="cc-cvv"
-                  placeholder
                   required
                 />
                 <div className="invalid-feedback">Security code required</div>
