@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { formatCash } from "../../component/formatCash";
+import ModalImage from "react-modal-image";
 
 const Cart = () => {
   const { user, cart } = useSelector((state) => ({ ...state }));
@@ -28,28 +29,32 @@ const Cart = () => {
                   <div className="col-12 col-lg-6">
                     <span
                       className="mb-6 text-secondary"
-                      style={{ fontSize: 16 }}>
+                      style={{ fontSize: 16 }}
+                    >
                       Thông tin sản phẩm
                     </span>
                   </div>
                   <div className="col-12 col-lg-2">
                     <span
                       className="mb-6 text-secondary"
-                      style={{ fontSize: 16 }}>
+                      style={{ fontSize: 16 }}
+                    >
                       Giá tiền
                     </span>
                   </div>
                   <div className="col-12 col-lg-2 text-center">
                     <span
                       className="mb-6 text-secondary"
-                      style={{ fontSize: 16 }}>
+                      style={{ fontSize: 16 }}
+                    >
                       Số lượng
                     </span>
                   </div>
                   <div className="col-12 col-lg-2 text-end">
                     <span
                       className="mb-6 text-secondary"
-                      style={{ fontSize: 16 }}>
+                      style={{ fontSize: 16 }}
+                    >
                       Tổng
                     </span>
                   </div>
@@ -59,13 +64,15 @@ const Cart = () => {
                   {cart.map((c, index) => (
                     <div
                       className="row align-items-center mb-6 mb-md-3"
-                      key={index}>
+                      key={index}
+                    >
                       <div className="col-12 col-md-8 col-lg-6 mb-6 mb-md-0">
                         <div className="row align-items-center">
                           <div className="col-12 col-md-4 mb-3">
                             <div
                               className="d-flex align-items-center justify-content-center bg-light"
-                              style={{ width: 96, height: 128 }}>
+                              style={{ width: 96, height: 128 }}
+                            >
                               <img
                                 className="img-fluid"
                                 style={{ objectFit: "contain" }}
@@ -75,6 +82,10 @@ const Cart = () => {
                                     : ""
                                 }
                                 alt
+                              />
+                              <ModalImage
+                                small={c.images[0].url}
+                                large={c.images[0].url}
                               />
                             </div>
                           </div>
@@ -96,7 +107,8 @@ const Cart = () => {
                               height={2}
                               viewBox="0 0 12 2"
                               fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
                               <g opacity="0.35">
                                 <rect
                                   x={12}
@@ -120,7 +132,8 @@ const Cart = () => {
                               height={12}
                               viewBox="0 0 12 12"
                               fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
                               <g opacity="0.35">
                                 <rect
                                   x={5}
@@ -156,13 +169,15 @@ const Cart = () => {
                 <hr />
                 <div
                   className="d-flex justify-content-between
-                  ">
+                  "
+                >
                   <p>Giá tiền :</p>
                   <b className="text-danger">{formatCash(`${getTotal()}`)}đ</b>
                 </div>
                 <div
                   className="d-flex justify-content-between
-                  ">
+                  "
+                >
                   <p>Phí Vận Chuyển :</p>
                   <b className="text-danger">22.000đ</b>
                 </div>
@@ -170,15 +185,16 @@ const Cart = () => {
 
                 <div
                   className="d-flex justify-content-between
-                  ">
+                  "
+                >
                   <h5>Tổng tiền:</h5>
                   <b className=" text-danger">
                     {formatCash(`${getTotalCart()}`)}đ
                   </b>
                 </div>
-                {user ? (
+                {user.email ? (
                   <button className="btn btn-md btn-primary mt-2">
-                    Thanh toán đơn hàng
+                    Checkout with {user.email}
                   </button>
                 ) : (
                   <button className="btn btn-sm btn-primary mt-2">

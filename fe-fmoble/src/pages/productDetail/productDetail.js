@@ -14,6 +14,7 @@ import { getProduct, productStar, getRelated } from "../../functions/products";
 import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
 import { showAverage } from "../../functions/ratings";
+import { toast } from "react-toastify";
 
 const ProductDetail = () => {
   // redux get user state
@@ -57,6 +58,7 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
+    toast.success(`Success add to cart`);
     let cart = [];
     if (typeof window !== "undefined") {
       //if cart is in localstorage GET it
