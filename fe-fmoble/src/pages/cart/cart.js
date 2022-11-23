@@ -166,18 +166,6 @@ const Cart = () => {
                   <p>Phí Vận Chuyển :</p>
                   <b className="text-danger">22.000đ</b>
                 </div>
-                <div className="">
-                  <span className="">Mã Giảm Giá</span>
-                  <br />
-                  <input
-                    className="form-control me-6 mb-4 mb-lg-0 px-8 py-4 fw-bold border"
-                    type="text"
-                    placeholder="SUMMER30X"
-                  />
-                  <a className="flex-shrink-0 btn btn-sm btn-dark" href="#">
-                    Apply
-                  </a>
-                </div>
                 <hr />
 
                 <div
