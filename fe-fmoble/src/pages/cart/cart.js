@@ -4,6 +4,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import { formatCash } from "../../component/formatCash";
 import ProductCartInCheckOut from "../../component/cards/productCartInCheckOut";
+import { userCart } from "../../functions/user";
 
 const Cart = () => {
   const { user, cart } = useSelector((state) => ({ ...state }));
@@ -23,6 +24,15 @@ const Cart = () => {
   const history = useNavigate();
   const location = useLocation();
   const redirectLogin = () => {};
+
+  const saveOrderToDb = () => {
+    userCart(cart, user.token)
+      .then((res) => {
+        console.log("CART POST RES", res);
+        if (res.data.ok) history("/thanh-toan");
+      })
+      .catch((err) => console.log("cart save err", err));
+  };
 
   return (
     <div>
@@ -113,11 +123,12 @@ const Cart = () => {
                     </b>
                   </div>
                   {user.email ? (
-                    <Link to={"/thanh-toan"}>
-                      <button className="btn btn-md btn-primary mt-3">
-                        Checkout with {user.email}
-                      </button>
-                    </Link>
+                    <button
+                      className="btn btn-md btn-primary mt-3"
+                      onClick={saveOrderToDb}
+                    >
+                      Checkout with {user.email}
+                    </button>
                   ) : (
                     <Link to={"/login"}>
                       <button
