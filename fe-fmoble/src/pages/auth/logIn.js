@@ -10,8 +10,8 @@ import Spiner from "../../component/spinner/spinner";
 const Login = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("khoa10688@gmail.com");
+  const [password, setPassword] = useState("1234567");
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));

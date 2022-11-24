@@ -105,6 +105,7 @@ const FileUpload = ({ value, setValue, setLoading, loading }) => {
             hidden
             accept="images/*"
             onChange={fileUploadAndResize}
+            required
           />
         </label>
       </div>

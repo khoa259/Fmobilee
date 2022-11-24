@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import { formatCash } from "../../component/formatCash";
 import ProductCartInCheckOut from "../../component/cards/productCartInCheckOut";
@@ -19,6 +19,10 @@ const Cart = () => {
     }
     return getTotal();
   };
+
+  const history = useNavigate();
+  const location = useLocation();
+  const redirectLogin = () => {};
 
   return (
     <div>
@@ -106,7 +110,9 @@ const Cart = () => {
                       Checkout with {user.email}
                     </button>
                   ) : (
-                    <button className="btn btn-sm btn-primary mt-3">
+                    <button
+                      onClick={redirectLogin}
+                      className="btn btn-sm btn-primary mt-3">
                       Login to Checkout
                     </button>
                   )}

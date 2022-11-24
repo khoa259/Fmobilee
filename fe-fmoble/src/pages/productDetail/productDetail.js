@@ -116,6 +116,13 @@ const ProductDetail = () => {
                     <Link to={`/${category.slug}`}> {category.name}</Link>
                   )}
                 </div>
+                <div>
+                  {product.quantity > 0 ? (
+                    <p className="text-success">còn hàng</p>
+                  ) : (
+                    <p className="text-danger">hết hàng</p>
+                  )}
+                </div>
                 <div className="d-flex justify-content-between align-items-center">
                   <h3>{product.title}</h3>
                 </div>
@@ -176,7 +183,10 @@ const ProductDetail = () => {
                 </div>
                 <div className="buttons d-flex flex-row mt-2  gap-3">
                   {/* <button className="btn btn-outline-dark">Mua ngay</button> */}
-                  <button onClick={handleAddToCart} className="btn btn-dark">
+                  <button
+                    onClick={handleAddToCart}
+                    className="btn btn-dark"
+                    disabled={product.quantity === 0}>
                     <i className="fa-solid fa-cart-plus mr-2"></i>
                     Thêm vào giỏ hàng
                   </button>
