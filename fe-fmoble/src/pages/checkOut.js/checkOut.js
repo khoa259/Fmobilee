@@ -26,8 +26,11 @@ const CheckOut = () => {
             </span>
           </h4>
           <ul className="list-group mb-3">
-            {cart.map((item) => (
-              <li className="list-group-item d-flex justify-content-between lh-condensed">
+            {cart.map((item, index) => (
+              <li
+                className="list-group-item d-flex justify-content-between lh-condensed"
+                key={index}
+              >
                 <div>
                   <h6 className="my-0">{item.title}</h6>
                   <small className="text-muted">{item.title}</small>

@@ -8,6 +8,7 @@ import authRoute from "./routes/auth.js";
 import routerCategory from "./routes/category.js";
 import routerProducts from "./routes/product.js";
 import routerUpload from "./routes/cloudinary.js";
+import routerCart from "./routes/user.js";
 
 // variable
 const app = express();
@@ -34,6 +35,7 @@ app.use("/api", authRoute);
 app.use("/api", routerCategory);
 app.use("/api", routerProducts);
 app.use("/api", routerUpload);
+app.use("/api", routerCart);
 
 // port
 const port = process.env.PORT || 8000;
