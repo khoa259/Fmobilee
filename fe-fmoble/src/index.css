@@ -173,6 +173,11 @@ a {
   position: initial;
 }
 
+/* cart */
+.remove-cart {
+  font-size: 16px;
+}
+
 /* avatar image */
 .avatar {
   /* box-shadow: 7px 1px 6px 1px gainsboro; */

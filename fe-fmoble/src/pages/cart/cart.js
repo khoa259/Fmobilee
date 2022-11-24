@@ -14,7 +14,7 @@ const Cart = () => {
   };
   const getTotalCart = () => {
     const ship = 22000;
-    if (cart.length != 0) {
+    if (cart.length !== 0) {
       return getTotal() + ship;
     }
     return getTotal();
