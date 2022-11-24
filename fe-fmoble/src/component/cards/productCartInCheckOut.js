@@ -67,18 +67,19 @@ const ProductCartInCheckOut = ({ p }) => {
           <div className="row align-items-center">
             <i
               onClick={handleRemove}
-              className="fa-sharp fa-solid fa-circle-xmark remove-cart"></i>
+              className="fa-sharp fa-solid fa-circle-xmark remove-cart"
+            ></i>
             <div className="col-12 col-md-4 mb-3">
               <div
                 className="d-flex align-items-center justify-content-center bg-light"
-                style={{ width: 96, height: 128 }}>
+                style={{ width: 96, height: 128 }}
+              >
                 <img
                   className="img-fluid"
                   style={{ objectFit: "contain" }}
                   src={p.images && p.images.length ? p.images[0].url : ""}
                   alt="#"
                 />
-                <ModalImage small={p.images[0].url} large={p.images[0].url} />
               </div>
             </div>
             <div className="col-8">
@@ -99,7 +100,8 @@ const ProductCartInCheckOut = ({ p }) => {
                 height={2}
                 viewBox="0 0 12 2"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <g opacity="0.35">
                   <rect
                     x={12}
@@ -125,7 +127,8 @@ const ProductCartInCheckOut = ({ p }) => {
                 height={12}
                 viewBox="0 0 12 12"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <g opacity="0.35">
                   <rect x={5} width={2} height={12} fill="currentColor" />
                   <rect

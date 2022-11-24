@@ -1,8 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { formatCash } from "../../component/formatCash";
 
 const CheckOut = () => {
   const { user, cart } = useSelector((state) => ({ ...state }));
+  const getTotal = () => {
+    return cart.reduce((currentValue, nextValue) => {
+      return currentValue + nextValue.count * nextValue.price;
+    }, 0);
+  };
   return (
     <div className="container">
       <div className="py-5 text-center">
@@ -20,30 +26,28 @@ const CheckOut = () => {
             </span>
           </h4>
           <ul className="list-group mb-3">
-            <li className="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 className="my-0">Product name A</h6>
-                <small className="text-muted">Brief description</small>
-              </div>
-              <span className="text-muted">$12</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 className="my-0">Second product</h6>
-                <small className="text-muted">Brief description</small>
-              </div>
-              <span className="text-muted">$8</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between bg-light">
+            {cart.map((item) => (
+              <li className="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 className="my-0">{item.title}</h6>
+                  <small className="text-muted">{item.title}</small>
+                </div>
+                <span className="text-muted">
+                  {formatCash(`${item.price}đ`)}
+                </span>
+              </li>
+            ))}
+            {/*------------------ Mã giảm giá------------ */}
+            {/* <li className="list-group-item d-flex justify-content-between bg-light">
               <div className="text-success">
                 <h6 className="my-0">Mã giảm giá</h6>
                 <small>EXAMPLECODE</small>
               </div>
               <span className="text-success">-$5</span>
-            </li>
+            </li> */}
             <li className="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>$20</strong>
+              <strong>{formatCash(`${getTotal()}đ`)}</strong>
             </li>
           </ul>
           <form className="card p-2">
@@ -102,7 +106,8 @@ const CheckOut = () => {
                 <select
                   className="custom-select d-block w-100"
                   id="country"
-                  required>
+                  required
+                >
                   <option value>Choose...</option>
                   <option>United States</option>
                 </select>
@@ -115,7 +120,8 @@ const CheckOut = () => {
                 <select
                   className="custom-select d-block w-100"
                   id="state"
-                  required>
+                  required
+                >
                   <option value>Choose...</option>
                   <option>California</option>
                 </select>
