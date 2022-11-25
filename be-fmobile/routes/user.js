@@ -4,7 +4,7 @@ import { authCheck, adminCheck } from "../middleware/auth.js";
 
 const routerCart = Router();
 
-routerCart.post("/user/cart", authCheck, userCart); // save cart
-routerCart.get("/user/cart", authCheck, getUserCart); //get cart
+routerCart.post("/user/cart", authCheck, userCart);
+routerCart.get("/user/cart", authCheck, getUserCart);
 
 export default routerCart;

@@ -18,7 +18,6 @@ const Login = () => {
 
   useEffect(() => {
     if (user && user.token) history("/");
-    console.log(user);
   }, [user, history]);
 
   const roleBasedRedirect = (res) => {
@@ -38,6 +37,7 @@ const Login = () => {
       const { user } = result;
       console.log("user", user);
       const idTokenResult = await user.getIdTokenResult();
+
       console.log("idTokenResult", idTokenResult);
       createOrUpdateUser(idTokenResult.token)
         .then((res) => {
@@ -52,7 +52,7 @@ const Login = () => {
             },
           });
           roleBasedRedirect(res);
-          console.log("res", res);
+          localStorage.setItem("token", JSON.stringify(idTokenResult.token));
         })
         .catch((err) => console.log("failed", err));
       history("/");
@@ -93,7 +93,8 @@ const Login = () => {
         block
         shape="round"
         size="large"
-        disabled={!email || password.length < 6}>
+        disabled={!email || password.length < 6}
+      >
         Login with Email/Password
       </Button>
     </form>
@@ -105,6 +106,8 @@ const Login = () => {
       .then(async (result) => {
         const { user } = result;
         const idTokenResult = await user.getIdTokenResult();
+        console.log(idTokenResult);
+        console.log(idTokenResult.token);
         createOrUpdateUser(idTokenResult.token)
           .then((res) => {
             dispatch({
@@ -140,7 +143,8 @@ const Login = () => {
             className="mb-3"
             block
             shape="round"
-            size="large">
+            size="large"
+          >
             Login with Google
           </Button>
         </div>
