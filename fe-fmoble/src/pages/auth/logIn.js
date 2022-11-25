@@ -52,7 +52,8 @@ const Login = () => {
             },
           });
           roleBasedRedirect(res);
-          localStorage.setItem("token", JSON.stringify(idTokenResult.token));
+          console.log("idTokenResult.token", idTokenResult.token);
+          localStorage.setItem("token", idTokenResult.token);
         })
         .catch((err) => console.log("failed", err));
       history("/");

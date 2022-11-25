@@ -14,6 +14,7 @@ const Header = () => {
   const { user, cart } = useSelector((state) => ({ ...state }));
   const logout = () => {
     firebase.auth().signOut();
+    localStorage.clear();
     dispatch({
       type: "LOGOUT",
       payload: null,
@@ -80,7 +81,8 @@ const Header = () => {
         className="nav-child"
         variant="dark"
         expand="lg"
-        collapseOnSelect="false">
+        collapseOnSelect="false"
+      >
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center">
           <Nav as="ul" className="Ul">

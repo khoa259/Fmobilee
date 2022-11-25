@@ -9,10 +9,11 @@ const CheckOut = () => {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
-  const getToken = localStorage.getItem("token");
-  console.log(getToken);
+  // const getToken = localStorage.getItem("token");
+  // console.log(getToken);
 
   useEffect(() => {
+    const getToken = localStorage.getItem("token");
     getUserCart(getToken).then((res) => {
       console.log("user cart res", JSON.stringify(res.data, null, 4));
       setProducts(res.data.products);
@@ -28,7 +29,7 @@ const CheckOut = () => {
         <div className="col-md-4 order-md-2 mb-4">
           {JSON.stringify(products)}
           {/* bug ở đây---- bạn xử lý thêm nhé */}
-          {/* {products.map((p, i) => (
+          {products.map((p, i) => (
             <>
               <h4 className="d-flex justify-content-between align-items-center mb-3">
                 <span className="text-muted">Giỏ hàng</span>
@@ -57,7 +58,7 @@ const CheckOut = () => {
                 </li>
               </ul>
             </>
-          ))} */}
+          ))}
           <form className="card p-2">
             <div className="input-group">
               <input
