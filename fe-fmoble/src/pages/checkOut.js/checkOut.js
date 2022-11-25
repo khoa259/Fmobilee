@@ -6,12 +6,15 @@ import { getUserCart } from "../../functions/user";
 const CheckOut = () => {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
-  const { user } = useSelector((state) => ({ ...state }));
+
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => ({ ...state }));
+  const getToken = localStorage.getItem("token");
+  console.log(getToken);
 
   useEffect(() => {
-    getUserCart(user.token).then((res) => {
-      console.log("user cart res", JSON.stringify(res.data));
+    getUserCart(getToken).then((res) => {
+      console.log("user cart res", JSON.stringify(res.data, null, 4));
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
     });

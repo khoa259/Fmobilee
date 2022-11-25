@@ -30,6 +30,7 @@ const Cart = () => {
       .then((res) => {
         console.log("CART POST RES", res);
         if (res.data.ok) history("/thanh-toan");
+        localStorage.removeItem("cart");
       })
       .catch((err) => console.log("cart save err", err));
   };
