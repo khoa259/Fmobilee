@@ -3,6 +3,7 @@ import Product from "../models/product.js";
 import Cart from "../models/cart.js";
 
 export const userCart = async (req, res) => {
+  // console.log(req.body); // {cart: []}
   const { cart } = req.body;
 
   let products = [];
@@ -45,15 +46,15 @@ export const userCart = async (req, res) => {
     orderdBy: user._id,
   }).save();
 
-  console.log("new cart ----->", newCart);
+  console.log("new cart ----> ", newCart);
   res.json({ ok: true });
 };
 
 export const getUserCart = async (req, res) => {
   const user = await User.findOne({ email: req.user.email }).exec();
 
-  const cart = await Cart.findOne({ orderdBy: user._id })
-    .populate("products.products", "_id title price totalAfterDiscount")
+  let cart = await Cart.findOne({ orderdBy: user._id })
+    .populate("products.product", "_id title price totalAfterDiscount")
     .exec();
 
   const { products, cartTotal, totalAfterDiscount } = cart;
