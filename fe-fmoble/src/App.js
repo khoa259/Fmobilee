@@ -34,6 +34,7 @@ import ListProducts from "./pages/admin/product/listProducts";
 import ProductDetail from "./pages/productDetail/productDetail";
 import Cart from "./pages/cart/cart";
 import CheckOut from "./pages/checkOut.js/checkOut";
+import Shop from "./pages/shop";
 // import Spiner from "./component/spinner/spinner";
 
 const Wrapper = ({ children }) => {
@@ -93,6 +94,7 @@ const App = () => {
               <Route path="/iphone" element={<h1>PageIphone</h1>} />
               <Route path="/:slug" element={<ProductDetail />} />
               <Route path="category/:slug" element={<CategoryHome />} />
+              <Route path="/products" element={<Shop />} />
             </Route>
             <Route
               path="admin"

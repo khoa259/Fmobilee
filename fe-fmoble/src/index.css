@@ -238,11 +238,21 @@ a {
 
 .ant-pagination-item {
   cursor: pointer;
-  border: 1px;
-  background: rgb(102, 102, 99);
-  padding: 10px !important;
+  border: 1px solid black !important;
+  background: rgb(240, 240, 236);
+  padding: 10px;
   margin: 0 6px 0 6px;
   border-radius: 3px;
+}
+
+.ant-pagination-item a {
+  color: black !important;
+}
+
+
+
+.ant-pagination-item:focus {
+  background-color: #0066CC;
 }
 
 .ant-pagination-item-link {

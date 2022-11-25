@@ -10,6 +10,7 @@ import {
   update,
   productStar,
   listRelated,
+  searchFilters,
 } from "../controller/product.js";
 // middlewares
 import { authCheck, adminCheck } from "../middleware/auth.js";
@@ -30,5 +31,6 @@ routerProducts.post("/products", list);
 routerProducts.put("/product/star/:productId", authCheck, productStar);
 // related
 routerProducts.get("/product/related/:productId", listRelated);
-
+//search
+routerProducts.post("/search/filters", searchFilters);
 export default routerProducts;
