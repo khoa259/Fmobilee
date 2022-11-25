@@ -1,58 +1,60 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { formatCash } from "../../component/formatCash";
+import { getUserCart } from "../../functions/user";
 
 const CheckOut = () => {
-  const { user, cart } = useSelector((state) => ({ ...state }));
-  const getTotal = () => {
-    return cart.reduce((currentValue, nextValue) => {
-      return currentValue + nextValue.count * nextValue.price;
-    }, 0);
-  };
+  const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const { user } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getUserCart(user.token).then((res) => {
+      console.log("user cart res", JSON.stringify(res.data));
+      setProducts(res.data.products);
+      setTotal(res.data.cartTotal);
+    });
+  }, []);
   return (
     <div className="container">
       <div className="py-5 text-center">
         <h2>Thanh Toán Đơn Hàng</h2>
-        {cart.map((c) => (
-          <h2>{c._id}</h2>
-        ))}
       </div>
       <div className="row">
         <div className="col-md-4 order-md-2 mb-4">
-          <h4 className="d-flex justify-content-between align-items-center mb-3">
-            <span className="text-muted">Giỏ hàng</span>
-            <span className="badge badge-secondary badge-pill">
-              {cart.length}
-            </span>
-          </h4>
-          <ul className="list-group mb-3">
-            {cart.map((item, index) => (
-              <li
-                className="list-group-item d-flex justify-content-between lh-condensed"
-                key={index}
-              >
-                <div>
-                  <h6 className="my-0">{item.title}</h6>
-                  <small className="text-muted">{item.title}</small>
-                </div>
-                <span className="text-muted">
-                  {formatCash(`${item.price}đ`)}
+          {JSON.stringify(products)}
+          {/* bug ở đây---- bạn xử lý thêm nhé */}
+          {/* {products.map((p, i) => (
+            <>
+              <h4 className="d-flex justify-content-between align-items-center mb-3">
+                <span className="text-muted">Giỏ hàng</span>
+                <span className="badge badge-secondary badge-pill">
+                  {p.length}
                 </span>
-              </li>
-            ))}
-            {/*------------------ Mã giảm giá------------ */}
-            {/* <li className="list-group-item d-flex justify-content-between bg-light">
-              <div className="text-success">
-                <h6 className="my-0">Mã giảm giá</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span className="text-success">-$5</span>
-            </li> */}
-            <li className="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>{formatCash(`${getTotal()}đ`)}</strong>
-            </li>
-          </ul>
+              </h4>
+              <ul className="list-group mb-3">
+                <li className="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h6 className="my-0">{p.title}</h6>
+                    <small className="text-muted">{p.title}</small>
+                  </div>
+                  <span className="text-muted">{formatCash(`${total}đ`)}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between bg-light">
+                  <div className="text-success">
+                    <h6 className="my-0">Mã giảm giá</h6>
+                    <small>EXAMPLECODE</small>
+                  </div>
+                  <span className="text-success">-$5</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                  <span>Total (USD)</span>
+                  <strong>{formatCash(`${total}đ`)}</strong>
+                </li>
+              </ul>
+            </>
+          ))} */}
           <form className="card p-2">
             <div className="input-group">
               <input
