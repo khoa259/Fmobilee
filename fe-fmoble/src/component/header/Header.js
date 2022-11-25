@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { getCategories } from "../../functions/category";
 import { MenuList } from "../data-menu/data-menu";
+import Search from "../form/Search";
 import "./header.css";
 const Header = () => {
   const [categories, setCategories] = useState([]);
@@ -34,6 +35,8 @@ const Header = () => {
           <Navbar.Brand href="/">Fmobile</Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand-xl" />
           <Nav as="ul" className="ulHeader ml-auto mt-2">
+            <Search />
+
             <Nav.Link href="/gio-hang" className="icon-cart">
               <i className="fas fa-shopping-cart"></i>
 

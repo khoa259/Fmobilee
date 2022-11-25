@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getProducts, getProductCount } from "../../functions/products";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Pagination } from "antd";
 
 import Spinner from "../../component/spinner/spinner";
@@ -74,6 +74,13 @@ const BestSeller = () => {
             </Row>
           </div>
         )}
+        <div className="w-full text-center mt-4">
+          <Link to="/products">
+            <button className="btn btn-md rounded btn-primary text-center">
+              Xem thêm
+            </button>
+          </Link>
+        </div>
         <Pagination
           current={page}
           total={(productsCount / 4) * 10}
