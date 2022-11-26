@@ -4,7 +4,11 @@ import { toast } from "react-toastify";
 
 import "./checkOut.css";
 import { formatCash } from "../../component/formatCash";
-import { emptyUserCart, getUserCart } from "../../functions/user";
+import {
+  emptyUserCart,
+  getUserCart,
+  saveUserAddress,
+} from "../../functions/user";
 
 const CheckOut = () => {
   const [products, setProducts] = useState([]);
@@ -37,6 +41,7 @@ const CheckOut = () => {
       });
       // remove from backend
       emptyUserCart(user.token).then((res) => {
+        console.log(products);
         setProducts([]);
         setTotal(0);
         toast.success("đơn hàng của bạn đã xóa thành công");
@@ -61,7 +66,8 @@ const CheckOut = () => {
             {products.map((p, i) => (
               <li
                 className="list-group-item d-flex justify-content-between lh-condensed"
-                key={i}>
+                key={i}
+              >
                 <div>
                   <b className="my-0">{p.product.title}</b>
                 </div>
@@ -139,7 +145,8 @@ const CheckOut = () => {
                 <select
                   className="custom-select d-block w-100"
                   id="country"
-                  required>
+                  required
+                >
                   <option value>Choose...</option>
                   <option>United States</option>
                 </select>
@@ -152,7 +159,8 @@ const CheckOut = () => {
                 <select
                   className="custom-select d-block w-100"
                   id="state"
-                  required>
+                  required
+                >
                   <option value>Choose...</option>
                   <option>California</option>
                 </select>

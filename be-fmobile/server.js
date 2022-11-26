@@ -20,7 +20,11 @@ app.use(bodyParser.json({ limit: "2mb" }));
 
 // connect DB
 mongoose
-  .connect("mongodb://localhost:27017/Ecommerce-Fmobile")
+  .connect("mongodb://localhost:27017/Ecommerce-Fmobile", {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log("Connect DB success"))
   .catch((err) => console.log("DB connect error", err));
 
