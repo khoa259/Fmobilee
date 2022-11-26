@@ -32,7 +32,7 @@ const Shop = () => {
   useEffect(() => {
     const delayed = setTimeout(() => {
       fetchProducts({ query: text });
-    }, 300);
+    }, 1000);
     return () => clearTimeout(delayed);
   }, [text]);
 

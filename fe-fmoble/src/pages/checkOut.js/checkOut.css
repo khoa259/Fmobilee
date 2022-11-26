@@ -1,0 +1,4 @@
+.list-group, .list-group-item:hover {
+    background: none !important;
+    box-shadow: none !important;
+}

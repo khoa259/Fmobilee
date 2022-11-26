@@ -61,3 +61,11 @@ export const getUserCart = async (req, res) => {
     res.json({ products, cartTotal, totalAfterDiscount });
   }
 };
+
+export const emptyCart = async (req, res) => {
+  console.log("empty cart");
+  const user = await User.findOne({ email: req.user.email }).exec();
+
+  const cart = await Cart.findOneAndRemove({ orderdBy: user._id }).exec();
+  res.json(cart);
+};

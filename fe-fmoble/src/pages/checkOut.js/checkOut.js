@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
+import "./checkOut.css";
 import { formatCash } from "../../component/formatCash";
-import { getUserCart } from "../../functions/user";
+import { emptyUserCart, getUserCart } from "../../functions/user";
 
 const CheckOut = () => {
   const [products, setProducts] = useState([]);
@@ -20,6 +23,26 @@ const CheckOut = () => {
       setTotal(res.data.cartTotal);
     });
   }, []);
+
+  const emptyCart = () => {
+    if (window.confirm("đơn hàng của bạn sẽ bị xóa ")) {
+      // remove from local storage
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("cart");
+      }
+      // remove from redux
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: [],
+      });
+      // remove from backend
+      emptyUserCart(user.token).then((res) => {
+        setProducts([]);
+        setTotal(0);
+        toast.success("đơn hàng của bạn đã xóa thành công");
+      });
+    }
+  };
   return (
     <div className="container">
       <div className="py-5 text-center">
@@ -27,38 +50,39 @@ const CheckOut = () => {
       </div>
       <div className="row">
         <div className="col-md-4 order-md-2 mb-4">
-          {JSON.stringify(products)}
+          {/* {JSON.stringify(products)} */}
           {/* bug ở đây---- bạn xử lý thêm nhé */}
-          {products.map((p, i) => (
-            <>
-              <h4 className="d-flex justify-content-between align-items-center mb-3">
-                <span className="text-muted">Giỏ hàng</span>
-                <span className="badge badge-secondary badge-pill">
-                  {p.length}
-                </span>
-              </h4>
-              <ul className="list-group mb-3">
-                <li className="list-group-item d-flex justify-content-between lh-condensed">
-                  <div>
-                    <h6 className="my-0">{p.title}</h6>
-                    <small className="text-muted">{p.title}</small>
-                  </div>
-                  <span className="text-muted">{formatCash(`${total}đ`)}</span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between bg-light">
-                  <div className="text-success">
-                    <h6 className="my-0">Mã giảm giá</h6>
-                    <small>EXAMPLECODE</small>
-                  </div>
-                  <span className="text-success">-$5</span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between">
-                  <span>Total (USD)</span>
-                  <strong>{formatCash(`${total}đ`)}</strong>
-                </li>
-              </ul>
-            </>
-          ))}
+
+          <h4 className="d-flex justify-content-between align-items-center mb-3">
+            <span className="text-muted">Giỏ hàng</span>
+            <span className="badge badge-secondary badge-pill"></span>
+          </h4>
+          <ul className="list-group mb-3">
+            {products.map((p, i) => (
+              <li
+                className="list-group-item d-flex justify-content-between lh-condensed"
+                key={i}>
+                <div>
+                  <b className="my-0">{p.product.title}</b>
+                </div>
+                <span className="text-muted">{formatCash(`${total}đ`)}</span>
+              </li>
+            ))}
+            <li className="list-group-item d-flex justify-content-between bg-light">
+              <div className="text-success">
+                <h6 className="my-0">Mã giảm giá</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span className="text-success">-$5</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>{formatCash(`${total}đ`)}</strong>
+            </li>
+            <span className="text-primary pl-2" onClick={emptyCart}>
+              Xóa toàn bộ đơn hàng
+            </span>
+          </ul>
           <form className="card p-2">
             <div className="input-group">
               <input
@@ -115,8 +139,7 @@ const CheckOut = () => {
                 <select
                   className="custom-select d-block w-100"
                   id="country"
-                  required
-                >
+                  required>
                   <option value>Choose...</option>
                   <option>United States</option>
                 </select>
@@ -129,8 +152,7 @@ const CheckOut = () => {
                 <select
                   className="custom-select d-block w-100"
                   id="state"
-                  required
-                >
+                  required>
                   <option value>Choose...</option>
                   <option>California</option>
                 </select>

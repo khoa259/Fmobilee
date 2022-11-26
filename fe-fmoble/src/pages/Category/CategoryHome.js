@@ -52,7 +52,7 @@ const CategoryHome = () => {
                 </NavLink>
 
                 <Card.Body>
-                  <NavLink to={`/product/${product.slug}`}>
+                  <NavLink to={`/${product.slug}`}>
                     <h5>{product.title}</h5>
                   </NavLink>
                   {/* show ratings about products */}
