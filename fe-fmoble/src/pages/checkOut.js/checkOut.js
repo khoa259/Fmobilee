@@ -9,6 +9,7 @@ import {
   getUserCart,
   saveUserAddress,
 } from "../../functions/user";
+import { Link } from "react-router-dom";
 
 const CheckOut = () => {
   const {
@@ -338,9 +339,14 @@ const CheckOut = () => {
             </div>
             <hr className="mb-4" /> */}
 
-            <button className="btn btn-primary btn-lg btn-block" type="submit">
-              Continue to checkout
-            </button>
+            <Link to={"/payments"}>
+              <button
+                className="btn btn-primary btn-lg btn-block"
+                type="submit"
+              >
+                Continue to checkout
+              </button>
+            </Link>
           </form>
         </div>
       </div>

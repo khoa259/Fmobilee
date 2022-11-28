@@ -23,6 +23,7 @@ import History from "./pages/user/history";
 import Password from "./pages/user/Password.js";
 import Wishlist from "./pages/user/Wishlist.js";
 import CategoryHome from "./pages/Category/CategoryHome";
+import Payments from "./pages/payments/Payments";
 // Router Admin
 import Dashboard from "./pages/admin/Dashboard";
 import Category from "./pages/admin/category/Category";
@@ -95,6 +96,7 @@ const App = () => {
               <Route path="/:slug" element={<ProductDetail />} />
               <Route path="category/:slug" element={<CategoryHome />} />
               <Route path="/products" element={<Shop />} />
+              <Route path="/payments" element={<Payments />} />
             </Route>
             <Route
               path="admin"
@@ -102,7 +104,8 @@ const App = () => {
                 <AdminRoute>
                   <AdminLayout />
                 </AdminRoute>
-              }>
+              }
+            >
               <Route index path="dashboard" element={<Dashboard />} />
               <Route path="category" element={<Category />} />
               <Route path="category/:slug" element={<CategoryUpdate />} />
