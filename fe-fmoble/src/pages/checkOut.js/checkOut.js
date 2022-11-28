@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+import { useForm, SubmitHandler } from "react-hook-form";
 import "./checkOut.css";
 import { formatCash } from "../../component/formatCash";
 import {
@@ -11,8 +11,15 @@ import {
 } from "../../functions/user";
 
 const CheckOut = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
+  const [address, setAddress] = useState("");
+  const [savedAdress, setSavedAdress] = useState(false);
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
@@ -48,6 +55,19 @@ const CheckOut = () => {
       });
     }
   };
+  const saveAddressToDB = (data) => {
+    console.log(data);
+    // saveUserAddress(user.token, address).then((res) => {});
+    saveUserAddress(user.token, data).then((res) => {
+      console.log("res.data", res);
+      if (res.data) {
+        setAddress(data);
+        toast.success("Address saved");
+        console.log(res.data);
+      }
+    });
+  };
+
   return (
     <div className="container">
       <div className="py-5 text-center">
@@ -104,9 +124,14 @@ const CheckOut = () => {
             </div>
           </form>
         </div>
+
+        {/* ------------Thong tin dat hang----------------- */}
         <div className="col-md-8 order-md-1">
           <h4 className="mb-3">Thông Tin Đặt hàng</h4>
-          <form className="needs-validation" noValidate>
+          <form
+            className="needs-validation"
+            onSubmit={handleSubmit(saveAddressToDB)}
+          >
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label htmlFor="firstName">Họ Tên</label>
@@ -115,7 +140,7 @@ const CheckOut = () => {
                   className="form-control"
                   id="firstName"
                   placeholder="Họ Tên"
-                  defaultValue
+                  {...register("name", { required: true })}
                   required
                 />
                 <div className="invalid-feedback">
@@ -133,6 +158,7 @@ const CheckOut = () => {
                 className="form-control"
                 id="email"
                 placeholder="you@example.com"
+                {...register("email", { required: true })}
               />
               <div className="invalid-feedback">
                 Please enter a valid email address for shipping updates.
@@ -142,31 +168,26 @@ const CheckOut = () => {
             <div className="row">
               <div className="col-md-5 mb-3">
                 <label htmlFor="country">Thành phố/Tỉnh</label>
-                <select
-                  className="custom-select d-block w-100"
-                  id="country"
-                  required
-                >
-                  <option value>Choose...</option>
-                  <option>United States</option>
-                </select>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  placeholder="you@example.com"
+                  {...register("country", { required: true })}
+                />
                 <div className="invalid-feedback">
                   Please select a valid country.
                 </div>
               </div>
               <div className="col-md-4 mb-3">
                 <label htmlFor="state">Quận/Huyện</label>
-                <select
-                  className="custom-select d-block w-100"
-                  id="state"
-                  required
-                >
-                  <option value>Choose...</option>
-                  <option>California</option>
-                </select>
-                <div className="invalid-feedback">
-                  Please provide a valid state.
-                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  placeholder="you@example.com"
+                  {...register("district", { required: true })}
+                />
               </div>
               <div className="col-md-3 mb-3">
                 <label htmlFor="zip">Phường/Xã</label>
@@ -175,7 +196,7 @@ const CheckOut = () => {
                   className="form-control"
                   id="zip"
                   placeholder="Phường Xã"
-                  required
+                  {...register("ward", { required: true })}
                 />
                 <div className="invalid-feedback">Zip code required.</div>
               </div>
@@ -193,7 +214,16 @@ const CheckOut = () => {
                 Please enter your shipping address.
               </div>
             </div>
-            <hr className="mb-4" />
+
+            {/* ghi chu */}
+            {/* <div className="mb-3">
+              <label htmlFor="address">Ghi chú</label>
+              <ReactQuill theme="snow" value={}/>
+            </div> */}
+
+            {/* Thong tin thanh toan */}
+
+            {/* <hr className="mb-4" />
             <div className="custom-control custom-checkbox">
               <input
                 type="checkbox"
@@ -214,9 +244,9 @@ const CheckOut = () => {
                 Save this information for next time
               </label>
             </div>
-            <hr className="mb-4" />
-            <h4 className="mb-3">Thanh toán online</h4>
-            <div className="d-block my-3">
+            <hr className="mb-4" /> */}
+            {/* <h4 className="mb-3">Thanh toán online</h4> */}
+            {/* <div className="d-block my-3">
               <div className="custom-control custom-radio">
                 <input
                   id="credit"
@@ -306,7 +336,8 @@ const CheckOut = () => {
                 <div className="invalid-feedback">Security code required</div>
               </div>
             </div>
-            <hr className="mb-4" />
+            <hr className="mb-4" /> */}
+
             <button className="btn btn-primary btn-lg btn-block" type="submit">
               Continue to checkout
             </button>

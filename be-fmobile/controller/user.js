@@ -73,7 +73,7 @@ export const emptyCart = async (req, res) => {
 };
 
 export const saveAddress = async (req, res) => {
-  const userAddress = await User.findOneAndUpdate(
+  const userAddress = await User.findOne(
     { email: req.user.email },
     { address: req.body }
   ).exec();
