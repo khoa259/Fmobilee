@@ -1,6 +1,7 @@
 import React from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import StripeCheckout from "../../component/stripe/stripeCheckOut";
 
 //load stripe outside of components render to avoid
 const promise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
