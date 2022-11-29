@@ -3,24 +3,28 @@ import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import * as dotenv from "dotenv";
+dotenv.config();
 //import Router
 import authRoute from "./routes/auth.js";
 import routerCategory from "./routes/category.js";
 import routerProducts from "./routes/product.js";
 import routerUpload from "./routes/cloudinary.js";
 import routerCart from "./routes/user.js";
+import routerPayment from "./routes/stripe.js";
 
 // variable
+
+// console.log("test env", process.env.STRIPE_SECRET);
 const app = express();
 // app
-
 app.use(morgan("dev"));
 app.use(cors());
 app.use(bodyParser.json({ limit: "2mb" }));
 
 // connect DB
 mongoose
-  .connect("mongodb://localhost:27017/Ecommerce-Fmobile", {
+  .connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
@@ -40,6 +44,7 @@ app.use("/api", routerCategory);
 app.use("/api", routerProducts);
 app.use("/api", routerUpload);
 app.use("/api", routerCart);
+app.use("/api", routerPayment);
 
 // port
 const port = process.env.PORT || 8000;

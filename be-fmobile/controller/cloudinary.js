@@ -1,10 +1,11 @@
 import cloudinary from "cloudinary";
-
+import dotenv from "dotenv";
+dotenv.config();
 // config
 cloudinary.config({
-  cloud_name: "dgo2betkv",
-  api_key: "142211326741412",
-  api_secret: "P0okXukU74ik0nAZiZhw5up3y5I",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 export const upload = async (req, res) => {

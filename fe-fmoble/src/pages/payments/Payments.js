@@ -5,7 +5,6 @@ import StripeCheckout from "../../component/stripe/stripeCheckOut";
 
 //load stripe outside of components render to avoid
 const promise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
-
 const Payments = () => {
   return (
     <div className="container p-5 text-center">
