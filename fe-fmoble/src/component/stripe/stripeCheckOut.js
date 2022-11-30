@@ -15,7 +15,7 @@ const StripeCheckout = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
-  console.log("user", user.token);
+  // console.log("user", user.token);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -27,7 +27,8 @@ const StripeCheckout = () => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    createPaymentIntent(user.token).then((res) => {
+    const getToken = localStorage.getItem("token");
+    createPaymentIntent(getToken).then((res) => {
       console.log("create payment intent", res.data);
       setClientSecret(res.data.client_secret);
     });
@@ -37,7 +38,9 @@ const StripeCheckout = () => {
     //
   };
   const handleChange = async (e) => {
-    //
+    // //
+    // setDisabled(e.empty);
+    // setError(e.error ? e.error.message : "");
   };
   const paymentElementOptions = {
     // layout: "tabs",

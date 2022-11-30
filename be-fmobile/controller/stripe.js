@@ -13,7 +13,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET, {
 export const createPaymentIntent = async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: 100,
-    currency: "VND",
+    currency: "usd",
   });
   // const paymentIntent = await Stripe.paymentIntents.
   res.send({
