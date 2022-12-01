@@ -88,8 +88,7 @@ const CheckOut = () => {
             {products.map((p, i) => (
               <li
                 className="list-group-item d-flex justify-content-between lh-condensed"
-                key={i}
-              >
+                key={i}>
                 <div>
                   <b className="my-0">{p.product.title}</b>
                 </div>
@@ -105,7 +104,7 @@ const CheckOut = () => {
             </li>
             <li className="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>{formatCash(`${total}đ`)}</strong>
+              <strong>{formatCash(`${total}`)}đ</strong>
             </li>
             <span className="text-primary pl-2" onClick={emptyCart}>
               Xóa toàn bộ đơn hàng
@@ -132,8 +131,7 @@ const CheckOut = () => {
           <h4 className="mb-3">Thông Tin Đặt hàng</h4>
           <form
             className="needs-validation"
-            onSubmit={handleSubmit(saveAddressToDB)}
-          >
+            onSubmit={handleSubmit(saveAddressToDB)}>
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label htmlFor="firstName">Họ Tên</label>
@@ -343,8 +341,7 @@ const CheckOut = () => {
             <Link to={"/payments"}>
               <button
                 className="btn btn-primary btn-lg btn-block"
-                type="submit"
-              >
+                type="submit">
                 Continue to checkout
               </button>
             </Link>
