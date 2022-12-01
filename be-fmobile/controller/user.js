@@ -20,7 +20,6 @@ export const userCart = async (req, res) => {
 
   for (let i = 0; i < cart.length; i++) {
     let object = {};
-
     object.product = cart[i]._id;
     object.count = cart[i].count;
     object.color = cart[i].color;

@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { PaymentElement, Elements } from "@stripe/react-stripe-js";
-import { useNavigate } from "react-router-dom";
+import {
+  PaymentElement,
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import "./stripe.css";
@@ -14,6 +20,9 @@ const StripeCheckout = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
   // console.log("user", user.token);
+
+  const stripe = useStripe();
+  const elements = useElements();
 
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -48,12 +57,35 @@ const StripeCheckout = () => {
   };
 
   const handleSubmit = async (e) => {
-    //
+    e.preventDefault();
+    setProcessing(true);
+
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+        billing_details: {
+          name: e.target.name.value,
+        },
+      },
+    });
+
+    if (payload.error) {
+      setError(`Payment failed ${payload.error.message}`);
+      setProcessing(false);
+    } else {
+      // here you get result after successful payment
+      // create order and save in database for admin to process
+      // empty user cart from redux store and local storage
+      console.log(JSON.stringify(payload, null, 4));
+      setError(null);
+      setProcessing(false);
+      setSucceeded(true);
+    }
   };
   const handleChange = async (e) => {
     // //
-    // setDisabled(e.empty);
-    // setError(e.error ? e.error.message : "");
+    setDisabled(e.empty);
+    setError(e.error ? e.error.message : ""); //show error message
   };
   const paymentElementOptions = {
     // layout: "tabs",
@@ -86,7 +118,36 @@ const StripeCheckout = () => {
     clientSecret &&
     stripePromise && (
       <Elements stripe={stripePromise} options={{ clientSecret }}>
-        <Payment />
+        <p className={succeeded ? "result-message" : "result-message hidden"}>
+          Payment Successful.{" "}
+          <Link to="/user/history">See it in your purchase history.</Link>
+        </p>
+
+        <form id="payment-form" className="stripe-form" onSubmit={handleSubmit}>
+          <CardElement
+            id="card-element"
+            options={paymentElementOptions}
+            onChange={handleChange}
+          />
+          <button
+            className="stripe-button"
+            disabled={processing || disabled || succeeded}
+          >
+            <span id="button-text">
+              {processing ? (
+                <div className="spinner" id="spinner"></div>
+              ) : (
+                "Pay"
+              )}
+            </span>
+          </button>
+          <br />
+          {error && (
+            <div className="card-error" role="alert">
+              {error}
+            </div>
+          )}
+        </form>
       </Elements>
     )
   );
