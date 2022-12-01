@@ -30,7 +30,7 @@ const CheckOut = () => {
   useEffect(() => {
     const getToken = localStorage.getItem("token");
     console.log(getToken);
-    getUserCart(getToqken).then((res) => {
+    getUserCart(getToken).then((res) => {
       console.log("user cart res", JSON.stringify(res.data, null, 4));
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
