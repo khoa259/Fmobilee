@@ -6,7 +6,7 @@ const AdminLayout = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2 p-0">
+        <div className="layout-admin col-md-2 p-0">
           <AdminNav />
         </div>
         <div className="col mt-4">

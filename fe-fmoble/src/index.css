@@ -178,6 +178,10 @@ a {
   font-size: 16px;
 }
 
+.layout-admin {
+  max-width: 6.7% !important;
+}
+
 /* avatar image */
 .avatar {
   /* box-shadow: 7px 1px 6px 1px gainsboro; */

@@ -9,37 +9,37 @@ export const MenuList = [
 export const MenuAdmin = [
   {
     id: 1,
-    icon: "fa-solid fa-bell pr-1",
+    icon: "fa-solid fa-bell ",
     label: "Dashboard",
     path: "/admin/dashboard",
   },
   {
     id: 2,
-    icon: "fa-solid fa-clipboard pr-2",
+    icon: "fa-solid fa-clipboard ",
     label: "Quản lý danh mục",
     path: "/admin/category",
   },
   {
     id: 3,
-    icon: "fa-solid fa-store pr-1",
+    icon: "fa-solid fa-store ",
     label: "Quản lý sản phẩm",
     path: "/admin/products",
   },
   {
     id: 4,
-    icon: "fa-sharp fa-solid fa-cart-shopping pr-1",
+    icon: "fa-sharp fa-solid fa-cart-shopping ",
     label: "Quản lý đơn hàng",
     path: "/admin/order",
   },
   {
     id: 5,
-    icon: "fa-solid fa-user pr-1",
+    icon: "fa-solid fa-user ",
     label: "Quản lý user",
     path: "/admin/user",
   },
   {
     id: 6,
-    icon: "fa-solid fa-earth-americas pr-2",
+    icon: "fa-solid fa-earth-americas ",
     label: "WEBSITE",
     path: "/",
   },
