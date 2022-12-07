@@ -12,7 +12,7 @@ import routerProducts from "./routes/product.js";
 import routerUpload from "./routes/cloudinary.js";
 import routerCart from "./routes/user.js";
 import routerPayment from "./routes/stripe.js";
-
+import order from "./routes/orderVnpay/order.js";
 // variable
 
 // console.log("test env", process.env.STRIPE_SECRET);
@@ -45,6 +45,7 @@ app.use("/api", routerProducts);
 app.use("/api", routerUpload);
 app.use("/api", routerCart);
 app.use("/api", routerPayment);
+app.use("/api/order", order);
 
 // port
 const port = process.env.PORT || 8000;

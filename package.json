@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "date-format": "^4.0.14",
     "react-modal-image": "^2.6.0"
   }
 }
