@@ -39,12 +39,12 @@ router.post("/create_payment_url", function (req, res, next) {
 
   var createDate = dateFormat(date, "yyyymmddHHmmss");
   var orderId = dateFormat(date, "HHmmss");
-  var amount = req.amount;
+  var amount = 100000;
   var bankCode = "NCB";
 
   var orderInfo = "DEMO";
   var orderType = "billpayment";
-  var locale = "req.body.language";
+  var locale = "vn";
   if (locale === null || locale === "") {
     locale = "vn";
   }
@@ -81,6 +81,7 @@ router.post("/create_payment_url", function (req, res, next) {
 });
 
 router.get("/vnpay_return", function (req, res, next) {
+  console.log("VNPAY RETURN");
   var vnp_Params = req.query;
   console.log(vnp_Params);
   var secureHash = vnp_Params["vnp_SecureHash"];
@@ -89,22 +90,25 @@ router.get("/vnpay_return", function (req, res, next) {
   delete vnp_Params["vnp_SecureHashType"];
 
   vnp_Params = sortObject(vnp_Params);
+  console.log(vnp_Params);
 
   //   var config = require("config");
-  var tmnCode = config.get("vnp_TmnCode");
-  var secretKey = config.get("vnp_HashSecret");
+  //   var tmnCode = "71JUNFKK";
+  var secretKey = "JEMWOMOPSJHWVPXDUPGFEZFXFPDVJGTZ";
 
-  var querystring = require("qs");
+  //   var querystring = require("qs");
   var signData = querystring.stringify(vnp_Params, { encode: false });
-  var crypto = require("crypto");
+  //   var crypto = require("crypto");
   var hmac = crypto.createHmac("sha512", secretKey);
   var signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+  console.log(123, signed);
 
   if (secureHash === signed) {
     //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
-
+    console.log(1, vnp_Params["vnp_ResponseCode"]);
     res.render("success", { code: vnp_Params["vnp_ResponseCode"] });
   } else {
+    console.log(2);
     res.render("success", { code: "97" });
   }
 });
@@ -133,6 +137,9 @@ router.get("/vnpay_ipn", function (req, res, next) {
   } else {
     res.status(200).json({ RspCode: "97", Message: "Fail checksum" });
   }
+  res.json({
+    vnp_Params,
+  });
 });
 
 function sortObject(obj) {

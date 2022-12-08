@@ -13,7 +13,7 @@ export const authCheck = async (req, res, next) => {
     res.status(401).json({
       err: "Invalid or expired token",
     });
-  }
+  };
   next();
 };
 

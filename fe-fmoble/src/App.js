@@ -96,7 +96,7 @@ const App = () => {
               <Route path="/:slug" element={<ProductDetail />} />
               <Route path="category/:slug" element={<CategoryHome />} />
               <Route path="/products" element={<Shop />} />
-              <Route path="/payments" element={<Payments />} />
+              <Route path="/order/vnpay_return" element={<Payments />} />
             </Route>
             <Route
               path="admin"
