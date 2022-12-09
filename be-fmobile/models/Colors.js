@@ -5,6 +5,7 @@ const colorSchema = new mongoose.Schema({
     type: String,
     maxlength: 50,
     required: true,
+    trim: true,
   },
   Status: {
     type: ObjectId,

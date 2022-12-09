@@ -1,23 +1,29 @@
 import mongoose from "mongoose";
 const { ObjectId } = mongoose.Schema;
 
-const cartSchema = new mongoose.Schema(
+const billSchema = new mongoose.Schema(
   {
     products: [
       {
         product: {
           type: ObjectId,
           ref: "Product",
+          price: String,
+          colors: String,
+          title: String,
         },
         count: {
           type: Number,
         },
+        status: {
+          type: ObjectId,
+          ref: "Status",
+        },
       },
     ],
-    cartTotal: Number,
-    totalAfterDiscount: Number,
+    billTotal: Number,
     orderdBy: { type: ObjectId, ref: "User" },
   },
   { timestamps: true }
 );
-export default mongoose.model("Cart", cartSchema);
+export default mongoose.model("Bill", billSchema);

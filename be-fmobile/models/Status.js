@@ -4,6 +4,10 @@ const statusSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  codeStatus: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model("Status", statusSchema);

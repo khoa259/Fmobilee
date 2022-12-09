@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import { formatCash } from "../../component/formatCash";
 import ProductCartInCheckOut from "../../component/cards/productCartInCheckOut";
-import { userCart } from "../../functions/user";
+import { getUserCart } from "../../functions/user";
 
 const Cart = () => {
+  const [total, setTotal] = useState(0);
+  const [products, setProducts] = useState([]);
   const { user, cart } = useSelector((state) => ({ ...state }));
   const getTotal = () => {
     return cart.reduce((currentValue, nextValue) => {
@@ -25,15 +27,14 @@ const Cart = () => {
   const location = useLocation();
   const redirectLogin = () => {};
 
-  const saveOrderToDb = () => {
-    userCart(cart, user.token)
-      .then((res) => {
-        console.log("CART POST RES", res);
-        if (res.data.ok) history("/thanh-toan");
-        localStorage.removeItem("cart");
-      })
-      .catch((err) => console.log("cart save err", err));
-  };
+  useEffect(() => {
+    const getToken = localStorage.getItem("token");
+    getUserCart(getToken).then((res) => {
+      setProducts(res.data.products);
+      setTotal(res.data.cartTotal);
+    });
+  }, []);
+  console.log("prd", products);
 
   return (
     <div>
@@ -41,8 +42,10 @@ const Cart = () => {
       <section className="py-20 pt-5 ">
         <div className="container">
           <div className="p-8 p-lg-20 ">
-            <h2 className="mb-8 mb-md-20">Giỏ Hàng / {cart.length} Sản phẩm</h2>
-            {!cart.length ? (
+            <h2 className="mb-8 mb-md-20">
+              Giỏ Hàng / {products.length} Sản phẩm
+            </h2>
+            {!products.length ? (
               <p>
                 Không có sản phẩm nào trong giỏ hàng{" "}
                 <Link className="text-success" to="/">
@@ -87,7 +90,7 @@ const Cart = () => {
                     </div>
                   </div>
                   <hr />
-                  {cart.map((p) => (
+                  {products.map((p) => (
                     <ProductCartInCheckOut key={p._id} p={p} />
                   ))}
                 </div>
@@ -99,9 +102,7 @@ const Cart = () => {
                   "
                   >
                     <p>Giá tiền :</p>
-                    <b className="text-danger">
-                      {formatCash(`${getTotal()}`)}đ
-                    </b>
+                    <b className="text-danger">{products.price}đ</b>
                   </div>
                   {cart.length != 0 && (
                     <div
@@ -119,15 +120,10 @@ const Cart = () => {
                   "
                   >
                     <h5>Tổng tiền:</h5>
-                    <b className=" text-danger">
-                      {formatCash(`${getTotalCart()}`)}đ
-                    </b>
+                    <b className=" text-danger">{formatCash(total + "")}đ</b>
                   </div>
                   {user.email ? (
-                    <button
-                      className="btn btn-md btn-primary mt-3"
-                      onClick={saveOrderToDb}
-                    >
+                    <button className="btn btn-md btn-primary mt-3">
                       Checkout with {user.email}
                     </button>
                   ) : (

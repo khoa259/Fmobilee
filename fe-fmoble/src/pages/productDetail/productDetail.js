@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
-import { useParams, Link, NavLink, json } from "react-router-dom";
+import { useParams, Link, NavLink, json, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import StarRating from "react-star-ratings";
@@ -11,6 +11,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import "./productDetail.css";
 
 import { getProduct, productStar, getRelated } from "../../functions/products";
+import { userCart } from "../../functions/user";
 import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
 import { showAverage } from "../../functions/ratings";
@@ -58,29 +59,25 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    toast.success(`Success add to cart`);
     let cart = [];
     if (typeof window !== "undefined") {
-      //if cart is in localstorage GET it
-      if (localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"));
-      }
-      // push new product to cart
       cart.push({
         ...product,
         count: 1,
       });
-      //remove duplicates
       let unique = _.uniqWith(cart, _.isEqual);
-      //save to localStorage
-      localStorage.setItem("cart", JSON.stringify(unique));
-
-      //add to redux state
       dispatch({
         type: "ADD_TO_CART",
         payload: unique,
       });
     }
+    userCart(cart, user.token)
+      .then(({ data }) => {
+        if (data && data.succces) {
+          toast.success(data.message);
+        }
+      })
+      .catch((err) => console.log("cart save err", err));
   };
   return (
     <div className="container containerDetail">
@@ -186,7 +183,8 @@ const ProductDetail = () => {
                   <button
                     onClick={handleAddToCart}
                     className="btn btn-dark"
-                    disabled={product.quantity === 0}>
+                    disabled={product.quantity === 0}
+                  >
                     <i className="fa-solid fa-cart-plus mr-2"></i>
                     Thêm vào giỏ hàng
                   </button>

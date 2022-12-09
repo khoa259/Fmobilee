@@ -57,18 +57,18 @@ const CheckOut = () => {
       });
     }
   };
-  const saveAddressToDB = (data) => {
-    console.log(data);
-    // saveUserAddress(user.token, address).then((res) => {});
-    saveUserAddress(user.token, data).then((res) => {
-      console.log("res.data", res);
-      if (res.data) {
-        setAddress(data);
-        toast.success("Address saved");
-        console.log(res.data);
-      }
-    });
-  };
+  // const saveAddressToDB = (data) => {
+  //   console.log(data);
+  //   // saveUserAddress(user.token, address).then((res) => {});
+  //   saveUserAddress(user.token, data).then((res) => {
+  //     console.log("res.data", res);
+  //     if (res.data) {
+  //       setAddress(data);
+  //       toast.success("Address saved");
+  //       console.log(res.data);
+  //     }
+  //   });
+  // };
 
   return (
     <div className="container">
@@ -88,7 +88,8 @@ const CheckOut = () => {
             {products.map((p, i) => (
               <li
                 className="list-group-item d-flex justify-content-between lh-condensed"
-                key={i}>
+                key={i}
+              >
                 <div>
                   <b className="my-0">{p.product.title}</b>
                 </div>
@@ -129,9 +130,7 @@ const CheckOut = () => {
         {/* ------------Thong tin dat hang----------------- */}
         <div className="col-md-8 order-md-1">
           <h4 className="mb-3">Thông Tin Đặt hàng</h4>
-          <form
-            className="needs-validation"
-            onSubmit={handleSubmit(saveAddressToDB)}>
+          <form className="needs-validation" onSubmit={handleSubmit()}>
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label htmlFor="firstName">Họ Tên</label>
@@ -341,7 +340,8 @@ const CheckOut = () => {
             <Link to={"/payments"}>
               <button
                 className="btn btn-primary btn-lg btn-block"
-                type="submit">
+                type="submit"
+              >
                 Continue to checkout
               </button>
             </Link>
