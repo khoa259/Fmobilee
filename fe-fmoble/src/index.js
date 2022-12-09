@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./bootstrap.min.css";
+import "antd/dist/antd.css";
 
 import { legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";

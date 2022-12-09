@@ -83,7 +83,7 @@ const BestSeller = () => {
         </div>
         <Pagination
           current={page}
-          total={(productsCount / 4) * 10}
+          total={(productsCount / 2) * 4}
           onChange={(value) => setPage(value)}
         />
       </Container>
