@@ -34,11 +34,9 @@ const Cart = () => {
       setTotal(res.data.cartTotal);
     });
   }, []);
-  console.log("prd", products);
 
   return (
     <div>
-      {/* {JSON.stringify(cart)} */}
       <section className="py-20 pt-5 ">
         <div className="container">
           <div className="p-8 p-lg-20 ">
@@ -97,13 +95,15 @@ const Cart = () => {
                 <div className="col-md-4 h-50  ">
                   <h4>Thanh Toán</h4>
                   <hr />
-                  <div
-                    className="d-flex justify-content-between
+                  {products.map((p, i) => (
+                    <div
+                      className="d-flex justify-content-between
                   "
-                  >
-                    <p>Giá tiền :</p>
-                    <b className="text-danger">{products.price}đ</b>
-                  </div>
+                    >
+                      <p>Giá tiền :</p>
+                      <b className="text-danger">{p.product.price}đ</b>
+                    </div>
+                  ))}
                   {cart.length != 0 && (
                     <div
                       className="d-flex justify-content-between

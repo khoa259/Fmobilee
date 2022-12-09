@@ -77,19 +77,23 @@ const ProductCartInCheckOut = ({ p }) => {
                 <img
                   className="img-fluid"
                   style={{ objectFit: "contain" }}
-                  src={p.images && p.images.length ? p.images[0].url : ""}
+                  src={
+                    p.product.images && p.product.images.length
+                      ? p.product.images[0].url
+                      : ""
+                  }
                   alt="#"
                 />
               </div>
             </div>
             <div className="col-8">
-              <span className="mb-2 lead span">{p.title}</span>
+              <span className="mb-2 lead span">{p.product.title}</span>
             </div>
           </div>
         </div>
         <div className="d-none d-lg-block col-lg-2">
           <span className=" text-secondary text-decoration-line-through">
-            {formatCash(`${p.price}`)}đ
+            {formatCash(`${p.product.price}`)}đ
           </span>
         </div>
         <div className="col-auto col-md-2">
