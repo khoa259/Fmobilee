@@ -1,4 +1,5 @@
 import Users from "../models/User.js";
+import Cart from "../models/cart.js";
 
 export const createOrUpdateUser = async (req, res) => {
   const { name, picture, email } = req.user;
@@ -17,7 +18,12 @@ export const createOrUpdateUser = async (req, res) => {
       name: email.split("@")[0],
       picture,
     }).save();
-    console.log("USER CREATED", newUser);
+    // if (newUser) {
+    //   let newCart = await new Cart({
+    //     orderdBy: newUser._id,
+    //   }).save();
+    //
+    // }
     res.json(newUser);
   }
 };
