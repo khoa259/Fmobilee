@@ -96,11 +96,7 @@ const Cart = () => {
                   <hr />
                   <p>Giá tiền :</p>
                   {products.map((p, i) => (
-                    <div
-                      key={i}
-                      className="d-flex justify-content-between"
-                  
-                      key={i}>
+                    <div className="d-flex justify-content-between" key={i}>
                       <p>{p.product.title}</p>
                       <b className="text-danger">
                         {formatCash(`${p.product.price}`)}đ
