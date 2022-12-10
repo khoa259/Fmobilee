@@ -6,50 +6,41 @@ export const userCart = async (req, res) => {
   // console.log(req.body); // {cart: []}
   try {
     const { cart } = req.body;
-
+    const idProduct = cart[0]._id;
     let products = [];
-
+    let checkProductDulicate = false;
     const user = await User.findOne({ email: req.user.email }).exec();
-
-    // check if cart with logged in user id already exist
-    let cartExistByThisUser = await Cart.findOne({ orderdBy: user._id }).exec();
-
-    if (cartExistByThisUser) {
-      cartExistByThisUser.remove();
-      console.log("removed old cart");
+    let cartByUser = await Cart.findOne({ orderdBy: user._id }).exec();
+    if (cartByUser) {
+      cartByUser.products &&
+        cartByUser.products.forEach((product) => {
+          if (idProduct == product.product) {
+            checkProductDulicate = true;
+            product.count = product.count + 1;
+            cartByUser.cartTotal = cartByUser.cartTotal + cart[0].price;
+          }
+        });
     }
-
-    for (let i = 0; i < cart.length; i++) {
+    if (!checkProductDulicate) {
       let object = {};
-      object.product = cart[i]._id;
-      object.count = cart[i].count;
-      object.color = cart[i].color;
-      // get price for creating total
-      let productFromDb = await Product.findById(cart[i]._id)
-        .select("price")
-        .exec();
-      object.price = productFromDb.price;
-
+      object.product = cart[0]._id;
+      object.count = cart[0].count;
+      object.color = cart[0].color;
+      object.price = cart[0].price;
       products.push(object);
+      cartByUser.cartTotal = cartByUser.cartTotal + object.price * object.count;
     }
+    cartByUser.products = [...cartByUser.products, ...products];
+    console.log({ ...cartByUser, cartTotal: 100 });
+    const updated = await Cart.findOneAndUpdate(
+      { _id: cartByUser._id },
+      { ...cartByUser, cartTotal: 100 },
+      { new: true }
+    ).exec();
 
-    // console.log('products', products)
-
-    let cartTotal = 0;
-    for (let i = 0; i < products.length; i++) {
-      cartTotal = cartTotal + products[i].price * products[i].count;
-    }
-
-    // console.log("cartTotal", cartTotal);
-
-    let newCart = await new Cart({
-      products,
-      cartTotal,
-      orderdBy: user._id,
-    }).save();
-    console.log("new cart ----> ", newCart);
     res.json({ message: "Thành công", succces: true });
   } catch (error) {
+    console.log(12, error);
     res.json({ message: "Thất bại", succces: false });
   }
 };
