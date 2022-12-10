@@ -13,6 +13,7 @@ import {
 } from "../../functions/user";
 import { getAddress } from "../../functions/address";
 import { Link } from "react-router-dom";
+import { Select } from "antd";
 
 const CheckOut = () => {
   const {
@@ -21,6 +22,8 @@ const CheckOut = () => {
     handleSubmit,
   } = useForm();
   const [products, setProducts] = useState([]);
+  const [Province, setProvince] = useState([]);
+  const [District, setDistrict] = useState([]);
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState("");
   const [savedAdress, setSavedAdress] = useState(false);
@@ -40,11 +43,31 @@ const CheckOut = () => {
     });
     const getAddressData = () => {
       axios.get("https://provinces.open-api.vn/api/").then((res) => {
-        console.log(res);
+        let lstProvince = [];
+        res.data.forEach((item) => {
+          lstProvince.push({
+            value: item.code,
+            label: item.name,
+          });
+        });
+        setProvince(lstProvince);
       });
     };
     getAddressData();
   }, []);
+
+  const onchangeProvince = (e) => {
+    axios.get(`https://provinces.open-api.vn/api/p/${1}`).then((res) => {
+      let lstDistrict = [];
+      res.data[0].districts.forEach((item) => {
+        lstDistrict.push({
+          value: item.code,
+          label: item.name,
+        });
+      });
+      setDistrict(lstDistrict);
+    });
+  };
 
   const emptyCart = () => {
     if (window.confirm("đơn hàng của bạn sẽ bị xóa ")) {
@@ -98,7 +121,8 @@ const CheckOut = () => {
             {products.map((p, i) => (
               <li
                 className="list-group-item d-flex justify-content-between lh-condensed"
-                key={i}>
+                key={i}
+              >
                 <div>
                   <b className="my-0">{p.product.title}</b>
                 </div>
@@ -172,16 +196,20 @@ const CheckOut = () => {
                 Please enter a valid email address for shipping updates.
               </div>
             </div>
-
             <div className="row">
               <div className="col-md-5 mb-3">
                 <label htmlFor="country">Thành phố/Tỉnh</label>
-                <input
+                {/* <input
                   type="text"
                   className="form-control"
                   id="email"
                   placeholder="you@example.com"
                   {...register("country", { required: true })}
+                /> */}
+                <Select
+                  style={{ width: 120 }}
+                  onChange={(e) => onchangeProvince(e)}
+                  options={Province}
                 />
                 <div className="invalid-feedback">
                   Please select a valid country.
@@ -189,22 +217,33 @@ const CheckOut = () => {
               </div>
               <div className="col-md-4 mb-3">
                 <label htmlFor="state">Quận/Huyện</label>
-                <input
+                {/* <input
                   type="text"
                   className="form-control"
                   id="email"
                   placeholder="you@example.com"
                   {...register("district", { required: true })}
-                />
+                /> */}
+                <Select style={{ width: 120 }} options={District} />
               </div>
               <div className="col-md-3 mb-3">
                 <label htmlFor="zip">Phường/Xã</label>
-                <input
+                {/* <input
                   type="text"
                   className="form-control"
                   id="zip"
                   placeholder="Phường Xã"
                   {...register("ward", { required: true })}
+                /> */}
+                <Select
+                  defaultValue="lucy"
+                  style={{ width: 120 }}
+                  options={[
+                    {
+                      value: "lucy",
+                      label: "Lucy",
+                    },
+                  ]}
                 />
                 <div className="invalid-feedback">Zip code required.</div>
               </div>
@@ -349,7 +388,8 @@ const CheckOut = () => {
             <Link to={"/payments"}>
               <button
                 className="btn btn-primary btn-lg btn-block"
-                type="submit">
+                type="submit"
+              >
                 Continue to checkout
               </button>
             </Link>
