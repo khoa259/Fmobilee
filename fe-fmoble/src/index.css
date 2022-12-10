@@ -233,26 +233,6 @@ a {
   padding-top: 10px;
 }
 
-.ant-pagination {
-  display: flex !important;
-  list-style: none !important;
-  justify-content: end !important;
-  margin-top: 30px;
-}
-
-.ant-pagination-item {
-  cursor: pointer;
-  border: 1px solid black !important;
-  background: rgb(240, 240, 236);
-  padding: 10px;
-  margin: 0 6px 0 6px;
-  border-radius: 3px;
-}
-
-.ant-pagination-item a {
-  color: black !important;
-}
-
 
 
 .ant-pagination-item:focus {

@@ -7,6 +7,7 @@ import { formatCash } from "../formatCash";
 const ProductCartInCheckOut = ({ p }) => {
   let dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
+  console.log(p);
 
   const handleQuantityChange = (e) => {
     // console.log("available quantity", p.quantity);
@@ -44,6 +45,7 @@ const ProductCartInCheckOut = ({ p }) => {
         <div className="col-12 col-md-8 col-lg-6 mb-6 mb-md-0">
           <div className="row align-items-center">
             <i className="fa-sharp fa-solid fa-circle-xmark remove-cart"></i>
+
             <div className="col-12 col-md-4 mb-3">
               <div
                 className="d-flex align-items-center justify-content-center bg-light"
@@ -51,11 +53,7 @@ const ProductCartInCheckOut = ({ p }) => {
                 <img
                   className="img-fluid"
                   style={{ objectFit: "contain" }}
-                  src={
-                    p.product.images && p.product.images.length
-                      ? p.product.images[0].url
-                      : ""
-                  }
+                  src={p.images && p.images.length ? p.images[0].url : ""}
                   alt="#"
                 />
               </div>
