@@ -8,27 +8,33 @@ export const userCart = async (req, res) => {
     const { cart } = req.body;
     const idProduct = cart[0]._id;
     let products = [];
+    let checkProductDulicate = false;
     const user = await User.findOne({ email: req.user.email }).exec();
     let cartByUser = await Cart.findOne({ orderdBy: user._id }).exec();
     if (cartByUser) {
       cartByUser.products &&
         cartByUser.products.forEach((product) => {
           if (idProduct == product.product) {
+            checkProductDulicate = true;
             product.count = product.count + 1;
+            cartByUser.cartTotal = cartByUser.cartTotal + cart[0].price;
           }
         });
     }
-    let object = {};
-    object.product = cart[0]._id;
-    object.count = cart[0].count;
-    object.color = cart[0].color;
-    object.price = cart[0].price;
-    products.push(object);
+    if (!checkProductDulicate) {
+      let object = {};
+      object.product = cart[0]._id;
+      object.count = cart[0].count;
+      object.color = cart[0].color;
+      object.price = cart[0].price;
+      products.push(object);
+      cartByUser.cartTotal = cartByUser.cartTotal + object.price * object.count;
+    }
     cartByUser.products = [...cartByUser.products, ...products];
-    cartByUser.cartTotal = cartByUser.cartTotal + object.price * object.count;
+    console.log({ ...cartByUser, cartTotal: 100 });
     const updated = await Cart.findOneAndUpdate(
       { _id: cartByUser._id },
-      cartByUser,
+      { ...cartByUser, cartTotal: 100 },
       { new: true }
     ).exec();
 

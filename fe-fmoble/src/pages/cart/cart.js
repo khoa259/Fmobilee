@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { formatCash } from "../../component/formatCash";
 import ProductCartInCheckOut from "../../component/cards/productCartInCheckOut";
@@ -10,23 +10,25 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const [products, setProducts] = useState([]);
   const { user, cart } = useSelector((state) => ({ ...state }));
+  const history = useNavigate();
 
   const getTotal = () => {
     return cart.reduce((currentValue, nextValue) => {
       return currentValue + nextValue.count * nextValue.price;
     }, 0);
   };
-  const getTotalCart = () => {
-    const ship = 22000;
-    if (cart.length !== 0) {
-      return getTotal() + ship;
-    }
-    return getTotal();
-  };
 
-  const history = useNavigate();
-  const location = useLocation();
-  const redirectLogin = () => {};
+  // const getTotalCart = () => {
+  //   const ship = 22000;
+  //   if (cart.length !== 0) {
+  //     return getTotal() + ship;
+  //   }
+  //   return getTotal();
+  // };
+
+  const redirectCheckout = () => {
+    history("/thanh-toan");
+  };
 
   useEffect(() => {
     const getToken = localStorage.getItem("token");
@@ -92,44 +94,38 @@ const Cart = () => {
                 <div className="col-md-4 h-50  ">
                   <h4>Thanh Toán</h4>
                   <hr />
+                  <p>Giá tiền :</p>
                   {products.map((p, i) => (
                     <div
                       key={i}
-                      className="d-flex justify-content-between
-                  ">
-                      <p>Giá tiền :</p>
-                      <b className="text-danger">{formatCash(`${total}`)}đ</b>
+                      className="d-flex justify-content-between"
+                  
+                      key={i}>
+                      <p>{p.product.title}</p>
+                      <b className="text-danger">
+                        {formatCash(`${p.product.price}`)}đ
+                      </b>
                     </div>
                   ))}
-                  {cart.length != 0 && (
-                    <div
-                      className="d-flex justify-content-between
+                  {/* <div
+                    className="d-flex justify-content-between
                   ">
-                      <p>Phí Vận Chuyển :</p>
-                      <b className="text-danger">22.000đ</b>
-                    </div>
-                  )}
-                  <hr />
+                    <p>Phí Vận Chuyển :</p>
+                    <b className="text-danger">22.000đ</b>
+                  </div> */}
 
+                  <hr />
                   <div
                     className="d-flex justify-content-between
                   ">
                     <h5>Tổng tiền:</h5>
                     <b className=" text-danger">{formatCash(`${total}`)}đ</b>
                   </div>
-                  {user.email ? (
-                    <button className="btn btn-md btn-primary mt-3">
-                      Checkout with {user.email}
-                    </button>
-                  ) : (
-                    <Link to={"/login"}>
-                      <button
-                        onClick={redirectLogin}
-                        className="btn btn-sm btn-primary mt-3">
-                        Login to Checkout
-                      </button>
-                    </Link>
-                  )}
+                  <button
+                    className="btn btn-md btn-primary mt-3"
+                    onClick={redirectCheckout}>
+                    Thanh Toán
+                  </button>
                 </div>
               </div>
             )}
