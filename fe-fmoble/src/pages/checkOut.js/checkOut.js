@@ -37,37 +37,36 @@ const CheckOut = () => {
     const getToken = localStorage.getItem("token");
     console.log(getToken);
     getUserCart(getToken).then((res) => {
-      console.log("user cart res", JSON.stringify(res.data, null, 4));
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
     });
-    const getAddressData = () => {
-      axios.get("https://provinces.open-api.vn/api/").then((res) => {
-        let lstProvince = [];
-        res.data.forEach((item) => {
-          lstProvince.push({
-            value: item.code,
-            label: item.name,
-          });
-        });
-        setProvince(lstProvince);
-      });
-    };
-    getAddressData();
+    // const getAddressData = () => {
+    //   axios.get("https://provinces.open-api.vn/api/").then((res) => {
+    //     let lstProvince = [];
+    //     res.data.forEach((item) => {
+    //       lstProvince.push({
+    //         value: item.code,
+    //         label: item.name,
+    //       });
+    //     });
+    //     setProvince(lstProvince);
+    //   });
+    // };
+    // getAddressData();
   }, []);
 
-  const onchangeProvince = (e) => {
-    axios.get(`https://provinces.open-api.vn/api/p/${1}`).then((res) => {
-      let lstDistrict = [];
-      res.data[0].districts.forEach((item) => {
-        lstDistrict.push({
-          value: item.code,
-          label: item.name,
-        });
-      });
-      setDistrict(lstDistrict);
-    });
-  };
+  // const onchangeProvince = (e) => {
+  //   axios.get(`https://provinces.open-api.vn/api/p/${1}`).then((res) => {
+  //     let lstDistrict = [];
+  //     res.data[0].districts.forEach((item) => {
+  //       lstDistrict.push({
+  //         value: item.code,
+  //         label: item.name,
+  //       });
+  //     });
+  //     setDistrict(lstDistrict);
+  //   });
+  // };
 
   const emptyCart = () => {
     if (window.confirm("đơn hàng của bạn sẽ bị xóa ")) {
@@ -101,6 +100,15 @@ const CheckOut = () => {
   //     }
   //   });
   // };
+  const onSubmit = (e) => {
+    axios
+      .post("http://localhost:8000/api/order/create_payment_url", {
+        amount: total,
+      })
+      .then((res) => {
+        window.location.href = res.data.url;
+      });
+  };
 
   return (
     <div className="container">
@@ -121,12 +129,13 @@ const CheckOut = () => {
             {products.map((p, i) => (
               <li
                 className="list-group-item d-flex justify-content-between lh-condensed"
-                key={i}
-              >
+                key={i}>
                 <div>
                   <b className="my-0">{p.product.title}</b>
                 </div>
-                <span className="text-muted">{formatCash(`${total}`)} đ</span>
+                <span className="text-muted">
+                  {formatCash(`${p.product.price * p.count}`)} đ
+                </span>
               </li>
             ))}
             <li className="list-group-item d-flex justify-content-between bg-light">
@@ -163,7 +172,7 @@ const CheckOut = () => {
         {/* ------------Thong tin dat hang----------------- */}
         <div className="col-md-8 order-md-1">
           <h4 className="mb-3">Thông Tin Đặt hàng</h4>
-          <form className="needs-validation" onSubmit={handleSubmit()}>
+          <form className="needs-validation" onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label htmlFor="firstName">Họ Tên</label>
@@ -206,11 +215,7 @@ const CheckOut = () => {
                   placeholder="you@example.com"
                   {...register("country", { required: true })}
                 /> */}
-                <Select
-                  style={{ width: 120 }}
-                  onChange={(e) => onchangeProvince(e)}
-                  options={Province}
-                />
+                <Select style={{ width: 120 }} options={Province} />
                 <div className="invalid-feedback">
                   Please select a valid country.
                 </div>
@@ -385,14 +390,11 @@ const CheckOut = () => {
             </div>
             <hr className="mb-4" /> */}
 
-            <Link to={"/payments"}>
-              <button
-                className="btn btn-primary btn-lg btn-block"
-                type="submit"
-              >
-                Continue to checkout
-              </button>
-            </Link>
+            {/* <Link to={"/payments"}> */}
+            <button className="btn btn-primary btn-lg btn-block">
+              Continue to checkout
+            </button>
+            {/* </Link> */}
           </form>
         </div>
       </div>

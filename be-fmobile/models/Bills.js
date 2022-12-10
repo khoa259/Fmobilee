@@ -15,12 +15,12 @@ const billSchema = new mongoose.Schema(
         count: {
           type: Number,
         },
-        status: {
-          type: ObjectId,
-          ref: "Status",
-        },
       },
     ],
+    status: {
+      type: ObjectId,
+      ref: "Status",
+    },
     billTotal: Number,
     orderdBy: { type: ObjectId, ref: "User" },
   },

@@ -39,7 +39,7 @@ router.post("/create_payment_url", function (req, res, next) {
 
   var createDate = dateFormat(date, "yyyymmddHHmmss");
   var orderId = dateFormat(date, "HHmmss");
-  var amount = req.amount;
+  var amount = req.body.amount;
   var bankCode = "NCB";
 
   var orderInfo = "DEMO";
@@ -74,13 +74,13 @@ router.post("/create_payment_url", function (req, res, next) {
   var hmac = crypto.createHmac("sha512", secretKey);
   var signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
   vnp_Params["vnp_SecureHash"] = signed;
-  console.log("test", vnp_Params);
   vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: false });
-  console.log("url", vnpUrl);
-  res.redirect(vnpUrl);
+  res.json({ url: vnpUrl });
 });
 
 router.get("/vnpay_return", function (req, res, next) {
+  // logic dùng window.location.search để lấy full param +&idUser=...
+  //Fe truyền xuống đầy đủ thông tin trên URL dc trả về và idUser lấy các thông tin để lưu bill
   console.log("VNPAY RETURN");
   var vnp_Params = req.query;
   console.log(vnp_Params);
@@ -107,6 +107,9 @@ router.get("/vnpay_return", function (req, res, next) {
     //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
     console.log(1, vnp_Params["vnp_ResponseCode"]);
     res.render("success", { code: vnp_Params["vnp_ResponseCode"] });
+    //get ra cart theo idUser lấy hết sản phẩm từ card nhét vào bill
+    // FE gửi thông tin xuống thành công thì lưu bill (xem bảng bill đã có trường daThanhToan) daThanhToan = true status = chờ xác nhận
+    // sau khi lưu bill thành công thì xóa hét sản phẩm trogn cart chỉ xóa sản phẩm trang cart chứ k xóa cart
   } else {
     console.log(2);
     res.render("success", { code: "97" });
