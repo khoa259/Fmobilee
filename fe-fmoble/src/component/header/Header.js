@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { getCategories } from "../../functions/category";
-import { MenuList } from "../data-menu/data-menu";
+import { getUserCart } from "../../functions/user";
 import Search from "../form/Search";
 import "./header.css";
 const Header = () => {
   const [categories, setCategories] = useState([]);
+  const [cartDB, setCartDB] = useState([]);
   const history = useNavigate();
   const dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
@@ -27,6 +28,10 @@ const Header = () => {
     getCategories().then((c) => {
       setCategories(c.data);
     });
+    const getToken = localStorage.getItem("token");
+    getUserCart(getToken).then((e) => {
+      setCartDB(e.data.products);
+    });
   }, []);
   return (
     <div className="fixed-top ">
@@ -40,7 +45,7 @@ const Header = () => {
             <Nav.Link href="/gio-hang" className="icon-cart">
               <i className="fas fa-shopping-cart"></i>
 
-              <Badge bg="none">{cart.length}</Badge>
+              <Badge bg="none">{cartDB.length}</Badge>
             </Nav.Link>
             <div className="dropdown">
               {/* nếu user không tồn tai */}
@@ -84,8 +89,7 @@ const Header = () => {
         className="nav-child"
         variant="dark"
         expand="lg"
-        collapseOnSelect="false"
-      >
+        collapseOnSelect="false">
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center">
           <Nav as="ul" className="Ul">

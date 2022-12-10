@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
+
 import "./checkOut.css";
 import { formatCash } from "../../component/formatCash";
 import {
@@ -9,6 +11,7 @@ import {
   getUserCart,
   saveUserAddress,
 } from "../../functions/user";
+import { getAddress } from "../../functions/address";
 import { Link } from "react-router-dom";
 
 const CheckOut = () => {
@@ -35,6 +38,12 @@ const CheckOut = () => {
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
     });
+    const getAddressData = () => {
+      axios.get("https://provinces.open-api.vn/api/").then((res) => {
+        console.log(res);
+      });
+    };
+    getAddressData();
   }, []);
 
   const emptyCart = () => {
@@ -72,6 +81,7 @@ const CheckOut = () => {
 
   return (
     <div className="container">
+      {JSON.stringify(getAddress)}
       <div className="py-5 text-center">
         <h2>Thanh Toán Đơn Hàng</h2>
       </div>
@@ -88,12 +98,11 @@ const CheckOut = () => {
             {products.map((p, i) => (
               <li
                 className="list-group-item d-flex justify-content-between lh-condensed"
-                key={i}
-              >
+                key={i}>
                 <div>
                   <b className="my-0">{p.product.title}</b>
                 </div>
-                <span className="text-muted">{formatCash(`${total}đ`)}</span>
+                <span className="text-muted">{formatCash(`${total}`)} đ</span>
               </li>
             ))}
             <li className="list-group-item d-flex justify-content-between bg-light">
@@ -340,8 +349,7 @@ const CheckOut = () => {
             <Link to={"/payments"}>
               <button
                 className="btn btn-primary btn-lg btn-block"
-                type="submit"
-              >
+                type="submit">
                 Continue to checkout
               </button>
             </Link>

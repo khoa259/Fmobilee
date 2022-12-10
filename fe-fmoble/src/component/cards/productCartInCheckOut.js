@@ -13,67 +13,41 @@ const ProductCartInCheckOut = ({ p }) => {
     let count = e.target.value < 1 ? 1 : e.target.value;
 
     if (count > p.quantity) {
-      toast.error(`Max available quantity: ${p.quantity}`);
+      toast.error(`Bạn đã thêm vượt quá số lượng: ${p.quantity}`);
       return;
     }
 
     let cart = [];
 
-    if (typeof window !== "undefined") {
-      if (localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"));
-      }
+    // if (typeof window !== "undefined") {
+    //   if (localStorage.getItem("cart")) {
+    //     cart = JSON.parse(localStorage.getItem("cart"));
+    //   }
 
-      cart.map((product, i) => {
-        if (product._id == p._id) {
-          cart[i].count = count;
-        }
-      });
+    //   cart.map((product, i) => {
+    //     if (product._id == p._id) {
+    //       cart[i].count = count;
+    //     }
+    //   });
 
-      localStorage.setItem("cart", JSON.stringify(cart));
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: cart,
-      });
-    }
+    //   localStorage.setItem("cart", JSON.stringify(cart));
+    //   dispatch({
+    //     type: "ADD_TO_CART",
+    //     payload: cart,
+    //   });
+    // }
   };
 
-  const handleRemove = () => {
-    // console.log(p._id, "to remove");
-    let cart = [];
-
-    if (typeof window !== "undefined") {
-      if (localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"));
-      }
-      // [1,2,3,4,5]
-      cart.map((product, i) => {
-        if (product._id === p._id) {
-          cart.splice(i, 1);
-        }
-      });
-
-      localStorage.setItem("cart", JSON.stringify(cart));
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: cart,
-      });
-    }
-  };
   return (
     <div className="mb-12 py-6 border-top border-bottom">
       <div className="row align-items-center mb-6 mb-md-3">
         <div className="col-12 col-md-8 col-lg-6 mb-6 mb-md-0">
           <div className="row align-items-center">
-            <i
-              onClick={handleRemove}
-              className="fa-sharp fa-solid fa-circle-xmark remove-cart"
-            ></i>
+            <i className="fa-sharp fa-solid fa-circle-xmark remove-cart"></i>
             <div className="col-12 col-md-4 mb-3">
               <div
                 className="d-flex align-items-center justify-content-center bg-light"
-                style={{ width: 96, height: 128 }}
-              >
+                style={{ width: 96, height: 128 }}>
                 <img
                   className="img-fluid"
                   style={{ objectFit: "contain" }}
@@ -104,8 +78,7 @@ const ProductCartInCheckOut = ({ p }) => {
                 height={2}
                 viewBox="0 0 12 2"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.35">
                   <rect
                     x={12}
@@ -131,8 +104,7 @@ const ProductCartInCheckOut = ({ p }) => {
                 height={12}
                 viewBox="0 0 12 12"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.35">
                   <rect x={5} width={2} height={12} fill="currentColor" />
                   <rect
@@ -150,10 +122,11 @@ const ProductCartInCheckOut = ({ p }) => {
         </div>
         <div className="col-auto col-md-2 text-end">
           <p className="text-secondary text-decoration-line-through">
-            {formatCash(`${p.price * p.count}`)}đ
+            {formatCash(`${p.product.price * p.count}`)}đ
           </p>
         </div>
       </div>
+      <hr />
     </div>
   );
 };

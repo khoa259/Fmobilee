@@ -18,12 +18,11 @@ export const createOrUpdateUser = async (req, res) => {
       name: email.split("@")[0],
       picture,
     }).save();
-    // if (newUser) {
-    //   let newCart = await new Cart({
-    //     orderdBy: newUser._id,
-    //   }).save();
-    //
-    // }
+    if (newUser) {
+      let newCart = await new Cart({
+        orderdBy: newUser._id,
+      }).save();
+    }
     res.json(newUser);
   }
 };
