@@ -174,7 +174,7 @@ const CheckOut = () => {
           <h4 className="mb-3">Thông Tin Đặt hàng</h4>
           <form className="needs-validation" onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
-              <div className="col-md-6 mb-3">
+              <div className="col-xl-12 mb-3">
                 <label htmlFor="firstName">Họ Tên</label>
                 <input
                   type="text"
@@ -205,9 +205,25 @@ const CheckOut = () => {
                 Please enter a valid email address for shipping updates.
               </div>
             </div>
+            <div className="mb-3">
+              <label htmlFor="email">
+                Số điện thoại <span className="text-muted">(Optional)</span>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="phoneNumber"
+                placeholder="0123456789"
+                {...register("phoneNumber", { required: true })}
+              />
+              <div className="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </div>
             <div className="row">
-              <div className="col-md-5 mb-3">
+              <div className="col-md-4 mb-3">
                 <label htmlFor="country">Thành phố/Tỉnh</label>
+                <br />
                 {/* <input
                   type="text"
                   className="form-control"
@@ -215,13 +231,14 @@ const CheckOut = () => {
                   placeholder="you@example.com"
                   {...register("country", { required: true })}
                 /> */}
-                <Select style={{ width: 120 }} options={Province} />
+                <Select style={{ width: 200 }} options={Province} />
                 <div className="invalid-feedback">
                   Please select a valid country.
                 </div>
               </div>
               <div className="col-md-4 mb-3">
                 <label htmlFor="state">Quận/Huyện</label>
+                <br />
                 {/* <input
                   type="text"
                   className="form-control"
@@ -229,10 +246,11 @@ const CheckOut = () => {
                   placeholder="you@example.com"
                   {...register("district", { required: true })}
                 /> */}
-                <Select style={{ width: 120 }} options={District} />
+                <Select style={{ width: 200 }} options={District} />
               </div>
-              <div className="col-md-3 mb-3">
+              <div className="col-md-4 mb-3">
                 <label htmlFor="zip">Phường/Xã</label>
+                <br />
                 {/* <input
                   type="text"
                   className="form-control"
@@ -242,7 +260,7 @@ const CheckOut = () => {
                 /> */}
                 <Select
                   defaultValue="lucy"
-                  style={{ width: 120 }}
+                  style={{ width: 200 }}
                   options={[
                     {
                       value: "lucy",
