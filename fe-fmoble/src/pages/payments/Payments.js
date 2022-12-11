@@ -47,9 +47,9 @@ const Payments = () => {
           <div>
             <span>
               kêt quả:
-              {vnp_ResponseCode?.vnp_ResponseCode !== "00" && (
+              {/* {vnp_ResponseCode?.vnp_ResponseCode !== "00" && (
                 <strong className="text-success">Thanh toán thành công</strong>
-              )}
+              )} */}
             </span>
           </div>
         </div>
