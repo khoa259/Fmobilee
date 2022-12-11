@@ -1,17 +1,28 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { formatCash } from "../../component/formatCash";
-
+import { getUserCart } from "../../functions/user";
+import { formatCash } from "../../component/formatCash";
 //load stripe outside of components render to avoid
 const Payments = () => {
-  const [payment, setPayment] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8000/api/order/vnpay_return`, { vnpUrl: url })
-  //     .then((res) => {
-  //       window.location.pathname = res.data.url;
-  //     });
-  // }, []);
+  const { user } = useSelector((state) => ({ ...state }));
+  // debugger;
+  const urlPaymentReturn = window.location.search;
+  console.log("urlPaymentReturn", urlPaymentReturn);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/order/vnpay_return${urlPaymentReturn}`)
+      .then((res) => {
+        console.log("res", res);
+      });
+    const getToken = localStorage.getItem("token");
+    getUserCart(getToken).then((res) => {
+      console.log("res Products", res);
+      setProducts(res.data.products);
+    });
+  }, []);
   const myKeyValue = window.location.search;
   console.log(myKeyValue);
   const urlParams = new URLSearchParams(myKeyValue);
@@ -32,6 +43,26 @@ const Payments = () => {
           <div className="col-3 text-success">
             <span>{formatCash(`${vnp_Amount}`)} đ</span>
           </div>
+        </div>
+        <div className="row mt-3 ">
+          <div className="col-lg-9 col-2">
+            <p>Sản phẩm đã thanh toán</p>
+          </div>
+          {products.map((p, i) => (
+            <>
+              <div className="col-3 text-success">
+                <span>{p.product.title}</span>
+              </div>
+              <div className="col-3 text-success">
+                <span>{formatCash(`${p.product.price}`)}đ</span>
+              </div>
+            </>
+          ))}
+        </div>
+        <div>
+          <span> Người thanh toán: {user?.name}</span>
+          <br></br>
+          <span> Địa chỉ email: {user?.email}</span>
         </div>
         <hr />
         <div>
@@ -54,7 +85,7 @@ const Payments = () => {
           </div>
         </div>
         <div className="text-center mt-5">
-          <button type="button" class="btn btn-success text-center">
+          <button type="button" className="btn btn-success text-center">
             Xác nhận thanh toán
           </button>
         </div>

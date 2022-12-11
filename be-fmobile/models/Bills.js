@@ -9,7 +9,7 @@ const billSchema = new mongoose.Schema(
           type: ObjectId,
           ref: "Product",
           price: String,
-          colors: String,
+          // colors: String,
           title: String,
         },
         count: {
@@ -20,6 +20,9 @@ const billSchema = new mongoose.Schema(
     status: {
       type: ObjectId,
       ref: "Status",
+    },
+    bankCode: {
+      type: String,
     },
     billTotal: Number,
     orderdBy: { type: ObjectId, ref: "User" },

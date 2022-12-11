@@ -59,7 +59,7 @@ router.post("/create_payment_url", function (req, res, next) {
   vnp_Params["vnp_TxnRef"] = orderId;
   vnp_Params["vnp_OrderInfo"] = orderInfo;
   vnp_Params["vnp_OrderType"] = orderType;
-  vnp_Params["vnp_Amount"] = amount * 100;
+  vnp_Params["vnp_Amount"] = req.body.amount;
   vnp_Params["vnp_ReturnUrl"] = returnUrl;
   vnp_Params["vnp_IpAddr"] = ipAddr;
   vnp_Params["vnp_CreateDate"] = createDate;
@@ -75,13 +75,15 @@ router.post("/create_payment_url", function (req, res, next) {
   var signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
   vnp_Params["vnp_SecureHash"] = signed;
   vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: false });
+  console.log("vnpUrl", vnpUrl);
+  // console.log("vnpJSon", vnpUrl?.toJSON());
+
   res.json({ url: vnpUrl });
 });
 
 router.get("/vnpay_return", function (req, res, next) {
   // logic dùng window.location.search để lấy full param +&idUser=...
   //Fe truyền xuống đầy đủ thông tin trên URL dc trả về và idUser lấy các thông tin để lưu bill
-  console.log("VNPAY RETURN");
   var vnp_Params = req.query;
   console.log(vnp_Params);
   var secureHash = vnp_Params["vnp_SecureHash"];
@@ -90,7 +92,7 @@ router.get("/vnpay_return", function (req, res, next) {
   delete vnp_Params["vnp_SecureHashType"];
 
   vnp_Params = sortObject(vnp_Params);
-  console.log(vnp_Params);
+  console.log("vnp_Params", vnp_Params);
 
   //   var config = require("config");
   //   var tmnCode = "71JUNFKK";
@@ -102,11 +104,14 @@ router.get("/vnpay_return", function (req, res, next) {
   var hmac = crypto.createHmac("sha512", secretKey);
   var signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
   console.log(123, signed);
-
+  console.log("secureHash", secureHash);
   if (secureHash === signed) {
     //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
     console.log(1, vnp_Params["vnp_ResponseCode"]);
-    res.render("success", { code: vnp_Params["vnp_ResponseCode"] });
+    return res.status(200).json({
+      message: vnp_Params,
+    });
+    // res.render("success", { code: vnp_Params["vnp_ResponseCode"] });
     //get ra cart theo idUser lấy hết sản phẩm từ card nhét vào bill
     // FE gửi thông tin xuống thành công thì lưu bill (xem bảng bill đã có trường daThanhToan) daThanhToan = true status = chờ xác nhận
     // sau khi lưu bill thành công thì xóa hét sản phẩm trogn cart chỉ xóa sản phẩm trang cart chứ k xóa cart
