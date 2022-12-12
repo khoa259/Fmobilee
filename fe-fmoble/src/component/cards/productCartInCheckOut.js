@@ -119,9 +119,9 @@ const ProductCartInCheckOut = ({ p }) => {
           </div>
         </div>
         <div className="col-auto col-md-2 text-end">
-          <p className="text-secondary text-decoration-line-through">
+          <span className="text-secondary text-decoration-line-through">
             {formatCash(`${p.product.price * p.count}`)}đ
-          </p>
+          </span>
         </div>
       </div>
       <hr />

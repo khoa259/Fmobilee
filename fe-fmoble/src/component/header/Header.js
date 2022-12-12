@@ -37,7 +37,9 @@ const Header = () => {
     <div className="fixed-top ">
       <Navbar variant="light">
         <Container>
-          <Navbar.Brand href="/">Fmobile</Navbar.Brand>
+          <Navbar.Brand>
+            <Link to="/">Fmobile</Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand-xl" />
           <Nav as="ul" className="ulHeader ml-auto mt-2">
             <Search />
@@ -95,7 +97,7 @@ const Header = () => {
           <Nav as="ul" className="Ul">
             {categories.map((c) => (
               <Nav.Item as="li" className="LI" key={c._id}>
-                <Nav.Link href={`/category/${c.slug}`}>{c.name}</Nav.Link>
+                <Link to={`/category/${c.slug}`}>{c.name}</Link>
               </Nav.Item>
             ))}
           </Nav>

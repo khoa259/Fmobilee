@@ -25,7 +25,7 @@ export const userCart = async (req, res) => {
       let object = {};
       object.product = cart[0]._id;
       object.count = cart[0].count;
-      object.color = cart[0].color;
+      object.images = cart[0].images;
       object.price = cart[0].price;
       products.push(object);
       cartByUser.cartTotal = cartByUser.cartTotal + object.price * object.count;

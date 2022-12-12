@@ -3,6 +3,10 @@
     background: #838383 !important;
 }
 
+a {
+    color: black !important;
+}
+
 .nav-child {
     background: #363a40 !important;
 }

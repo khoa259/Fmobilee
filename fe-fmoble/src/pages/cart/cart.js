@@ -32,9 +32,11 @@ const Cart = () => {
 
   useEffect(() => {
     const getToken = localStorage.getItem("token");
+
     getUserCart(getToken).then((res) => {
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
+      console.log(res);
     });
   }, []);
 

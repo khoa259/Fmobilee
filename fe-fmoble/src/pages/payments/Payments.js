@@ -1,6 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import dateFormat from "dateformat";
+
+import "./payment.css";
+
 import { formatCash } from "../../component/formatCash";
 import { getUserCart } from "../../functions/user";
 //load stripe outside of components render to avoid
@@ -33,60 +37,61 @@ const Payments = () => {
   const handleSubmit = () => {};
   return (
     <div className="container p-5 ">
-      <h4 className="text-center">Đơn Hàng Thanh Toán</h4>
-      <form>
-        <div className="col-md-8 offset-md-2 ">
-          <div className="row mt-3 ">
-            <div className="col-lg-9 col-2">
-              <p>Tổng hóa đơn thanh toán</p>
-            </div>
-            <div className="col-3 text-success">
-              <span>{formatCash(`${vnp_Amount}`)} đ</span>
-            </div>
-          </div>
-          <div className="row mt-3 ">
-            <div className="col-lg-9 col-2">
-              <p>Sản phẩm đã thanh toán</p>
-            </div>
+      <h2 className="text-center">Đơn Hàng Thanh Toán</h2>
+      <div className="pt-4">
+        <form>
+          <div className="col-md-8 offset-md-2">
             {products.map((p, i) => (
-              <>
-                <div className="col-3 text-success">
-                  <span>{p.product.title}</span>
+              <div className="row" key={i}>
+                <div className="col-lg-9 ">
+                  <span className="bill">{p.product.title}</span>
                 </div>
                 <div className="col-3 text-success">
-                  <span>{p.product.price}</span>
+                  <span className="bill">
+                    {formatCash(`${p.product.price}`)} đ
+                  </span>
                 </div>
-              </>
+              </div>
             ))}
-          </div>
-          <div>
-            <span> Người thanh toán: {user?.name}</span>
-            <br></br>
-            <span> Địa chỉ email: {user?.email}</span>
-          </div>
-          <hr />
-          <div>
-            <div>
-              <span> Mã giao dịch: {vnp_TransactionNo}</span>
+            <div className="row mt-3 ">
+              <div className="col-lg-9 col-2">
+                <span className="bill">Tổng hóa đơn thanh toán</span>
+              </div>
+              <div className="col-3 text-success">
+                <span className="bill">{formatCash(`${vnp_Amount}`)} đ</span>
+              </div>
             </div>
+
             <div>
-              <span>Ngân hàng: {vnp_BankCode}</span>
+              <span className="bill"> Người thanh toán: {user?.name}</span>
+              <br></br>
+              <span className="bill"> Email: {user?.email}</span>
             </div>
+            <hr />
             <div>
-              <span>thời gian thanh toán: {vnp_PayDate}</span>
+              <div>
+                <span className="bill"> Mã giao dịch: {vnp_TransactionNo}</span>
+              </div>
+              <div>
+                <span className="bill">Ngân hàng: {vnp_BankCode}</span>
+              </div>
+              <div>
+                <span className="bill">
+                  Thời gian thanh toán: {vnp_PayDate}
+                </span>
+              </div>
+            </div>
+            <div className="text-center mt-5">
+              <button
+                type="submit"
+                onClick={handleSubmit()}
+                className="btn btn-success text-center">
+                Xác nhận thanh toán
+              </button>
             </div>
           </div>
-          <div className="text-center mt-5">
-            <button
-              type="submit"
-              onClick={handleSubmit()}
-              className="btn btn-success text-center"
-            >
-              Xác nhận thanh toán
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
