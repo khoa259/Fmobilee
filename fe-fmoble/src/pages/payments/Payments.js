@@ -47,11 +47,11 @@ const Payments = () => {
             {products.map((p, i) => (
               <div className="row" key={i}>
                 <div className="col-lg-9 ">
-                  <span className="bill">{p.product.title}</span>
+                  <span className="bill">{p?.product?.title}</span>
                 </div>
                 <div className="col-3 text-success">
                   <span className="bill">
-                    {formatCash(`${p.product.price}`)} đ
+                    {formatCash(`${p?.product?.price}`)} đ
                   </span>
                 </div>
               </div>
