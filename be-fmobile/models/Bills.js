@@ -8,9 +8,12 @@ const billSchema = new mongoose.Schema(
         product: {
           type: ObjectId,
           ref: "Product",
-          price: String,
-          // colors: String,
-          title: String,
+        },
+        name: {
+          type: String,
+        },
+        price: {
+          type: Number,
         },
         count: {
           type: Number,
@@ -19,13 +22,16 @@ const billSchema = new mongoose.Schema(
     ],
     status: {
       type: ObjectId,
-      ref: "Status",
+      ref: "status",
     },
-    bankCode: {
+    timePayment: {
+      type: String,
+    },
+    username: {
       type: String,
     },
     billTotal: Number,
-    orderdBy: { type: ObjectId, ref: "User" },
+    orderdBy: { type: ObjectId, ref: "user" },
   },
   { timestamps: true }
 );

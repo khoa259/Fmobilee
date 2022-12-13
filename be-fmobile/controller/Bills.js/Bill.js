@@ -3,21 +3,31 @@ import cart from "../../models/cart.js";
 
 export const createBill = async (req, res) => {
   try {
-    const { products, billTotal, orderdBy, bankCode, status, idCart } =
-      req.body;
+    const {
+      products,
+      billTotal,
+      orderdBy,
+      bankCode,
+      username,
+      timePayment,
+      status,
+      idCart,
+    } = req.body;
 
     //check user co ton tai trong db hay ko
     //user -> findById({id: orderdBy})
 
     //check {{products, billTotal, orderdBy} co dung dinh dang model hay ko
-
-    const bill = await new Bills({
+    const bill = {
       products,
       billTotal,
       orderdBy,
       bankCode,
       status,
-    }).save();
+      username,
+      timePayment,
+    };
+    await new Bills(bill).save();
 
     const cartPrd = await cart.findOne({ _id: idCart });
     console.log("cartPrd", cartPrd);
