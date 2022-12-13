@@ -1,5 +1,4 @@
 import React from "react";
-import ModalImage from "react-modal-image";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 

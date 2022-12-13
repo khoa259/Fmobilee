@@ -46,7 +46,6 @@ const Header = () => {
 
             <Nav.Link href="/gio-hang" className="icon-cart">
               <i className="fas fa-shopping-cart"></i>
-
               <Badge bg="none">{cartDB.length}</Badge>
             </Nav.Link>
             <div className="dropdown">

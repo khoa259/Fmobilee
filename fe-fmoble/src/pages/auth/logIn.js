@@ -24,7 +24,7 @@ const Login = () => {
     if (res.data.role === "admin") {
       history("/admin/dashboard");
     } else {
-      history("/user/history");
+      history("/");
     }
   };
 
@@ -94,8 +94,7 @@ const Login = () => {
         block
         shape="round"
         size="large"
-        disabled={!email || password.length < 6}
-      >
+        disabled={!email || password.length < 6}>
         Login with Email/Password
       </Button>
     </form>
@@ -144,8 +143,7 @@ const Login = () => {
             className="mb-3"
             block
             shape="round"
-            size="large"
-          >
+            size="large">
             Login with Google
           </Button>
         </div>

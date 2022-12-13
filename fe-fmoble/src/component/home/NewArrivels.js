@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getProducts, getProductCount } from "../../functions/products";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Pagination } from "antd";
 
 import Banner from "../../component/banner/banner";
@@ -10,7 +10,7 @@ import { formatCash } from "../formatCash";
 import { useSelector } from "react-redux";
 
 const NewArrivels = () => {
-  const { user } = useSelector((state) => ({ ...state }));
+  // const { user } = useSelector((state) => ({ ...state }));
   const [products, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [productsCount, setProductsCount] = useState(0);
@@ -47,7 +47,7 @@ const NewArrivels = () => {
                     ) : (
                       <div className="position-absolute is-stock">hết hàng</div>
                     )}
-                    <NavLink to={`/${product.slug}`}>
+                    <Link to={`/${product.slug}`}>
                       <Card.Img
                         className="img-fluid"
                         src={
@@ -57,16 +57,16 @@ const NewArrivels = () => {
                         }
                         variant="top"
                       />
-                    </NavLink>
+                    </Link>
 
                     <Card.Body>
-                      <NavLink to={`${product.slug}`}>
+                      <Link to={`/${product.slug}`}>
                         <span className="span">{product.title}</span>
-                      </NavLink>
+                      </Link>
 
-                      <Card.Text as="p" className="price">
+                      <Link to={`/${product.slug}`} className="price">
                         Giá từ {formatCash(`${product.price}`)}đ
-                      </Card.Text>
+                      </Link>
                     </Card.Body>
                   </Card>
                 </Col>

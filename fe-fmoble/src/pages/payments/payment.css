@@ -17,3 +17,10 @@
     pointer-events: none;
     background: none;
 }
+
+.input-bill-title {
+    font-size: 20px;
+    pointer-events: none;
+    border: none;
+    background: none;
+}

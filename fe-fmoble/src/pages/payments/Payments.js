@@ -6,10 +6,11 @@ import "./payment.css";
 
 import { formatCash } from "../../component/formatCash";
 import { getUserCart } from "../../functions/user";
+import { createBill } from "../../functions/Bill";
 //load stripe outside of components render to avoid
 const Payments = () => {
   const { user } = useSelector((state) => ({ ...state }));
-  const { handleSubmit, register, reset } = useForm();
+  const { handleSubmit, register } = useForm();
   // debugger;
   const urlPaymentReturn = window.location.search;
   // console.log("urlPaymentReturn", urlPaymentReturn);
@@ -36,6 +37,7 @@ const Payments = () => {
 
   // const handleSubmit = () => {};
   const onSubmit = (data) => {
+    createBill(data);
     console.log("form", data);
   };
   return (
@@ -47,7 +49,13 @@ const Payments = () => {
             {products.map((p, i) => (
               <div className="row" key={i}>
                 <div className="col-lg-9 ">
-                  <span className="bill">{p?.product?.title}</span>
+                  {/* <span className="bill">{p?.product?.title}</span> */}
+                  <input
+                    className="input-bill-title"
+                    type="text"
+                    {...register("p.product.titile")}
+                    value={p?.product?.title}
+                  />
                 </div>
                 <div className="col-3 text-success">
                   <span className="bill">
@@ -65,7 +73,7 @@ const Payments = () => {
                   className="input-bill-total"
                   type="number"
                   {...register("vnp_Amount")}
-                  value={vnp_Amount}
+                  value={vnp_Amount / 100}
                 />
               </div>
             </div>
@@ -112,7 +120,7 @@ const Payments = () => {
               </div>
             </div>
             <div className="text-center mt-5">
-              <button className="btn btn-success text-center">
+              <button className="btn btn-success text-center rounded">
                 Xác nhận thanh toán
               </button>
             </div>

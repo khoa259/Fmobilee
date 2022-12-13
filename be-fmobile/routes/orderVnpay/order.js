@@ -40,7 +40,7 @@ router.post("/create_payment_url", function (req, res, next) {
 
   var createDate = dateFormat(date, "yyyymmddHHmmss");
   var orderId = dateFormat(date, "HHmmss");
-  var amount = req.body.amount;
+  var amount = req.body.amount * 100;
   var bankCode = "NCB";
 
   var orderInfo = "DEMO";
@@ -60,7 +60,7 @@ router.post("/create_payment_url", function (req, res, next) {
   vnp_Params["vnp_TxnRef"] = orderId;
   vnp_Params["vnp_OrderInfo"] = orderInfo;
   vnp_Params["vnp_OrderType"] = orderType;
-  vnp_Params["vnp_Amount"] = req.body.amount;
+  vnp_Params["vnp_Amount"] = req.body.amount * 100;
   vnp_Params["vnp_ReturnUrl"] = returnUrl;
   vnp_Params["vnp_IpAddr"] = ipAddr;
   vnp_Params["vnp_CreateDate"] = createDate;

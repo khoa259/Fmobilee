@@ -160,6 +160,8 @@ a {
 
 .icon-cart {
     color: rgb(22, 21, 21) !important;
+    display: flex;
+    align-items: center;
 }
 
 .badge {
