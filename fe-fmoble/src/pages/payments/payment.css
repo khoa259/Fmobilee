@@ -6,9 +6,14 @@
 .input-bill {
     border: none;
     color: rgb(0, 179, 255);
+    pointer-events: none;
+    background: none;
+
 }
 
 .input-bill-total {
     border: none;
     font-size: 20px;
+    pointer-events: none;
+    background: none;
 }

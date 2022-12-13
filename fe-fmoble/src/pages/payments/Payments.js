@@ -64,7 +64,6 @@ const Payments = () => {
                 <input
                   className="input-bill-total"
                   type="number"
-                  disabled
                   {...register("vnp_Amount")}
                   value={vnp_Amount}
                 />
@@ -84,7 +83,6 @@ const Payments = () => {
                   <input
                     className="input-bill"
                     type="text"
-                    disabled
                     {...register("vnp_TransactionNo")}
                     value={vnp_TransactionNo}
                   />
@@ -96,7 +94,6 @@ const Payments = () => {
                   <input
                     className="input-bill"
                     type="text"
-                    disabled
                     {...register("vnp_BankCode")}
                     value={vnp_BankCode}
                   />
@@ -108,7 +105,6 @@ const Payments = () => {
                   <input
                     className="input-bill"
                     type="text"
-                    disabled
                     {...register("vnp_PayDate")}
                     value={vnp_PayDate}
                   />
