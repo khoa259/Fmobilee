@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import dateFormat from "dateformat";
-
+import { useForm } from "react-hook-form";
 import "./payment.css";
 
 import { formatCash } from "../../component/formatCash";
@@ -10,9 +9,10 @@ import { getUserCart } from "../../functions/user";
 //load stripe outside of components render to avoid
 const Payments = () => {
   const { user } = useSelector((state) => ({ ...state }));
+  const { handleSubmit, register, reset } = useForm();
   // debugger;
   const urlPaymentReturn = window.location.search;
-  console.log("urlPaymentReturn", urlPaymentReturn);
+  // console.log("urlPaymentReturn", urlPaymentReturn);
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
@@ -26,7 +26,7 @@ const Payments = () => {
       });
   }, []);
   const myKeyValue = window.location.search;
-  console.log(myKeyValue);
+  // console.log(myKeyValue);
   const urlParams = new URLSearchParams(myKeyValue);
   const vnp_Amount = urlParams.get("vnp_Amount");
   const vnp_BankCode = urlParams.get("vnp_BankCode");
@@ -34,12 +34,15 @@ const Payments = () => {
   const vnp_TransactionNo = urlParams.get("vnp_TransactionNo");
   const vnp_ResponseCode = urlParams.get("vnp_ResponseCode");
 
-  const handleSubmit = () => {};
+  // const handleSubmit = () => {};
+  const onSubmit = (data) => {
+    console.log("form", data);
+  };
   return (
     <div className="container p-5 ">
       <h2 className="text-center">Đơn Hàng Thanh Toán</h2>
       <div className="pt-4">
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="col-md-8 offset-md-2">
             {products.map((p, i) => (
               <div className="row" key={i}>
@@ -58,7 +61,13 @@ const Payments = () => {
                 <span className="bill">Tổng hóa đơn thanh toán</span>
               </div>
               <div className="col-3 text-success">
-                <span className="bill">{formatCash(`${vnp_Amount}`)} đ</span>
+                <input
+                  className="input-bill-total"
+                  type="number"
+                  disabled
+                  {...register("vnp_Amount")}
+                  value={vnp_Amount}
+                />
               </div>
             </div>
 
@@ -70,22 +79,44 @@ const Payments = () => {
             <hr />
             <div>
               <div>
-                <span className="bill"> Mã giao dịch: {vnp_TransactionNo}</span>
-              </div>
-              <div>
-                <span className="bill">Ngân hàng: {vnp_BankCode}</span>
+                <span className="bill">
+                  Mã giao dịch:
+                  <input
+                    className="input-bill"
+                    type="text"
+                    disabled
+                    {...register("vnp_TransactionNo")}
+                    value={vnp_TransactionNo}
+                  />
+                </span>
               </div>
               <div>
                 <span className="bill">
-                  Thời gian thanh toán: {vnp_PayDate}
+                  Ngân hàng:{" "}
+                  <input
+                    className="input-bill"
+                    type="text"
+                    disabled
+                    {...register("vnp_BankCode")}
+                    value={vnp_BankCode}
+                  />
+                </span>
+              </div>
+              <div>
+                <span className="bill">
+                  Thời gian thanh toán:{" "}
+                  <input
+                    className="input-bill"
+                    type="text"
+                    disabled
+                    {...register("vnp_PayDate")}
+                    value={vnp_PayDate}
+                  />
                 </span>
               </div>
             </div>
             <div className="text-center mt-5">
-              <button
-                type="submit"
-                onClick={handleSubmit()}
-                className="btn btn-success text-center">
+              <button className="btn btn-success text-center">
                 Xác nhận thanh toán
               </button>
             </div>

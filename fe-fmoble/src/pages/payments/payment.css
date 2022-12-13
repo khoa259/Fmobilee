@@ -2,3 +2,13 @@
     font-size: 20px;
     font-weight: 400;
 }
+
+.input-bill {
+    border: none;
+    color: rgb(0, 179, 255);
+}
+
+.input-bill-total {
+    border: none;
+    font-size: 20px;
+}
