@@ -21,8 +21,13 @@ const billSchema = new mongoose.Schema(
       },
     ],
     status: {
-      type: ObjectId,
-      ref: "status",
+      // type: ObjectId,
+      // ref: "status",
+      type: String,
+      default: "CXN",
+    },
+    tradingCode: {
+      type: String,
     },
     timePayment: {
       type: String,

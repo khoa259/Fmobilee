@@ -29,11 +29,11 @@ export const createBill = async (req, res) => {
     };
     await new Bills(bill).save();
 
-    const cartPrd = await cart.findOne({ _id: idCart });
-    console.log("cartPrd", cartPrd);
-    const updateCart = await cart.findByIdAndUpdate(cartPrd._id, {
-      products: [],
-    });
+    // const cartPrd = await cart.findOne({ _id: idCart });
+    // console.log("cartPrd", cartPrd);
+    // const updateCart = await cart.findByIdAndUpdate(cartPrd._id, {
+    //   products: [],
+    // });
 
     return res.status(200).json({
       success: true,
@@ -42,5 +42,16 @@ export const createBill = async (req, res) => {
   } catch (error) {
     console.log("error", error);
     res.status(400).json({ message: "không thể tạo mới" });
+  }
+};
+export const listBill = async (req, res) => {
+  try {
+    const listBill = await Bills.find({}).exec();
+    res.json(listBill);
+  } catch (error) {
+    console.log("error", error);
+    res
+      .status(400)
+      .json({ message: "Không thể hiện thị được danh sách đơn hàng" });
   }
 };
