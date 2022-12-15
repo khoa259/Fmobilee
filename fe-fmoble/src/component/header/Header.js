@@ -43,11 +43,11 @@ const Header = () => {
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand-xl" />
           <Nav as="ul" className="ulHeader ml-auto mt-2">
             <Search />
-
             <Nav.Link href="/gio-hang" className="icon-cart">
               <i className="fas fa-shopping-cart"></i>
               <Badge bg="none">{cartDB.length}</Badge>
             </Nav.Link>
+
             <div className="dropdown">
               {/* nếu user không tồn tai */}
               {!user?.email && (
@@ -70,6 +70,7 @@ const Header = () => {
                   <Link to="/" onClick={logout}>
                     đăng xuất
                   </Link>
+                  <Link to={"/user/history"}>Settings</Link>
                 </div>
               )}
 
@@ -90,7 +91,8 @@ const Header = () => {
         className="nav-child"
         variant="dark"
         expand="lg"
-        collapseOnSelect="false">
+        collapseOnSelect="false"
+      >
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center">
           <Nav as="ul" className="Ul">
