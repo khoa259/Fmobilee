@@ -29,11 +29,11 @@ export const createBill = async (req, res) => {
     };
     await new Bills(bill).save();
 
-    // const cartPrd = await cart.findOne({ _id: idCart });
-    // console.log("cartPrd", cartPrd);
-    // const updateCart = await cart.findByIdAndUpdate(cartPrd._id, {
-    //   products: [],
-    // });
+    const cartPrd = await cart.findOne({ _id: idCart });
+    console.log("cartPrd", cartPrd);
+    const updateCart = await cart.findByIdAndUpdate(cartPrd._id, {
+      products: [],
+    });
 
     return res.status(200).json({
       success: true,

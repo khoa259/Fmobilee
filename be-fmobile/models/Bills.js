@@ -9,7 +9,7 @@ const billSchema = new mongoose.Schema(
           type: ObjectId,
           ref: "Product",
         },
-        name: {
+        title: {
           type: String,
         },
         price: {
@@ -21,10 +21,8 @@ const billSchema = new mongoose.Schema(
       },
     ],
     status: {
-      // type: ObjectId,
-      // ref: "status",
-      type: String,
-      default: "CXN",
+      type: ObjectId,
+      ref: "status",
     },
     tradingCode: {
       type: String,
