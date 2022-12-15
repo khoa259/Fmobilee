@@ -12,7 +12,7 @@ import { createBill } from "../../functions/Bill";
 const Payments = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const { handleSubmit, register } = useForm();
-  const email = user;
+  const { email } = user;
   const urlPaymentReturn = window.location.search;
   // console.log("urlPaymentReturn", urlPaymentReturn);
   const [products, setProducts] = useState([]);
@@ -20,6 +20,7 @@ const Payments = () => {
   const [isModalFail, setisModalFail] = useState(false);
   const navigate = useNavigate();
 
+  console.log("email", email);
   //call APi return Vnpay
   useEffect(() => {
     axios

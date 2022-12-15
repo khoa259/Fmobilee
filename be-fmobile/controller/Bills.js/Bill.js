@@ -46,7 +46,7 @@ export const createBill = async (req, res) => {
 };
 export const listBill = async (req, res) => {
   try {
-    const listBill = await Bills.find({}).exec();
+    const listBill = await Bills.find({}).sort({ createdAt: -1 }).exec();
     res.json(listBill);
   } catch (error) {
     console.log("error", error);

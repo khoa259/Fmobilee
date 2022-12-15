@@ -63,7 +63,7 @@ const RegisterComplete = () => {
           })
           .catch((err) => console.log(err));
         // redirect
-        history("/");
+        history("/login");
       }
     } catch (error) {
       console.log(error);
