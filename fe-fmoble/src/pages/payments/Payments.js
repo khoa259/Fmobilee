@@ -45,20 +45,17 @@ const Payments = () => {
 
   //Handle SUbmit form
   const onSubmit = (data) => {
-    const newData = {
-      ...data,
-      products: products.map((product) => product.product),
-    };
-    if (createBill(newData)) {
-      showModal();
-    } else {
-      showModalFail();
-    }
-  };
-  const showModal = () => {
-    setisModalFail(true);
+    // const newData = {
+    //   ...data,
+    //   products: products.map((product) => product.product),
+    // };
+    // createBill(newData).then(showModal()).catch(showModalFail());
+    console.log("data", data);
   };
   const showModalFail = () => {
+    setisModalFail(true);
+  };
+  const showModal = () => {
     setIsModalOpen(true);
   };
   const handleOk = () => {
@@ -142,7 +139,7 @@ const Payments = () => {
                     className="input-bill"
                     type="text"
                     {...register("username")}
-                    value={"toai"}
+                    value={user?.email}
                   />
                 </span>
               </div>
