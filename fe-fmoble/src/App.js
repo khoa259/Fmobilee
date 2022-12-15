@@ -36,6 +36,7 @@ import ProductDetail from "./pages/productDetail/productDetail";
 import Cart from "./pages/cart/cart";
 import CheckOut from "./pages/checkOut.js/checkOut";
 import Shop from "./pages/shop";
+import Order from "./pages/admin/order/order";
 // import Spiner from "./component/spinner/spinner";
 
 const Wrapper = ({ children }) => {
@@ -92,7 +93,6 @@ const App = () => {
               <Route path="/user/history" element={<History />} />
               <Route path="/user/password" element={<Password />} />
               <Route path="/user/wishlist" element={<Wishlist />} />
-              <Route path="/iphone" element={<h1>PageIphone</h1>} />
               <Route path="/:slug" element={<ProductDetail />} />
               <Route path="category/:slug" element={<CategoryHome />} />
               <Route path="/products" element={<Shop />} />
@@ -104,14 +104,14 @@ const App = () => {
                 <AdminRoute>
                   <AdminLayout />
                 </AdminRoute>
-              }
-            >
+              }>
               <Route index path="dashboard" element={<Dashboard />} />
               <Route path="category" element={<Category />} />
               <Route path="category/:slug" element={<CategoryUpdate />} />
               <Route path="product" element={<ProductCreate />} />
               <Route path="products" element={<ListProducts />} />
               <Route path="product/:slug" element={<ProductUpdate />} />
+              <Route path="order" element={<Order />} />
             </Route>
             <Route path="*" element={<Page404 />} />
           </Routes>

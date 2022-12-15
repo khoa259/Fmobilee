@@ -10,7 +10,7 @@ const Register = () => {
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
-    if (user && user.token) history("/");
+    if (user && user.token) history("/login");
   }, [user, history]);
   const handleSubmit = async (e) => {
     e.preventDefault();

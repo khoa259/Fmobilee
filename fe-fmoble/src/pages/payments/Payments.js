@@ -12,7 +12,7 @@ import { createBill } from "../../functions/Bill";
 const Payments = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const { handleSubmit, register } = useForm();
-  const email = user;
+  const { email } = user;
   const urlPaymentReturn = window.location.search;
   // console.log("urlPaymentReturn", urlPaymentReturn);
   const [products, setProducts] = useState([]);
@@ -20,6 +20,7 @@ const Payments = () => {
   const [isModalFail, setisModalFail] = useState(false);
   const navigate = useNavigate();
 
+  console.log("email", email);
   //call APi return Vnpay
   useEffect(() => {
     axios
@@ -35,25 +36,27 @@ const Payments = () => {
 
   // get value in url
   const myKeyValue = window.location.search;
-  console.log("myKeyValue", myKeyValue);
+  // console.log("myKeyValue", myKeyValue);
   const urlParams = new URLSearchParams(myKeyValue);
   const vnp_Amount = urlParams.get("vnp_Amount");
-  console.log("vnp_Amount", vnp_Amount);
+  // console.log("vnp_Amount", vnp_Amount);
   const vnp_BankCode = urlParams.get("vnp_BankCode");
   const vnp_PayDate = urlParams.get("vnp_PayDate");
   const vnp_TransactionNo = urlParams.get("vnp_TransactionNo");
 
   //Handle SUbmit form
+
   const onSubmit = (data) => {
-    const newData = {
-      ...data,
-      products: products.map((product) => product.product),
-    };
-    if (createBill(newData)) {
-      showModal();
-    } else {
-      showModalFail();
-    }
+    // const newData = {
+    //   ...data,
+    //   products: products.map((product) => product.product),
+    // };
+    // if (createBill(newData)) {
+    //   showModal();
+    // } else {
+    //   showModalFail();
+    // }
+    console.log("data", data);
   };
   const showModal = () => {
     setisModalFail(true);
@@ -142,7 +145,7 @@ const Payments = () => {
                     className="input-bill"
                     type="text"
                     {...register("username")}
-                    value={"toai"}
+                    value={email}
                   />
                 </span>
               </div>

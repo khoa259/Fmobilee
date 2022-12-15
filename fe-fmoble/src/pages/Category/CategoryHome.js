@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getCategory } from "../../functions/category";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Card, Col, Container } from "react-bootstrap";
 import { formatCash } from "../../component/formatCash";
@@ -38,8 +38,13 @@ const CategoryHome = () => {
         <div className="row">
           {products.map((product, index) => (
             <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-              <Card className="my-3 p-2 rounded card-prd" key={index}>
-                <NavLink to={`/${product.slug}`}>
+              <Card className="card-prd" key={index}>
+                {product?.quantity !== 0 ? (
+                  <div className="position-absolute stock">còn hàng</div>
+                ) : (
+                  <div className="position-absolute is-stock">hết hàng</div>
+                )}
+                <Link to={`/${product.slug}`}>
                   <Card.Img
                     className="img-fluid"
                     src={
@@ -49,31 +54,16 @@ const CategoryHome = () => {
                     }
                     variant="top"
                   />
-                </NavLink>
+                </Link>
 
                 <Card.Body>
-                  <NavLink to={`/${product.slug}`}>
-                    <h5>{product.title}</h5>
-                  </NavLink>
-                  {/* show ratings about products */}
-                  <h3>
-                    {product &&
-                    product.ratings &&
-                    product.ratings.length > 0 ? (
-                      showAverage(product)
-                    ) : (
-                      <div className="text-center pt-1 pb-3">No rating yet</div>
-                    )}
-                  </h3>
-                  {/* <Card.Text as="div">
-              <Rating
-                value={product.rating}
-                text={`${product.numReviews} reviews`}
-                />
-              </Card.Text> */}
-                  <Card.Text as="p" className="price">
-                    {formatCash(`${product.price}`)} đ
-                  </Card.Text>
+                  <Link to={`/${product.slug}`}>
+                    <span className="span">{product.title}</span>
+                  </Link>
+
+                  <Link to={`/${product.slug}`} className="price">
+                    Giá từ {formatCash(`${product.price}`)}đ
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>
