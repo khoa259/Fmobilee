@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { formatCash } from "../formatCash";
 const ProductCartInCheckOut = ({ p }) => {
+  console.log("ppppp", p);
   let dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
+  const [quantityState, setQuantityState] = useState(p?.count || 1);
   console.log(p);
 
   const handleQuantityChange = (e) => {
@@ -38,6 +40,15 @@ const ProductCartInCheckOut = ({ p }) => {
     // }
   };
 
+  const quantityPlus = () => {
+    setQuantityState(quantityState + 1);
+    console.log("quantitySate", quantityState);
+    console.log("call", {
+      idProduct: p._id,
+      count: quantityState,
+    });
+  };
+
   return (
     <div className="mb-12 py-6 border-top border-bottom">
       <div className="row align-items-center mb-6 mb-md-3">
@@ -48,7 +59,8 @@ const ProductCartInCheckOut = ({ p }) => {
             <div className="col-12 col-md-4 mb-3">
               <div
                 className="d-flex align-items-center justify-content-center bg-light"
-                style={{ width: 96, height: 128 }}>
+                style={{ width: 96, height: 128 }}
+              >
                 <img
                   className="img-fluid"
                   style={{ objectFit: "contain" }}
@@ -75,7 +87,8 @@ const ProductCartInCheckOut = ({ p }) => {
                 height={2}
                 viewBox="0 0 12 2"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <g opacity="0.35">
                   <rect
                     x={12}
@@ -95,13 +108,14 @@ const ProductCartInCheckOut = ({ p }) => {
               value={p.count}
               onChange={handleQuantityChange}
             />
-            <button className="btn px-0 py-2">
+            <button className="btn px-0 py-2" onClick={quantityPlus}>
               <svg
                 width={12}
                 height={12}
                 viewBox="0 0 12 12"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <g opacity="0.35">
                   <rect x={5} width={2} height={12} fill="currentColor" />
                   <rect

@@ -4,6 +4,7 @@ import {
   getUserCart,
   emptyCart,
   saveAddress,
+  countPrdCard,
 } from "../controller/user.js";
 import { authCheck, adminCheck } from "../middleware/auth.js";
 
@@ -13,4 +14,5 @@ routerCart.post("/user/cart", authCheck, userCart);
 routerCart.get("/user/cart", authCheck, getUserCart);
 routerCart.delete("/user/cart", authCheck, emptyCart); // empty cart
 routerCart.post("/user/address", authCheck, saveAddress);
+routerCart.put("/user/cart/:id", countPrdCard);
 export default routerCart;

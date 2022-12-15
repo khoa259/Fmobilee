@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import Product from "../models/product.js";
 import Cart from "../models/cart.js";
+import mongoose from "mongoose";
 
 export const userCart = async (req, res) => {
   // console.log(req.body); // {cart: []}
@@ -50,12 +51,13 @@ export const userCart = async (req, res) => {
 export const getUserCart = async (req, res) => {
   const user = await User.findOne({ email: req.user?.email }).exec();
 
-  let cart = await Cart.findOne({ orderdBy: user?._id })
+  const cart = await Cart.findOne({ orderdBy: user?._id })
     .populate("products.product", "_id title price totalAfterDiscount")
     .exec();
+
   if (cart) {
-    const { products, cartTotal, totalAfterDiscount } = cart;
-    res.json({ products, cartTotal, totalAfterDiscount });
+    const { products, cartTotal, totalAfterDiscount, _id } = cart;
+    res.json({ _id, products, cartTotal, totalAfterDiscount });
   }
 };
 
@@ -73,4 +75,45 @@ export const saveAddress = async (req, res) => {
     { address: req.body }
   ).exec();
   res.json({ ok: true });
+};
+
+export const countPrdCard = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { idProduct, count } = req.body;
+
+    const existedCart = await Cart.findById(id);
+
+    if (!existedCart) {
+      return res.status(400).json({
+        message: "Card not found",
+      });
+    }
+
+    const updateCard = await Cart.updateOne(
+      {
+        _id: mongoose.Types.ObjectId(id),
+      },
+      {
+        $set: { "products.$[p].count": count },
+      },
+      {
+        arrayFilters: [{ "p._id": idProduct }],
+      }
+    );
+
+    if (!updateCard) {
+      return res.status(400).json({
+        message: "update fail",
+      });
+    }
+
+    return res.status(200).json({
+      message: "update success",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
 };
