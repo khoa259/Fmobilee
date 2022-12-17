@@ -34,3 +34,7 @@ export const saveUserAddress = async (authtoken, address) => {
     }
   );
 };
+
+export const updateQty = async (idCart, data) => {
+  await axios.put(`${process.env.REACT_APP_API}/user/cart/${idCart}`, data);
+};

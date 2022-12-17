@@ -8,7 +8,7 @@ import { getUserCart } from "../../functions/user";
 
 const Cart = () => {
   const [total, setTotal] = useState(0);
-  const [products, setProducts] = useState([]);
+  const [dataCart, setDataCart] = useState({ products: [], idCart: "" });
   const { user, cart } = useSelector((state) => ({ ...state }));
   const history = useNavigate();
 
@@ -34,11 +34,13 @@ const Cart = () => {
     const getToken = localStorage.getItem("token");
 
     getUserCart(getToken).then((res) => {
-      setProducts(res.data.products);
+      console.log(res.data);
+      setDataCart({ ...res.data, idCart: res.data._id });
       setTotal(res.data.cartTotal);
     });
   }, []);
-  console.log(products);
+  const { products, idCart } = dataCart;
+  console.log(dataCart);
 
   return (
     <div>
@@ -62,39 +64,35 @@ const Cart = () => {
                     <div className="col-12 col-lg-6">
                       <span
                         className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}
-                      >
+                        style={{ fontSize: 16 }}>
                         Thông tin sản phẩm
                       </span>
                     </div>
                     <div className="col-12 col-lg-2">
                       <span
                         className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}
-                      >
+                        style={{ fontSize: 16 }}>
                         Giá tiền
                       </span>
                     </div>
                     <div className="col-12 col-lg-2 text-center">
                       <span
                         className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}
-                      >
+                        style={{ fontSize: 16 }}>
                         Số lượng
                       </span>
                     </div>
                     <div className="col-12 col-lg-2 text-end">
                       <span
                         className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}
-                      >
+                        style={{ fontSize: 16 }}>
                         Tổng
                       </span>
                     </div>
                   </div>
                   <hr />
                   {products.map((p) => (
-                    <ProductCartInCheckOut key={p._id} p={p} />
+                    <ProductCartInCheckOut key={p._id} p={p} idCart={idCart} />
                   ))}
                 </div>
                 <div className="col-md-4 h-50  ">
@@ -119,15 +117,13 @@ const Cart = () => {
                   <hr />
                   <div
                     className="d-flex justify-content-between
-                  "
-                  >
+                  ">
                     <h5>Tổng tiền:</h5>
                     <b className=" text-danger">{formatCash(`${total}`)}đ</b>
                   </div>
                   <button
                     className="btn btn-md btn-primary mt-3"
-                    onClick={redirectCheckout}
-                  >
+                    onClick={redirectCheckout}>
                     Thanh Toán
                   </button>
                 </div>

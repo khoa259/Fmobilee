@@ -6,6 +6,6 @@ export const createBill = async (data) => {
 };
 
 export const getAllBill = async () => {
-  const data = await axios.get("http://localhost:8000/api/bills");
+  const data = await axios.get(`${process.env.REACT_APP_API}/bills`);
   return data;
 };

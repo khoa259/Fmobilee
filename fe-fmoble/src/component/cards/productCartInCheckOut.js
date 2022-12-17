@@ -1,53 +1,34 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { updateQty } from "../../functions/user";
 
 import { formatCash } from "../formatCash";
-const ProductCartInCheckOut = ({ p }) => {
-  console.log("ppppp", p);
+const ProductCartInCheckOut = ({ p, idCart }) => {
   let dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
+  console.log("cart", p.product);
   const [quantityState, setQuantityState] = useState(p?.count || 1);
   console.log(p);
 
-  const handleQuantityChange = (e) => {
-    // console.log("available quantity", p.quantity);
-    let count = e.target.value < 1 ? 1 : e.target.value;
-
-    if (count > p.quantity) {
-      toast.error(`Bạn đã thêm vượt quá số lượng: ${p.quantity}`);
-      return;
-    }
-
-    let cart = [];
-
-    // if (typeof window !== "undefined") {
-    //   if (localStorage.getItem("cart")) {
-    //     cart = JSON.parse(localStorage.getItem("cart"));
-    //   }
-
-    //   cart.map((product, i) => {
-    //     if (product._id == p._id) {
-    //       cart[i].count = count;
-    //     }
-    //   });
-
-    //   localStorage.setItem("cart", JSON.stringify(cart));
-    //   dispatch({
-    //     type: "ADD_TO_CART",
-    //     payload: cart,
-    //   });
-    // }
-  };
-
   const quantityPlus = () => {
     setQuantityState(quantityState + 1);
-    console.log("quantitySate", quantityState);
-    console.log("call", {
+  };
+
+  const decrementQty = () => {
+    setQuantityState(quantityState - 1);
+  };
+  const saveUpdateQty = useCallback(() => {
+    const payload = {
       idProduct: p._id,
       count: quantityState,
-    });
-  };
+    };
+    updateQty(idCart, payload);
+  }, [quantityState]);
+
+  useEffect(() => {
+    saveUpdateQty();
+  }, [quantityState]);
 
   return (
     <div className="mb-12 py-6 border-top border-bottom">
@@ -59,8 +40,7 @@ const ProductCartInCheckOut = ({ p }) => {
             <div className="col-12 col-md-4 mb-3">
               <div
                 className="d-flex align-items-center justify-content-center bg-light"
-                style={{ width: 96, height: 128 }}
-              >
+                style={{ width: 96, height: 128 }}>
                 <img
                   className="img-fluid"
                   style={{ objectFit: "contain" }}
@@ -69,7 +49,7 @@ const ProductCartInCheckOut = ({ p }) => {
                 />
               </div>
             </div>
-            <div className="col-8">
+            <div className="col-6">
               <span className="mb-2 lead span">{p.product.title}</span>
             </div>
           </div>
@@ -81,59 +61,25 @@ const ProductCartInCheckOut = ({ p }) => {
         </div>
         <div className="col-auto col-md-2">
           <div className="d-inline-flex align-items-center px-4 fw-bold text-secondary border rounded-2">
-            <button className="btn px-0 py-2">
-              <svg
-                width={12}
-                height={2}
-                viewBox="0 0 12 2"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g opacity="0.35">
-                  <rect
-                    x={12}
-                    width={2}
-                    height={12}
-                    transform="rotate(90 12 0)"
-                    fill="currentColor"
-                  />
-                </g>
-              </svg>
+            <button className="btn px-0 py-2" onClick={decrementQty}>
+              <i className="fa-solid fa-minus"></i>
             </button>
             <input
               className="form-control px-2 py-4 text-center text-md-end border-0"
               style={{ width: 48 }}
               type="number"
               placeholder={1}
-              value={p.count}
-              onChange={handleQuantityChange}
+              value={quantityState}
+              // onChange={handleQuantityChange}
             />
             <button className="btn px-0 py-2" onClick={quantityPlus}>
-              <svg
-                width={12}
-                height={12}
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g opacity="0.35">
-                  <rect x={5} width={2} height={12} fill="currentColor" />
-                  <rect
-                    x={12}
-                    y={5}
-                    width={2}
-                    height={12}
-                    transform="rotate(90 12 5)"
-                    fill="currentColor"
-                  />
-                </g>
-              </svg>
+              <i className="fa-solid fa-plus"></i>
             </button>
           </div>
         </div>
         <div className="col-auto col-md-2 text-end">
           <span className="text-secondary text-decoration-line-through">
-            {formatCash(`${p.product.price * p.count}`)}đ
+            {formatCash(`${p.product.price * quantityState}`)}đ
           </span>
         </div>
       </div>
