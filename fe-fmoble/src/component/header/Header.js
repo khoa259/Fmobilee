@@ -28,83 +28,92 @@ const Header = () => {
     getCategories().then((c) => {
       setCategories(c.data);
     });
+  }, []);
+  useEffect(() => {
     const getToken = localStorage.getItem("token");
     getUserCart(getToken).then((e) => {
       setCartDB(e.data.products);
     });
-  }, []);
+  }, [cartDB.length]);
   return (
-    <div className="fixed-top ">
-      <Navbar variant="light">
-        <Container>
-          <Navbar.Brand>
-            <Link to="/">Fmobile</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="offcanvasNavbar-expand-xl" />
-          <Nav as="ul" className="ulHeader ml-auto mt-2">
-            <Search />
-            <Nav.Link href="/gio-hang" className="icon-cart">
-              <i className="fas fa-shopping-cart"></i>
-              <Badge bg="none">{cartDB.length}</Badge>
-            </Nav.Link>
+    <nav className="navbars navbar-expand-md fixed-top">
+      <div className="container-header container-lg">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i className="fa-solid fa-bars icon-bars"></i>
+        </button>
 
-            <div className="dropdown">
-              {/* nếu user không tồn tai */}
-              {!user?.email && (
-                <button className="dropbtn">
-                  <i className=" fas fa-user"></i>
-                </button>
-              )}
-              <div className="text-white pl-2 pt-3">
-                {user?.email && user?.email.split("@")[0]}
-              </div>
-              {!user?.email && (
-                <div className="dropdown-content">
-                  <Link to="/register">đăng ký</Link>
-                  <Link to="/login">đăng nhập</Link>
-                </div>
-              )}
-              {/* Nếu user có tồn tại  */}
-              {user?.email && user?.role === "subscriber" && (
-                <div className="dropdown-content">
-                  <Link to="/" onClick={logout}>
-                    đăng xuất
-                  </Link>
-                  <Link to={"/user/history"}>Settings</Link>
-                </div>
-              )}
-
-              {user?.email && user?.role === "admin" && (
-                <div className="dropdown-content">
-                  <Link to="/" onClick={logout}>
-                    đăng xuất
-                  </Link>
-                  <Link to="/admin/dashboard">Dashboard</Link>
-                </div>
-              )}
-            </div>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          </Nav>
-        </Container>
-      </Navbar>
-      <Navbar
-        className="nav-child"
-        variant="dark"
-        expand="lg"
-        collapseOnSelect="false"
-      >
-        <Navbar.Toggle aria-controls="basic-navbar-nav " />
-        <Navbar.Collapse className="basic-navbar-nav justify-content-center">
-          <Nav as="ul" className="Ul">
+        <Link className="navbar-brand logo" to="/">
+          Fmobile
+        </Link>
+        <div
+          className="collapse navbar-collapse justify-content-center "
+          id="navbarSupportedContent">
+          <ul className=" me-auto mb-2 mb-lg-0">
             {categories.map((c) => (
-              <Nav.Item as="li" className="LI" key={c._id}>
-                <Link to={`/category/${c.slug}`}>{c.name}</Link>
-              </Nav.Item>
+              <li key={c._id}>
+                <Link
+                  className="nav-header"
+                  aria-current="page"
+                  to={`/category/${c.slug}`}>
+                  {c.name}
+                </Link>
+              </li>
             ))}
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    </div>
+          </ul>
+        </div>
+
+        <div className="icon-header">
+          <Search />
+          <Link to="/gio-hang">
+            <i className="fas fa-shopping-cart position-relative">
+              <span className="badge" bg="none">
+                {cartDB.length}
+              </span>
+            </i>
+          </Link>
+          <div className="dropdown collapse navbar-collapse">
+            {!user?.email && (
+              <button className="dropbtn">
+                <i className=" fas fa-user"></i>
+              </button>
+            )}
+            <div className="text-white ">
+              {user?.email && user?.email.split("@")[0]}
+            </div>
+            {!user?.email && (
+              <div className="dropdown-content">
+                <Link to="/register">đăng ký</Link>
+                <Link to="/login">đăng nhập</Link>
+              </div>
+            )}
+            {/* Nếu user có tồn tại  */}
+            {user?.email && user?.role === "subscriber" && (
+              <div className="dropdown-content">
+                <Link to={"/user/history"}>Settings</Link>
+                <Link to="/" onClick={logout}>
+                  đăng xuất
+                </Link>
+              </div>
+            )}
+            {user?.email && user?.role === "admin" && (
+              <div className="dropdown-content">
+                <Link to="/" onClick={logout}>
+                  đăng xuất
+                </Link>
+                <Link to="/admin/dashboard">Dashboard</Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 

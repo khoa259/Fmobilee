@@ -21,9 +21,9 @@ const Search = () => {
   };
 
   return (
-    <div className="search-box">
+    <div className="search-box collapse navbar-collapse ">
       <button className="btn-search" onClick={handleSubmit}>
-        <i className="fas fa-search" />
+        <i className="fa-solid fa-magnifying-glass icon-search"></i>
       </button>
       <input
         type="text"

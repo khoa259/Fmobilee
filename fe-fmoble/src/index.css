@@ -1,6 +1,22 @@
+:root {
+  --gray: #3a393a;
+  --bg-gray: #515154;
+  --bg-gray-2: #4B4B4B;
+  --white: #ffffff;
+  --light: white;
+  --height-panigation: 6px;
+  --width-panigation: 18px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 /* width */
+
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+  height: 50px;
 }
 
 /* Track */
@@ -20,12 +36,19 @@
   background: #555;
 }
 
+
 .main {
   position: relative;
-  background: #eeeeee;
+  background: #efebeb;
   min-height: 100vh;
   padding-bottom: 6rem !important;
-  margin-top: 7rem;
+  margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-top: 3rem;
+  }
 }
 
 .arrow {
@@ -75,11 +98,7 @@ a {
   height: 3rem !important;
 }
 
-:root {
-  --light: white;
-  --height-panigation: 6px;
-  --width-panigation: 18px;
-}
+
 
 .swiper-button-prev,
 .swiper-button-next {

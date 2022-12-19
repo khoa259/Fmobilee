@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Card, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { formatCash } from "../component/formatCash";
 
 import Spinner from "../component/spinner/spinner";
@@ -58,7 +58,7 @@ const Shop = () => {
                   ) : (
                     <div className="position-absolute is-stock">hết hàng</div>
                   )}
-                  <NavLink to={`/${product.slug}`}>
+                  <Link to={`/${product.slug}`}>
                     <Card.Img
                       className="img-fluid"
                       src={
@@ -68,12 +68,12 @@ const Shop = () => {
                       }
                       variant="top"
                     />
-                  </NavLink>
+                  </Link>
 
                   <Card.Body>
-                    <NavLink to={`${product.slug}`}>
+                    <Link to={`/${product.slug}`}>
                       <span className="span">{product.title}</span>
-                    </NavLink>
+                    </Link>
 
                     <Card.Text as="p" className="price">
                       Giá từ {formatCash(`${product.price}`)}đ
