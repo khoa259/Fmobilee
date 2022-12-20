@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema(
       required: true,
       index: true,
     },
+    avatar: {
+      type: String,
+    },
     role: {
       type: String,
       default: "subscriber",

@@ -9,13 +9,12 @@ import FileUpload from "../../../component/form/fileUpload";
 import Spiner from "../../../component/spinner/spinner";
 
 const initialState = {
-  title: "Apple iPhone 14 Pro Max - Chính Hãng VN/A ",
-  description:
-    "iPhone 14 Pro Max VN/A là dòng sản phẩm cao cấp nhất nằm trong thế hệ iPhone 14 Series mới vừa được ra mắt cùng với nhiều nâng cấp về ngoại hình và tính năng, hứa hẹn sẽ là dòng sản phẩm đột phá trong vài năm trở lại đây của Apple.",
-  price: "31490000",
+  title: "",
+  description: "",
+  price: "",
   categories: [],
-  shipping: "Yes",
-  quantity: "10",
+  shipping: "",
+  quantity: "",
   images: [],
   colors: ["Black", "Brown", "Silver", "White", "Blue"],
   color: "",

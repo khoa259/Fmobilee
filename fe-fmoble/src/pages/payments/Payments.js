@@ -46,11 +46,11 @@ const Payments = () => {
 
   //Handle SUbmit form
   const onSubmit = (data) => {
-    // const newData = {
-    //   ...data,
-    //   products: products.map((product) => product.product),
-    // };
-    // createBill(newData).then(showModal()).catch(showModalFail());
+    const newData = {
+      ...data,
+      products: products.map((product) => product.product),
+    };
+    createBill(newData);
     console.log("data", data);
   };
   const showModalFail = () => {

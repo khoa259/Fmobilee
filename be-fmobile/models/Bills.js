@@ -33,6 +33,9 @@ const billSchema = new mongoose.Schema(
     username: {
       type: String,
     },
+    address: {
+      type: String,
+    },
     billTotal: Number,
     orderdBy: { type: ObjectId, ref: "user" },
   },
