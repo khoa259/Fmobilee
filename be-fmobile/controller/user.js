@@ -17,7 +17,7 @@ export const userCart = async (req, res) => {
         if (idProduct == product.product) {
           checkProductDulicate = true;
           product.count = product.count + 1;
-          cartByUser.cartTotal = cartByUser.cartTotal + cart[0].price;
+          // cartByUser.cartTotal = cartByUser.cartTotal + cart[0].price;
         }
       });
     }
