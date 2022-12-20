@@ -41,21 +41,24 @@ const Header = () => {
             <Link to="/">Fmobile</Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand-xl" />
-          <Nav as="ul" className="ulHeader ml-auto mt-2">
+          <Nav as="ul" className="ulHeader ml-auto mt-2 ">
             <Search />
-            <Nav.Link href="/gio-hang" className="icon-cart">
-              <i className="fas fa-shopping-cart"></i>
-              <Badge bg="none">{cartDB.length}</Badge>
-            </Nav.Link>
+            <Link to="/gio-hang">
+              <i className="fas fa-shopping-cart position-relative">
+                <span className="badge" bg="none">
+                  {cartDB.length}
+                </span>
+              </i>
+            </Link>
 
-            <div className="dropdown">
+            <div className="dropdown ">
               {/* nếu user không tồn tai */}
               {!user?.email && (
                 <button className="dropbtn">
                   <i className=" fas fa-user"></i>
                 </button>
               )}
-              <div className="text-white pl-2 pt-3">
+              <div className="text-white pl-2 ">
                 {user?.email && user?.email.split("@")[0]}
               </div>
               {!user?.email && (
@@ -91,14 +94,15 @@ const Header = () => {
         className="nav-child"
         variant="dark"
         expand="lg"
-        collapseOnSelect="false"
-      >
+        collapseOnSelect="false">
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center">
           <Nav as="ul" className="Ul">
             {categories.map((c) => (
               <Nav.Item as="li" className="LI" key={c._id}>
-                <Link to={`/category/${c.slug}`}>{c.name}</Link>
+                <Link className="navLink" to={`/category/${c.slug}`}>
+                  {c.name}
+                </Link>
               </Nav.Item>
             ))}
           </Nav>

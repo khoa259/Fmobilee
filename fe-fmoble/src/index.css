@@ -25,16 +25,28 @@
   background: #eeeeee;
   min-height: 100vh;
   padding-bottom: 6rem !important;
-  margin-top: 7rem;
+  margin-top: 6rem;
+}
+
+@media (max-width: 992px) {
+  .main {
+    margin-top: 5.5rem;
+  }
+
+}
+
+button:focus {
+  outline: none !important;
 }
 
 .arrow {
   scroll-behavior: smooth;
+  border-radius: 50px;
   position: absolute;
   position: fixed;
   bottom: 50px;
   right: 30px;
-  background: #888;
+  background: rgb(96, 94, 94);
   padding: 10px;
   outline: none;
   border: none;
