@@ -38,6 +38,7 @@ import CheckOut from "./pages/checkOut.js/checkOut";
 import Shop from "./pages/shop";
 import Order from "./pages/admin/order/order";
 import Profile from "./pages/user/Profile";
+import UserLayout from "./layouts/userLayout";
 // import Spiner from "./component/spinner/spinner";
 
 const Wrapper = ({ children }) => {
@@ -91,23 +92,25 @@ const App = () => {
               <Route path="/forgot/password" element={<ForgotPassword />} />
               <Route path="/gio-hang" element={<Cart />} />
               <Route path="/thanh-toan" element={<CheckOut />} />
-              <Route path="/user/history" element={<History />} />
-              <Route path="/user/password" element={<Password />} />
-              <Route path="/user/wishlist" element={<Wishlist />} />
-              <Route path="/user/profile" element={<Profile />} />
               <Route path="/:slug" element={<ProductDetail />} />
               <Route path="category/:slug" element={<CategoryHome />} />
               <Route path="/products" element={<Shop />} />
               <Route path="/order/vnpay_return" element={<Payments />} />
+              <Route path="/user" element={<UserLayout />}>
+                <Route path="/user/purchase" element={<History />} />
+                <Route path="/user/password" element={<Password />} />
+                <Route path="/user/wishlist" element={<Wishlist />} />
+                <Route path="/user/profile" element={<Profile />} />
+              </Route>
             </Route>
+
             <Route
               path="admin"
               element={
                 <AdminRoute>
                   <AdminLayout />
                 </AdminRoute>
-              }
-            >
+              }>
               <Route index path="dashboard" element={<Dashboard />} />
               <Route path="category" element={<Category />} />
               <Route path="category/:slug" element={<CategoryUpdate />} />

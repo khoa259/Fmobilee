@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Table, Button } from "antd";
+import dateFormat from "dateformat";
+
 import { getAllBill } from "../../../functions/Bill";
+import { formatCash } from "../../../component/formatCash";
+import { Link } from "react-router-dom";
 
 const Order = () => {
   const [order, setOrder] = useState([]);
@@ -10,13 +15,58 @@ const Order = () => {
       setOrder(res.data);
     });
   }, []);
+
+  const dataSource = order.map((item, index) => {
+    return {
+      key: index + 1,
+      name: item.products.title,
+      billTotal: formatCash(`${item.billTotal}`),
+      status: item.status,
+      updatedAt: dateFormat(new Date(item.updatedAt), "dd/mm/yyyy"),
+      detail: (
+        <Link to={`/order/${item._id}`}>
+          <Button type="primary">xem chi tiết</Button>
+        </Link>
+      ),
+    };
+  });
+
+  const columns = [
+    {
+      title: "STT",
+      dataIndex: "key",
+      key: "key",
+    },
+    {
+      title: "Tên sản phẩm",
+      dataIndex: "name",
+    },
+    {
+      title: "Tổng Tiền",
+      dataIndex: "billTotal",
+      sorter: (a, b) => a.billTotal - b.billTotal,
+    },
+    {
+      title: "Ngày đặt hàng",
+      dataIndex: "updatedAt",
+    },
+    {
+      title: "trạng thái đơn hàng",
+      dataIndex: "status",
+    },
+    {
+      title: "Xử lý",
+      dataIndex: "detail",
+    },
+  ];
+  const onChange = (sorter) => {
+    console.log("params", sorter);
+  };
   return (
     <div>
       Order
       <h2>đơn hàng</h2>
-      {order?.map((_) => (
-        <div key={_._id}>{_.username}</div>
-      ))}
+      <Table dataSource={dataSource} columns={columns} onChange={onChange} />;
     </div>
   );
 };

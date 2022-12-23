@@ -1,6 +1,7 @@
 import User from "../models/User.js";
-import Product from "../models/product.js";
+// import Product from "../models/product.js";
 import Cart from "../models/cart.js";
+import Bills from "../models/Bills.js";
 import mongoose from "mongoose";
 
 export const userCart = async (req, res) => {
@@ -114,6 +115,21 @@ export const countPrdCard = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: error.message,
+    });
+  }
+};
+
+export const ordersByUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.user.email }).exec();
+    const userOrder = await Bills.find({ orderdBy: user._id })
+
+      .populate("products")
+      .exec();
+    res.json(userOrder);
+  } catch (error) {
+    return res.status(500).json({
+      message: "không lấy được dữ liệu đơn hàng",
     });
   }
 };

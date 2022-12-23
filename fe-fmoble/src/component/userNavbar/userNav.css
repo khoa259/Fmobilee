@@ -1,0 +1,19 @@
+.nav_link-user {
+    display: block;
+    padding: 10px 1rem;
+    font-size: 15px;
+    font-weight: 400;
+    min-width: 200px;
+    margin: 2px 1px;
+}
+
+.nav_link-user:hover {
+    color: rgb(32, 15, 221) !important;
+    background: rgb(227, 226, 226);
+    border-radius: 5px;
+}
+
+.nav_link-user:focus {
+    color: rgb(32, 15, 221) !important;
+    background: rgb(227, 226, 226);
+}

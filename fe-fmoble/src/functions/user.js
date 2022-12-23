@@ -38,3 +38,12 @@ export const saveUserAddress = async (authtoken, address) => {
 export const updateQty = async (idCart, data) => {
   await axios.put(`${process.env.REACT_APP_API}/user/cart/${idCart}`, data);
 };
+
+// export const ordersByUser = async (authtoken) => {
+//   const data = await axios.get(`${process.env.REACT_APP_API}/user/orders`, {
+//     headers: {
+//       authtoken,
+//     },
+//   });
+//   return data;
+// };

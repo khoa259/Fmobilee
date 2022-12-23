@@ -51,7 +51,7 @@ const Header = () => {
               </i>
             </Link>
 
-            <div className="dropdown ">
+            <div className="dropdown">
               {/* nếu user không tồn tai */}
               {!user?.email && (
                 <button className="dropbtn">
@@ -70,10 +70,10 @@ const Header = () => {
               {/* Nếu user có tồn tại  */}
               {user?.email && user?.role === "subscriber" && (
                 <div className="dropdown-content">
+                  <Link to={"/user/purchase"}>Settings</Link>
                   <Link to="/" onClick={logout}>
                     đăng xuất
                   </Link>
-                  <Link to={"/user/history"}>Settings</Link>
                 </div>
               )}
 

@@ -40,8 +40,7 @@ const Password = () => {
           <button
             className="btn btn-primary"
             type="submit"
-            disabled={!password || password.length < 6 || loading}
-          >
+            disabled={!password || password.length < 6 || loading}>
             Submit
           </button>
         </div>
@@ -49,22 +48,13 @@ const Password = () => {
     </div>
   );
   return (
-    <div>
-      <Container>
-        <div className="row mt-4">
-          <div className="col-md-2">
-            <UserNav />
-          </div>
-          <div className="col text-center">
-            {loading ? (
-              <h3 className="text-danger">Loading</h3>
-            ) : (
-              <h3>Password updated</h3>
-            )}
-            {passwordUpdateForm()}
-          </div>
-        </div>
-      </Container>
+    <div className="col text-center">
+      {loading ? (
+        <h3 className="text-danger">Loading</h3>
+      ) : (
+        <h3>Password updated</h3>
+      )}
+      {passwordUpdateForm()}
     </div>
   );
 };
