@@ -123,8 +123,7 @@ export const ordersByUser = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.user.email }).exec();
     const userOrder = await Bills.find({ orderdBy: user._id })
-
-      .populate("products")
+      .populate("products.product")
       .exec();
     res.json(userOrder);
   } catch (error) {

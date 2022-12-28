@@ -12,7 +12,7 @@ const Category = () => {
       setCategories(c.data);
       setLoading(false);
     });
-  }, []);
+  }, [categories]);
 
   const showCategories = () =>
     categories.map((c) => (

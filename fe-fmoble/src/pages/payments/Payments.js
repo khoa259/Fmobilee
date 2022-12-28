@@ -11,11 +11,14 @@ import { createBill } from "../../functions/Bill";
 //load stripe outside of components render to avoid
 const Payments = () => {
   const { user } = useSelector((state) => ({ ...state }));
-  const { handleSubmit, register } = useForm();
+  console.log("user", user);
+  const { handleSubmit, register, reset } = useForm();
   const { email } = user;
   const urlPaymentReturn = window.location.search;
   // console.log("urlPaymentReturn", urlPaymentReturn);
   const [products, setProducts] = useState([]);
+  const [idCart, setIdCard] = useState();
+  console.log("idCart", idCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFail, setisModalFail] = useState(false);
   const navigate = useNavigate();
@@ -30,6 +33,8 @@ const Payments = () => {
         getUserCart(getToken).then((res) => {
           console.log("res Products", res);
           setProducts(res.data.products);
+          setIdCard(res.data._id);
+          reset(res.data.products);
         });
       });
   }, []);
@@ -48,10 +53,14 @@ const Payments = () => {
   const onSubmit = (data) => {
     const newData = {
       ...data,
+      tradingCode: vnp_TransactionNo,
+      orderdBy: user._id,
+      idCart: idCart,
+      username: user.name,
       products: products.map((product) => product.product),
     };
+    console.log("newData", newData);
     createBill(newData);
-    console.log("data", data);
   };
   const showModalFail = () => {
     setisModalFail(true);
@@ -77,7 +86,7 @@ const Payments = () => {
 
   return (
     <>
-      <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      {/* <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <Result
           status="success"
           title="Đơn hàng đã được xác nhận thành công"
@@ -97,54 +106,57 @@ const Payments = () => {
             </Link>
           }
         />
-      </Modal>
+      </Modal> */}
       <div className="container p-5 ">
         <h2 className="text-center">Đơn Hàng Thanh Toán</h2>
         <div className="pt-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             <span></span>
             <div className="col-md-8 offset-md-2">
-              {products.map((p, i) => (
-                <div className="row" key={i}>
-                  <div className="col-lg-4 ">
-                    <input
-                      className="input-bill-title"
-                      type="text"
-                      {...register("name")}
-                      value={p?.product?.title}
-                    />
-                  </div>
+              {products &&
+                products?.map((p, i) => (
+                  <div className="row" key={i}>
+                    {console.log("p", p)}
+                    <div className="col-lg-4 ">
+                      <input
+                        className="input-bill-title"
+                        type="text"
+                        {...register("title")}
+                        value={p?.product?.title}
+                      />
+                    </div>
 
-                  <div className="col-lg-4 ">
-                    <input
-                      className="input-bill-title"
-                      type="text"
-                      {...register("price")}
-                      value={formatCash(`${p?.product?.price}`)}
-                    />
-                    <br />
-                  </div>
+                    <div className="col-lg-4 ">
+                      <input
+                        className="input-bill-title"
+                        type="text"
+                        {...register("price")}
+                        value={formatCash(`${p?.product?.price}`)}
+                      />
+                      <br />
+                    </div>
 
-                  <div className="col-4 text-success">
-                    <span className="bill">
-                      {formatCash(`${p?.product?.price}`)} đ
-                    </span>
+                    <div className="col-4 text-success">
+                      <span className="bill">
+                        {formatCash(`${p?.product?.price * p?.count}`)} đ
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
 
               <div>
                 <span className="bill">
                   Tên người đặt hàng
-                  <input
+                  {/* <input
                     className="input-bill"
                     type="text"
-                    {...register("username")}
+                    {...register("email")}
                     value={user?.email}
-                  />
+                  /> */}
+                  <div>{user?.name}</div>
                 </span>
               </div>
-              <div>
+              {/* <div>
                 <span className="bill">
                   Tên người đặt hàng
                   <input
@@ -154,7 +166,7 @@ const Payments = () => {
                     value={"6399d0c17e5cac3f0852d6b1"}
                   />
                 </span>
-              </div>
+              </div> */}
               <div>
                 <span className="bill">
                   Tên người đặt hàng

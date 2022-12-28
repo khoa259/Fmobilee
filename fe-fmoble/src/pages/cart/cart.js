@@ -64,28 +64,32 @@ const Cart = () => {
                     <div className="col-12 col-lg-6">
                       <span
                         className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}>
+                        style={{ fontSize: 16 }}
+                      >
                         Thông tin sản phẩm
                       </span>
                     </div>
                     <div className="col-12 col-lg-2">
                       <span
                         className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}>
+                        style={{ fontSize: 16 }}
+                      >
                         Giá tiền
                       </span>
                     </div>
                     <div className="col-12 col-lg-2 text-center">
                       <span
                         className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}>
+                        style={{ fontSize: 16 }}
+                      >
                         Số lượng
                       </span>
                     </div>
                     <div className="col-12 col-lg-2 text-end">
                       <span
                         className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}>
+                        style={{ fontSize: 16 }}
+                      >
                         Tổng
                       </span>
                     </div>
@@ -103,7 +107,7 @@ const Cart = () => {
                     <div className="d-flex justify-content-between" key={i}>
                       <p>{p.product.title}</p>
                       <b className="text-danger">
-                        {formatCash(`${p.product.price}`)}đ
+                        {formatCash(`${p.product.price * p?.count}`)}đ
                       </b>
                     </div>
                   ))}
@@ -117,13 +121,15 @@ const Cart = () => {
                   <hr />
                   <div
                     className="d-flex justify-content-between
-                  ">
+                  "
+                  >
                     <h5>Tổng tiền:</h5>
                     <b className=" text-danger">{formatCash(`${total}`)}đ</b>
                   </div>
                   <button
                     className="btn btn-md btn-primary mt-3"
-                    onClick={redirectCheckout}>
+                    onClick={redirectCheckout}
+                  >
                     Thanh Toán
                   </button>
                 </div>

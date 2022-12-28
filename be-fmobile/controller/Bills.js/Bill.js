@@ -12,6 +12,7 @@ export const createBill = async (req, res) => {
       timePayment,
       status,
       idCart,
+      tradingCode,
     } = req.body;
 
     //check user co ton tai trong db hay ko
@@ -26,13 +27,14 @@ export const createBill = async (req, res) => {
       status,
       username,
       timePayment,
+      tradingCode,
     };
     await new Bills(bill).save();
 
     const cartPrd = await cart.findOne({ _id: idCart });
-    console.log("cartPrd", cartPrd);
     const updateCart = await cart.findByIdAndUpdate(cartPrd._id, {
       products: [],
+      cartTotal: 0,
     });
 
     return res.status(200).json({
