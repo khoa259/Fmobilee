@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { updateQty } from "../../functions/user";
 
 import { formatCash } from "../formatCash";
-const ProductCartInCheckOut = ({ p, idCart }) => {
+const ProductCartInCheckOut = ({ p, idCart, load, setLoad, total }) => {
   let dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
   console.log("cart", p.product);
@@ -13,15 +13,18 @@ const ProductCartInCheckOut = ({ p, idCart }) => {
 
   const quantityPlus = () => {
     setQuantityState(quantityState + 1);
+    setLoad(quantityState);
   };
 
   const decrementQty = () => {
     setQuantityState(quantityState - 1);
+    setLoad(quantityState);
   };
   const saveUpdateQty = useCallback(() => {
     const payload = {
       idProduct: p._id,
       count: quantityState,
+      cartTotal: total,
     };
     updateQty(idCart, payload);
   }, [quantityState]);
@@ -40,8 +43,7 @@ const ProductCartInCheckOut = ({ p, idCart }) => {
             <div className="col-12 col-md-4 mb-3">
               <div
                 className="d-flex align-items-center justify-content-center bg-light"
-                style={{ width: 96, height: 128 }}
-              >
+                style={{ width: 96, height: 128 }}>
                 <img
                   className="img-fluid"
                   style={{ objectFit: "contain" }}

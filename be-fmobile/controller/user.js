@@ -81,7 +81,7 @@ export const saveAddress = async (req, res) => {
 export const countPrdCard = async (req, res) => {
   try {
     const { id } = req.params;
-    const { idProduct, count } = req.body;
+    const { idProduct, count, cartTotal } = req.body;
 
     const existedCart = await Cart.findById(id);
 
@@ -96,7 +96,7 @@ export const countPrdCard = async (req, res) => {
         _id: mongoose.Types.ObjectId(id),
       },
       {
-        $set: { "products.$[p].count": count },
+        $set: { "products.$[p].count": count, cartTotal: cartTotal },
       },
       {
         arrayFilters: [{ "p._id": idProduct }],
