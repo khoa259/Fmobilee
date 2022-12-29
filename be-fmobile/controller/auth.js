@@ -33,3 +33,14 @@ export const currentUser = async (req, res) => {
     res.json(user);
   });
 };
+
+export const updateUser = async (req, res) => {
+  try {
+    const user = await Users.findByIdAndUpdate({ id: req.user._id }, req.body, {
+      new: true,
+    }).exec();
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({ message: "không thể cap nhat" });
+  }
+};

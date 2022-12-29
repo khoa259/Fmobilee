@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Button, Space } from "antd";
 
 const Profile = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -8,6 +9,11 @@ const Profile = () => {
     <section className="container-profile">
       <div className="pt-2 text-center">
         <h4>Thông tin tài khoản</h4>
+        <span>
+          <Button type="primary" size="small">
+            Thay đổi thông tin
+          </Button>
+        </span>
       </div>
 
       <div className="container">
