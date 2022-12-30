@@ -172,6 +172,6 @@ export const searchFilters = async (req, res) => {
   }
   if (price !== undefined) {
     console.log("price---->", price);
-    await hand;
+    await handlePrice(req, res, price);
   }
 };

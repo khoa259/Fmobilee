@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 // import { useSelector } from "react-redux";
 
-import UserNav from "../../component/userNavbar/userNavbar";
-import { ordersByUser } from "../../functions/user";
+// import UserNav from "../../component/userNavbar/userNavbar";
+// import { ordersByUser } from "../../functions/user";
 const History = () => {
   // const [order, setOrder] = useState([]);
   // const { user } = useSelector((state) => ({ ...state }));

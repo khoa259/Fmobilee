@@ -1,0 +1,16 @@
+.navShop {
+    height: 100%;
+}
+
+.rowShop {
+    margin: 0 !important;
+}
+
+.col-filter {
+    min-width: 250px;
+    margin-top: 29px;
+}
+
+.ant-menu-item {
+    padding-left: 16px !important;
+}

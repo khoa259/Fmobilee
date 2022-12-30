@@ -1,6 +1,6 @@
 import firebase from "firebase";
 import React, { useEffect, useState } from "react";
-import { Badge, Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -94,8 +94,7 @@ const Header = () => {
         className="nav-child"
         variant="dark"
         expand="lg"
-        collapseOnSelect="false"
-      >
+        collapseOnSelect="false">
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center">
           <Nav as="ul" className="Ul">

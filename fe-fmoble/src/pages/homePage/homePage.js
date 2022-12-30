@@ -12,9 +12,9 @@ const HomePage = () => {
       <div>
         <NewArrivels />
       </div>
-      <div>
+      {/* <div>
         <BestSeller />
-      </div>
+      </div> */}
       <div className="sub-banner container">
         <Link to="/products">
           <img src={subBanner} className="img-fluid" />
