@@ -1,21 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Space } from "antd";
+import { Button, Modal, Space } from "antd";
+import { Input } from "antd";
+import FileUpload from "../../component/form/fileUpload";
 
 const Profile = () => {
   const { user } = useSelector((state) => ({ ...state }));
+  const [open, setOpen] = useState(false);
 
   return (
     <section className="container-profile">
       <div className="pt-2 text-center">
         <h4>Thông tin tài khoản</h4>
         <span>
-          <Button type="primary" size="small">
-            Thay đổi thông tin
+          <Button type="primary" onClick={() => setOpen(true)}>
+            Thay đổi thông tin cá nhân
           </Button>
         </span>
       </div>
-
+      <Modal
+        title="Modal 1000px width"
+        centered
+        open={open}
+        onOk={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
+        width={1000}
+      >
+        <form>
+          <h4 className="text-center">Thông tin cá nhân</h4>
+          <FileUpload />
+          <Input placeholder="Basic usage" value={user?.name} />;
+          <Input placeholder="Basic usage" value={user?.email} />;
+          <Input placeholder="Basic usage" value={user?.address} />;
+        </form>
+      </Modal>
       <div className="container">
         <div className="row">
           <div className="col-lg-4">
