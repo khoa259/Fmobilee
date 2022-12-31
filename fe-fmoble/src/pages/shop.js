@@ -84,8 +84,8 @@ const Shop = () => {
           range
           // value={price}
           onChange={handleSlider}
-          max={60000000}
-          min={986452}
+          max={90000000}
+          min={0}
         />
       ),
     ]),
@@ -104,7 +104,8 @@ const Shop = () => {
                 mode="inline"
                 defaultOpenKeys={["1", "2"]}
                 className="bg-light shadow-sm p-3 mb-5 bg-body rounded"
-                items={items}>
+                items={items}
+              >
                 {/* <SubMenu key="1" title={"Giá sản phẩm"}>
                   <div>
                     <Slider
