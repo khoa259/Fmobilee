@@ -33,9 +33,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
-      console.log("result", result);
       const { user } = result;
-      console.log("user", user);
       const idTokenResult = await user.getIdTokenResult();
 
       console.log("idTokenResult", idTokenResult);
@@ -47,12 +45,13 @@ const Login = () => {
               name: res.data.name,
               email: res.data.email,
               role: res.data.role,
+              address: res.data.address,
+              image: res.data.image,
               _id: res.data._id,
               token: idTokenResult.token,
             },
           });
           roleBasedRedirect(res);
-          console.log("idTokenResult.token", idTokenResult.token);
           localStorage.setItem("token", idTokenResult.token);
         })
         .catch((err) => console.log("failed", err));
@@ -94,7 +93,8 @@ const Login = () => {
         block
         shape="round"
         size="large"
-        disabled={!email || password.length < 6}>
+        disabled={!email || password.length < 6}
+      >
         Login with Email/Password
       </Button>
     </form>
@@ -143,7 +143,8 @@ const Login = () => {
             className="mb-3"
             block
             shape="round"
-            size="large">
+            size="large"
+          >
             Login with Google
           </Button>
         </div>
