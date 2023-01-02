@@ -97,7 +97,7 @@ const App = () => {
               <Route path="/products" element={<Shop />} />
               <Route path="/order/vnpay_return" element={<Payments />} />
               <Route path="/user" element={<UserLayout />}>
-                <Route path="/user/purchase/" element={<History />} />
+                <Route path="/user/purchase" element={<History />} />
                 <Route path="/user/password" element={<Password />} />
                 <Route path="/user/wishlist" element={<Wishlist />} />
                 <Route path="/user/profile/:id" element={<Profile />} />
@@ -110,7 +110,8 @@ const App = () => {
                 <AdminRoute>
                   <AdminLayout />
                 </AdminRoute>
-              }>
+              }
+            >
               <Route index path="dashboard" element={<Dashboard />} />
               <Route path="category" element={<Category />} />
               <Route path="category/:slug" element={<CategoryUpdate />} />

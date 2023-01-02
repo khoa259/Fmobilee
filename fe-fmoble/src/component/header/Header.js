@@ -70,7 +70,7 @@ const Header = () => {
               {/* Nếu user có tồn tại  */}
               {user?.email && user?.role === "subscriber" && (
                 <div className="dropdown-content">
-                  <Link to={`/user/purchase/${user._id}`}>Settings</Link>
+                  <Link to={`/user/profile/${user._id}`}>Settings</Link>
                   <Link to="/" onClick={logout}>
                     đăng xuất
                   </Link>
@@ -94,7 +94,8 @@ const Header = () => {
         className="nav-child"
         variant="dark"
         expand="lg"
-        collapseOnSelect="false">
+        collapseOnSelect="false"
+      >
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse className="basic-navbar-nav justify-content-center">
           <Nav as="ul" className="Ul">

@@ -1,12 +1,26 @@
 import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Button, Modal, Space } from "antd";
 import { Input } from "antd";
 import FileUpload from "../../component/form/fileUpload";
-
+import { updateProfileUser } from "../../functions/auth";
+import { useParams } from "react-router-dom";
 const Profile = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const { id } = useParams();
   const { user } = useSelector((state) => ({ ...state }));
   const [open, setOpen] = useState(false);
+
+  const onUpdate = (data) => {
+    console.log("data", data);
+    updateProfileUser(id, data);
+  };
 
   return (
     <section className="container-profile">
@@ -19,19 +33,40 @@ const Profile = () => {
         </span>
       </div>
       <Modal
-        title="Modal 1000px width"
+        title="Cập nhật thông tin người dùng"
         centered
         open={open}
         onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
-        width={1000}
+        width={500}
       >
-        <form>
+        <form onSubmit={handleSubmit(onUpdate)}>
           <h4 className="text-center">Thông tin cá nhân</h4>
-          <FileUpload />
-          <Input placeholder="Basic usage" value={user?.name} />;
-          <Input placeholder="Basic usage" value={user?.email} />;
-          <Input placeholder="Basic usage" value={user?.address} />;
+          {/* <FileUpload /> */}
+          <input
+            placeholder="Tên người dùng"
+            value={user?.name}
+            {...register("name")}
+          />
+          <input
+            placeholder="Tên người dùng"
+            value={user?.email}
+            {...register("email")}
+          />
+          <input
+            placeholder="Tên người dùng"
+            value={user?.avatar}
+            {...register("avatar")}
+          />
+          <input
+            placeholder="Tên người dùng"
+            value={user?.address}
+            {...register("address")}
+          />
+          ;
+          {/* <Input placeholder="Basic usage" value={user?.email} />;
+          <Input placeholder="Basic usage" value={user?.address} />; */}
+          <button type="submit">Submit</button>
         </form>
       </Modal>
       <div className="container">
@@ -84,7 +119,7 @@ const Profile = () => {
                     <p className="mb-0">Địa chỉ</p>
                   </div>
                   <div className="col-sm-9">
-                    <p className="text-muted mb-0">Hà Nội, Việt Nam</p>
+                    <p className="text-muted mb-0">{user?.address}</p>
                   </div>
                 </div>
               </div>
