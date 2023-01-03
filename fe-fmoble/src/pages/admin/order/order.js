@@ -8,14 +8,12 @@ import { Link } from "react-router-dom";
 
 const Order = () => {
   const [order, setOrder] = useState([]);
-  console.log("order", order);
   useEffect(() => {
     getAllBill().then((res) => {
       console.log("res", res);
-      setOrder(res);
+      setOrder(res.data);
     });
   }, []);
-  console.log("order", order);
   const dataSource = order.map((item, index) => {
     return {
       key: index + 1,
