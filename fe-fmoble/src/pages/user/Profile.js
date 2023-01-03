@@ -15,6 +15,7 @@ const Profile = () => {
   } = useForm();
   const { id } = useParams();
   const { user } = useSelector((state) => ({ ...state }));
+  console.log("user", user);
   const [open, setOpen] = useState(false);
 
   const onUpdate = (data) => {
@@ -80,7 +81,7 @@ const Profile = () => {
                   className="rounded-circle img-fluid"
                   style={{ width: 150 }}
                 />
-                <h5 className="my-3">{user.name}</h5>
+                <h5 className="my-3">{user?.name}</h5>
               </div>
             </div>
           </div>

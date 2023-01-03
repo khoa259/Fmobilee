@@ -50,6 +50,7 @@ const RegisterComplete = () => {
         console.log("user", user, "idTokenResult", idTokenResult);
         createOrUpdateUser(idTokenResult.token)
           .then((res) => {
+            console.log("res", res);
             dispatch({
               type: "LOGGED_IN_USER",
               payload: {
@@ -57,6 +58,8 @@ const RegisterComplete = () => {
                 email: res.data.email,
                 role: res.data.role,
                 _id: res.data._id,
+                address: res.data?.address,
+                avatar: res.data?.avatar,
                 token: idTokenResult.token,
               },
             });
