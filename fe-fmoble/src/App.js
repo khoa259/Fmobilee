@@ -39,6 +39,7 @@ import Shop from "./pages/shop";
 import Order from "./pages/admin/order/order";
 import Profile from "./pages/user/Profile";
 import UserLayout from "./layouts/userLayout";
+import OrderDetails from "./pages/admin/order/OrderDetails";
 // import Spiner from "./component/spinner/spinner";
 
 const Wrapper = ({ children }) => {
@@ -119,6 +120,7 @@ const App = () => {
               <Route path="products" element={<ListProducts />} />
               <Route path="product/:slug" element={<ProductUpdate />} />
               <Route path="order" element={<Order />} />
+              <Route path=":id" element={<OrderDetails />} />
             </Route>
             <Route path="*" element={<Page404 />} />
           </Routes>
