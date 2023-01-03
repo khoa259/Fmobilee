@@ -15,11 +15,11 @@ const Order = () => {
       setOrder(res.data);
     });
   }, []);
-
+  console.log("order", order);
   const dataSource = order.map((item, index) => {
     return {
       key: index + 1,
-      name: item.products.title,
+      name: item?.username,
       billTotal: formatCash(`${item.billTotal}`),
       status: item.status,
       updatedAt: dateFormat(new Date(item.updatedAt), "dd/mm/yyyy"),
@@ -38,7 +38,7 @@ const Order = () => {
       key: "key",
     },
     {
-      title: "Tên sản phẩm",
+      title: "Tên người đặt",
       dataIndex: "name",
     },
     {

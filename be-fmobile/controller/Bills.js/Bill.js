@@ -57,3 +57,12 @@ export const listBill = async (req, res) => {
       .json({ message: "Không thể hiện thị được danh sách đơn hàng" });
   }
 };
+
+export const detailBill = async (req, res) => {
+  try {
+    const bill = await Bills.findOne({ _id: req.params.id }).exec();
+    res.json(bill);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
