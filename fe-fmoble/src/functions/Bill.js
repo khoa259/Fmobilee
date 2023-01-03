@@ -9,3 +9,7 @@ export const getAllBill = async () => {
   const data = await axios.get(`${process.env.REACT_APP_API}/bills`);
   return data;
 };
+
+export const getDetailBill = async (id) => {
+  await axios.get(`${process.env.REACT_APP_API}/bills/${id}`);
+};
