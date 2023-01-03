@@ -120,7 +120,7 @@ const App = () => {
               <Route path="products" element={<ListProducts />} />
               <Route path="product/:slug" element={<ProductUpdate />} />
               <Route path="order" element={<Order />} />
-              <Route path=":id" element={<OrderDetails />} />
+              <Route path="order/:id" element={<OrderDetails />} />
             </Route>
             <Route path="*" element={<Page404 />} />
           </Routes>

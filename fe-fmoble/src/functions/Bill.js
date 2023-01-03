@@ -11,5 +11,5 @@ export const getAllBill = async () => {
 };
 
 export const getDetailBill = async (id) => {
-  await axios.get(`${process.env.REACT_APP_API}/bills/${id}`);
+  await axios.get(`${process.env.REACT_APP_API}/bill/${id}`);
 };

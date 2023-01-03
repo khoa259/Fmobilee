@@ -12,7 +12,7 @@ const Order = () => {
   useEffect(() => {
     getAllBill().then((res) => {
       console.log("res", res);
-      setOrder(res.data);
+      setOrder(res);
     });
   }, []);
   console.log("order", order);
@@ -24,7 +24,7 @@ const Order = () => {
       status: item.status,
       updatedAt: dateFormat(new Date(item.updatedAt), "dd/mm/yyyy"),
       detail: (
-        <Link to={`/order/${item._id}`}>
+        <Link to={`${item._id}`}>
           <Button type="primary">xem chi tiết</Button>
         </Link>
       ),
