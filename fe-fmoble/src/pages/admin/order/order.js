@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "antd";
+import { Table, Button, Select } from "antd";
 import dateFormat from "dateformat";
 
 import { getAllBill } from "../../../functions/Bill";
@@ -19,7 +19,32 @@ const Order = () => {
       key: index + 1,
       name: item?.username,
       billTotal: formatCash(`${item.billTotal}`),
-      status: item.status,
+      status: (
+        <Select
+          defaultValue="Chờ xác nhận"
+          style={{
+            width: 180,
+          }}
+          options={[
+            {
+              value: item._id,
+              label: item._id,
+            },
+            {
+              value: "Thành công",
+              label: "Thành công",
+            },
+            {
+              value: "Đang vận chuyển",
+              label: "Đang vận chuyển",
+            },
+            {
+              value: "Hủy",
+              label: "Hủy",
+            },
+          ]}
+        />
+      ),
       updatedAt: dateFormat(new Date(item.updatedAt), "dd/mm/yyyy"),
       detail: (
         <Link to={`${item._id}`}>

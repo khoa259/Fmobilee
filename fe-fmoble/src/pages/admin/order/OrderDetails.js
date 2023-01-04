@@ -5,39 +5,49 @@ import { getDetailBill } from "../../../functions/Bill";
 import dateFormat from "dateformat";
 import { formatCash } from "../../../component/formatCash";
 import { Badge, Descriptions } from "antd";
-import axios from "axios";
 
 const OrderDetails = () => {
   const [order, setOrder] = useState([]);
   const { id } = useParams();
   useEffect(() => {
     const getProudct = async () => {
-      const data = await axios.get("http://localhost:8000/api/bill/" + id);
+      const { data } = await getDetailBill(id);
       console.log("data", data);
-      setOrder(data.data);
+      setOrder(data);
     };
     getProudct();
   }, [id]);
-  console.log("order", order);
+  console.log("order", order.products);
+  // const { products } = order;
+  // console.log("products", products?.price);
   return (
     <div>
       <h1 className="text-center">Chi tiết đơn hàng</h1>
+      {/* {JSON.stringify(order.products)} */}
       <Descriptions title="User Info" bordered>
-        <Descriptions.Item label="Product">
-          {order.products.title}
+        <Descriptions.Item label="Tên sản phẩm">
+          {order?.products?.map((p, i) => (
+            <div key={i}>
+              <span className="h5">{p.title}</span>
+            </div>
+          ))}
+          {/* {order.products.title} */}
         </Descriptions.Item>
         <Descriptions.Item label="Billing Mode">Prepaid</Descriptions.Item>
         <Descriptions.Item label="Automatic Renewal">YES</Descriptions.Item>
-        <Descriptions.Item label="Order time">
-          2018-04-24 18:00:00
+        <Descriptions.Item label="Thời gian đặt hàng">
+          <span className="h5">
+            {dateFormat(order.updatedAt, "dd/mm/yyyy - HH:MM:s")}
+          </span>
         </Descriptions.Item>
-        <Descriptions.Item label="Usage Time" span={2}>
-          2019-04-24 18:00:00
+        <Descriptions.Item label="Tổng tiền" span={2}>
+          <span className="h5">{formatCash(`${order.billTotal}`)}đ</span>
         </Descriptions.Item>
         <Descriptions.Item label="Status" span={3}>
           <Badge status="processing" text="Running" />
         </Descriptions.Item>
       </Descriptions>
+      <Button type="primary">In hóa đơn</Button>
     </div>
   );
 };
