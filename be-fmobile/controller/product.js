@@ -166,7 +166,7 @@ const handleCategory = async (req, res, category) => {
   try {
     const product = await Product.find({ category })
       .populate("category", "_id name")
-      .populate("posteBy", "_id name")
+      // .populate("posteBy", "_id name")
       .exec();
     res.json(product);
   } catch (error) {
@@ -176,7 +176,7 @@ const handleCategory = async (req, res, category) => {
 
 //search products
 export const searchFilters = async (req, res) => {
-  const { query, price, cateogry } = req.body;
+  const { query, price, category } = req.body;
 
   if (query) {
     console.log("query", query);
@@ -186,8 +186,8 @@ export const searchFilters = async (req, res) => {
     console.log("price---->", price);
     await handlePrice(req, res, price);
   }
-  if (cateogry) {
-    console.log("price---->", price);
+  if (category) {
+    console.log("category---->", category);
     await handleCategory(req, res, category);
   }
 };

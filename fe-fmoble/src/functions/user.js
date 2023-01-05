@@ -48,8 +48,8 @@ export const updateQty = async (idCart, data) => {
 //   return data;
 // };
 
-export const getUserOrders = async (authtoken) =>
-  await axios.get(`${process.env.REACT_APP_API}/user/orders`, {
+export const getUserOrders = async (authtoken, orderdBy) =>
+  await axios.get(`${process.env.REACT_APP_API}/user/orders`, orderdBy, {
     headers: {
       authtoken,
     },

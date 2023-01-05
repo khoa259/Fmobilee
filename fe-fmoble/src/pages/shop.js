@@ -111,7 +111,6 @@ const Shop = () => {
     ));
   //antd component
   const formatter = (v) => `${v} đ`;
-
   return (
     <div className="container-fluid">
       {loading ? (
