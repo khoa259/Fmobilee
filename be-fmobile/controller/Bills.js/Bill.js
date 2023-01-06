@@ -66,3 +66,17 @@ export const detailBill = async (req, res) => {
     console.log(error.message);
   }
 };
+
+export const Editbill = async (req, res) => {
+  try {
+    await Bills.findOneAndUpdate(
+      { _id: req.params.id },
+      { status: req.body.status }
+    ).exec();
+    res.json(200, {
+      message: "update success",
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};

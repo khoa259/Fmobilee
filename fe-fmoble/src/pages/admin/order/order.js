@@ -5,44 +5,51 @@ import dateFormat from "dateformat";
 import { getAllBill } from "../../../functions/Bill";
 import { formatCash } from "../../../component/formatCash";
 import { Link } from "react-router-dom";
+import { getListStatus } from "../../../functions/status";
+import axios from "axios";
 
 const Order = () => {
   const [order, setOrder] = useState([]);
+  const [status, setStatus] = useState([]);
   useEffect(() => {
     getAllBill().then((res) => {
       console.log("res", res);
       setOrder(res.data);
     });
+    const getStatus = axios
+      .get("http://localhost:8000/api/status")
+      .then((res) => setStatus(res.data))
+      .catch((error) => console.log("error", error.message));
   }, []);
+  console.log("status", status);
+  const onChangStatus = async (billId, dataStatus) => {
+    const changeStatus = await axios.put(
+      `http://localhost:8000/api/bill/${billId}`,
+      {
+        status: dataStatus,
+      }
+    );
+    console.log("changeStatus", changeStatus);
+  };
   const dataSource = order.map((item, index) => {
+    console.log("item", item);
     return {
       key: index + 1,
       name: item?.username,
       billTotal: formatCash(`${item.billTotal}`),
       status: (
         <Select
-          defaultValue="Chờ xác nhận"
+          onChange={(data) => onChangStatus(item._id, data)}
+          defaultValue={item.status}
           style={{
             width: 180,
           }}
-          options={[
-            {
+          options={status.map((item) => {
+            return {
               value: item._id,
-              label: item._id,
-            },
-            {
-              value: "Thành công",
-              label: "Thành công",
-            },
-            {
-              value: "Đang vận chuyển",
-              label: "Đang vận chuyển",
-            },
-            {
-              value: "Hủy",
-              label: "Hủy",
-            },
-          ]}
+              label: item.name,
+            };
+          })}
         />
       ),
       updatedAt: dateFormat(new Date(item.updatedAt), "dd/mm/yyyy"),

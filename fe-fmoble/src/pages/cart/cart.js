@@ -9,7 +9,6 @@ import { getUserCart } from "../../functions/user";
 const Cart = () => {
   const [total, setTotal] = useState(0);
   const [load, setLoad] = useState(0);
-  console.log("load", load);
   const [dataCart, setDataCart] = useState({ products: [], idCart: "" });
   const { user, cart } = useSelector((state) => ({ ...state }));
   const history = useNavigate();
