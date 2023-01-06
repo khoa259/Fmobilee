@@ -7,6 +7,7 @@ import { formatCash } from "../../../component/formatCash";
 import { Link } from "react-router-dom";
 import { getListStatus } from "../../../functions/status";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Order = () => {
   const [order, setOrder] = useState([]);
@@ -23,13 +24,17 @@ const Order = () => {
   }, []);
   console.log("status", status);
   const onChangStatus = async (billId, dataStatus) => {
-    const changeStatus = await axios.put(
-      `http://localhost:8000/api/bill/${billId}`,
-      {
-        status: dataStatus,
-      }
-    );
-    console.log("changeStatus", changeStatus);
+    try {
+      const changeStatus = await axios.put(
+        `http://localhost:8000/api/bill/${billId}`,
+        {
+          status: dataStatus,
+        }
+      );
+      toast.success("Change Status Success");
+    } catch (error) {
+      toast.warning("Change Status Fail");
+    }
   };
   const dataSource = order.map((item, index) => {
     console.log("item", item);
