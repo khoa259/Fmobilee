@@ -40,17 +40,16 @@ button:focus {
 
 .arrow {
   scroll-behavior: smooth;
-  border-radius: 50px;
-  /* position: absolute; */
   position: fixed;
+  border-radius: 5px;
   bottom: 50px;
-  right: 30px;
-  background: rgb(96, 94, 94);
-  padding: 15px;
+  right: 40px;
+  background: rgb(101, 99, 99);
+  padding: 10px;
   outline: none;
   border: none;
   color: #edecec;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
   z-index: 1;
@@ -139,6 +138,27 @@ a {
   border-color: #02010100;
   box-shadow: 4px 4px 28px 5px rgb(0 0 0 / 12%);
   transition-duration: 0.6s;
+}
+
+.btnAddToCart {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  color: white !important;
+  width: 85%;
+  font-size: 25px;
+  text-align: center;
+  opacity: 0;
+  transition: 0.6s;
+}
+
+.btnAddToCart .btn {
+  color: white !important;
+}
+
+.card-prd:hover .btnAddToCart {
+  opacity: 1;
 }
 
 .stock {
