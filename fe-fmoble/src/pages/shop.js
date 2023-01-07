@@ -4,8 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Checkbox, Menu, Slider } from "antd";
 import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
+import { toast } from "react-toastify";
+import _ from "lodash";
 
 import "../component/navShop/navShop.css";
+
+import { userCart } from "../functions/user";
 import { formatCash } from "../component/formatCash";
 import Spinner from "../component/spinner/spinner";
 import {
@@ -23,9 +27,10 @@ const Shop = () => {
   const [categories, setCategores] = useState([]);
   const [categoryIds, setCategoryIds] = useState([]);
   const [ok, setOk] = useState(false);
+  const [product, setProduct] = useState({});
 
   let dispatch = useDispatch();
-  let { search } = useSelector((state) => ({ ...state }));
+  let { search, cart, user } = useSelector((state) => ({ ...state }));
   const { text } = search;
 
   useEffect(() => {
@@ -38,7 +43,27 @@ const Shop = () => {
       setProducts(res.data);
     });
   };
-
+  const handleAddToCart = () => {
+    let cart = [];
+    if (typeof window !== "undefined") {
+      cart.push({
+        ...product,
+        count: 1,
+      });
+      let unique = _.uniqWith(cart, _.isEqual);
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: unique,
+      });
+    }
+    userCart(cart, user.token)
+      .then(({ data }) => {
+        if (data && data.succces) {
+          toast.success(data.message);
+        }
+      })
+      .catch((err) => console.log("cart save err", err));
+  };
   //load products defaul on page
   const loadAllProducts = () => {
     getProductsByCount(12).then((p) => {
@@ -188,6 +213,15 @@ const Shop = () => {
                       Giá từ {formatCash(`${product.price}`)}đ
                     </Card.Text>
                   </Card.Body>
+                  <div className="btnAddToCart">
+                    <button
+                      onClick={handleAddToCart}
+                      className="btn"
+                      disabled={product.quantity === 0}>
+                      <i className="fa-solid fa-cart-plus mr-2"></i>
+                      Thêm vào giỏ hàng
+                    </button>
+                  </div>
                 </Card>
               </Col>
             ))}
