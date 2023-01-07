@@ -86,6 +86,10 @@ a {
   height: 3rem !important;
 }
 
+.form-control:focus {
+  box-shadow: none !important;
+}
+
 :root {
   --light: white;
   --height-panigation: 6px;
@@ -243,8 +247,6 @@ a {
 .btn-eye {
   padding-top: 10px;
 }
-
-
 
 .ant-pagination-item:focus {
   background-color: #0066CC;

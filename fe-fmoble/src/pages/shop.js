@@ -138,6 +138,7 @@ const Shop = () => {
                       range
                       // value={price}
                       onChange={handleSlider}
+                      defaultValue={[0, 90000000]}
                       max={90000000}
                     />
                   </div>

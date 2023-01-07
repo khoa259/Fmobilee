@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { Button, Modal, Space } from "antd";
-import { Input } from "antd";
-import FileUpload from "../../component/form/fileUpload";
-import { updateProfileUser } from "../../functions/auth";
+import { Button, Modal } from "antd";
 import { useParams } from "react-router-dom";
+
+import { updateProfileUser } from "../../functions/auth";
 const Profile = () => {
   const {
     register,
@@ -15,11 +14,9 @@ const Profile = () => {
   } = useForm();
   const { id } = useParams();
   const { user } = useSelector((state) => ({ ...state }));
-  console.log("user", user);
   const [open, setOpen] = useState(false);
 
   const onUpdate = (data) => {
-    console.log("data", data);
     updateProfileUser(id, data);
   };
 
@@ -27,11 +24,6 @@ const Profile = () => {
     <section className="container-profile">
       <div className="pt-2 text-center">
         <h4>Thông tin tài khoản</h4>
-        <span>
-          <Button type="primary" onClick={() => setOpen(true)}>
-            Thay đổi thông tin cá nhân
-          </Button>
-        </span>
       </div>
       <Modal
         title="Cập nhật thông tin người dùng"
@@ -39,35 +31,46 @@ const Profile = () => {
         open={open}
         onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
-        width={500}
-      >
+        width={800}>
         <form onSubmit={handleSubmit(onUpdate)}>
           <h4 className="text-center">Thông tin cá nhân</h4>
           {/* <FileUpload /> */}
+          <label className="h5">Tên người dùng</label>
           <input
             placeholder="Tên người dùng"
+            className="form-control"
             value={user?.name}
             {...register("name")}
+            disabled
           />
+          <label className="h5">Email của bạn</label>
           <input
+            className="form-control"
             placeholder="Tên người dùng"
             value={user?.email}
             {...register("email")}
+            disabled
           />
+          <label className="h5">Số điện thoại</label>
           <input
-            placeholder="Tên người dùng"
+            className="form-control"
+            placeholder="Số điện thoại"
             value={user?.avatar}
-            {...register("avatar")}
+            {...register("096565656")}
           />
+          <label className="h5">Địa chỉ</label>
           <input
-            placeholder="Tên người dùng"
+            className="form-control"
+            placeholder="Địa chỉ"
             value={user?.address}
             {...register("address")}
           />
           ;
           {/* <Input placeholder="Basic usage" value={user?.email} />;
           <Input placeholder="Basic usage" value={user?.address} />; */}
-          <button type="submit">Submit</button>
+          {/* <div className="text-center mt-2">
+            <Button type="primary ">Lưu</Button>
+          </div> */}
         </form>
       </Modal>
       <div className="container">
@@ -128,6 +131,11 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      <span>
+        <Button type="primary" onClick={() => setOpen(true)}>
+          Thay đổi thông tin cá nhân
+        </Button>
+      </span>
     </section>
   );
 };
