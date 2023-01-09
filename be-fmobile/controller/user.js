@@ -121,8 +121,14 @@ export const countPrdCard = async (req, res) => {
 
 export const ordersByUser = async (req, res) => {
   try {
-    const userBills = await Bills.findOne({ orderdBy: req.params.id }).exec();
-    res.json(userBills);
+    const userBills = await Bills.findOne({ orderdBy: req.params._id }).exec();
+    if (userBills === null) {
+      return res.status(200).json({
+        message: "Bill is not found",
+      });
+    } else {
+      res.json(userBills);
+    }
   } catch (error) {
     res.status(400).json({ message: "không thể cap nhat" });
   }
