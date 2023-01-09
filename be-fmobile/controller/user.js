@@ -121,15 +121,9 @@ export const countPrdCard = async (req, res) => {
 
 export const ordersByUser = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.user.id }).exec();
-    console.log("user", user);
-    // const userOrder = await Bills.find({ orderdBy: user._id })
-    //   .populate("products.product")
-    //   .exec();
-    // res.json(userOrder);
+    const userBills = await Bills.findOne({ orderdBy: req.params.id }).exec();
+    res.json(userBills);
   } catch (error) {
-    return res.status(500).json({
-      message: "không lấy được dữ liệu đơn hàng",
-    });
+    res.status(400).json({ message: "không thể cap nhat" });
   }
 };
