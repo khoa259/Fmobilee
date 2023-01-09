@@ -121,11 +121,12 @@ export const countPrdCard = async (req, res) => {
 
 export const ordersByUser = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.user.email }).exec();
-    const userOrder = await Bills.find({ orderdBy: user._id })
-      .populate("products.product")
-      .exec();
-    res.json(userOrder);
+    const user = await User.findOne({ _id: req.user.id }).exec();
+    console.log("user", user);
+    // const userOrder = await Bills.find({ orderdBy: user._id })
+    //   .populate("products.product")
+    //   .exec();
+    // res.json(userOrder);
   } catch (error) {
     return res.status(500).json({
       message: "không lấy được dữ liệu đơn hàng",

@@ -48,7 +48,7 @@ const Cart = () => {
   }, [load]);
   const { products, idCart } = dataCart;
   console.log(dataCart);
-
+  console.log("products", products.po);
   return (
     <div>
       <section className="py-20 pt-5 ">

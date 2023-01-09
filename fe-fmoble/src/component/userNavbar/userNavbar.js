@@ -15,7 +15,7 @@ const UserNav = () => {
           </Link>
         </li>
         <li>
-          <Link to="/user/purchase" className="nav_link-user ">
+          <Link to={`/user/purchase/${user._id}`} className="nav_link-user ">
             <i className="fa-solid fa-bag-shopping text-success"></i> Đơn hàng
             của tôi
           </Link>

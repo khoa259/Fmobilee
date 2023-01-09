@@ -97,8 +97,8 @@ const App = () => {
               <Route path="category/:slug" element={<CategoryHome />} />
               <Route path="/products" element={<Shop />} />
               <Route path="/order/vnpay_return" element={<Payments />} />
-              <Route path="/user" element={<UserLayout />}>
-                <Route path="/user/purchase" element={<History />} />
+              <Route path="/" element={<UserLayout />}>
+                <Route path="/user/purchase/:id" element={<History />} />
                 <Route path="/user/password" element={<Password />} />
                 <Route path="/user/wishlist" element={<Wishlist />} />
                 <Route path="/user/profile/:id" element={<Profile />} />
