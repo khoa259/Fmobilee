@@ -40,7 +40,7 @@ const Register = () => {
         autoFocus
       />
 
-      <button type="submit" className="btn btn-raised">
+      <button type="submit" className="btn btn-dark">
         Register
       </button>
     </form>

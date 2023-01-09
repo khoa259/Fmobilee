@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { getProducts, getProductCount } from "../../functions/products";
 import { Card, Col, Container, Row } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Pagination } from "antd";
+import { toast } from "react-toastify";
+import _ from "lodash";
+
+import { getProducts, getProductCount } from "../../functions/products";
+// import { userCart } from "../../functions/user";
 
 import Banner from "../../component/banner/banner";
 import Spinner from "../../component/spinner/spinner";
 import { formatCash } from "../formatCash";
-import { useSelector } from "react-redux";
 
 const NewArrivels = () => {
-  // const { user } = useSelector((state) => ({ ...state }));
-  const [products, setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [productsCount, setProductsCount] = useState(0);
   const [page, setPage] = useState(1);
+  // const [product, setProduct] = useState({});
+
+  const { user, cart } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
 
   useEffect(() => {
     loadAllProduct();
@@ -26,9 +33,31 @@ const NewArrivels = () => {
   const loadAllProduct = () => {
     setLoading(false);
     getProducts("createdAt", "desc", page).then((res) => {
-      setProduct(res.data);
+      setProducts(res.data);
     });
   };
+
+  // const handleAddToCart = () => {
+  //   let cart = [];
+  //   if (typeof window !== "undefined") {
+  //     cart.push({
+  //       ...product,
+  //       count: 1,
+  //     });
+  //     let unique = _.uniqWith(cart, _.isEqual);
+  //     dispatch({
+  //       type: "ADD_TO_CART",
+  //       payload: unique,
+  //     });
+  //   }
+  //   userCart(cart, user.token)
+  //     .then(({ data }) => {
+  //       if (data && data.succces) {
+  //         toast.success(data.message);
+  //       }
+  //     })
+  //     .catch((err) => console.log("cart save err", err));
+  // };
   return (
     <div>
       <Banner />
@@ -68,6 +97,15 @@ const NewArrivels = () => {
                         Giá từ {formatCash(`${product.price}`)}đ
                       </Link>
                     </Card.Body>
+                    {/* <div className="btnAddToCart">
+                      <button
+                        onClick={handleAddToCart}
+                        className="btn"
+                        disabled={product.quantity === 0}>
+                        <i className="fa-solid fa-cart-plus mr-2"></i>
+                        Thêm vào giỏ hàng
+                      </button>
+                    </div> */}
                   </Card>
                 </Col>
               ))}
@@ -81,11 +119,11 @@ const NewArrivels = () => {
             </button>
           </Link>
         </div>
-        <Pagination
+        {/* <Pagination
           current={page}
           total={(productsCount / 2) * 4}
           onChange={(value) => setPage(value)}
-        />
+        /> */}
       </Container>
     </div>
   );

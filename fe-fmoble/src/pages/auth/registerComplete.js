@@ -63,6 +63,7 @@ const RegisterComplete = () => {
                 token: idTokenResult.token,
               },
             });
+            localStorage.setItem("token", idTokenResult.token);
           })
           .catch((err) => console.log(err));
         // redirect
@@ -87,7 +88,7 @@ const RegisterComplete = () => {
         autoFocus
       />
       <br />
-      <button type="submit" className="btn btn-raised">
+      <button type="submit" className="btn btn-dark">
         Complete Registration
       </button>
     </form>

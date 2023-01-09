@@ -70,6 +70,7 @@ const App = () => {
                 token: idTokenResult.token,
               },
             });
+            localStorage.setItem("token", idTokenResult.token);
           })
           .catch((err) => console.log(err));
       }
@@ -111,8 +112,7 @@ const App = () => {
                 <AdminRoute>
                   <AdminLayout />
                 </AdminRoute>
-              }
-            >
+              }>
               <Route index path="dashboard" element={<Dashboard />} />
               <Route path="category" element={<Category />} />
               <Route path="category/:slug" element={<CategoryUpdate />} />

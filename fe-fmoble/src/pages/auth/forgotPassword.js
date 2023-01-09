@@ -51,7 +51,7 @@ const ForgotPassword = ({ history }) => {
           autoFocus
         />
         <br />
-        <button className="btn btn-raised" disabled={!email}>
+        <button className="btn btn-dark" disabled={!email}>
           Submit
         </button>
       </form>
