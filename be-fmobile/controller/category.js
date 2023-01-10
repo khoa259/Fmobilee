@@ -20,7 +20,6 @@ export const read = async (req, res) => {
     .populate("category")
     .populate("postedBy")
     .exec();
-  console.log("products", products);
   res.json({
     category,
     products,

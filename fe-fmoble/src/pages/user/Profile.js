@@ -11,12 +11,15 @@ const Profile = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    setValue,
   } = useForm();
   const { id } = useParams();
   const { user } = useSelector((state) => ({ ...state }));
   const [open, setOpen] = useState(false);
 
   const onUpdate = (data) => {
+    setValue("name", data.name);
+    setValue("email", data.email);
     updateProfileUser(id, data);
   };
 
@@ -29,10 +32,15 @@ const Profile = () => {
         title="Cập nhật thông tin người dùng"
         centered
         open={open}
-        onOk={() => setOpen(false)}
+        footer={[
+          <Button type="primary" htmlType="submit" form="myForm">
+            Xác nhận
+          </Button>,
+        ]}
         onCancel={() => setOpen(false)}
-        width={800}>
-        <form onSubmit={handleSubmit(onUpdate)}>
+        width={800}
+      >
+        <form onSubmit={handleSubmit(onUpdate)} id="myForm">
           <h4 className="text-center">Thông tin cá nhân</h4>
           {/* <FileUpload /> */}
           <label className="h5">Tên người dùng</label>
@@ -41,7 +49,6 @@ const Profile = () => {
             className="form-control"
             value={user?.name}
             {...register("name")}
-            disabled
           />
           <label className="h5">Email của bạn</label>
           <input
@@ -49,14 +56,13 @@ const Profile = () => {
             placeholder="Tên người dùng"
             value={user?.email}
             {...register("email")}
-            disabled
           />
           <label className="h5">Số điện thoại</label>
           <input
             className="form-control"
             placeholder="Số điện thoại"
             value={user?.avatar}
-            {...register("096565656")}
+            {...register("user")}
           />
           <label className="h5">Địa chỉ</label>
           <input
