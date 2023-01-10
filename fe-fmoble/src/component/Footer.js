@@ -28,7 +28,7 @@ const Footer = () => {
       <section>
         <div className="container text-md-start my-4">
           <section>
-            <form action>
+            <form>
               <div className="row d-flex justify-content-center">
                 <div className="col-auto">
                   <p className="pt-2">
