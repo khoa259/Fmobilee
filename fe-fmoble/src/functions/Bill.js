@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const createBill = async (data) => {
   console.log("data", data);
-  axios.post(`${process.env.REACT_APP_API}/bill`, data);
+  const res = await axios.post(`${process.env.REACT_APP_API}/bill`, data);
+  return res.status;
 };
 
 export const getAllBill = async () => {

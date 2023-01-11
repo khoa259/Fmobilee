@@ -11,19 +11,15 @@ import { createBill } from "../../functions/Bill";
 //load stripe outside of components render to avoid
 const Payments = () => {
   const { user } = useSelector((state) => ({ ...state }));
-  console.log("user", user);
   const { handleSubmit, register, reset } = useForm();
   const { email } = user;
   const urlPaymentReturn = window.location.search;
-  // console.log("urlPaymentReturn", urlPaymentReturn);
   const [products, setProducts] = useState([]);
   const [idCart, setIdCard] = useState();
-  console.log("idCart", idCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFail, setisModalFail] = useState(false);
   const navigate = useNavigate();
 
-  console.log("email", email);
   //call APi return Vnpay
   useEffect(() => {
     axios
@@ -31,7 +27,6 @@ const Payments = () => {
       .then((res) => {
         const getToken = localStorage.getItem("token");
         getUserCart(getToken).then((res) => {
-          console.log("res Products", res);
           setProducts(res.data.products);
           setIdCard(res.data._id);
           reset(res.data.products);
@@ -41,16 +36,14 @@ const Payments = () => {
 
   // get value in url
   const myKeyValue = window.location.search;
-  console.log("myKeyValue", myKeyValue);
   const urlParams = new URLSearchParams(myKeyValue);
   const vnp_Amount = urlParams.get("vnp_Amount");
-  console.log("vnp_Amount", vnp_Amount);
   const vnp_BankCode = urlParams.get("vnp_BankCode");
   const vnp_PayDate = urlParams.get("vnp_PayDate");
   const vnp_TransactionNo = urlParams.get("vnp_TransactionNo");
 
   //Handle SUbmit form
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const newData = {
       ...data,
       tradingCode: vnp_TransactionNo,
@@ -59,8 +52,12 @@ const Payments = () => {
       username: user.name,
       products: products.map((product) => product.product),
     };
-    console.log("newData", newData);
-    createBill(newData);
+    const status = await createBill(newData);
+    if (status === 200) {
+      showModal();
+    } else {
+      showModalFail();
+    }
   };
   const showModalFail = () => {
     setisModalFail(true);
@@ -116,7 +113,6 @@ const Payments = () => {
               {products &&
                 products?.map((p, i) => (
                   <div className="row" key={i}>
-                    {console.log("p", p)}
                     <div className="col-lg-4 ">
                       <input
                         className="input-bill-title"
