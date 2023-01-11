@@ -78,6 +78,15 @@ export const saveAddress = async (req, res) => {
   res.json({ ok: true });
 };
 
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id }).exec();
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({ message: "Not found" });
+  }
+};
+
 export const countPrdCard = async (req, res) => {
   try {
     const { id } = req.params;
