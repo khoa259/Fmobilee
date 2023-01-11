@@ -15,6 +15,9 @@ const billSchema = new mongoose.Schema(
         price: {
           type: Number,
         },
+        images: {
+          type: Array,
+        },
         count: {
           type: Number,
         },

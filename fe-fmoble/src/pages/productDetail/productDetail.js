@@ -81,21 +81,20 @@ const ProductDetail = () => {
   };
   return (
     <div className="container containerDetail">
-      {/* {JSON.stringify(product.category)} */}
       <div className=" mt-5 mb-5">
         <div className="pb-3">
           {category && (
             <div>
-              <Link className="namecate" to={`/${category.slug}`}>
+              <Link className="namecate" to={`/category/${category.slug}`}>
                 {category.name} /
               </Link>
               <span> {product.title}</span>
             </div>
           )}
         </div>
-        <div className="card">
+        <div className="card rounded-lg">
           {/* _id: {product._id} */}
-          <div className="row g-0">
+          <div className="row g-0 ">
             <div className="col-md-6 border-end">
               <div className=" ">
                 <Carousel showArrows={true} infiniteLoop>
@@ -110,7 +109,9 @@ const ProductDetail = () => {
               <div className="p-3 right-side">
                 <div className="pb-3">
                   {category && (
-                    <Link to={`/${category.slug}`}> {category.name}</Link>
+                    <Link to={`/category/${category.slug}`}>
+                      {category.name}
+                    </Link>
                   )}
                 </div>
                 <div>
@@ -183,8 +184,7 @@ const ProductDetail = () => {
                   <button
                     onClick={handleAddToCart}
                     className="btn btn-dark"
-                    disabled={product.quantity === 0}
-                  >
+                    disabled={product.quantity === 0}>
                     <i className="fa-solid fa-cart-plus mr-2"></i>
                     Thêm vào giỏ hàng
                   </button>
@@ -194,7 +194,7 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <h3 className="text-center mt-5">Related Products</h3>
+      <h3 className="text-center mt-5">Sản phẩm liên quan</h3>
       {/* {JSON.stringify(related)} */}
 
       {related.length == 0 ? (

@@ -7,9 +7,8 @@ import { formatCash } from "../formatCash";
 const ProductCartInCheckOut = ({ p, idCart, load, setLoad, total }) => {
   let dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
-  console.log("cart", p.product);
+  // console.log("cart", p.product);
   const [quantityState, setQuantityState] = useState(p?.count || 1);
-  console.log(p);
 
   const quantityPlus = () => {
     setQuantityState(quantityState + 1);

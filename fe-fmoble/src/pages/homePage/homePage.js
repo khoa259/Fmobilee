@@ -3,7 +3,6 @@ import React from "react";
 import "./homePage.css";
 import subBanner from "../../images/banner-doanh-nghiep.jpg";
 import NewArrivels from "../../component/home/NewArrivels";
-import BestSeller from "../../component/home/BestSeller";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {

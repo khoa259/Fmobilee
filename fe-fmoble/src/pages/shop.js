@@ -7,8 +7,6 @@ import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
-import "../component/navShop/navShop.css";
-
 import { userCart } from "../functions/user";
 import { formatCash } from "../component/formatCash";
 import Spinner from "../component/spinner/spinner";
@@ -80,7 +78,7 @@ const Shop = () => {
     return () => clearTimeout(delayed);
   }, [text]);
 
-  // fillter product by price
+  // filter product by price
   useEffect(() => {
     fetchProducts({ price });
     console.log("ok to request", price);
@@ -98,7 +96,7 @@ const Shop = () => {
     }, 300);
   };
 
-  // handle check for categories
+  // filter product by pricecategories
   const handleCheck = (e) => {
     dispatch({
       type: "SEARCH_QUERY",

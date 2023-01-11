@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Card, Col, Container } from "react-bootstrap";
 import { formatCash } from "../../component/formatCash";
-import { showAverage } from "../../functions/ratings";
 
 const CategoryHome = () => {
   const [category, setCategory] = useState({});
@@ -30,7 +29,7 @@ const CategoryHome = () => {
                 Loading...
               </h4>
             ) : (
-              <h3 className="text-center p-3 mt-5 mb-5 ">{category.name}</h3>
+              <h3 className="text-center p-3 mt-4">{category.name}</h3>
             )}
           </div>
         </div>

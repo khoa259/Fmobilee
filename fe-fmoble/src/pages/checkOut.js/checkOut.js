@@ -16,16 +16,15 @@ const CheckOut = () => {
     handleSubmit,
   } = useForm();
   const [products, setProducts] = useState([]);
-  const [Province, setProvince] = useState([]);
-  const [District, setDistrict] = useState([]);
   const [total, setTotal] = useState(0);
-  const [address, setAddress] = useState("");
+  // const [Province, setProvince] = useState([]);
+  // const [District, setDistrict] = useState([]);
+  // const [address, setAddress] = useState("");
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
   useEffect(() => {
     const getToken = localStorage.getItem("token");
-    console.log(getToken);
     getUserCart(getToken).then((res) => {
       setProducts(res.data.products);
       let totalCard = 0;
@@ -63,8 +62,9 @@ const CheckOut = () => {
         amount: total,
       })
       .then((res) => {
-        window.location.href = res.data.url;
+        console.log((window.location.href = res.data.url));
       });
+    console.log("payment", e);
   };
 
   return (
@@ -81,29 +81,20 @@ const CheckOut = () => {
 
           <ul className="list-group mb-3">
             {products.map((p, i) => (
-              <>
-                <li
-                  className="list-group-item d-flex justify-content-between lh-condensed"
-                  key={i}
-                >
+              <div key={i}>
+                <li className="list-group-item d-flex justify-content-between lh-condensed">
                   <div>
                     <b className="my-0">{p.product.title}</b>
+                    <div>
+                      <label>Số lượng:</label>
+                      <span className="my-0">{p?.count}</span>
+                    </div>
                   </div>
-
                   <span className="text-muted">
                     {formatCash(`${p.product.price * p?.count}`)}đ
                   </span>
                 </li>
-                <li
-                  className="list-group-item d-flex justify-content-between lh-condensed"
-                  key={i}
-                >
-                  <div>
-                    <label>Số lượng:</label>
-                    <span className="my-0">{p?.count}</span>
-                  </div>
-                </li>
-              </>
+              </div>
             ))}
 
             <li className="list-group-item d-flex justify-content-between bg-light">
@@ -115,8 +106,8 @@ const CheckOut = () => {
             </li>
 
             <li className="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>{formatCash(`${total}`)}</strong>
+              <span>Tổng tiền (VNĐ)</span>
+              <strong className="h5">{formatCash(`${total}`)}đ</strong>
             </li>
             <span className="text-primary pl-2" onClick={emptyCart}>
               Xóa toàn bộ đơn hàng
@@ -256,7 +247,7 @@ const CheckOut = () => {
             </div>
 
             <button className="btn btn-primary btn-lg btn-block">
-              Continue to checkout
+              thanh toán
             </button>
             {/* </Link> */}
           </form>

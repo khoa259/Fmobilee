@@ -1,0 +1,12 @@
+.btnViewMore {
+    padding: 7px 40px;
+    border: 2px solid rgb(11, 58, 197);
+    border-radius: 12px;
+    color: rgb(11, 58, 197);
+}
+
+.btnViewMore:hover, .btnViewMore:focus {
+    color: white;
+    box-shadow: inset 15rem 0 0 0 rgb(11, 58, 197);
+    transition-duration: 0.5s;
+}
