@@ -132,3 +132,53 @@ export const ordersByUser = async (req, res) => {
     res.status(400).json({ message: "không thể cap nhat" });
   }
 };
+
+export const wishlist = async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const user = await User.findOneAndUpdate(
+      { email: req.user.email },
+      { $addToSet: { wishlist: productId } },
+      { new: true }
+    ).exec();
+    res.json(user);
+  } catch (err) {
+    res.status(400).json({
+      err: err.message,
+    });
+  }
+};
+
+export const getwishlist = async (req, res) => {
+  try {
+    const list = await User.find({ email: req.user.email })
+      .select("wishlist")
+      .populate("wishlist")
+      .exec();
+    res.json(list);
+  } catch (err) {
+    res.status(400).json({
+      err: err.message,
+    });
+  }
+};
+
+export const deletewishlist = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const user = await User.findOneAndUpdate(
+      { email: req.user.email },
+      { $pull: { wishlist: productId } }
+    ).exec();
+    res.json(user);
+  } catch (err) {
+    res.status(400).json({
+      err: err.message,
+    });
+  }
+};
+
+export const updatewishlist = async (req, res) => {
+  try {
+  } catch (error) {}
+};

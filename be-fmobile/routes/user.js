@@ -17,4 +17,12 @@ routerCart.delete("/user/cart", authCheck, emptyCart); // empty cart
 routerCart.post("/user/address", authCheck, saveAddress);
 routerCart.put("/user/cart/:id", countPrdCard);
 routerCart.get("/user/orders/:id", ordersByUser);
+
+// wishlist
+
+routerCart.post("/user/wishlist", authCheck, wishlist);
+routerCart.get("/user/wishlist", authCheck, getwishlist);
+routerCart.delete("/user/wishlist", authCheck, deletewishlist);
+routerCart.put("/user/wishlist/:id", authCheck, updatewishlist);
+
 export default routerCart;

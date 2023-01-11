@@ -20,7 +20,6 @@ const CheckOut = () => {
   const [District, setDistrict] = useState([]);
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState("");
-  const [savedAdress, setSavedAdress] = useState(false);
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
