@@ -6,6 +6,9 @@ import {
   saveAddress,
   countPrdCard,
   ordersByUser,
+  wishlist,
+  getwishlist,
+  deletewishlist,
 } from "../controller/user.js";
 import { authCheck, adminCheck } from "../middleware/auth.js";
 
@@ -23,6 +26,5 @@ routerCart.get("/user/orders/:id", ordersByUser);
 routerCart.post("/user/wishlist", authCheck, wishlist);
 routerCart.get("/user/wishlist", authCheck, getwishlist);
 routerCart.delete("/user/wishlist", authCheck, deletewishlist);
-routerCart.put("/user/wishlist/:id", authCheck, updatewishlist);
 
 export default routerCart;

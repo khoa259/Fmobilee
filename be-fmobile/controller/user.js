@@ -177,8 +177,3 @@ export const deletewishlist = async (req, res) => {
     });
   }
 };
-
-export const updatewishlist = async (req, res) => {
-  try {
-  } catch (error) {}
-};
