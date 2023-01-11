@@ -50,7 +50,7 @@ const Payments = () => {
   const vnp_TransactionNo = urlParams.get("vnp_TransactionNo");
 
   //Handle SUbmit form
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const newData = {
       ...data,
       tradingCode: vnp_TransactionNo,
@@ -60,7 +60,12 @@ const Payments = () => {
       products: products.map((product) => product.product),
     };
     console.log("newData", newData);
-    createBill(newData);
+    const status = await createBill(newData);
+    if (status === 200) {
+      showModal();
+    } else {
+      showModalFail();
+    }
   };
   const showModalFail = () => {
     setisModalFail(true);
