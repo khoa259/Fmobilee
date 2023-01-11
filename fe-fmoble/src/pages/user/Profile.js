@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Button, Modal } from "antd";
 import { useParams } from "react-router-dom";
 
 import { updateProfileUser } from "../../functions/auth";
+import axios from "axios";
 const Profile = () => {
   const {
     register,
@@ -14,13 +15,26 @@ const Profile = () => {
     setValue,
   } = useForm();
   const { id } = useParams();
-  const { user } = useSelector((state) => ({ ...state }));
+  const user = useSelector((state) => state.user);
+
   const [open, setOpen] = useState(false);
+  const [userUpdate, setUserUpdate] = useState([]);
+  const [callApi, setCallApi] = useState(Math.random());
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await axios.get(`http://localhost:8000/api/user/${id}`);
+      setUserUpdate(data);
+    };
+    getUser();
+  }, [id, callApi]);
 
   const onUpdate = (data) => {
     setValue("name", data.name);
     setValue("email", data.email);
     updateProfileUser(id, data);
+    setOpen(false);
+    setCallApi(Math.random());
   };
 
   return (
@@ -37,6 +51,7 @@ const Profile = () => {
             Xác nhận
           </Button>,
         ]}
+        onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
         width={800}
       >
@@ -47,28 +62,24 @@ const Profile = () => {
           <input
             placeholder="Tên người dùng"
             className="form-control"
-            value={user?.name}
             {...register("name")}
           />
           <label className="h5">Email của bạn</label>
           <input
             className="form-control"
             placeholder="Tên người dùng"
-            value={user?.email}
             {...register("email")}
           />
           <label className="h5">Số điện thoại</label>
           <input
             className="form-control"
             placeholder="Số điện thoại"
-            value={user?.avatar}
             {...register("user")}
           />
           <label className="h5">Địa chỉ</label>
           <input
             className="form-control"
             placeholder="Địa chỉ"
-            value={user?.address}
             {...register("address")}
           />
           ;
@@ -90,7 +101,7 @@ const Profile = () => {
                   className="rounded-circle img-fluid"
                   style={{ width: 150 }}
                 />
-                <h5 className="my-3">{user?.name}</h5>
+                <h5 className="my-3">{userUpdate?.name}</h5>
               </div>
             </div>
           </div>
@@ -102,7 +113,9 @@ const Profile = () => {
                     <p className="mb-0 fw-normal">Họ tên</p>
                   </div>
                   <div className="col-sm-9">
-                    <p className="text-muted mb-0 fw-normal">{user.name}</p>
+                    <p className="text-muted mb-0 fw-normal">
+                      {userUpdate.name}
+                    </p>
                   </div>
                 </div>
                 <hr />
@@ -111,7 +124,7 @@ const Profile = () => {
                     <p className="mb-0">Email</p>
                   </div>
                   <div className="col-sm-9">
-                    <p className="text-muted mb-0">{user.email}</p>
+                    <p className="text-muted mb-0">{userUpdate.email}</p>
                   </div>
                 </div>
                 <hr />
@@ -129,7 +142,7 @@ const Profile = () => {
                     <p className="mb-0">Địa chỉ</p>
                   </div>
                   <div className="col-sm-9">
-                    <p className="text-muted mb-0">{user?.address}</p>
+                    <p className="text-muted mb-0">{userUpdate?.address}</p>
                   </div>
                 </div>
               </div>
