@@ -15,6 +15,7 @@ import routerPayment from "./routes/stripe.js";
 import routerStatus from "./routes/status/Status.js";
 import routerBill from "./routes/Bill/Bill.js";
 import order from "./routes/orderVnpay/order.js";
+import router from "./routes/Contact.js";
 // variable
 
 // console.log("test env", process.env.STRIPE_SECRET);
@@ -50,6 +51,7 @@ app.use("/api", routerPayment);
 app.use("/api/order", order);
 app.use("/api", routerStatus);
 app.use("/api", routerBill);
+app.use("/api", router);
 
 // port
 const port = process.env.PORT || 8000;
