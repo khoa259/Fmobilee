@@ -29,7 +29,7 @@ const CategoryHome = () => {
                 Loading...
               </h4>
             ) : (
-              <h3 className="text-center p-3 mt-4">{category.name}</h3>
+              <h2 className="text-center p-3 mt-4">{category.name}</h2>
             )}
           </div>
         </div>

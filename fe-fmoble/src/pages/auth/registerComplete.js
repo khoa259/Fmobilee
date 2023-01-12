@@ -89,7 +89,7 @@ const RegisterComplete = () => {
       />
       <br />
       <button type="submit" className="btn btn-dark">
-        Complete Registration
+        Đăng Ký
       </button>
     </form>
   );
@@ -98,7 +98,7 @@ const RegisterComplete = () => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <h4>Register Complete</h4>
+          <h4>Đăng ký tài khoản</h4>
           {completeRegistrationForm()}
         </div>
       </div>

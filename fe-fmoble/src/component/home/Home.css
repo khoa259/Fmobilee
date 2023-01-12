@@ -10,3 +10,7 @@
     box-shadow: inset 15rem 0 0 0 rgb(11, 58, 197);
     transition-duration: 0.5s;
 }
+
+.title:hover {
+    color: #000;
+}

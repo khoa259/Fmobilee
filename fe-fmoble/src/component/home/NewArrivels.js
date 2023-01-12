@@ -48,7 +48,7 @@ const NewArrivels = () => {
                 <div className="text-center mt-5 ">
                   <Link
                     to={`/category/${product.category.slug}`}
-                    className=" h2">
+                    className="title h2">
                     {product.category.name}
                   </Link>
                 </div>

@@ -82,7 +82,7 @@ const Login = () => {
           placeholder="Your password"
         />
       </div>
-      <Link to="/forgot/password">Forgot Password</Link>
+      <Link to="/forgot/password">Quên Mật Khẩu</Link>
       <br />
       <Button
         onClick={handleSubmit}
@@ -91,9 +91,8 @@ const Login = () => {
         block
         shape="round"
         size="large"
-        disabled={!email || password.length < 6}
-      >
-        Login with Email/Password
+        disabled={!email || password.length < 6}>
+        Đăng Nhập Email/Password
       </Button>
     </form>
   );
@@ -133,18 +132,29 @@ const Login = () => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          {loading ? <Spiner /> : <h4>Login</h4>}
+          {loading ? <Spiner /> : <h4>Đăng Nhập</h4>}
           {loginForm()}
+
           <Button
             onClick={googleLogin}
             type="danger"
             className="mb-3"
             block
             shape="round"
-            size="large"
-          >
-            Login with Google
+            size="large">
+            Đăng Nhập Google
           </Button>
+          <Link to="/register">
+            <Button
+              className="mb-3"
+              block
+              shape="round"
+              size="large"
+              type="primary"
+              ghost>
+              Đăng Ký Tài Khoản
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

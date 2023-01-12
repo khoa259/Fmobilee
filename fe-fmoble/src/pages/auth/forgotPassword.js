@@ -24,7 +24,9 @@ const ForgotPassword = ({ history }) => {
       .then(() => {
         setEmail("");
         setLoading(false);
-        toast.success("Check your email for password reset link");
+        toast.success(
+          `Kiểm tra Email ${email} của bạn để thực hiện đổi mật khẩu`
+        );
       })
       .catch((error) => {
         setLoading(false);
