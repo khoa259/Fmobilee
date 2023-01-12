@@ -203,7 +203,8 @@ a:hover {
   display: block;
   font-size: 16px !important;
   font-weight: 600;
-  /* padding: 20px 0; */
+  color: #000;
+  padding-top: 20px;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis;
@@ -251,10 +252,11 @@ a:hover {
 
 .avatar-button {
   float: right;
-  color: #f1f1f1;
-  background: #eb0e0e;
+  color: #e60b0b;
+  background: none;
   border: none;
-  border-radius: 50px;
+  padding: 3px;
+  font-size: 26px;
 }
 
 .avatar-button:focus {

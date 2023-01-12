@@ -39,13 +39,13 @@ const ProductCreate = () => {
     createProduct(value, user.token)
       .then((res) => {
         console.log(res);
-        history("/admin/product");
         toast.success(`${value.title} is created`);
       })
       .catch((err) => {
         toast.error(err.response.data.err);
       });
     //
+    history("/admin/product");
   };
 
   const handleChange = (e) => {

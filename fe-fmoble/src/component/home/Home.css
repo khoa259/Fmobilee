@@ -14,3 +14,8 @@
 .title:hover {
     color: #000;
 }
+
+.img-fluid {
+    min-height: 215px !important;
+    object-fit: cover;
+}

@@ -18,8 +18,8 @@ const FileUpload = ({ value, setValue, setLoading, loading }) => {
       for (let i = 0; i < files.length; i++) {
         Resizer.imageFileResizer(
           files[i],
-          720,
-          720,
+          1080,
+          1080,
           "JPEG",
           100,
           0,
@@ -91,7 +91,7 @@ const FileUpload = ({ value, setValue, setLoading, loading }) => {
                 className="avatar-button"
                 key={index}
                 onClick={() => handleImageRemove(image.public_id)}>
-                <i className="fa-solid fa-x"></i>
+                <i className="fa-regular fa-circle-xmark"></i>
               </button>
             </div>
           ))}
