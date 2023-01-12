@@ -52,12 +52,12 @@ const ProductCartInCheckOut = ({ p, idCart, load, setLoad, total }) => {
               </div>
             </div>
             <div className="col-6">
-              <span className="mb-2 lead span">{p.product.title}</span>
+              <p className="mb-2 span">{p.product.title}</p>
             </div>
           </div>
         </div>
         <div className="d-none d-lg-block col-lg-2">
-          <span className=" text-secondary text-decoration-line-through">
+          <span className=" span mb-2 text-decoration-line-through">
             {formatCash(`${p.product.price}`)}đ
           </span>
         </div>
@@ -80,7 +80,7 @@ const ProductCartInCheckOut = ({ p, idCart, load, setLoad, total }) => {
           </div>
         </div>
         <div className="col-auto col-md-2 text-end">
-          <span className="text-secondary text-decoration-line-through">
+          <span className="span mb-2 text-decoration-line-through">
             {formatCash(`${p.product.price * quantityState}`)}đ
           </span>
         </div>

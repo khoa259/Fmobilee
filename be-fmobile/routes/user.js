@@ -10,7 +10,7 @@ import {
   getwishlist,
   deletewishlist,
 } from "../controller/user.js";
-import { authCheck, adminCheck } from "../middleware/auth.js";
+import { authCheck } from "../middleware/auth.js";
 
 const routerCart = Router();
 

@@ -1,4 +1,5 @@
 import Product from "../models/product.js";
+import Category from "../models/category.js";
 import slugify from "slugify";
 import User from "../models/User.js";
 
@@ -190,4 +191,11 @@ export const searchFilters = async (req, res) => {
     console.log("category---->", category);
     await handleCategory(req, res, category);
   }
+};
+
+export const showProductByCategory = async (req, res) => {
+  const { cateId } = req.body.params.slug;
+  const product = await Product.findById(cateId).populate("category").exec();
+  // const product = await Product.findOne(category).populate("products").exec();
+  res.json(product);
 };

@@ -32,16 +32,19 @@ const Register = () => {
 
   const registerForm = () => (
     <form onSubmit={handleSubmit}>
+      <label className="span">Email của bạn</label>
       <input
         type="email"
         className="form-control"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        placeholder="Nhập Email của bạn"
         autoFocus
+        required
       />
 
-      <button type="submit" className="btn btn-dark">
-        Register
+      <button type="submit" className="btn btn-dark mt-2">
+        Gửi
       </button>
     </form>
   );
@@ -50,7 +53,7 @@ const Register = () => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <h4>Register</h4>
+          <h4>đăng ký tài khoản</h4>
           {registerForm()}
         </div>
       </div>

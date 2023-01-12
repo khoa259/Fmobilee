@@ -11,6 +11,7 @@ import {
   productStar,
   listRelated,
   searchFilters,
+  showProductByCategory,
 } from "../controller/product.js";
 // middlewares
 import { authCheck, adminCheck } from "../middleware/auth.js";
@@ -33,4 +34,5 @@ routerProducts.put("/product/star/:productId", authCheck, productStar);
 routerProducts.get("/product/related/:productId", listRelated);
 //search
 routerProducts.post("/search/filters", searchFilters);
+routerProducts.get("/products/:slug", showProductByCategory);
 export default routerProducts;

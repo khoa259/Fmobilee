@@ -38,7 +38,7 @@ const ForgotPassword = ({ history }) => {
       {loading ? (
         <h4 className="text-danger">Loading</h4>
       ) : (
-        <h4>Forgot Password</h4>
+        <h4>quên mật khẩu</h4>
       )}
 
       <form onSubmit={handleSubmit}>
@@ -47,12 +47,12 @@ const ForgotPassword = ({ history }) => {
           className="form-control"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Type your email"
+          placeholder="Nhập Email của bạn"
           autoFocus
+          required
         />
-        <br />
-        <button className="btn btn-dark" disabled={!email}>
-          Submit
+        <button className="btn btn-dark mt-1" disabled={!email}>
+          Gửi
         </button>
       </form>
     </div>

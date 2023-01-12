@@ -48,7 +48,8 @@ const CheckOut = () => {
         payload: [],
       });
       // remove from backend
-      emptyUserCart(user.token).then((res) => {
+      const getToken = localStorage.getItem("token");
+      emptyUserCart(getToken).then((res) => {
         console.log(products);
         setProducts([]);
         setTotal(0);
@@ -109,9 +110,9 @@ const CheckOut = () => {
               <span>Tổng tiền (VNĐ)</span>
               <strong className="h5">{formatCash(`${total}`)}đ</strong>
             </li>
-            <span className="text-primary pl-2" onClick={emptyCart}>
+            {/* <span className="text-primary pl-2" onClick={emptyCart}>
               Xóa toàn bộ đơn hàng
-            </span>
+            </span> */}
           </ul>
 
           <form className="card p-2">

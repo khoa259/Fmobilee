@@ -30,6 +30,7 @@ const Payments = () => {
           setProducts(res.data.products);
           setIdCard(res.data._id);
           reset(res.data.products);
+          console.log(res.data);
         });
       });
   }, []);
@@ -83,7 +84,7 @@ const Payments = () => {
 
   return (
     <>
-      {/* <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <Result
           status="success"
           title="Đơn hàng đã được xác nhận thành công"
@@ -103,7 +104,7 @@ const Payments = () => {
             </Link>
           }
         />
-      </Modal> */}
+      </Modal>
       <div className="container p-5 ">
         <h2 className="text-center">Đơn Hàng Thanh Toán</h2>
         <div className="pt-4">
@@ -113,7 +114,7 @@ const Payments = () => {
               {products &&
                 products?.map((p, i) => (
                   <div className="row" key={i}>
-                    <div className="col-lg-4 ">
+                    <div className="col-lg-8 ">
                       <input
                         className="input-bill-title"
                         type="text"
@@ -121,22 +122,30 @@ const Payments = () => {
                         value={p?.product?.title}
                       />
                     </div>
-
-                    <div className="col-lg-4 ">
+                    <div className="col-lg-1">
+                      <input
+                        className="input-bill-title"
+                        type="text"
+                        {...register("count")}
+                        value={p?.count}
+                      />
+                      <br />
+                    </div>
+                    <div className="col-lg-3">
                       <input
                         className="input-bill-title"
                         type="text"
                         {...register("price")}
-                        value={formatCash(`${p?.product?.price}`)}
+                        value={formatCash(`${p?.product?.price * p?.count}`)}
                       />
                       <br />
                     </div>
-
-                    <div className="col-4 text-success">
+                    ,
+                    {/* <div className="col-4 text-success">
                       <span className="bill">
                         {formatCash(`${p?.product?.price * p?.count}`)} đ
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                 ))}
 
@@ -165,7 +174,7 @@ const Payments = () => {
               </div> */}
               <div>
                 <span className="bill">
-                  Tên người đặt hàng
+                  Trạng thái đơn hàng:
                   <input
                     className="input-bill"
                     type="text"

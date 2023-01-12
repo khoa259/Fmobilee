@@ -27,7 +27,7 @@ const Profile = () => {
       setUserUpdate(data);
     };
     getUser();
-  }, [id, callApi]);
+  }, [callApi]);
 
   const onUpdate = (data) => {
     setValue("name", data.name);
@@ -53,8 +53,7 @@ const Profile = () => {
         ]}
         onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
-        width={800}
-      >
+        width={800}>
         <form onSubmit={handleSubmit(onUpdate)} id="myForm">
           <h4 className="text-center">Thông tin cá nhân</h4>
           {/* <FileUpload /> */}

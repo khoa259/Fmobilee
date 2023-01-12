@@ -26,13 +26,13 @@ export const userCart = async (req, res) => {
       let object = {};
       object.product = cart[0]._id;
       object.count = cart[0].count;
-      // object.images = cart[0].images;
+      object.images = cart[0].images;
       object.price = cart[0].price;
       products.push(object);
-      if ((object.product = cart[0]._id)) {
-        cartByUser.cartTotal =
-          cartByUser.cartTotal + object.price * object.count;
-      }
+      // if ((object.product = cart[0]._id)) {
+      //   cartByUser.cartTotal =
+      //     cartByUser.cartTotal + object.price * object.count;
+      // }
     }
     cartByUser.products = [...cartByUser.products, ...products];
     console.log({ ...cartByUser, cartTotal: 100 });
@@ -50,9 +50,12 @@ export const userCart = async (req, res) => {
 };
 
 export const getUserCart = async (req, res) => {
-  const user = await User.findOne({ email: req.user?.email }).exec();
-
+  const mysort = { createdAt: -1 };
+  const user = await User.findOne({ email: req.user?.email })
+    .sort(mysort)
+    .exec();
   const cart = await Cart.findOne({ orderdBy: user?._id })
+    .sort(mysort)
     .populate("products.product", "_id title price totalAfterDiscount")
     .exec();
 
@@ -66,7 +69,9 @@ export const emptyCart = async (req, res) => {
   console.log("empty cart");
   const user = await User.findOne({ email: req.user.email }).exec();
 
-  const cart = await Cart.findOneAndRemove({ orderdBy: user._id }).exec();
+  const cart = await Cart.findOneAndRemove({
+    orderdBy: user.products[0],
+  }).exec();
   res.json(cart);
 };
 
@@ -78,14 +83,14 @@ export const saveAddress = async (req, res) => {
   res.json({ ok: true });
 };
 
-export const getUser = async (req, res) => {
-  try {
-    const user = await User.findOne({ _id: req.params.id }).exec();
-    res.json(user);
-  } catch (error) {
-    res.status(400).json({ message: "Not found" });
-  }
-};
+// export const getUser = async (req, res) => {
+//   try {
+//     const user = await User.findOne({ _id: req.params.id }).exec();
+//     res.json(user);
+//   } catch (error) {
+//     res.status(400).json({ message: "Not found" });
+//   }
+// };
 
 export const countPrdCard = async (req, res) => {
   try {

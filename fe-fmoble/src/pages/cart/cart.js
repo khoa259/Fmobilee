@@ -53,30 +53,22 @@ const Cart = () => {
                 <div className="col-12 col-xl-8 mb-8 mb-xl-0">
                   <div className="d-none d-lg-flex row">
                     <div className="col-12 col-lg-6">
-                      <span
-                        className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}>
+                      <span className="mb-6 span" style={{ fontSize: 16 }}>
                         Thông tin sản phẩm
                       </span>
                     </div>
                     <div className="col-12 col-lg-2">
-                      <span
-                        className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}>
+                      <span className="mb-6 span" style={{ fontSize: 16 }}>
                         Giá tiền
                       </span>
                     </div>
-                    <div className="col-12 col-lg-2 text-center">
-                      <span
-                        className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}>
+                    <div className="col-12 col-lg-2">
+                      <span className=" span" style={{ fontSize: 16 }}>
                         Số lượng
                       </span>
                     </div>
                     <div className="col-12 col-lg-2 text-end">
-                      <span
-                        className="mb-6 text-secondary"
-                        style={{ fontSize: 16 }}>
+                      <span className="mb-2 span" style={{ fontSize: 16 }}>
                         Tổng
                       </span>
                     </div>
@@ -96,7 +88,6 @@ const Cart = () => {
                 <div className="col-md-4 h-50  ">
                   <h4>Thanh Toán</h4>
                   <hr />
-                  <p>Giá tiền :</p>
                   {products.map((p, i) => (
                     <div className="d-flex justify-content-between" key={i}>
                       <p>{p.product.title}</p>

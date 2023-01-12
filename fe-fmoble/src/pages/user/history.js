@@ -28,7 +28,7 @@ const History = () => {
                 <div className="card mb-4" key={i}>
                   <div className="card-header py-3">
                     <h5 className="mb-0">
-                      Ngày đặt hàng: {dateFormat(p.updatedAt, "dd/mm/yyyy")}
+                      Ngày đặt hàng: {dateFormat(p.createdAt, "dd/mm/yyyy")}
                     </h5>
                   </div>
                   <div className="">
