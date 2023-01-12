@@ -83,14 +83,14 @@ export const saveAddress = async (req, res) => {
   res.json({ ok: true });
 };
 
-// export const getUser = async (req, res) => {
-//   try {
-//     const user = await User.findOne({ _id: req.params.id }).exec();
-//     res.json(user);
-//   } catch (error) {
-//     res.status(400).json({ message: "Not found" });
-//   }
-// };
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ id: req.params._id }).exec();
+    res.json(user);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
 
 export const countPrdCard = async (req, res) => {
   try {

@@ -22,12 +22,14 @@ const Profile = () => {
   const [callApi, setCallApi] = useState(Math.random());
 
   useEffect(() => {
-    const getUser = async () => {
-      const { data } = await axios.get(`http://localhost:8000/api/user/${id}`);
+    const getUser = async (id) => {
+      const { data } = await axios.get(
+        `http://localhost:8000/api/user-profile/${id}`
+      );
       setUserUpdate(data);
     };
     getUser();
-  }, [callApi]);
+  }, [id, callApi]);
 
   const onUpdate = (data) => {
     setValue("name", data.name);
@@ -53,7 +55,8 @@ const Profile = () => {
         ]}
         onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
-        width={800}>
+        width={800}
+      >
         <form onSubmit={handleSubmit(onUpdate)} id="myForm">
           <h4 className="text-center">Thông tin cá nhân</h4>
           {/* <FileUpload /> */}
