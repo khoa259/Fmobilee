@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Row, Card, Col } from "react-bootstrap";
+import { Row, Card, Col, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Checkbox, Menu, Slider } from "antd";
 import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
-import { toast } from "react-toastify";
 import _ from "lodash";
 
-import { userCart } from "../functions/user";
-import { formatCash } from "../component/formatCash";
-import Spinner from "../component/spinner/spinner";
+import "./shop.css";
+
+import { formatCash } from "../../component/formatCash";
+import Spinner from "../../component/spinner/spinner";
 import {
   fetchProductsByFilter,
   getProductsByCount,
-} from "../functions/products";
-import { getCategories } from "../functions/category";
+} from "../../functions/products";
+import { getCategories } from "../../functions/category";
 
 const { SubMenu } = Menu;
 
@@ -25,10 +25,9 @@ const Shop = () => {
   const [categories, setCategores] = useState([]);
   const [categoryIds, setCategoryIds] = useState([]);
   const [ok, setOk] = useState(false);
-  const [product, setProduct] = useState({});
 
   let dispatch = useDispatch();
-  let { search, cart, user } = useSelector((state) => ({ ...state }));
+  let { search } = useSelector((state) => ({ ...state }));
   const { text } = search;
 
   useEffect(() => {
@@ -41,27 +40,7 @@ const Shop = () => {
       setProducts(res.data);
     });
   };
-  const handleAddToCart = () => {
-    let cart = [];
-    if (typeof window !== "undefined") {
-      cart.push({
-        ...product,
-        count: 1,
-      });
-      let unique = _.uniqWith(cart, _.isEqual);
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: unique,
-      });
-    }
-    userCart(cart, user.token)
-      .then(({ data }) => {
-        if (data && data.succces) {
-          toast.success(data.message);
-        }
-      })
-      .catch((err) => console.log("cart save err", err));
-  };
+
   //load products defaul on page
   const loadAllProducts = () => {
     getProductsByCount(12).then((p) => {
@@ -161,7 +140,6 @@ const Shop = () => {
                       range
                       // value={price}
                       onChange={handleSlider}
-                      defaultValue={[0, 90000000]}
                       max={90000000}
                     />
                   </div>
@@ -183,8 +161,8 @@ const Shop = () => {
               <div className="text-center">Không tìm thấy sản phẩm</div>
             )}
             {products.map((product) => (
-              <Col key={product._id} sm={6} md={6} lg={3} xl={2}>
-                <Card className="card-prd">
+              <Col key={product._id} sm={6} md={6} lg={2}>
+                <Card className="card-prd mt-0 mb-4">
                   {product?.quantity !== 0 ? (
                     <div className="position-absolute stock">còn hàng</div>
                   ) : (
@@ -192,7 +170,7 @@ const Shop = () => {
                   )}
                   <NavLink to={`/${product.slug}`}>
                     <Card.Img
-                      className="img-fluid"
+                      className="img-fluid-shop"
                       src={
                         product.images && product.images.length
                           ? product.images[0].url
@@ -211,15 +189,6 @@ const Shop = () => {
                       Giá từ {formatCash(`${product.price}`)}đ
                     </Card.Text>
                   </Card.Body>
-                  <div className="btnAddToCart">
-                    <button
-                      onClick={handleAddToCart}
-                      className="btn"
-                      disabled={product.quantity === 0}>
-                      <i className="fa-solid fa-cart-plus mr-2"></i>
-                      Thêm vào giỏ hàng
-                    </button>
-                  </div>
                 </Card>
               </Col>
             ))}
