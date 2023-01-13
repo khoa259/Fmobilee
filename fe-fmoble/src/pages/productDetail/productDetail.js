@@ -59,18 +59,24 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    let cart = [];
-    if (typeof window !== "undefined") {
-      cart.push({
-        ...product,
-        count: 1,
-      });
-      let unique = _.uniqWith(cart, _.isEqual);
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: unique,
-      });
+    const userExists = user && user.email;
+    if (userExists) {
+      let cart = [];
+      if (typeof window !== "undefined") {
+        cart.push({
+          ...product,
+          count: 1,
+        });
+        let unique = _.uniqWith(cart, _.isEqual);
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: unique,
+        });
+      }
+    } else {
+      toast.error("Please login to add to cart");
     }
+
     userCart(cart, user.token)
       .then(({ data }) => {
         if (data && data.succces) {
@@ -184,7 +190,8 @@ const ProductDetail = () => {
                   <button
                     onClick={handleAddToCart}
                     className="btn btn-dark"
-                    disabled={product.quantity === 0}>
+                    disabled={product.quantity === 0}
+                  >
                     <i className="fa-solid fa-cart-plus mr-2"></i>
                     Thêm vào giỏ hàng
                   </button>

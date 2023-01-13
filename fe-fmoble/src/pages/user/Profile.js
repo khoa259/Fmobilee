@@ -15,6 +15,8 @@ const Profile = () => {
     setValue,
   } = useForm();
   const { id } = useParams();
+  console.log("id", id);
+
   const user = useSelector((state) => state.user);
 
   const [open, setOpen] = useState(false);
