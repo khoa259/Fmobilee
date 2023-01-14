@@ -1,0 +1,48 @@
+:root {
+    --gray: rgb(198, 192, 192);
+    --white: #fff
+}
+
+.header-box {
+    background-color: var(--gray);
+    padding: 10px 0;
+    border-radius: 8px;
+}
+
+.date-order span {
+    color: var(--white);
+    font-size: 16px;
+}
+
+.status-box span {
+    color: var(--white);
+    font-size: 16px;
+}
+
+.purchase-box {
+    border-bottom: 1px solid var(--gray);
+}
+
+.count-items {
+    text-align: start !important;
+}
+
+.title span {
+    font-weight: 700;
+}
+
+.count-items span {
+    font-weight: 700;
+}
+
+.code-purcharse {
+    text-align: start !important;
+    align-items: center;
+}
+
+.toltal-price {
+    text-align: end !important;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 8px 0;
+}

@@ -35,7 +35,7 @@ import ListProducts from "./pages/admin/product/listProducts";
 import ProductDetail from "./pages/productDetail/productDetail";
 import Cart from "./pages/cart/cart";
 import CheckOut from "./pages/checkOut.js/checkOut";
-import Shop from "./pages/shop";
+import Shop from "./pages/shop/shop";
 import Order from "./pages/admin/order/order";
 import Profile from "./pages/user/Profile";
 import UserLayout from "./layouts/userLayout";
