@@ -46,7 +46,6 @@ const CategoryUpdate = () => {
         <input
           type="text"
           className="form-control"
-          // onChange={(e) => setName(e.target.value)}
           {...register("name", { required: true })}
           // autoFocus
           required

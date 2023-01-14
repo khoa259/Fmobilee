@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import UserNav from "../../component/userNavbar/userNavbar";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
-import { Container } from "react-bootstrap";
 
 const Password = () => {
   const [password, setPassword] = useState("");
@@ -40,7 +38,8 @@ const Password = () => {
           <button
             className="btn btn-primary"
             type="submit"
-            disabled={!password || password.length < 6 || loading}>
+            disabled={!password || password.length < 6 || loading}
+          >
             Submit
           </button>
         </div>
