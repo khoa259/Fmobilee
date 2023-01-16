@@ -39,5 +39,9 @@ export const currentAdmin = async (authToken) => {
 };
 
 export const updateProfileUser = async (id, user) => {
-  await axios.put(`${process.env.REACT_APP_API}/update-user/${id}`, user);
+  const res = await axios.put(
+    `${process.env.REACT_APP_API}/update-user/${id}`,
+    user
+  );
+  return res.status;
 };
