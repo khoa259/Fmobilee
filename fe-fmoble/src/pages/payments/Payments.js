@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { Button, Modal, Result } from "antd";
+
 import "./payment.css";
-import { Button, Modal, Result, Space } from "antd";
+
 import { formatCash } from "../../component/formatCash";
 import { getUserCart } from "../../functions/user";
 import { createBill } from "../../functions/Bill";
@@ -53,6 +55,7 @@ const Payments = () => {
       username: user.name,
       products: products.map((product) => product.product),
     };
+    console.log({ ...data });
     const status = await createBill(newData);
     if (status === 200) {
       showModal();
@@ -81,7 +84,7 @@ const Payments = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  console.log("timepayment", products);
   return (
     <>
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
@@ -89,7 +92,7 @@ const Payments = () => {
           status="success"
           title="Đơn hàng đã được xác nhận thành công"
           subTitle="Đơn hàng của quý khách đã được xác nhận thành công, cùng mua sắm tiếp nhé"
-          extra={[<Button key="buy">Buy Again</Button>]}
+          extra={[<Button key="buy">Mua tiếp</Button>]}
         />
         ;
       </Modal>
@@ -114,22 +117,35 @@ const Payments = () => {
               {products &&
                 products?.map((p, i) => (
                   <div className="row" key={i}>
-                    <div className="col-lg-8 ">
+                    <div className="col-lg-2 ">
+                      <img
+                        src={p.images && p.images.length ? p.images[0].url : ""}
+                        alt={p.images}
+                        style={{ height: "80px", objectFit: "cover" }}
+                        className="m-2"
+                      />
+                      <input
+                        className="input-bill-title"
+                        type="text"
+                        {...register("images")}
+                        // value={p?.images[0]}
+                      />
+                    </div>
+                    <div className="col-lg-7 ">
                       <input
                         className="input-bill-title"
                         type="text"
                         {...register("title")}
                         value={p?.product?.title}
-                      />
-                    </div>
-                    <div className="col-lg-1">
+                      />{" "}
+                      <br />
+                      X
                       <input
                         className="input-bill-title"
                         type="text"
                         {...register("count")}
                         value={p?.count}
                       />
-                      <br />
                     </div>
                     <div className="col-lg-3">
                       <input
@@ -140,12 +156,6 @@ const Payments = () => {
                       />
                       <br />
                     </div>
-                    ,
-                    {/* <div className="col-4 text-success">
-                      <span className="bill">
-                        {formatCash(`${p?.product?.price * p?.count}`)} đ
-                      </span>
-                    </div> */}
                   </div>
                 ))}
 
@@ -161,17 +171,7 @@ const Payments = () => {
                   <div>{user?.name}</div>
                 </span>
               </div>
-              {/* <div>
-                <span className="bill">
-                  Tên người đặt hàng
-                  <input
-                    className="input-bill"
-                    type="text"
-                    {...register("idCart")}
-                    value={"6399d0c17e5cac3f0852d6b1"}
-                  />
-                </span>
-              </div> */}
+
               <div>
                 <span className="bill">
                   Trạng thái đơn hàng:

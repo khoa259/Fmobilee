@@ -92,7 +92,7 @@ const Login = () => {
         shape="round"
         size="large"
         disabled={!email || password.length < 6}>
-        Đăng Nhập Email/Password
+        Đăng Nhập
       </Button>
     </form>
   );

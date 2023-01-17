@@ -5,13 +5,14 @@ export const createBill = async (req, res) => {
   try {
     const {
       products,
-      // images,
-      // count,
+      images,
+      count,
       billTotal,
       orderdBy,
       bankCode,
       username,
       timePayment,
+      createdAt,
       status,
       idCart,
       tradingCode,
@@ -23,13 +24,14 @@ export const createBill = async (req, res) => {
     //check {{products, billTotal, orderdBy} co dung dinh dang model hay ko
     const bill = {
       products,
-      // images,
-      // count,
+      images,
+      count,
       billTotal,
       orderdBy,
       bankCode,
       status,
       username,
+      createdAt,
       timePayment,
       tradingCode,
     };

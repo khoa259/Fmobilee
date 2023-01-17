@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { Button } from "antd";
+
 import {
   createCategory,
   getCategories,
@@ -97,7 +99,7 @@ const Category = () => {
             <Spiner />
           </div>
         ) : (
-          <h4>Create category</h4>
+          <h4>Create </h4>
         )}
         {CategoryForm()}
         <hr />
@@ -116,9 +118,11 @@ const Category = () => {
                 <td>{index + 1}</td>
                 <td>{c.name}</td>
                 <td>
-                  <button onClick={() => handleRemove(c.slug)}>Remove</button>
+                  <Button type="danger" onClick={() => handleRemove(c.slug)}>
+                    Xóa
+                  </Button>
                   <Link to={`/admin/category/${c.slug}`}>
-                    <button>Update</button>
+                    <Button type="primary">Sửa</Button>
                   </Link>
                 </td>
               </tr>

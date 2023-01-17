@@ -39,7 +39,7 @@ const ProductCreate = () => {
     createProduct(value, user.token)
       .then((res) => {
         console.log(res);
-        toast.success(`${value.title} is created`);
+        toast.success(`${value.title} đã được thêm mới `);
       })
       .catch((err) => {
         toast.error(err.response.data.err);

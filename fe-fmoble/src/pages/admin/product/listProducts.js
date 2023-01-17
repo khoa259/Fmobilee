@@ -75,57 +75,51 @@ const ListProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map(
-            (product, index) => (
-              console.log("product", product),
-              (
-                <tr key={index}>
-                  <td>
-                    <img
-                      src={
-                        product.images && product.images.length
-                          ? product.images[0].url
-                          : ""
-                      }
-                      alt={product.images}
-                      style={{ height: "80px", objectFit: "cover" }}
-                      className="m-2"
-                    />
-                  </td>
-                  <td>{product.title}</td>
-                  <td>{formatCash(`${product.price}`)}</td>
-                  <td>{product.category.name}</td>
-                  <td>
-                    {product.quantity > 0 ? (
-                      product.quantity
-                    ) : (
-                      <p className="text-red">hết hàng</p>
-                    )}
-                  </td>
-                  <td>
-                    <div className="">
-                      <Link className="" to={`/admin/product/${product.slug}`}>
-                        <Button type="primary">Sửa</Button>
-                      </Link>
+          {products.map((product, index) => (
+            <tr key={index}>
+              <td>
+                <img
+                  src={
+                    product.images && product.images.length
+                      ? product.images[0].url
+                      : ""
+                  }
+                  alt={product.images}
+                  style={{ height: "80px", objectFit: "cover" }}
+                  className="m-2"
+                />
+              </td>
+              <td>{product.title}</td>
+              <td>{formatCash(`${product.price}`)} đ </td>
+              <td>{product.category.name}</td>
+              <td>
+                {product.quantity > 0 ? (
+                  product.quantity
+                ) : (
+                  <p className="text-red">hết hàng</p>
+                )}
+              </td>
+              <td>
+                <div className="">
+                  <Link className="" to={`/admin/product/${product.slug}`}>
+                    <Button type="primary">Sửa</Button>
+                  </Link>
 
-                      <br />
-                      <Button
-                        type="danger"
-                        onClick={() => handleRemove(`${product.slug}`)}
-                      >
-                        Xóa
-                      </Button>
+                  <br />
+                  <Button
+                    type="danger"
+                    onClick={() => handleRemove(`${product.slug}`)}>
+                    Xóa
+                  </Button>
 
-                      <br />
-                      <Link to={`/${product.slug}`}>
-                        <i className="fa-regular fa-eye btn-eye"></i>
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              )
-            )
-          )}
+                  <br />
+                  <Link to={`/${product.slug}`} target="_blank">
+                    <i className="fa-regular fa-eye btn-eye"></i>
+                  </Link>
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>
