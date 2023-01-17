@@ -31,6 +31,14 @@
     font-weight: 700;
 }
 
+.price-bill {
+    text-align: end !important;
+    color: #0066CC !important;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
 .count-items span {
     font-weight: 700;
 }

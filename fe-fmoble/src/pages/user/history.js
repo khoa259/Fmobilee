@@ -28,15 +28,17 @@ const History = () => {
         <div className="px-3">
           <div className="row header-box">
             <div className="col-6 date-order">
-              <span>Ngày đặt hàng: {dateFormat(new Date(), "dd/mm/yyyy")}</span>
+              <span>
+                Ngày đặt hàng: {dateFormat(order.createdAt, "dd/mm/yyyy")}
+              </span>
             </div>
             <div className="col-6 status-box">
-              <span>{order.status}</span>
+              {/* <span>{order.status}</span> */}
             </div>
           </div>
-          {order?.products?.map((item, index) => {
-            <React.Fragment>
-              <div className="row align-items-center purchase-box">
+          {order?.products?.map((item, index) => (
+            <div key={index}>
+              <div className="row align-items-center purchase-box ">
                 <div className="col-9 row align-items-center">
                   <div className="images-bills">
                     <img
@@ -47,23 +49,27 @@ const History = () => {
                   </div>
                   <div className="titlle-count-items mx-4">
                     <div className="title">
-                      <span>{}</span>
+                      <span>{item.title} </span>
                     </div>
                     <div className="count-items">
                       <span>SL: 1</span>
                     </div>
                   </div>
                 </div>
-                <div className="col-3 price m-0 ">18.000.0000 đ</div>
-              </div>
-              <div className="row align-items-center ">
-                <div className="col code-purcharse">
-                  Mã đơn hàng: 23654526295
+                <div className="col-3 price-bill m-0">
+                  {formatCash(`${item.price}`)}đ
                 </div>
-                <div className="col toltal-price">Tổng tiền: 18.000.000 đ</div>
               </div>
-            </React.Fragment>;
-          })}
+            </div>
+          ))}
+          <div className="row align-items-center ">
+            <div className="col code-purcharse">
+              Mã đơn hàng: {order.tradingCode}
+            </div>
+            <div className="col toltal-price">
+              Tổng tiền: {formatCash(`${order.billTotal}`)}VNĐ
+            </div>
+          </div>
         </div>
       </section>
     </>

@@ -55,7 +55,7 @@ const Login = () => {
         .catch((err) => console.log("failed", err));
       history("/");
     } catch (error) {
-      toast.error(error.message);
+      toast.error("lỗi đăng nhập");
       setLoading(false);
     }
   };

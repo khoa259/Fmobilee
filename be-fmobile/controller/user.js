@@ -35,10 +35,10 @@ export const userCart = async (req, res) => {
       // }
     }
     cartByUser.products = [...cartByUser.products, ...products];
-    console.log({ ...cartByUser, cartTotal: 100 });
+    console.log({ ...cartByUser });
     const updated = await Cart.findOneAndUpdate(
       { _id: cartByUser._id },
-      { ...cartByUser, cartTotal: 100 },
+      { ...cartByUser },
       { new: true }
     ).exec();
 
@@ -60,8 +60,8 @@ export const getUserCart = async (req, res) => {
     .exec();
 
   if (cart) {
-    const { products, cartTotal, totalAfterDiscount, _id } = cart;
-    res.json({ _id, products, cartTotal, totalAfterDiscount });
+    const { products, totalAfterDiscount, _id } = cart;
+    res.json({ _id, products, totalAfterDiscount });
   }
 };
 
@@ -95,7 +95,7 @@ export const getUser = async (req, res) => {
 export const countPrdCard = async (req, res) => {
   try {
     const { id } = req.params;
-    const { idProduct, count, cartTotal } = req.body;
+    const { idProduct, count } = req.body;
 
     const existedCart = await Cart.findById(id);
 
@@ -110,7 +110,7 @@ export const countPrdCard = async (req, res) => {
         _id: mongoose.Types.ObjectId(id),
       },
       {
-        $set: { "products.$[p].count": count, cartTotal: cartTotal },
+        $set: { "products.$[p].count": count },
       },
       {
         arrayFilters: [{ "p._id": idProduct }],

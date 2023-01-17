@@ -40,7 +40,6 @@ export const createBill = async (req, res) => {
     const cartPrd = await cart.findOne({ _id: idCart });
     const updateCart = await cart.findByIdAndUpdate(cartPrd._id, {
       products: [],
-      cartTotal: 0,
     });
 
     return res.status(200).json({
