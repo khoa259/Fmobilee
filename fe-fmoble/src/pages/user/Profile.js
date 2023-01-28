@@ -34,12 +34,16 @@ const Profile = () => {
   }, [id, callApi]);
 
   const onUpdate = async (data) => {
-    await setValue("name", data.name);
+    setValue("name", data.name);
     setValue("email", data.email);
     const status = await updateProfileUser(id, data);
     if (status === 200) {
       showModal();
       setOpen(false);
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setCallApi(Math.random());
+      }, 2000);
     } else {
       showModalFail();
     }
@@ -50,9 +54,7 @@ const Profile = () => {
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+
   const handleOkFail = () => {
     setisModalFail(false);
   };
@@ -66,15 +68,14 @@ const Profile = () => {
 
   return (
     <>
-      <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal open={isModalOpen} onCancel={handleCancel}>
         <Result
           status="success"
           title="Thông tin cá nhân của bạn đã được cập nhật thành công"
-          extra={[<Button key="buy">Thoát</Button>]}
         />
         ;
       </Modal>
-      <Modal open={isModalFail} onOk={handleOkFail} onCancel={handleCancelFail}>
+      <Modal open={isModalFail} onCancel={handleCancelFail}>
         <Result
           status="500"
           title="500"

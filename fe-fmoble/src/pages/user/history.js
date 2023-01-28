@@ -17,7 +17,7 @@ const History = () => {
       return data;
     });
   }, []);
-  console.log("orderBy", order);
+  console.log("order", order);
 
   return (
     <>
@@ -25,18 +25,19 @@ const History = () => {
         <div className="container">
           <h3>Đơn Hàng Của Tôi</h3>
         </div>
-        <div className="px-3">
-          <div className="row header-box">
-            <div className="col-6 date-order">
-              <span>
-                Ngày đặt hàng: {dateFormat(order.createdAt, "dd/mm/yyyy")}
-              </span>
+        {order?.products?.map((item, index) => (
+          <div className="px-3">
+            <div className="row header-box">
+              <div className="col-6 date-order">
+                <span>
+                  Ngày đặt hàng: {dateFormat(order?.createdAt, "dd/mm/yyyy")}
+                </span>
+              </div>
+              <div className="col-6 status-box">
+                {/* <span>{order.status}</span> */}
+              </div>
             </div>
-            <div className="col-6 status-box">
-              {/* <span>{order.status}</span> */}
-            </div>
-          </div>
-          {order?.products?.map((item, index) => (
+
             <div key={index}>
               <div className="row align-items-center purchase-box ">
                 <div className="col-9 row align-items-center">
@@ -49,10 +50,10 @@ const History = () => {
                   </div>
                   <div className="titlle-count-items mx-4">
                     <div className="title">
-                      <span>{item.title} </span>
+                      <span>{item?.title} </span>
                     </div>
                     <div className="count-items">
-                      <span>SL: 1</span>
+                      <span>{item.count}</span>
                     </div>
                   </div>
                 </div>
@@ -61,16 +62,16 @@ const History = () => {
                 </div>
               </div>
             </div>
-          ))}
-          <div className="row align-items-center ">
-            <div className="col code-purcharse">
-              Mã đơn hàng: {order.tradingCode}
-            </div>
-            <div className="col toltal-price">
-              Tổng tiền: {formatCash(`${order.billTotal}`)}VNĐ
+            <div className="row align-items-center ">
+              <div className="col code-purcharse">
+                Mã đơn hàng: {order.tradingCode}
+              </div>
+              <div className="col toltal-price">
+                Tổng tiền: {formatCash(`${order.billTotal}`)}VNĐ
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </section>
     </>
   );
