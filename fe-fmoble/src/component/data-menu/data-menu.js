@@ -9,7 +9,7 @@ export const MenuList = [
 export const MenuAdmin = [
   {
     id: 1,
-    icon: "fa-solid fa-bell ",
+    icon: "fa-solid fa-house",
     label: "Dashboard",
     path: "/admin/dashboard",
   },

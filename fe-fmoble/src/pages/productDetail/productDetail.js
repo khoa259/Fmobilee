@@ -74,7 +74,7 @@ const ProductDetail = () => {
         });
       }
     } else {
-      toast.error("Please login to add to cart");
+      toast.error("Đăng nhập để thêm sản phẩm vào giỏ hàng");
     }
 
     userCart(cart, user.token)
@@ -190,8 +190,7 @@ const ProductDetail = () => {
                   <button
                     onClick={handleAddToCart}
                     className="btn btn-dark"
-                    disabled={product.quantity === 0}
-                  >
+                    disabled={product.quantity === 0}>
                     <i className="fa-solid fa-cart-plus mr-2"></i>
                     Thêm vào giỏ hàng
                   </button>

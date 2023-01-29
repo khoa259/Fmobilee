@@ -44,7 +44,7 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
           name="category"
           className="form-control"
           onChange={handleChange}>
-          <option>Please select</option>
+          <option>Lựa chọn danh mục</option>
           {categories.length > 0 &&
             categories.map((c) => (
               <option key={c._id} value={c._id}>
@@ -68,7 +68,7 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
       <div className="form-group">
         <label>Màu sắc</label>
         <select name="color" className="form-control" onChange={handleChange}>
-          <option>Please select</option>
+          <option>Lựa chọn màu sắc</option>
           {colors.map((c) => (
             <option key={c} value={c}>
               {c}
@@ -94,25 +94,12 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
           name="shipping"
           className="form-control"
           onChange={handleChange}>
-          <option>Please select</option>
+          <option>Lựa chọn vận chuyển</option>
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>
       </div>
-
-      {/* <div className="form-group">
-        <label>Brand</label>
-        <select name="brand" className="form-control" onChange={handleChange}>
-          <option>Please select</option>
-          {brands.map((b) => (
-            <option key={b} value={b}>
-              {b}
-            </option>
-          ))}
-        </select>
-      </div> */}
-
-      <button className="btn btn-outline-primary">Save</button>
+      <button className="btn btn-outline-primary">Thêm mới</button>
     </form>
   );
 };
