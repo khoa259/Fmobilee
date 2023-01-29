@@ -32,7 +32,7 @@ const Payments = () => {
           setProducts(res.data.products);
           setIdCard(res.data._id);
           reset(res.data.products);
-          console.log(res.data);
+          console.log("res.data", res.data);
         });
       });
   }, []);
@@ -47,6 +47,7 @@ const Payments = () => {
 
   //Handle SUbmit form
   const onSubmit = async (data) => {
+    console.log("data", data);
     const newData = {
       ...data,
       tradingCode: vnp_TransactionNo,
@@ -84,7 +85,6 @@ const Payments = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  console.log("timepayment", products);
   return (
     <>
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
@@ -127,7 +127,7 @@ const Payments = () => {
                         className="input-bill-title"
                         type="text"
                         {...register("images")}
-                        // value={p?.images[0]}
+                        value={p?.images[0]}
                       />
                     </div>
                     <div className="col-lg-7 ">
