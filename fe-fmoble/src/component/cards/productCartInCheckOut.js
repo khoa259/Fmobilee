@@ -71,6 +71,7 @@ const ProductCartInCheckOut = ({ p, idCart, load, setLoad, total }) => {
               style={{ width: 48 }}
               type="number"
               placeholder={1}
+              min="0"
               value={quantityState}
               // onChange={handleQuantityChange}
             />

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { formatCash } from "../../component/formatCash";
-import { getAddress } from "../../functions/address";
 import { getUserCart } from "../../functions/user";
 import "./checkOut.css";
 
@@ -34,11 +33,13 @@ const CheckOut = () => {
     axios
       .post("http://localhost:8000/api/order/create_payment_url", {
         amount: total,
+        e,
       })
       .then((res) => {
         console.log((window.location.href = res.data.url));
       });
     console.log("payment", e);
+    console.log("amount", total);
   };
 
   return (
@@ -111,14 +112,13 @@ const CheckOut = () => {
                     className="form-control"
                     id="firstName"
                     placeholder="Họ Tên"
-                    {...register("name", { required: true })}
+                    {...register("userName", { required: true })}
                   />
-                  {errors.name && (
+                  {errors.userName && (
                     <p className=" text-validate">Họ tên không được bỏ trống</p>
                   )}
                 </div>
               </div>
-
               <div className="mb-4">
                 <label htmlFor="email">
                   Email <span className="text-muted">(Optional)</span>
@@ -175,7 +175,6 @@ const CheckOut = () => {
                   <p className=" text-validate">Quá 500 ký tự</p>
                 )}
               </div>
-
               <button className="btn btn-primary btn-lg btn-block">
                 thanh toán
               </button>

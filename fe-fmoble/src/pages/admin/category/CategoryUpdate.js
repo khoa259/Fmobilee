@@ -30,7 +30,7 @@ const CategoryUpdate = () => {
         console.log(res);
         setLoading(false);
         // setName("");
-        toast.success(`"${res.data.name}" is updated`);
+        toast.success(`"${res.data.name}" đã được cập nhật`);
         history("/admin/category");
       })
       .catch((err) => {
@@ -51,7 +51,7 @@ const CategoryUpdate = () => {
           required
         />
         <br />
-        <button className="btn btn-outline-primary">Save</button>
+        <button className="btn btn-outline-primary">cập nhật</button>
       </div>
     </form>
   );

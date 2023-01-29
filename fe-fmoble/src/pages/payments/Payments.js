@@ -119,16 +119,15 @@ const Payments = () => {
                     <div className="col-lg-2 ">
                       <img
                         src={p.images && p.images.length ? p.images[0].url : ""}
-                        alt={p.images}
                         style={{ height: "80px", objectFit: "cover" }}
                         className="m-2"
                       />
-                      <input
+                      {/* <input
                         className="input-bill-title"
                         type="text"
                         {...register("images")}
-                        value={p?.images[0]}
-                      />
+                        // value={p?.images[0]}
+                      /> */}
                     </div>
                     <div className="col-lg-7 ">
                       <input
@@ -160,7 +159,7 @@ const Payments = () => {
 
               <div>
                 <span className="bill">
-                  Tên người đặt hàng
+                  Tên người đặt hàng:
                   {/* <input
                     className="input-bill"
                     type="text"
