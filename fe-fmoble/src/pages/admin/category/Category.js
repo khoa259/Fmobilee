@@ -69,7 +69,7 @@ const Category = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Name</label>
+          <label>Tên danh mục</label>
           <input
             type="text"
             onChange={(e) => setName(e.target.value)}
@@ -79,13 +79,13 @@ const Category = () => {
           />
           <br />
           <button className="btn btn-outline-primary" disabled={name === ""}>
-            Save
+            Thêm Mới
           </button>
         </div>
       </form>
       <input
         type="text"
-        placeholder="search category"
+        placeholder="tìm kiếm danh mục ...."
         className="form-control"
         onChange={handleSearchChange}
       />
@@ -99,7 +99,7 @@ const Category = () => {
             <Spiner />
           </div>
         ) : (
-          <h4>Create </h4>
+          <h4>Thêm mới danh mục </h4>
         )}
         {CategoryForm()}
         <hr />

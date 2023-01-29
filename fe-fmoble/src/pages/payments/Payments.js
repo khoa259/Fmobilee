@@ -36,7 +36,7 @@ const Payments = () => {
         });
       });
   }, []);
-
+  console.log("products", products);
   // get value in url
   const myKeyValue = window.location.search;
   const urlParams = new URLSearchParams(myKeyValue);
@@ -110,9 +110,8 @@ const Payments = () => {
       </Modal>
       <div className="container p-5 ">
         <h2 className="text-center">Đơn Hàng Thanh Toán</h2>
-        <div className="pt-4">
+        <div className="pt-4 shadow p-3 mb-5 bg-white rounded">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <span></span>
             <div className="col-md-8 offset-md-2">
               {products &&
                 products?.map((p, i) => (
