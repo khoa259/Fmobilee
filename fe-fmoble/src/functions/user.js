@@ -78,7 +78,7 @@ export const removeWishlist = async (productId, authtoken) => {
     { productId },
     {
       headers: {
-        authtoken,
+        authtoken: authtoken,
       },
     }
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getWishlist, removeWishlist } from "../../functions/user";
 import { Link } from "react-router-dom";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState();
@@ -25,23 +26,19 @@ const Wishlist = () => {
 
   const loadWishlist = async (key) => {
     const res = await getWishlist(key);
-    console.log(res);
     if (
       res &&
       res.data &&
       res.data[0].wishlist &&
       res.data[0].wishlist.length > 0
     ) {
-      console.log(res.data[0].wishlist);
-
       setWishlist(res.data[0].wishlist);
     }
   };
 
-  console.log("___WithList___", wishlist);
-
   const handleRemove = (productId) =>
-    removeWishlist(productId, user.token).then((res) => {
+    removeWishlist(productId, getToken).then((res) => {
+      console.log("res", res);
       loadWishlist();
     });
 
@@ -50,11 +47,13 @@ const Wishlist = () => {
       <h3 className="center">
         {wishlist?.map((p) => (
           <div key={p._id} className="alert alert-secondary">
-            <Link to={`/product/${p.slug}`}>{p.title}</Link>
+            <Link to={`${p.slug}`}>{p.title}</Link>
             <span
               onClick={() => handleRemove(p._id)}
               className="btn btn-sm float-right"
-            ></span>
+            >
+              <DeleteOutlined className="text-danger" />
+            </span>
           </div>
         ))}
         {/* {JSON.stringify(wishlist.data.title)} */}

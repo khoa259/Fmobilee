@@ -60,7 +60,7 @@ const Shop = () => {
   // filter product by price
   useEffect(() => {
     fetchProducts({ price });
-    console.log("ok to request", price);
+    loadAllProducts();
   }, [ok]);
 
   const handleSlider = (value) => {
@@ -105,7 +105,8 @@ const Shop = () => {
           className="pb-2 pl-4 pr-4"
           value={c._id}
           name="category"
-          checked={categoryIds.includes(c._id)}>
+          checked={categoryIds.includes(c._id)}
+        >
           {c.name}
         </Checkbox>
         <br />
@@ -125,14 +126,16 @@ const Shop = () => {
               <Menu
                 mode="inline"
                 defaultOpenKeys={["1", "2"]}
-                className="bg-light shadow-sm p-3 mb-5 bg-body rounded">
+                className="bg-light shadow-sm p-3 mb-5 bg-body rounded"
+              >
                 <SubMenu
                   key="1"
                   title={
                     <span className="h6">
                       <DollarOutlined /> Giá sản phẩm
                     </span>
-                  }>
+                  }
+                >
                   <div>
                     <Slider
                       className="ml-4 mr-4"
@@ -152,7 +155,8 @@ const Shop = () => {
                     <span className="h6">
                       <DownSquareOutlined /> Danh mục sản phẩm
                     </span>
-                  }>
+                  }
+                >
                   <div style={{ maringTop: "-10px" }}>{showCategories()}</div>
                 </SubMenu>
               </Menu>
