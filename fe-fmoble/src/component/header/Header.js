@@ -15,13 +15,16 @@ const Header = () => {
   const dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
   const logout = () => {
-    firebase.auth().signOut();
-    localStorage.clear();
-    dispatch({
-      type: "LOGOUT",
-      payload: null,
-    });
-    history("/");
+    const alrt = window.confirm("goodbye rồi à");
+    if (alrt) {
+      firebase.auth().signOut();
+      localStorage.clear();
+      dispatch({
+        type: "LOGOUT",
+        payload: null,
+      });
+      history("/");
+    }
   };
 
   useEffect(() => {
@@ -33,16 +36,16 @@ const Header = () => {
       setCartDB(e.data.products);
     });
   }, []);
+  // const getAvatar = localStorage.getItem("images");
+
   const items = categories.map((c, i) => {
     return {
       key: i,
       label: (
         <Link
           className="itemDrop"
-          // target="_blank"
           rel="noopener noreferrer"
-          to={`/category/${c.slug}`}
-        >
+          to={`/category/${c.slug}`}>
           {c.name}
         </Link>
       ),
@@ -66,9 +69,8 @@ const Header = () => {
                 menu={{
                   items,
                 }}
-                placement="bottom"
-              >
-                <Link to="/products">
+                placement="bottom">
+                <Link to="/products" className="text-white">
                   Sản phẩm <i className="fa-solid fa-angle-down"></i>
                 </Link>
               </Dropdown>
@@ -110,9 +112,11 @@ const Header = () => {
                 <i className=" fas fa-user"></i>
               </button>
             )}
-            <div className="text-white pl-2 ">
-              {user?.email && user?.email.split("@")[0]}
-            </div>
+            <img
+              src={user?.picture}
+              className="rounded-circle ml-3"
+              width={35}
+            />
             {!user?.email && (
               <div className="dropdown-content">
                 <Link to="/register">đăng ký</Link>

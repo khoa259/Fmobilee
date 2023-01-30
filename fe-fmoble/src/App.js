@@ -64,6 +64,7 @@ const App = () => {
               type: "LOGGED_IN_USER",
               payload: {
                 name: res.data.name,
+                picture: res.data.picture,
                 email: res.data.email,
                 role: res.data.role,
                 _id: res.data._id,
@@ -71,6 +72,7 @@ const App = () => {
               },
             });
             localStorage.setItem("token", idTokenResult.token);
+            localStorage.setItem("images", res.data.picture);
           })
           .catch((err) => console.log(err));
       }
@@ -112,8 +114,7 @@ const App = () => {
                 <AdminRoute>
                   <AdminLayout />
                 </AdminRoute>
-              }
-            >
+              }>
               <Route index path="dashboard" element={<Dashboard />} />
               <Route path="category" element={<Category />} />
               <Route path="category/:slug" element={<CategoryUpdate />} />

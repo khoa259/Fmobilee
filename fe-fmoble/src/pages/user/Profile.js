@@ -18,7 +18,6 @@ const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFail, setisModalFail] = useState(false);
   const user = useSelector((state) => state.user);
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [userUpdate, setUserUpdate] = useState([]);
   const [callApi, setCallApi] = useState(Math.random());
@@ -102,8 +101,7 @@ const Profile = () => {
           ]}
           onOk={() => setOpen(false)}
           onCancel={() => setOpen(false)}
-          width={800}
-        >
+          width={800}>
           <form onSubmit={handleSubmit(onUpdate)} id="myForm">
             <h4 className="text-center">Thông tin cá nhân</h4>
             {/* <FileUpload /> */}
@@ -145,9 +143,9 @@ const Profile = () => {
               <div className=" mb-4">
                 <div className="card-img py-4">
                   <img
-                    src="https://img.favpng.com/17/24/10/computer-icons-user-profile-male-avatar-png-favpng-jhVtWQQbMdbcNCahLZztCF5wk.jpg"
+                    src={user?.picture}
                     alt="avatar"
-                    className="rounded-circle img-fluid"
+                    className="rounded-circle"
                     style={{ width: 150 }}
                   />
                   <h5 className="my-3">{userUpdate?.name}</h5>

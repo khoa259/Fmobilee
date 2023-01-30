@@ -54,3 +54,60 @@
     font-size: 18px;
     padding: 8px 0;
 }
+
+/* whishlist */
+
+.icon-heart {
+    top: 0px !important;
+    right: 0px !important;
+    padding: 10px;
+    color: white;
+}
+
+.icon-heart i {
+    font-size: 25px !important;
+    color: rgb(224, 7, 7);
+}
+
+.icon-heart i:hover {
+    font-size: 28px !important;
+    color: rgb(221, 216, 216);
+}
+
+.icon-btn {
+    border: none;
+    background: none;
+}
+
+.wishlist-card {
+    position: relative;
+    height: 330px;
+    padding-top: 1rem;
+    border-radius: 9px !important;
+    border-top-right-radius: 0px !important;
+    border: none !important;
+    background: #fff;
+    padding: 50px 20px 10px 20px;
+    box-sizing: border-box !important;
+    margin-top: 30px;
+    box-shadow: 0px 1px 6px 3px rgb(0 0 0 / 12%);
+}
+
+.wishlist-img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    aspect-ratio: 1/1;
+}
+
+.wishlist-title {
+    display: block;
+    font-size: 16px !important;
+    font-weight: 600;
+    color: #000;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    width: 220px !important;
+    text-align: initial;
+}

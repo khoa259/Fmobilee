@@ -26,20 +26,19 @@ const Password = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label> New password</label>
+          <label> Mật khẩu mới</label>
           <input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             className="form-control"
-            placeholder="Enter new password"
+            placeholder="Mật khẩu mới"
             disabled={loading}
             value={password}
           />
           <button
             className="btn btn-primary"
             type="submit"
-            disabled={!password || password.length < 6 || loading}
-          >
+            disabled={!password || password.length < 6 || loading}>
             Submit
           </button>
         </div>
@@ -51,7 +50,7 @@ const Password = () => {
       {loading ? (
         <h3 className="text-danger">Loading</h3>
       ) : (
-        <h3>Password updated</h3>
+        <h3>cập nhật mật khẩu</h3>
       )}
       {passwordUpdateForm()}
     </div>

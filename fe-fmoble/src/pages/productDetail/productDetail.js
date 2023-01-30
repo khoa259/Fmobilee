@@ -89,7 +89,7 @@ const ProductDetail = () => {
     e.preventDefault();
     addToWishList(product._id, user.token).then((res) => {
       console.log("res", res);
-      toast.success("Added to wishlist");
+      toast.success("Đã thêm vào sản phẩm yêu thích");
     });
   };
   return (
@@ -192,21 +192,21 @@ const ProductDetail = () => {
                     <i className="fa-solid fa-plus"></i>
                   </button>
                 </div>
-                <div className="buttons d-flex flex-row mt-2  gap-3">
+                <div className="d-flex flex-row mt-2 gap-3">
                   {/* <button className="btn btn-outline-dark">Mua ngay</button> */}
                   <button
                     onClick={handleAddToCart}
                     className="btn btn-dark"
-                    disabled={product.quantity === 0}
-                  >
+                    disabled={product.quantity === 0}>
                     <i className="fa-solid fa-cart-plus mr-2"></i>
                     Thêm vào giỏ hàng
                   </button>
+                  <button
+                    onClick={handleAddToWishlist}
+                    className="btn btn-danger">
+                    <i className="fa-solid fa-heart"></i>
+                  </button>
                 </div>
-                <button onClick={handleAddToWishlist} className="btn btn-dark">
-                  <i className="fa-solid fa-cart-plus mr-2"></i>
-                  Thêm vào sản phẩm yêu thích
-                </button>
               </div>
             </div>
           </div>

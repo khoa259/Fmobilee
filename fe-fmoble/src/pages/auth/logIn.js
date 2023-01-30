@@ -42,9 +42,10 @@ const Login = () => {
             payload: {
               name: res.data.name,
               email: res.data.email,
+              picture: res.data.picture,
               role: res.data.role,
               address: res.data?.address,
-              image: res.data?.avatar,
+              // image: res.data?.avatar,
               _id: res.data._id,
               token: idTokenResult.token,
             },
@@ -103,14 +104,13 @@ const Login = () => {
       .then(async (result) => {
         const { user } = result;
         const idTokenResult = await user.getIdTokenResult();
-        console.log(idTokenResult);
-        console.log(idTokenResult.token);
         createOrUpdateUser(idTokenResult.token)
           .then((res) => {
             dispatch({
               type: "LOGGED_IN_USER",
               payload: {
                 name: res.data.name,
+                picture: res.data.picture,
                 email: res.data.email,
                 role: res.data.role,
                 _id: res.data._id,

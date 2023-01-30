@@ -56,17 +56,15 @@ const NewArrivels = () => {
                         }
                         variant="top"
                       />
-                    </Link>
 
-                    <Card.Body>
-                      <Link to={`/${product.slug}`}>
+                      <Card.Body>
                         <span className="span">{product.title}</span>
-                      </Link>
 
-                      <Link to={`/${product.slug}`} className="price">
-                        Giá từ {formatCash(`${product.price}`)}đ
-                      </Link>
-                    </Card.Body>
+                        <div className="price">
+                          Giá từ {formatCash(`${product.price}`)}đ
+                        </div>
+                      </Card.Body>
+                    </Link>
                   </Card>
                 </Col>
               ))}

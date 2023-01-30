@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Row, Card, Col, Container } from "react-bootstrap";
+import { Row, Card, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Checkbox, Menu, Slider } from "antd";
 import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
 import _ from "lodash";
@@ -105,8 +105,7 @@ const Shop = () => {
           className="pb-2 pl-4 pr-4"
           value={c._id}
           name="category"
-          checked={categoryIds.includes(c._id)}
-        >
+          checked={categoryIds.includes(c._id)}>
           {c.name}
         </Checkbox>
         <br />
@@ -126,16 +125,14 @@ const Shop = () => {
               <Menu
                 mode="inline"
                 defaultOpenKeys={["1", "2"]}
-                className="bg-light shadow-sm p-3 mb-5 bg-body rounded"
-              >
+                className="bg-light shadow-sm p-3 mb-5 bg-body rounded">
                 <SubMenu
                   key="1"
                   title={
                     <span className="h6">
                       <DollarOutlined /> Giá sản phẩm
                     </span>
-                  }
-                >
+                  }>
                   <div>
                     <Slider
                       className="ml-4 mr-4"
@@ -155,8 +152,7 @@ const Shop = () => {
                     <span className="h6">
                       <DownSquareOutlined /> Danh mục sản phẩm
                     </span>
-                  }
-                >
+                  }>
                   <div style={{ maringTop: "-10px" }}>{showCategories()}</div>
                 </SubMenu>
               </Menu>
@@ -172,7 +168,7 @@ const Shop = () => {
                   ) : (
                     <div className="position-absolute is-stock">hết hàng</div>
                   )}
-                  <NavLink to={`/${product.slug}`}>
+                  <Link to={`/${product.slug}`}>
                     <Card.Img
                       className="img-fluid-shop"
                       src={
@@ -182,17 +178,14 @@ const Shop = () => {
                       }
                       variant="top"
                     />
-                  </NavLink>
-
-                  <Card.Body>
-                    <NavLink to={`${product.slug}`}>
+                    <Card.Body>
                       <span className="span">{product.title}</span>
-                    </NavLink>
 
-                    <Card.Text as="p" className="price">
-                      Giá từ {formatCash(`${product.price}`)}đ
-                    </Card.Text>
-                  </Card.Body>
+                      <Card.Text as="p" className="price">
+                        Giá từ {formatCash(`${product.price}`)}đ
+                      </Card.Text>
+                    </Card.Body>
+                  </Link>
                 </Card>
               </Col>
             ))}

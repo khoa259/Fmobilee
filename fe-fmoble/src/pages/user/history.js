@@ -26,7 +26,7 @@ const History = () => {
           <h3>Đơn Hàng Của Tôi</h3>
         </div>
         {order?.products?.map((item, index) => (
-          <div className="px-3">
+          <div className="px-3" key={index}>
             <div className="row header-box">
               <div className="col-6 date-order">
                 <span>
@@ -53,7 +53,7 @@ const History = () => {
                       <span>{item?.title} </span>
                     </div>
                     <div className="count-items">
-                      <span>{item.count}</span>
+                      <span>SL: {item.count}</span>
                     </div>
                   </div>
                 </div>

@@ -161,6 +161,7 @@ export const getwishlist = async (req, res) => {
   console.log("___run__");
   try {
     const list = await User.find({ email: req.user.email })
+      .sort({ createdAt: -1 })
       .select("wishlist")
       .populate("wishlist")
       .exec();

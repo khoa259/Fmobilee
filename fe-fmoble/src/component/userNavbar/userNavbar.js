@@ -23,13 +23,13 @@ const UserNav = () => {
 
         <li>
           <Link to="/user/password" className="nav_link-user">
-            <i className="fa-solid fa-lock text-info"></i> Password
+            <i className="fa-solid fa-lock text-info"></i> Mật Khẩu
           </Link>
         </li>
 
         <li>
           <Link to="/user/wishlist" className="nav_link-user">
-            Wishlist
+            <i className="fa-solid fa-heart text-danger"></i> Sản phẩm yêu thích
           </Link>
         </li>
       </ul>
