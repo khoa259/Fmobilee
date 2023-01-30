@@ -41,7 +41,8 @@ const Header = () => {
           className="itemDrop"
           // target="_blank"
           rel="noopener noreferrer"
-          to={`/category/${c.slug}`}>
+          to={`/category/${c.slug}`}
+        >
           {c.name}
         </Link>
       ),
@@ -65,8 +66,9 @@ const Header = () => {
                 menu={{
                   items,
                 }}
-                placement="bottom">
-                <Link className="navLink">
+                placement="bottom"
+              >
+                <Link to="/products">
                   Sản phẩm <i className="fa-solid fa-angle-down"></i>
                 </Link>
               </Dropdown>
