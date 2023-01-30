@@ -61,11 +61,14 @@ export const getUserOrders = async (authtoken, orderdBy) => {
 };
 
 export const getWishlist = async (authtoken) => {
+  console.log("authtoken", authtoken);
   const data = await axios.get(`${process.env.REACT_APP_API}/user/wishlist`, {
     headers: {
-      authtoken,
+      authtoken: authtoken,
     },
   });
+  console.log("__data__", data);
+
   return data;
 };
 

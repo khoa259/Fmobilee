@@ -158,11 +158,13 @@ export const wishlist = async (req, res) => {
 };
 
 export const getwishlist = async (req, res) => {
+  console.log("___run__");
   try {
     const list = await User.find({ email: req.user.email })
       .select("wishlist")
       .populate("wishlist")
       .exec();
+    console.log("___list___", list);
     res.json(list);
   } catch (err) {
     res.status(400).json({

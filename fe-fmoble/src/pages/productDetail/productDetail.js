@@ -16,7 +16,7 @@ import RatingModal from "../../component/modals/RatingModals";
 import { formatCash } from "../../component/formatCash";
 import { showAverage } from "../../functions/ratings";
 import { toast } from "react-toastify";
-
+import { addToWishList } from "../../functions/user";
 const ProductDetail = () => {
   // redux get user state
   const { user, cart } = useSelector((state) => ({ ...state }));
@@ -84,6 +84,13 @@ const ProductDetail = () => {
         }
       })
       .catch((err) => console.log("cart save err", err));
+  };
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
+    addToWishList(product._id, user.token).then((res) => {
+      console.log("res", res);
+      toast.success("Added to wishlist");
+    });
   };
   return (
     <div className="container containerDetail">
@@ -190,11 +197,16 @@ const ProductDetail = () => {
                   <button
                     onClick={handleAddToCart}
                     className="btn btn-dark"
-                    disabled={product.quantity === 0}>
+                    disabled={product.quantity === 0}
+                  >
                     <i className="fa-solid fa-cart-plus mr-2"></i>
                     Thêm vào giỏ hàng
                   </button>
                 </div>
+                <button onClick={handleAddToWishlist} className="btn btn-dark">
+                  <i className="fa-solid fa-cart-plus mr-2"></i>
+                  Thêm vào sản phẩm yêu thích
+                </button>
               </div>
             </div>
           </div>
