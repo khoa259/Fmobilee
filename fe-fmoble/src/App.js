@@ -24,6 +24,7 @@ import Password from "./pages/user/Password.js";
 import Wishlist from "./pages/user/Wishlist.js";
 import CategoryHome from "./pages/Category/CategoryHome";
 import Payments from "./pages/payments/Payments";
+import Contact from "./pages/contact/contact";
 // Router Admin
 import Dashboard from "./pages/admin/Dashboard";
 import Category from "./pages/admin/category/Category";
@@ -90,6 +91,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<WebSiteLayout />}>
               <Route index element={<HomePage />} />
+              <Route path="/lien-he" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/register/complete" element={<RegisterComplete />} />

@@ -81,7 +81,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link className="navLink" to="/">
+              <Link className="navLink" to="/lien-he">
                 Liên Hệ
               </Link>
             </li>
