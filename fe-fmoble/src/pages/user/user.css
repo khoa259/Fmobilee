@@ -28,14 +28,15 @@
 }
 
 .title span {
-    font-weight: 700;
+    font-size: 19px;
+    font-weight: 600;
 }
 
 .price-bill {
     text-align: end !important;
     color: #0066CC !important;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 19px;
     margin-top: 20px;
 }
 
@@ -51,7 +52,7 @@
 .toltal-price {
     text-align: end !important;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 20px;
     padding: 8px 0;
 }
 

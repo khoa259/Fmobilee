@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import Cart from "../models/cart.js";
 import Bills from "../models/Bills.js";
 import mongoose from "mongoose";
+import Status from "../models/Status.js";
 
 export const userCart = async (req, res) => {
   // console.log(req.body); // {cart: []}
@@ -85,7 +86,7 @@ export const saveAddress = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    const user = await User.findOne({ id: req.params._id }).exec();
+    const user = await User.findOne({ _id: req.params.id }).exec();
     res.json(user);
   } catch (error) {
     res.status(400).json(error.message);
@@ -135,7 +136,11 @@ export const countPrdCard = async (req, res) => {
 export const ordersByUser = async (req, res) => {
   try {
     const userBills = await Bills.findOne({ orderdBy: req.params.id }).exec();
-    res.json(userBills);
+    const queryStatus = await Status.findOne({ _id: userBills.status });
+    console.log("userBills", userBills);
+    const result = { ...userBills._doc, status: queryStatus.name };
+    console.log("result", result);
+    res.json(result);
   } catch (error) {
     res.status(400).json({ message: "không thể cap nhat" });
   }

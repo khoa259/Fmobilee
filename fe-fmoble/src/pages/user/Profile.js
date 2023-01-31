@@ -28,6 +28,7 @@ const Profile = () => {
         `http://localhost:8000/api/my-profile/${id}`
       );
       setUserUpdate(data);
+      console.log(`userUpdate => ${JSON.stringify(userUpdate, null, 2)}`);
     };
     getUser();
   }, [id, callApi]);

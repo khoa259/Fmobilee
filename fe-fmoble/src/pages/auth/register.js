@@ -3,7 +3,7 @@ import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { useForm, handleSubmit } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
   const history = useNavigate();

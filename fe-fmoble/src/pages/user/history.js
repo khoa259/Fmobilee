@@ -34,7 +34,7 @@ const History = () => {
                 </span>
               </div>
               <div className="col-6 status-box">
-                {/* <span>{order.status}</span> */}
+                <span>Trạng thái: {order.status}</span>
               </div>
             </div>
 
@@ -58,7 +58,7 @@ const History = () => {
                   </div>
                 </div>
                 <div className="col-3 price-bill m-0">
-                  {formatCash(`${item.price}`)}đ
+                  <span>{formatCash(`${item.price}`)}đ</span>
                 </div>
               </div>
             </div>

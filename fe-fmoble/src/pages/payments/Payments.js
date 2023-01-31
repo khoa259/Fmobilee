@@ -10,6 +10,7 @@ import "./payment.css";
 import { formatCash } from "../../component/formatCash";
 import { getUserCart } from "../../functions/user";
 import { createBill } from "../../functions/Bill";
+import { getAddressLocalStorage } from "../../utils/functionHelp";
 //load stripe outside of components render to avoid
 const Payments = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -17,6 +18,7 @@ const Payments = () => {
   const { email } = user;
   const urlPaymentReturn = window.location.search;
   const [products, setProducts] = useState([]);
+  const [address, setAddress] = useState(getAddressLocalStorage);
   const [idCart, setIdCard] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFail, setisModalFail] = useState(false);
@@ -31,7 +33,8 @@ const Payments = () => {
         getUserCart(getToken).then((res) => {
           setProducts(res.data.products);
           setIdCard(res.data._id);
-          reset(res.data.products);
+          console.log("getAddressLocalStorage", getAddressLocalStorage);
+          reset({ ...res.data.products, address });
           console.log("res.data", res.data);
         });
       });
@@ -122,12 +125,12 @@ const Payments = () => {
                         style={{ height: "80px", objectFit: "cover" }}
                         className="m-2"
                       />
-                      {/* <input
+                      <input
                         className="input-bill-title"
                         type="text"
                         {...register("images")}
                         // value={p?.images[0]}
-                      /> */}
+                      />
                     </div>
                     <div className="col-lg-7 ">
                       <input
@@ -142,7 +145,7 @@ const Payments = () => {
                         className="input-bill-title"
                         type="text"
                         {...register("count")}
-                        value={p?.count}
+                        value={p?.product?.count}
                       />
                     </div>
                     <div className="col-lg-3">
@@ -151,6 +154,15 @@ const Payments = () => {
                         type="text"
                         {...register("price")}
                         value={formatCash(`${p?.product?.price * p?.count}`)}
+                      />
+                      <br />
+                    </div>
+                    <div className="col-lg-3">
+                      <input
+                        className="input-bill-title"
+                        type="text"
+                        {...register("address")}
+                        value={address}
                       />
                       <br />
                     </div>

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 
 import { formatCash } from "../../component/formatCash";
 import { getUserCart } from "../../functions/user";
+import { setAddressLocalStorage } from "../../utils/functionHelp";
 import "./checkOut.css";
 
 const CheckOut = () => {
@@ -38,7 +39,9 @@ const CheckOut = () => {
       .then((res) => {
         console.log((window.location.href = res.data.url));
       });
+
     console.log("payment", e);
+    setAddressLocalStorage(e?.address);
     console.log("amount", total);
   };
 

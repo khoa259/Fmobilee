@@ -14,7 +14,7 @@ const Password = () => {
       .updatePassword(password)
       .then(() => {
         setLoading(false);
-        toast.success("Password is updated");
+        toast.success("Password đã được cập nhật");
         setPassword("");
       })
       .catch((err) => {
