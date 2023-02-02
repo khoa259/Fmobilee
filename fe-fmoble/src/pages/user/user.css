@@ -30,6 +30,16 @@
 .title span {
     font-size: 19px;
     font-weight: 600;
+    text-align: initial;
+    display: block;
+    font-size: 16px !important;
+    font-weight: 600;
+    color: #000;
+    padding-top: 20px;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    width: 220px !important;
 }
 
 .price-bill {

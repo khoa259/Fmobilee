@@ -3,6 +3,12 @@ const { ObjectId } = mongoose.Schema;
 
 const billSchema = new mongoose.Schema(
   {
+    images: {
+      type: Array,
+    },
+    count: {
+      type: Number,
+    },
     products: [
       {
         product: {
@@ -15,17 +21,11 @@ const billSchema = new mongoose.Schema(
         price: {
           type: Number,
         },
-        images: {
-          type: Array,
-        },
-        count: {
-          type: Number,
-        },
       },
     ],
     status: {
       type: ObjectId,
-      ref: "status",
+      ref: "Status",
     },
     tradingCode: {
       type: String,

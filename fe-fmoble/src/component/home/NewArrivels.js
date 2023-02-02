@@ -24,7 +24,6 @@ const NewArrivels = () => {
       setLoading(false);
     });
   }, []);
-  console.log("products", products);
 
   return (
     <div>

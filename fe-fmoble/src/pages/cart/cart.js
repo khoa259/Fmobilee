@@ -32,7 +32,7 @@ const Cart = () => {
     });
   }, [load]);
   const { products, idCart } = dataCart;
-  console.log("products", products);
+  console.log("productsInCart ====>", JSON.stringify(products, null, 2));
   return (
     <div>
       <section className="py-20 pt-5 ">

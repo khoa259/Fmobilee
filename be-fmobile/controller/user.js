@@ -135,12 +135,16 @@ export const countPrdCard = async (req, res) => {
 
 export const ordersByUser = async (req, res) => {
   try {
-    const userBills = await Bills.findOne({ orderdBy: req.params.id }).exec();
-    const queryStatus = await Status.findOne({ _id: userBills.status });
+    const userBills = await Bills.find().populate("status", "name");
+    const billData = userBills.filter(
+      (dataBill) => dataBill.orderdBy == req.params.id
+    );
+    // const queryStatus = await Status.findOne({ _id: billData.status });
     console.log("userBills", userBills);
-    const result = { ...userBills._doc, status: queryStatus.name };
-    console.log("result", result);
-    res.json(result);
+    // console.log("billData", billData);
+    // const result = { ...billData, status: queryStatus.name };
+    // console.log("result", result);
+    res.json(billData);
   } catch (error) {
     res.status(400).json({ message: "không thể cap nhat" });
   }

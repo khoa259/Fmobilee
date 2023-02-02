@@ -8,7 +8,7 @@ export const authCheck = async (req, res, next) => {
       const firebaseUser = await fireAdmin
         .auth()
         .verifyIdToken(req.headers.authtoken);
-      console.log("firebase in auth", firebaseUser);
+      // console.log("firebase in auth", firebaseUser);
       req.user = firebaseUser;
     }
   } catch (error) {
