@@ -1,6 +1,33 @@
+.ant-checkbox-wrapper {
+    padding: 20px !important;
+    font-size: 17px !important;
+}
+
+.title-filter {
+    font-size: 16px !important;
+    font-weight: 600;
+}
+
+.ant-slider-track {
+    background-color: red !important;
+    height: 9px !important;
+}
+
+.ant-slider-handle {
+    width: 20px !important;
+    height: 20px !important;
+    color: #aa9b9b !important;
+    background: rgb(195, 194, 191) !important;
+}
+
 .img-fluid-shop {
     width: 251px;
     height: 251px;
     object-fit: contain;
     aspect-ratio: 1/1;
+}
+
+.col-filter {
+    min-width: 20rem !important;
+    margin-right: 2rem;
 }

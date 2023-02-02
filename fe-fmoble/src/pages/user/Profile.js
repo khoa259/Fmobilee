@@ -181,7 +181,7 @@ const Profile = () => {
                       <p className="mb-0">Số điện thoại</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">096459596</p>
+                      <p className="text-muted mb-0">{userUpdate.phone}</p>
                     </div>
                   </div>
                   <hr />

@@ -17,12 +17,14 @@ import { formatCash } from "../../component/formatCash";
 import { showAverage } from "../../functions/ratings";
 import { toast } from "react-toastify";
 import { addToWishList } from "../../functions/user";
+import { Select } from "antd";
 const ProductDetail = () => {
   // redux get user state
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const [product, setProduct] = useState({});
   const [related, setRelated] = useState([]);
+  const [options, setOptions] = useState([]);
   const [star, setStar] = useState(0);
   const { slug } = useParams();
   const { category } = product;
@@ -43,7 +45,16 @@ const ProductDetail = () => {
 
   const loadSingleProduct = () => {
     getProduct(slug).then((res) => {
+      console.log("res", res.data);
       setProduct(res.data);
+      const getColor = res.data.colors?.map((item) => {
+        return {
+          label: item,
+          value: item,
+        };
+      });
+
+      setOptions(getColor);
       // load related
       getRelated(res.data._id).then((res) => setRelated(res.data));
     });
@@ -56,6 +67,10 @@ const ProductDetail = () => {
       console.log("rating clicked", res);
       console.log(product);
     });
+  };
+
+  const handleChange = (value) => {
+    setProduct({ ...product, color: value });
   };
 
   const handleAddToCart = () => {
@@ -105,7 +120,7 @@ const ProductDetail = () => {
             </div>
           )}
         </div>
-        <div className="card rounded-lg">
+        <div className="card card-detail">
           {/* _id: {product._id} */}
           <div className="row g-0 ">
             <div className="col-md-6 border-end">
@@ -170,14 +185,15 @@ const ProductDetail = () => {
                 <div className="mt-2">
                   <span className="fw-bold">Color</span>
                   <div className="colors">
-                    <ul className="marker d-flex">
-                      <li className="marker-1" /> <li className="marker-2" />
-                      <li className="marker-3" /> <li className="marker-4" />
-                      <li className="marker-5" />
-                    </ul>
+                    <Select
+                      size={"middle"}
+                      onChange={handleChange}
+                      style={{ width: 200 }}
+                      options={options}
+                    />
                   </div>
                 </div>
-                <div className="inputs">
+                {/* <div className="inputs">
                   <button className=" decrements btn btn-outline-dark">
                     <i className="fa-solid fa-minus"></i>
                   </button>
@@ -191,19 +207,19 @@ const ProductDetail = () => {
                   <button className="increments btn btn-outline-dark">
                     <i className="fa-solid fa-plus"></i>
                   </button>
-                </div>
+                </div> */}
                 <div className="d-flex flex-row mt-2 gap-3">
                   {/* <button className="btn btn-outline-dark">Mua ngay</button> */}
                   <button
                     onClick={handleAddToCart}
-                    className="btn btn-dark"
+                    className="btn btn-dark rounded-lg"
                     disabled={product.quantity === 0}>
                     <i className="fa-solid fa-cart-plus mr-2"></i>
                     Thêm vào giỏ hàng
                   </button>
                   <button
                     onClick={handleAddToWishlist}
-                    className="btn btn-danger">
+                    className="btn btn-danger rounded-lg ml-2">
                     <i className="fa-solid fa-heart"></i>
                   </button>
                 </div>

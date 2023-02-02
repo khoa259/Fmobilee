@@ -2,6 +2,10 @@
     display: flex !important;
 }
 
+.card-detail {
+    border-radius: 1rem;
+}
+
 .widget-svg {
     width: 20px !important;
     height: 20px !important;

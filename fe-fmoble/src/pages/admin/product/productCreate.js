@@ -23,6 +23,7 @@ const initialState = {
 const ProductCreate = () => {
   const history = useNavigate();
   const [value, setValue] = useState(initialState);
+  const [color, setColor] = useState([]);
   const [loading, setLoading] = useState(false);
   // getUser by react-redux
 
@@ -36,15 +37,17 @@ const ProductCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createProduct(value, user.token)
+    console.log("submit", { ...value, colors: color });
+    createProduct({ ...value, colors: color }, user.token)
       .then((res) => {
         console.log(res);
+        setColor([]);
         toast.success(`${value.title} đã được thêm mới `);
       })
       .catch((err) => {
         toast.error(err.response.data.err);
       });
-    //
+
     history("/admin/product");
   };
 
@@ -70,6 +73,8 @@ const ProductCreate = () => {
           <ProductCreateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
+            color={color}
+            setColor={setColor}
             value={value}
           />
         </div>

@@ -120,8 +120,8 @@ const Shop = () => {
       ) : (
         <div className="mt-4">
           <h2 className="text-center p-3 pt-4 mb-1">Các sản phẩm</h2>
-          <Row className="rowShop">
-            <Col lg={2} className="col-filter">
+          <div className="d-flex">
+            <div className="col-filter">
               <Menu
                 mode="inline"
                 defaultOpenKeys={["1", "2"]}
@@ -129,7 +129,7 @@ const Shop = () => {
                 <SubMenu
                   key="1"
                   title={
-                    <span className="h6">
+                    <span className="title-filter">
                       <DollarOutlined /> Giá sản phẩm
                     </span>
                   }>
@@ -149,47 +149,53 @@ const Shop = () => {
                 <SubMenu
                   key="2"
                   title={
-                    <span className="h6">
+                    <span className="title-filter">
                       <DownSquareOutlined /> Danh mục sản phẩm
                     </span>
                   }>
                   <div style={{ maringTop: "-10px" }}>{showCategories()}</div>
                 </SubMenu>
               </Menu>
-            </Col>
-            {products?.length < 1 && (
-              <div className="text-center">Không tìm thấy sản phẩm</div>
-            )}
-            {products.map((product) => (
-              <Col key={product._id} sm={6} md={6} lg={2}>
-                <Card className="card-prd mt-0 mb-4">
-                  {product?.quantity !== 0 ? (
-                    <div className="position-absolute stock">còn hàng</div>
-                  ) : (
-                    <div className="position-absolute is-stock">hết hàng</div>
-                  )}
-                  <Link to={`/${product.slug}`}>
-                    <Card.Img
-                      className="img-fluid-shop"
-                      src={
-                        product.images && product.images.length
-                          ? product.images[0].url
-                          : ""
-                      }
-                      variant="top"
-                    />
-                    <Card.Body>
-                      <span className="span">{product.title}</span>
+            </div>
+            <div>
+              {products?.length < 1 && (
+                <div className="text-center">Không tìm thấy sản phẩm</div>
+              )}
+              <Row className="rowShop">
+                {products.map((product) => (
+                  <Col key={product._id} sm={6} md={6} lg={2}>
+                    <Card className="card-prd mt-0 mb-4">
+                      {product?.quantity !== 0 ? (
+                        <div className="position-absolute stock">còn hàng</div>
+                      ) : (
+                        <div className="position-absolute is-stock">
+                          hết hàng
+                        </div>
+                      )}
+                      <Link to={`/${product.slug}`}>
+                        <Card.Img
+                          className="img-fluid-shop"
+                          src={
+                            product.images && product.images.length
+                              ? product.images[0].url
+                              : ""
+                          }
+                          variant="top"
+                        />
+                        <Card.Body>
+                          <span className="span">{product.title}</span>
 
-                      <Card.Text as="p" className="price">
-                        Giá từ {formatCash(`${product.price}`)}đ
-                      </Card.Text>
-                    </Card.Body>
-                  </Link>
-                </Card>
-              </Col>
-            ))}
-          </Row>
+                          <Card.Text as="p" className="price">
+                            Giá từ {formatCash(`${product.price}`)}đ
+                          </Card.Text>
+                        </Card.Body>
+                      </Link>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          </div>
         </div>
       )}
       {/* <Pagination

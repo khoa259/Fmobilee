@@ -1,6 +1,13 @@
-import React from "react";
+import { Select } from "antd";
+import React, { useState } from "react";
 
-const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
+const ProductCreateForm = ({
+  handleSubmit,
+  handleChange,
+  value,
+  setColor,
+  color,
+}) => {
   const {
     title,
     description,
@@ -13,6 +20,26 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
     colors,
     brands,
   } = value;
+  const options = [
+    {
+      label: "Red",
+      value: "red",
+    },
+    {
+      label: "Blue",
+      value: "blue",
+    },
+    {
+      label: "Yellow",
+      value: "yellow",
+    },
+  ];
+
+  const handleChangeColor = (value) => {
+    setColor(value);
+  };
+
+  console.log("color", color);
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
@@ -67,14 +94,22 @@ const ProductCreateForm = ({ handleSubmit, handleChange, value }) => {
 
       <div className="form-group">
         <label>Màu sắc</label>
-        <select name="color" className="form-control" onChange={handleChange}>
+        <Select
+          mode="multiple"
+          size={"middle"}
+          placeholder="Please select"
+          onChange={handleChangeColor}
+          style={{ width: "100%" }}
+          options={options}
+        />
+        {/* <select name="color" className="form-control" onChange={handleChange}>
           <option>Lựa chọn màu sắc</option>
           {colors.map((c) => (
             <option key={c} value={c}>
               {c}
             </option>
           ))}
-        </select>
+        </select> */}
       </div>
 
       <div className="form-group">

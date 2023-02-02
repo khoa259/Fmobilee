@@ -145,7 +145,7 @@ const Payments = () => {
                         className="input-bill-title"
                         type="text"
                         {...register("count")}
-                        value={p?.product?.count}
+                        value={p?.count}
                       />
                     </div>
                     <div className="col-lg-3">

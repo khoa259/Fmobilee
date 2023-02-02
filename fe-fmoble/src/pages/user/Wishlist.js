@@ -47,6 +47,7 @@ const Wishlist = () => {
   return (
     <div>
       <h3 className="center">sản phẩm yêu thích</h3>
+
       <Row>
         {wishlist?.map((p, index) => (
           <Col lg={4} key={index}>

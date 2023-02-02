@@ -53,7 +53,7 @@ const ListProducts = () => {
         <h4 className="text-center">Danh Sách Sản Phẩm</h4>
       )}
       <div className="pt-5">
-        <Link to="/admin/product" target="_blank">
+        <Link to="/admin/product">
           <button className="btn btn-outline-primary mb-4">
             <i className="fa-solid fa-plus"></i> Thêm sản phẩm
           </button>
