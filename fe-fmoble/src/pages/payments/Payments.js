@@ -18,7 +18,7 @@ const Payments = () => {
   const { email } = user;
   const urlPaymentReturn = window.location.search;
   const [products, setProducts] = useState([]);
-  const [address, setAddress] = useState(getAddressLocalStorage);
+  const [address, setAddress] = useState(sessionStorage.getItem("address"));
   const [idCart, setIdCard] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFail, setisModalFail] = useState(false);
@@ -38,6 +38,8 @@ const Payments = () => {
           console.log("res.data", res.data);
         });
       });
+
+    setAddress(sessionStorage.getItem("address"));
   }, []);
   console.log("products", products);
   // get value in url
@@ -166,6 +168,8 @@ const Payments = () => {
                       />
                       <br />
                     </div>
+                    <br />
+                    <div>{address}</div>
                   </div>
                 ))}
 

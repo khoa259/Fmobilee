@@ -34,6 +34,7 @@ const CheckOut = () => {
   }, []);
 
   const onSubmit = (e) => {
+    sessionStorage.setItem("address", e.address);
     axios
       .post("http://localhost:8000/api/order/create_payment_url", {
         amount: total,

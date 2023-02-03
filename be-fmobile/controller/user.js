@@ -29,6 +29,7 @@ export const userCart = async (req, res) => {
       object.count = cart[0].count;
       object.images = cart[0].images;
       object.price = cart[0].price;
+      object.color = cart[0].color;
       products.push(object);
       // if ((object.product = cart[0]._id)) {
       //   cartByUser.cartTotal =
@@ -67,13 +68,17 @@ export const getUserCart = async (req, res) => {
 };
 
 export const emptyCart = async (req, res) => {
-  console.log("empty cart");
-  const user = await User.findOne({ email: req.user.email }).exec();
+  const { id, idProduct } = req.params;
+  console.log("id", id);
+  // const cartInfo = await Cart.findOne({ _id: id });
+  const remove = await Cart.updateOne(
+    { _id: mongoose.Types.ObjectId(id) },
+    { $pull: { products: { _id: idProduct } } },
+    { multi: true }
+  );
 
-  const cart = await Cart.findOneAndRemove({
-    orderdBy: user.products[0],
-  }).exec();
-  res.json(cart);
+  // console.log("remove", remove);
+  res.json(remove);
 };
 
 export const saveAddress = async (req, res) => {

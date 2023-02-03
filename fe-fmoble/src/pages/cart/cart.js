@@ -11,6 +11,7 @@ const Cart = () => {
   const [load, setLoad] = useState(0);
   const [dataCart, setDataCart] = useState({ products: [], idCart: "" });
   const history = useNavigate();
+  const [removeItem, setRemoveItem] = useState("");
 
   const redirectCheckout = () => {
     history("/thanh-toan");
@@ -30,7 +31,8 @@ const Cart = () => {
       );
       setTotal(totalCard);
     });
-  }, [load]);
+  }, [load, removeItem]);
+
   const { products, idCart } = dataCart;
   console.log("productsInCart ====>", JSON.stringify(products, null, 2));
   return (
@@ -82,6 +84,7 @@ const Cart = () => {
                       load={load}
                       setLoad={setLoad}
                       total={total}
+                      setRemoveItem={setRemoveItem}
                     />
                   ))}
                 </div>

@@ -1,15 +1,25 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { updateQty } from "../../functions/user";
+import { emptyUserCart, updateQty } from "../../functions/user";
+import { colorProduct } from "../../utils/contants";
 
 import { formatCash } from "../formatCash";
-const ProductCartInCheckOut = ({ p, idCart, load, setLoad, total }) => {
+const ProductCartInCheckOut = ({
+  p,
+  idCart,
+  load,
+  setLoad,
+  total,
+  setRemoveItem,
+}) => {
+  console.log("idCart", idCart);
+  console.log("p", p);
   let dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
   // console.log("cart", p.product);
   const [quantityState, setQuantityState] = useState(p?.count || 1);
-
+  const getToken = localStorage.getItem("token");
   const quantityPlus = () => {
     setQuantityState(quantityState + 1);
     setLoad(quantityState);
@@ -32,12 +42,25 @@ const ProductCartInCheckOut = ({ p, idCart, load, setLoad, total }) => {
     saveUpdateQty();
   }, [quantityState]);
 
+  const handleColor = (color) => {
+    const result = colorProduct.filter((colorIten) => colorIten.key == color);
+    console.log("result", result[0]?.color);
+    return result[0]?.color;
+  };
+
+  const removeItem = () => {
+    emptyUserCart(getToken, idCart, p._id);
+    setRemoveItem(p._id);
+  };
+
   return (
     <div className="mb-12 py-6 border-top border-bottom">
       <div className="row align-items-center mb-6 mb-md-3">
         <div className="col-12 col-md-8 col-lg-6 mb-6 mb-md-0">
           <div className="row align-items-center">
-            <i className="fa-sharp fa-solid fa-circle-xmark remove-cart"></i>
+            <i
+              className="fa-sharp fa-solid fa-circle-xmark remove-cart"
+              onClick={removeItem}></i>
 
             <div className="col-12 col-md-4 mb-3">
               <div
@@ -52,7 +75,16 @@ const ProductCartInCheckOut = ({ p, idCart, load, setLoad, total }) => {
               </div>
             </div>
             <div className="col-6">
-              <p className="mb-2 span">{p.product.title}</p>
+              <p className="h5">{p.product.title}</p>
+              <br />
+              <p className="">
+                PL:{" "}
+                <img
+                  src={handleColor(p.color)}
+                  style={{ borderRadius: "50%", width: "20px", height: "20px" }}
+                />
+              </p>
+              <br />
             </div>
           </div>
         </div>

@@ -82,6 +82,7 @@ const ProductDetail = () => {
           ...product,
           count: 1,
         });
+        console.log("cart", cart);
         let unique = _.uniqWith(cart, _.isEqual);
         dispatch({
           type: "ADD_TO_CART",

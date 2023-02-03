@@ -21,6 +21,7 @@ const cartSchema = new mongoose.Schema(
         count: {
           type: Number,
         },
+        color: String,
       },
     ],
     cartTotal: {
