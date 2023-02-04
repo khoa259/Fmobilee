@@ -191,6 +191,7 @@ export const getwishlist = async (req, res) => {
 export const deletewishlist = async (req, res) => {
   try {
     const { productId } = req.params;
+    console.log("productID", productId);
     const user = await User.findOneAndRemove(
       { email: req.user },
       { $pull: { wishlist: productId } }

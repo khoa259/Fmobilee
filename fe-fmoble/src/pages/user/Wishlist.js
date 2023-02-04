@@ -46,14 +46,12 @@ const Wishlist = () => {
 
   return (
     <div>
-      <h3 className="center">sản phẩm yêu thích</h3>
-
       <Row>
         {wishlist?.map((p, index) => (
           <Col lg={4} key={index}>
             <Card className="wishlist-card mt-0 mb-4">
               <div className="position-absolute icon-heart">
-                <button className="icon-btn">
+                <button className="icon-btn" onClick={handleRemove(p._id)}>
                   <i className="fa-solid fa-heart"></i>
                 </button>
               </div>

@@ -118,9 +118,9 @@ const Category = () => {
                 <td>{index + 1}</td>
                 <td>{c.name}</td>
                 <td>
-                  <Button type="danger" onClick={() => handleRemove(c.slug)}>
+                  {/* <Button type="danger" onClick={() => handleRemove(c.slug)}>
                     Xóa
-                  </Button>
+                  </Button> */}
                   <Link to={`/admin/category/${c.slug}`}>
                     <Button type="primary">Sửa</Button>
                   </Link>

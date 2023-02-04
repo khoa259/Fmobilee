@@ -170,6 +170,7 @@ const Payments = () => {
                     </div>
                     <br />
                     <div>{address}</div>
+                    <div>{console.log("address divv", address)}</div>
                   </div>
                 ))}
 
@@ -194,6 +195,7 @@ const Payments = () => {
                     type="text"
                     {...register("status")}
                     value={"6391f4358e713e3070f753bb"}
+                    hidden
                   />
                 </span>
               </div>
@@ -219,6 +221,7 @@ const Payments = () => {
                       type="text"
                       {...register("timePayment")}
                       value={vnp_PayDate}
+                      hidden
                     />
                   </span>
                 </div>
