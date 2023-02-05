@@ -8,12 +8,14 @@ import { Badge, Descriptions } from "antd";
 
 const OrderDetails = () => {
   const [order, setOrder] = useState([]);
+  const [data, setData] = useState();
   const { id } = useParams();
   useEffect(() => {
     const getProudct = async () => {
-      const { data } = await getDetailBill(id);
-      console.log("data", data);
-      setOrder(data);
+      const { data: newData } = await getDetailBill(id);
+      console.log("data", newData);
+      setData(newData);
+      setOrder(newData);
     };
     getProudct();
   }, [id]);
@@ -26,33 +28,31 @@ const OrderDetails = () => {
       <div className="container border">
         <div>
           <div>
-            {order?.products?.map((item, i) => (
-              <div className="py-2 " key={i}>
-                <span className="h4">Họ tên: {item.userName}</span>
-              </div>
-            ))}
+            <div className="py-2 ">
+              <span className="h4">Họ tên: {data?.orderdBy?.name}</span>
+            </div>
             <div className="py-2">
+              <span className="h4">Địa Chỉ: {data?.orderdBy?.address}</span>
+            </div>
+            <div className="py-2 ">
+              <span className="h4">Email: {data?.orderdBy?.email}</span>
+            </div>
+            <div className="py-2 ">
               <span className="h4">
-                Địa Chỉ: số 12 ngõ 258/20 Hạ Đình, Thanh Xuân, Hà Nội{" "}
+                Số điện thoại: {data?.orderdBy?.phoneNumber}
               </span>
-            </div>
-            <div className="py-2 ">
-              <span className="h4">Email: khoa10688@gmail.com</span>
-            </div>
-            <div className="py-2 ">
-              <span className="h4">Số điện thoại:0964184106</span>
             </div>
           </div>
           <div className="row pt-4">
             <div className="col-5">
               Ngày đặt hàng:{" "}
               <span className="h5">
-                {dateFormat(order.createdAt, "dd/mm/yyyy - hh:MM:ss TT")}
+                {dateFormat(data?.createdAt, "dd/mm/yyyy - hh:MM:ss TT")}
               </span>
             </div>
             <div className="col-4">
               Mã đơn hàng:
-              <span className="h5">{order.tradingCode}</span>
+              <span className="h5">{data?.tradingCode}</span>
             </div>
             <div className="col-3">
               <span>Phương thức thanh toán: Payment</span>
@@ -70,7 +70,7 @@ const OrderDetails = () => {
             </thead>
 
             <tbody>
-              {order?.products?.map((item, i) => (
+              {data?.products?.map((item, i) => (
                 <tr key={i}>
                   <th scope="row">{i + 1}</th>
                   <td className="h5">{item.title}</td>
@@ -82,7 +82,7 @@ const OrderDetails = () => {
           </table>
           <div className="text-end row">
             <span className="h4 col-11 ">
-              Tổng tiền: {formatCash(`${order.billTotal}`)} đ
+              Tổng tiền: {formatCash(`${data?.billTotal}`)} đ
             </span>
           </div>
           <div className="pt-3">

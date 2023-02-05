@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 
 const AdminRoute = ({ children }) => {
   const { user } = useSelector((state) => ({ ...state }));
+  const role = localStorage.getItem("role");
 
-  if (user?.role !== "admin") {
+  if (role !== "admin") {
     console.log("navigate to login");
     return <Navigate to="/"></Navigate>;
   }

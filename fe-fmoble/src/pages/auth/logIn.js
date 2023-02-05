@@ -37,6 +37,7 @@ const Login = () => {
       const idTokenResult = await user.getIdTokenResult();
       createOrUpdateUser(idTokenResult.token)
         .then((res) => {
+          localStorage.setItem("role", res.data.role);
           dispatch({
             type: "LOGGED_IN_USER",
             payload: {

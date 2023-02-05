@@ -78,11 +78,12 @@ export const detailBill = async (req, res) => {
 
 export const Editbill = async (req, res) => {
   try {
+    console.log("req.body.status", req.body.status);
     await Bills.findOneAndUpdate(
       { _id: req.params.id },
       { status: req.body.status }
     ).exec();
-    res.json(200, {
+    res.json({
       message: "update success",
     });
   } catch (error) {

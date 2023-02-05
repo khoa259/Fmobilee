@@ -6,18 +6,35 @@ import "./user.css";
 import { getUserOrders } from "../../functions/user";
 import { formatCash } from "../../component/formatCash";
 import { useParams } from "react-router-dom";
+import { updateProduct } from "../../functions/products";
+import axios from "axios";
 const History = () => {
   const [order, setOrder] = useState([]);
+  const [statusBill, setStatusBill] = useState("");
   const { id } = useParams();
 
+  const getToken = localStorage.getItem("token");
   useEffect(() => {
-    const getToken = localStorage.getItem("token");
     const { data } = getUserOrders(getToken, id).then((res) => {
       setOrder(res.data);
+      setStatusBill("");
       return data;
     });
-  }, []);
+  }, [statusBill]);
   console.log("order", JSON.stringify(order, null, 2));
+
+  const cancelBill = (id) => {
+    console.log("id", id);
+    const confirm = window.confirm("Bạn có muốn hủy đơn hàng?");
+    if (confirm) {
+      axios.put(`http://localhost:8000/api/bill/${id}`, {
+        status: "6391f48b8e713e3070f753c3",
+      });
+      setStatusBill("update");
+    }
+
+    // updateProduct(id, { status: "6391f48b8e713e3070f753c3" }, getToken);
+  };
 
   return (
     <>
@@ -43,6 +60,14 @@ const History = () => {
                       <span>Trạng thái: {item?.status?.name}</span>
                     </div>
                   </div>
+                  {item?.status?.name == "Giao thành công" ||
+                  item?.status?.name == "Đã hủy" ? null : (
+                    <div>
+                      <button onClick={() => cancelBill(item._id)}>
+                        Hủy đơn hàng
+                      </button>
+                    </div>
+                  )}
 
                   <div key={index}>
                     <div className="row align-items-center purchase-box ">

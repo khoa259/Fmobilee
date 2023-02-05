@@ -8,10 +8,14 @@ import { Link } from "react-router-dom";
 import { getListStatus } from "../../../functions/status";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const Order = () => {
   const [order, setOrder] = useState([]);
   const [status, setStatus] = useState([]);
+
+  const { orderBy } = order;
+  console.log("orderBy", orderBy);
   useEffect(() => {
     getAllBill().then((res) => {
       console.log("res", res);
@@ -22,6 +26,7 @@ const Order = () => {
       .then((res) => setStatus(res.data))
       .catch((error) => console.log("error", error.message));
   }, []);
+  console.log("orders-----", order.orderBy);
   console.log("status", status);
   const onChangStatus = async (billId, dataStatus) => {
     try {
@@ -36,11 +41,11 @@ const Order = () => {
       toast.warning("Change Status Fail");
     }
   };
-  const dataSource = order.map((item, index) => {
+  const dataSource = order?.map((item, index) => {
     console.log("item", item);
     return {
       key: index + 1,
-      name: item?.username,
+      name: item?.orderdBy?.name,
       billTotal: formatCash(`${item.billTotal}`),
       status: (
         <Select
@@ -49,6 +54,10 @@ const Order = () => {
           style={{
             width: 180,
           }}
+          disabled={
+            item.status === "63dfc0780bc8b74b60a7eab2" ||
+            item.status === "6391f48b8e713e3070f753c3"
+          }
           options={status.map((item) => {
             return {
               value: item._id,
@@ -66,6 +75,7 @@ const Order = () => {
     };
   });
 
+  console.log("dataSource", dataSource);
   const columns = [
     {
       title: "STT",
