@@ -47,7 +47,7 @@ const NewArrivels = () => {
                     )}
                     <Link to={`/${product.slug}`}>
                       <Card.Img
-                        className="img-fluid"
+                        className="img-fluid-shop"
                         src={
                           product.images && product.images.length
                             ? product.images[0].url

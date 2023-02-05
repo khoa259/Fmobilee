@@ -28,7 +28,7 @@ const OrderDetails = () => {
           <div>
             {order?.products?.map((item, i) => (
               <div className="py-2 " key={i}>
-                <span className="h4">Họ tên: {item.title}</span>
+                <span className="h4">Họ tên: {item.userName}</span>
               </div>
             ))}
             <div className="py-2">

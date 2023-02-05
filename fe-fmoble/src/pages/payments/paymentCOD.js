@@ -12,12 +12,11 @@ import { getUserCart } from "../../functions/user";
 import { createBill } from "../../functions/Bill";
 import { getAddressSesstionStorage } from "../../utils/functionHelp";
 //load stripe outside of components render to avoid
-const Payments = () => {
+const PaymentCOD = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const { handleSubmit, register, reset } = useForm();
-  const { email } = user;
-  const urlPaymentReturn = window.location.search;
   const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState(0);
   const [address, setAddress] = useState(sessionStorage.getItem("address"));
   const [idCart, setIdCard] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,42 +25,48 @@ const Payments = () => {
 
   //call APi return Vnpay
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/order/vnpay_return${urlPaymentReturn}`)
-      .then((res) => {
-        const getToken = localStorage.getItem("token");
-        getUserCart(getToken).then((res) => {
-          setProducts(res.data.products);
-          setIdCard(res.data._id);
-          console.log("getAddressLocalStorage", getAddressSesstionStorage);
-          reset({ ...res.data.products, address });
-          console.log("res.data", res.data);
-        });
-      });
+    const getToken = localStorage.getItem("token");
+    JSON.parse(address);
+    getUserCart(getToken).then((res) => {
+      setProducts(res.data.products);
+      setIdCard(res.data._id);
+      console.log("getAddressLocalStorage", getAddressSesstionStorage);
+      reset({ ...res.data.products, address });
+      console.log("res.data", res.data);
+      let totalCard = 0;
+      setTotal(
+        res.data.products.map(
+          (i) => (totalCard += +i?.product?.price * +i?.count)
+        )
+      );
+      setTotal(totalCard);
+    });
 
     // setAddress(sessionStorage.getItem("address"));
   }, []);
   console.log("products", products);
-  // get value in url
-  const myKeyValue = window.location.search;
-  const urlParams = new URLSearchParams(myKeyValue);
-  const vnp_Amount = urlParams.get("vnp_Amount");
-  const vnp_BankCode = urlParams.get("vnp_BankCode");
-  const vnp_PayDate = urlParams.get("vnp_PayDate");
-  const vnp_TransactionNo = urlParams.get("vnp_TransactionNo");
+
+  const getAddres = sessionStorage.getItem("address");
+  const convertAddress = JSON.parse(getAddres);
+  console.log("convertAddress", convertAddress);
+  const converPhone = convertAddress.phoneNumber;
+  const convertUsername = convertAddress.address;
+
+  // const randomIdBill
 
   //Handle SUbmit form
   const onSubmit = async (data) => {
-    console.log("data", data);
     const newData = {
       ...data,
-      tradingCode: vnp_TransactionNo,
       orderdBy: user._id,
       idCart: idCart,
-      username: user.name,
+      username: convertAddress.username,
+      phoneNumber: convertAddress.phoneNumber,
+      billTotal: total,
+      address: convertAddress.address,
       products: products.map((product) => product.product),
     };
-    console.log({ ...data });
+    console.log(newData);
     const status = await createBill(newData);
     if (status === 200) {
       showModal();
@@ -115,16 +120,18 @@ const Payments = () => {
       </Modal>
       <div className="container p-5 ">
         <h2 className="text-center">Đơn Hàng Thanh Toán</h2>
-        <div className="pt-4 shadow p-3 mb-5 bg-white rounded">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="col-md-8 offset-md-2">
+        <div className="pt-4 shadow p-3 mb-5 ">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="bg-white rounded container">
+            <div className="col">
               {products &&
-                products?.map((p, i) => (
-                  <div className="row" key={i}>
+                products?.map((p) => (
+                  <div className="row">
                     <div className="col-lg-2 ">
                       <img
                         src={p.images && p.images.length ? p.images[0].url : ""}
-                        style={{ height: "80px", objectFit: "cover" }}
+                        style={{ height: "120px", objectFit: "cover" }}
                         className="m-2"
                       />
                       <input
@@ -134,61 +141,83 @@ const Payments = () => {
                         // value={p?.images[0]}
                       />
                     </div>
-                    <div className="col-lg-7 ">
+                    <div className="col-lg-7">
+                      <span className="input-bill-title">
+                        {p?.product.title}
+                      </span>
                       <input
                         className="input-bill-title"
                         type="text"
                         {...register("title")}
-                        value={p?.product?.title}
+                        // value={p?._id}
                       />{" "}
                       <br />
-                      X
-                      <input
+                      Màu sắc:
+                      {p?.color}
+                      {/* <input
+                        className="input-bill-title"
+                        type="text"
+                        {...register("color")}
+                        value={p?.color}
+                      /> */}
+                      <br />X {p?.count}
+                      {/* <input
                         className="input-bill-title"
                         type="text"
                         {...register("count")}
-                        value={p?.count}
-                      />
+                        value=
+                      /> */}
                     </div>
                     <div className="col-lg-3">
-                      <input
-                        className="input-bill-title"
+                      {p?.product?.price * p?.count}
+                      {/* <input
+                        className="input-bill-title text-center"
                         type="text"
                         {...register("price")}
                         value={formatCash(`${p?.product?.price * p?.count}`)}
-                      />
+                      /> */}
+
                       <br />
                     </div>
-                    <div className="col-lg-3">
-                      <input
-                        className="input-bill-title"
-                        type="text"
-                        {...register("address")}
-                        value={address}
-                      />
-                      <br />
-                    </div>
-                    <br />
-                    <div>{address}</div>
-                    <div>{console.log("address divv", address)}</div>
                   </div>
                 ))}
 
               <div>
                 <span className="bill">
-                  Tên người đặt hàng:
+                  Tên người đặt hàng
+                  <input
+                    className="input-bill"
+                    type="text"
+                    {...register("username")}
+                    value={convertAddress?.username}
+                  />
+                </span>
+                <br />
+                <span className="bill">
+                  Email:
+                  <input
+                    className="input-bill"
+                    type="text"
+                    {...register("email")}
+                    value={convertAddress?.email}
+                  />
+                </span>
+                <br />
+                <span className="bill">Số điện thoại {converPhone}</span>
+                <br />
+                <span className="bill">
+                  Địa chỉ: {convertUsername}
                   {/* <input
                     className="input-bill"
                     type="text"
                     {...register("email")}
-                    value={user?.email}
+                    value={convertAddress?.address}
                   /> */}
-                  <div>{user?.name}</div>
                 </span>
               </div>
 
               <div>
-                <span className="bill">
+                <span className="bill" hidden>
                   Trạng thái đơn hàng:
                   <input
                     className="input-bill"
@@ -209,19 +238,7 @@ const Payments = () => {
                       className="input-bill"
                       type="text"
                       {...register("tradingCode")}
-                      value={vnp_TransactionNo}
-                    />
-                  </span>
-                </div>
-                <div>
-                  <span className="bill">
-                    Thời gian thanh toán:{" "}
-                    <input
-                      className="input-bill"
-                      type="text"
-                      {...register("timePayment")}
-                      value={vnp_PayDate}
-                      hidden
+                      value={Math.floor(Math.random() * 10000000)}
                     />
                   </span>
                 </div>
@@ -235,7 +252,7 @@ const Payments = () => {
                     className="input-bill-total"
                     type="number"
                     {...register("billTotal")}
-                    value={vnp_Amount / 100}
+                    value={total}
                   />
                 </div>
               </div>
@@ -252,4 +269,4 @@ const Payments = () => {
   );
 };
 
-export default Payments;
+export default PaymentCOD;

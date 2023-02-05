@@ -1,16 +1,20 @@
+import { Radio, Space } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { json, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { setAddressSesstionStorage } from "../../utils/functionHelp";
+import { colorProduct } from "../../utils/contants";
 
 import { formatCash } from "../../component/formatCash";
 import { getUserCart } from "../../functions/user";
-import {
-  getAddressLocalStorage,
-  setAddressLocalStorage,
-} from "../../utils/functionHelp";
 import "./checkOut.css";
 
 const CheckOut = () => {
+  const { user } = useSelector((state) => ({ ...state }));
+
   const {
     register,
     formState: { errors },
@@ -18,6 +22,8 @@ const CheckOut = () => {
   } = useForm();
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
+  const [valuePayment, setValuePayment] = useState(1);
+  const history = useNavigate();
 
   useEffect(() => {
     const getToken = localStorage.getItem("token");
@@ -33,30 +39,44 @@ const CheckOut = () => {
     });
   }, []);
 
-  const onSubmit = (e) => {
-    sessionStorage.setItem("address", e.address);
-    axios
-      .post("http://localhost:8000/api/order/create_payment_url", {
-        amount: total,
-        e,
-      })
-      .then((res) => {
-        console.log((window.location.href = res.data.url));
-      });
+  console.log(JSON.stringify(products, null, 2));
 
-    // console.log("payment", e);
-    setAddressLocalStorage(e);
+  const onChange = (e) => {
+    setValuePayment(e.target.value);
   };
 
-  const local = localStorage.getItem("address");
-  console.log("storage address =>>>>>>", JSON.parse(local));
+  const onSubmit = (e) => {
+    setAddressSesstionStorage(e);
+    if (valuePayment === 1) {
+      console.log("redirect to bill");
+      history("/order=COD");
+    } else {
+      console.log("payment to vnpay");
+      axios
+        .post("http://localhost:8000/api/order/create_payment_url", {
+          amount: total,
+          e,
+        })
+        .then((res) => {
+          console.log((window.location.href = res.data.url));
+        });
+    }
+  };
+
+  const handleColor = (color) => {
+    const result = colorProduct.filter((colorItem) => colorItem.key == color);
+    // console.log("result", result[0]?.color);
+    return result[0]?.color;
+  };
+  // const local = localStorage.getItem("address");
+  // console.log("storage address =>>>>>>", JSON.parse(local));
   return (
     <div className="container ">
       <div>
         <div className="py-5 text-center">
           <h2>Thanh Toán Đơn Hàng</h2>
         </div>
-        <div className="row shadow p-5 mb-5 bg-white rounded">
+        <div className="row shadow py-5 px-2 mb-5 bg-white rounded">
           <div className="col-md-4 order-md-2 mb-4">
             <h4 className="d-flex justify-content-between align-items-center mb-3">
               <span className="text-muted">Giỏ hàng</span>
@@ -68,13 +88,24 @@ const CheckOut = () => {
                 <div key={i}>
                   <li className="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                      <b className="my-0">{p.product.title}</b>
-                      <div>
-                        <label>Số lượng:</label>
-                        <span className="my-0">{p?.count}</span>
-                      </div>
+                      <span className="my-0 title-checkout">
+                        {p.product.title}
+                      </span>
+                      <p className="">
+                        Màu sắc:
+                        <img
+                          src={handleColor(p.color)}
+                          style={{
+                            marginLeft: "5px",
+                            // borderRadius: "50%",
+                            width: "30px",
+                            height: "10px",
+                          }}
+                        />
+                      </p>
+                      <p>Số lượng:{p?.count}</p>
                     </div>
-                    <span className="text-muted">
+                    <span className="">
                       {formatCash(`${p.product.price * p?.count}`)}đ
                     </span>
                   </li>
@@ -82,8 +113,8 @@ const CheckOut = () => {
               ))}
 
               <li className="list-group-item d-flex justify-content-between">
-                <span>Tổng tiền (VNĐ)</span>
-                <strong className="h5">{formatCash(`${total}`)}đ</strong>
+                <span className="h5">Tổng tiền (VNĐ)</span>
+                <strong className="h4 ">{formatCash(`${total}`)}đ</strong>
               </li>
               {/* <span className="text-primary pl-2" onClick={emptyCart}>
               Xóa toàn bộ đơn hàng
@@ -120,9 +151,10 @@ const CheckOut = () => {
                     className="form-control"
                     id="firstName"
                     placeholder="Họ Tên"
-                    {...register("userName", { required: true })}
+                    {...register("username", { required: true })}
+                    value={user.name}
                   />
-                  {errors.userName && (
+                  {errors.username && (
                     <p className=" text-validate">Họ tên không được bỏ trống</p>
                   )}
                 </div>
@@ -136,11 +168,9 @@ const CheckOut = () => {
                   className="form-control"
                   id="email"
                   placeholder="you@gmail.com"
-                  {...register("email", { required: true })}
+                  {...register("email")}
+                  value={user.email}
                 />
-                {errors.email?.type === "required" && (
-                  <p className=" text-validate">Email không được bỏ trống</p>
-                )}
               </div>
               <div className="mb-4">
                 <label htmlFor="email">
@@ -155,6 +185,7 @@ const CheckOut = () => {
                     required: true,
                     pattern: /(84|0[3|5|7|8|9])+([0-9]{8})/,
                   })}
+                  value="0964184106"
                 />
                 {errors.phoneNumber?.type === "required" && (
                   <p className=" text-validate">
@@ -173,6 +204,7 @@ const CheckOut = () => {
                   id="address"
                   placeholder="Địa chỉ..."
                   {...register("address", { required: true, maxLength: 500 })}
+                  value="0964184106 số 1 hạ đình"
                 />
                 {errors.address?.type === "required" && (
                   <p className=" text-validate">
@@ -182,6 +214,24 @@ const CheckOut = () => {
                 {errors.address?.type === "maxLength" && (
                   <p className=" text-validate">Quá 500 ký tự</p>
                 )}
+              </div>
+              <div className="my-3">
+                <label htmlFor="option" className="text-danger">
+                  Lựa chọn phương thức thanh toán
+                </label>
+                <br />
+                <Radio.Group onChange={onChange} value={valuePayment}>
+                  <Space direction="vertical">
+                    <Radio value={1}>Thanh toán khi nhận hàng</Radio>
+                    <Radio value={2}>
+                      Thanh toán qua
+                      <img
+                        src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-VNPAY-QR.png"
+                        width={70}
+                      />
+                    </Radio>
+                  </Space>
+                </Radio.Group>
               </div>
               <button className="btn btn-primary btn-lg btn-block">
                 thanh toán

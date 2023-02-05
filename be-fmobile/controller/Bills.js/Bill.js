@@ -53,7 +53,9 @@ export const createBill = async (req, res) => {
 };
 export const listBill = async (req, res) => {
   try {
-    const listBill = await Bills.find({}).sort({ createdAt: -1 }).exec();
+    const listBill = await Bills.find({})
+      .populate("orderdBy")
+      .sort({ createdAt: -1 });
     res.json(listBill);
   } catch (error) {
     console.log("error", error);
@@ -65,7 +67,9 @@ export const listBill = async (req, res) => {
 
 export const detailBill = async (req, res) => {
   try {
-    const bill = await Bills.findOne({ _id: req.params.id }).exec();
+    const bill = await Bills.findOne({ _id: req.params.id })
+      .populate("orderdBy")
+      .exec();
     res.json(bill);
   } catch (error) {
     console.log(error.message);

@@ -23,6 +23,19 @@ const billSchema = new mongoose.Schema(
         },
       },
     ],
+
+    userName: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    phoneNumber: {
+      type: Number,
+    },
+    address: {
+      type: String,
+    },
     status: {
       type: ObjectId,
       ref: "Status",
@@ -33,14 +46,9 @@ const billSchema = new mongoose.Schema(
     timePayment: {
       type: String,
     },
-    username: {
-      type: String,
-    },
-    address: {
-      type: String,
-    },
+
     billTotal: Number,
-    orderdBy: { type: ObjectId, ref: "user" },
+    orderdBy: { type: ObjectId, ref: "User" },
   },
   { timestamps: true }
 );

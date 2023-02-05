@@ -41,6 +41,7 @@ import Order from "./pages/admin/order/order";
 import Profile from "./pages/user/Profile";
 import UserLayout from "./layouts/userLayout";
 import OrderDetails from "./pages/admin/order/OrderDetails";
+import PaymentCOD from "./pages/payments/paymentCOD";
 // import Spiner from "./component/spinner/spinner";
 
 const Wrapper = ({ children }) => {
@@ -102,6 +103,7 @@ const App = () => {
               <Route path="/category/:slug" element={<CategoryHome />} />
               <Route path="/products" element={<Shop />} />
               <Route path="/order/vnpay_return" element={<Payments />} />
+              <Route path="/order=COD" element={<PaymentCOD />} />
               <Route path="/" element={<UserLayout />}>
                 <Route path="/user/purchase/:id" element={<History />} />
                 <Route path="/user/password" element={<Password />} />

@@ -12,6 +12,9 @@ import {
   listRelated,
   searchFilters,
   showProductByCategory,
+  soldProduct,
+  checkSoldMaxMin,
+  soldProductMaxMin,
 } from "../controller/product.js";
 // middlewares
 import { authCheck, adminCheck } from "../middleware/auth.js";
@@ -35,4 +38,6 @@ routerProducts.get("/product/related/:productId", listRelated);
 //search
 routerProducts.post("/search/filters", searchFilters);
 routerProducts.get("/products/:slug", showProductByCategory);
+routerProducts.put("/product/sold/:id", soldProduct);
+routerProducts.get("/product/soldMaxMin", soldProductMaxMin);
 export default routerProducts;

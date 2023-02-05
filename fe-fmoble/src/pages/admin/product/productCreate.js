@@ -45,7 +45,7 @@ const ProductCreate = () => {
         toast.success(`${value.title} đã được thêm mới `);
       })
       .catch((err) => {
-        toast.error(err.response.data.err);
+        toast.error(`${err.response.data} bị lỗi `);
       });
 
     history("/admin/product");

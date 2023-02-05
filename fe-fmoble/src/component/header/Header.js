@@ -15,7 +15,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
   const logout = () => {
-    const alrt = window.confirm("goodbye rồi à");
+    const alrt = window.confirm("Bạn có muốn đăng xuất");
     if (alrt) {
       firebase.auth().signOut();
       localStorage.clear();

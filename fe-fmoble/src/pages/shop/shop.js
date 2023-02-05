@@ -163,7 +163,7 @@ const Shop = () => {
               )}
               <Row className="rowShop">
                 {products.map((product) => (
-                  <Col key={product._id} sm={6} md={6} lg={2}>
+                  <Col key={product._id} sm={2} lg={2}>
                     <Card className="card-prd mt-0 mb-4">
                       {product?.quantity !== 0 ? (
                         <div className="position-absolute stock">còn hàng</div>

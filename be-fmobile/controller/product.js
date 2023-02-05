@@ -199,3 +199,50 @@ export const showProductByCategory = async (req, res) => {
   // const product = await Product.findOne(category).populate("products").exec();
   res.json(product);
 };
+
+export const soldProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { amout } = req.body;
+    const soldInfo = await Product.findOne({ _id: id }).exec();
+    const updateSold = soldInfo.sold + amout;
+    console.log(`soldProduct sold => ${updateSold}`);
+    const productInfo = await Product.findOneAndUpdate(
+      { _id: id },
+      { sold: updateSold }
+    );
+    console.log("productInfo", productInfo);
+    return res.json(productInfo);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
+export const checkSoldMaxMin = async (req, res) => {
+  console.log("hvjhv");
+
+  // const prod = await Product.find({});
+  // console.log("prod", prod);
+  // const max = Math.max.apply(
+  //   Math,
+  //   prod.map((o) => {
+  //     return o?.sold;
+  //   })
+  // );
+  // console.log("max", max);
+
+  // return res.json({
+  //   max: 5,
+  // });
+  // res.json(error);
+};
+
+export const soldProductMaxMin = async (req, res) => {
+  try {
+    const productInfo = await Product.find({}).exec();
+    console.log("soldProductMaxMin", productInfo);
+    return res.json(productInfo);
+  } catch (error) {
+    res.json(error);
+  }
+};

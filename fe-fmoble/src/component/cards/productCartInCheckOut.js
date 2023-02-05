@@ -43,7 +43,7 @@ const ProductCartInCheckOut = ({
   }, [quantityState]);
 
   const handleColor = (color) => {
-    const result = colorProduct.filter((colorIten) => colorIten.key == color);
+    const result = colorProduct.filter((colorItem) => colorItem.key == color);
     console.log("result", result[0]?.color);
     return result[0]?.color;
   };

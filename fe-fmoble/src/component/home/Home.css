@@ -15,7 +15,9 @@
     color: #000;
 }
 
-.img-fluid {
-    min-height: 215px !important;
-    object-fit: cover;
+.img-fluid-shop {
+    width: 251px;
+    height: 251px;
+    object-fit: contain;
+    aspect-ratio: 1/1;
 }
