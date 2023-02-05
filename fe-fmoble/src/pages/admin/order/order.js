@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 const Order = () => {
   const [order, setOrder] = useState([]);
   const [status, setStatus] = useState([]);
-
   const { orderBy } = order;
   console.log("orderBy", orderBy);
   useEffect(() => {
@@ -36,9 +35,9 @@ const Order = () => {
           status: dataStatus,
         }
       );
-      toast.success("Change Status Success");
+      toast.success("Thay đổi trạng thái thành công");
     } catch (error) {
-      toast.warning("Change Status Fail");
+      toast.warning("Thay đổi trạng thái thất bại");
     }
   };
   const dataSource = order?.map((item, index) => {

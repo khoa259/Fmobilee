@@ -119,9 +119,10 @@ const App = () => {
                 <AdminRoute>
                   <AdminLayout />
                 </AdminRoute>
-              }
-            >
-              <Route index path="dashboard" element={<Dashboard />} />
+              }>
+              {/* <Route index path="dashboard" element={<Dashboard />} /> */}
+              <Route index path="order" element={<Order />} />
+              <Route path="dashboard" element={<Dashboard />} />
               <Route path="category" element={<Category />} />
               <Route path="category/:slug" element={<CategoryUpdate />} />
               <Route path="product" element={<ProductCreate />} />
