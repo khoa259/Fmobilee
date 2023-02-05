@@ -21,10 +21,13 @@ const billSchema = new mongoose.Schema(
         price: {
           type: Number,
         },
+        color: {
+          type: String,
+        },
       },
     ],
 
-    userName: {
+    username: {
       type: String,
     },
     email: {
@@ -41,6 +44,9 @@ const billSchema = new mongoose.Schema(
       ref: "Status",
     },
     tradingCode: {
+      type: String,
+    },
+    cardType: {
       type: String,
     },
     timePayment: {

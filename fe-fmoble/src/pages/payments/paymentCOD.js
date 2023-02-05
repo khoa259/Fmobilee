@@ -17,7 +17,9 @@ const PaymentCOD = () => {
   const { handleSubmit, register, reset } = useForm();
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
-  const [address, setAddress] = useState(sessionStorage.getItem("address"));
+  const [address, setAddress] = useState(
+    JSON.parse(sessionStorage.getItem("address"))
+  );
   const [idCart, setIdCard] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFail, setisModalFail] = useState(false);
@@ -26,11 +28,9 @@ const PaymentCOD = () => {
   //call APi return Vnpay
   useEffect(() => {
     const getToken = localStorage.getItem("token");
-    JSON.parse(address);
     getUserCart(getToken).then((res) => {
       setProducts(res.data.products);
       setIdCard(res.data._id);
-      console.log("getAddressLocalStorage", getAddressSesstionStorage);
       reset({ ...res.data.products, address });
       console.log("res.data", res.data);
       let totalCard = 0;
@@ -43,14 +43,15 @@ const PaymentCOD = () => {
     });
 
     // setAddress(sessionStorage.getItem("address"));
+    console.log("getAddressLocalStorage", getAddressSesstionStorage);
   }, []);
   console.log("products", products);
 
-  const getAddres = sessionStorage.getItem("address");
-  const convertAddress = JSON.parse(getAddres);
-  console.log("convertAddress", convertAddress);
-  const converPhone = convertAddress.phoneNumber;
-  const convertUsername = convertAddress.address;
+  // const getAddres = sessionStorage.getItem("address");
+  // const convertAddress = JSON.parse(getAddres);
+  // console.log("convertAddress", convertAddress);
+  // const converPhone = convertAddress.phoneNumber;
+  // const convertUsername = convertAddress.address;
 
   // const randomIdBill
 
@@ -60,11 +61,13 @@ const PaymentCOD = () => {
       ...data,
       orderdBy: user._id,
       idCart: idCart,
-      username: convertAddress.username,
-      phoneNumber: convertAddress.phoneNumber,
+      username: address.username,
+      email: address.email,
+      phoneNumber: address.phoneNumber,
+      address: address.address,
       billTotal: total,
-      address: convertAddress.address,
       products: products.map((product) => product.product),
+      images: products.map((product) => product.images),
     };
     console.log(newData);
     const status = await createBill(newData);
@@ -126,12 +129,11 @@ const PaymentCOD = () => {
         <div className="pt-4 shadow p-3 mb-5 ">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="bg-white rounded container"
-          >
+            className="bg-white rounded container">
             <div className="col">
               {products &&
-                products?.map((p) => (
-                  <div className="row">
+                products?.map((p, i) => (
+                  <div className="row" key={i}>
                     <div className="col-lg-2 ">
                       <img
                         src={p.images && p.images.length ? p.images[0].url : ""}
@@ -193,7 +195,7 @@ const PaymentCOD = () => {
                     className="input-bill"
                     type="text"
                     {...register("username")}
-                    value={convertAddress?.username}
+                    value={address?.username}
                   />
                 </span>
                 <br />
@@ -203,14 +205,16 @@ const PaymentCOD = () => {
                     className="input-bill"
                     type="text"
                     {...register("email")}
-                    value={convertAddress?.email}
+                    value={address?.email}
                   />
                 </span>
                 <br />
-                <span className="bill">Số điện thoại {converPhone}</span>
+                <span className="bill">
+                  Số điện thoại {address?.phoneNumber}
+                </span>
                 <br />
                 <span className="bill">
-                  Địa chỉ: {convertUsername}
+                  Địa chỉ: {address?.address}
                   {/* <input
                     className="input-bill"
                     type="text"
@@ -266,8 +270,7 @@ const PaymentCOD = () => {
                 </button>
                 <button
                   onClick={handleRedirect}
-                  className="btn btn-warning text-center rounded ml-3"
-                >
+                  className="btn btn-warning text-center rounded ml-3">
                   Hủy thanh toán
                 </button>
               </div>

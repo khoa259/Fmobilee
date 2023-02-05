@@ -8,6 +8,7 @@ import { formatCash } from "../../component/formatCash";
 import { useParams } from "react-router-dom";
 import { updateProduct } from "../../functions/products";
 import axios from "axios";
+import { Button } from "antd";
 const History = () => {
   const [order, setOrder] = useState([]);
   const [statusBill, setStatusBill] = useState("");
@@ -21,7 +22,6 @@ const History = () => {
       return data;
     });
   }, [statusBill]);
-  console.log("order", JSON.stringify(order, null, 2));
 
   const cancelBill = (id) => {
     console.log("id", id);
@@ -35,7 +35,6 @@ const History = () => {
 
     // updateProduct(id, { status: "6391f48b8e713e3070f753c3" }, getToken);
   };
-
   return (
     <>
       <section>
@@ -48,7 +47,7 @@ const History = () => {
           <div>
             {order?.map((item, index) =>
               item.products.map((product, idx) => (
-                <div className="px-3 mt-4" key={idx}>
+                <div className="px-3 py-4 mt-4 bg-blue" key={idx}>
                   <div className="row header-box">
                     <div className="col-6 date-order">
                       <span>
@@ -60,21 +59,17 @@ const History = () => {
                       <span>Trạng thái: {item?.status?.name}</span>
                     </div>
                   </div>
-                  {item?.status?.name == "Giao thành công" ||
-                  item?.status?.name == "Đã hủy" ? null : (
-                    <div>
-                      <button onClick={() => cancelBill(item._id)}>
-                        Hủy đơn hàng
-                      </button>
-                    </div>
-                  )}
 
                   <div key={index}>
                     <div className="row align-items-center purchase-box ">
                       <div className="col-9 row align-items-center">
                         <div className="images-bills">
                           <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw0LDGrFJFTbhGUuXIf_PQ3TcQsThG8d-ZSA&usqp=CAU"
+                            src={
+                              item.images.flat(1) && item.images.length
+                                ? item.images.flat(1)[0].url
+                                : ""
+                            }
                             className="img-thumbnail"
                             width={150}
                           />
@@ -97,15 +92,25 @@ const History = () => {
                     <div className="col code-purcharse">
                       Mã đơn hàng: {item.tradingCode}
                     </div>
+
                     <div className="col toltal-price">
                       Tổng tiền: {formatCash(`${item.billTotal}`)}VNĐ
                     </div>
                   </div>
+                  {item?.status?.name == "Giao thành công" ||
+                  item?.status?.name == "Đã hủy" ? null : (
+                    <div className="button-cancel-bill">
+                      <Button danger onClick={() => cancelBill(item._id)}>
+                        Hủy đơn hàng
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))
             )}
           </div>
         )}
+        <br />
       </section>
     </>
   );

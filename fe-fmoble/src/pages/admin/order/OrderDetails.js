@@ -19,7 +19,7 @@ const OrderDetails = () => {
     };
     getProudct();
   }, [id]);
-  console.log("order", order);
+  console.log("order", order.address);
   // const { products } = order;
   // console.log("products", products?.price);
   return (
@@ -27,22 +27,22 @@ const OrderDetails = () => {
       <h1 className="text-center">Chi tiết đơn hàng</h1>
       <div className="container border">
         <div>
+          {/* {order?.map((info, inx) => ( */}
           <div>
             <div className="py-2 ">
-              <span className="h4">Họ tên: {data?.orderdBy?.name}</span>
+              <span className="h4">Họ tên: {order.username}</span>
             </div>
             <div className="py-2">
-              <span className="h4">Địa Chỉ: {data?.orderdBy?.address}</span>
+              <span className="h4">Email: {order.email}</span>
             </div>
             <div className="py-2 ">
-              <span className="h4">Email: {data?.orderdBy?.email}</span>
+              <span className="h4">Số điện thoại: {order.phoneNumber}</span>
             </div>
             <div className="py-2 ">
-              <span className="h4">
-                Số điện thoại: {data?.orderdBy?.phoneNumber}
-              </span>
+              <span className="h4">Địa Chỉ: {order.address}</span>
             </div>
           </div>
+          {/* ))} */}
           <div className="row pt-4">
             <div className="col-5">
               Ngày đặt hàng:{" "}
@@ -55,7 +55,10 @@ const OrderDetails = () => {
               <span className="h5">{data?.tradingCode}</span>
             </div>
             <div className="col-3">
-              <span>Phương thức thanh toán: Payment</span>
+              Phương thức thanh toán:{" "}
+              <span className="h5">
+                {order.cardType === "ATM" ? "Payment" : "COD"}
+              </span>
             </div>
           </div>
 
@@ -63,6 +66,7 @@ const OrderDetails = () => {
             <thead>
               <tr>
                 <th scope="col">STT</th>
+                <th scope="col">Ảnh sản phẩm</th>
                 <th scope="col">Tên Sản phẩm</th>
                 <th scope="col">Số lượng</th>
                 <th scope="col">Giá tiền</th>
@@ -73,6 +77,16 @@ const OrderDetails = () => {
               {data?.products?.map((item, i) => (
                 <tr key={i}>
                   <th scope="row">{i + 1}</th>
+                  <th scope="row">
+                    {data?.images?.map((img, index) => (
+                      <img
+                        key={index}
+                        src={img && img.length ? img[0].url : ""}
+                        className="img-thumbnail"
+                        width={150}
+                      />
+                    ))}
+                  </th>
                   <td className="h5">{item.title}</td>
                   <td>{item.count}</td>
                   <td className="h5">{formatCash(`${item.price}`)} đ</td>

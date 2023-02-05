@@ -37,7 +37,7 @@ const ProductCartInCheckOut = ({
   const saveUpdateQty = useCallback(() => {
     const payload = {
       idProduct: p._id,
-      count: quantityState > 0,
+      count: quantityState,
       cartTotal: total,
     };
     updateQty(idCart, payload);

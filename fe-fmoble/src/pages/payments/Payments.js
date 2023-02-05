@@ -18,7 +18,9 @@ const Payments = () => {
   const { email } = user;
   const urlPaymentReturn = window.location.search;
   const [products, setProducts] = useState([]);
-  const [address, setAddress] = useState(sessionStorage.getItem("address"));
+  const [address, setAddress] = useState(
+    JSON.parse(sessionStorage.getItem("address"))
+  );
   const [idCart, setIdCard] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFail, setisModalFail] = useState(false);
@@ -33,7 +35,6 @@ const Payments = () => {
         getUserCart(getToken).then((res) => {
           setProducts(res.data.products);
           setIdCard(res.data._id);
-          console.log("getAddressLocalStorage", getAddressSesstionStorage);
           reset({ ...res.data.products, address });
           console.log("res.data", res.data);
         });
@@ -41,12 +42,13 @@ const Payments = () => {
 
     // setAddress(sessionStorage.getItem("address"));
   }, []);
+  console.log("getAddressLocalStorage", address.username);
   console.log("products", products);
   // get value in url
   const myKeyValue = window.location.search;
   const urlParams = new URLSearchParams(myKeyValue);
   const vnp_Amount = urlParams.get("vnp_Amount");
-  const vnp_BankCode = urlParams.get("vnp_BankCode");
+  const vnp_CardType = urlParams.get("vnp_CardType");
   const vnp_PayDate = urlParams.get("vnp_PayDate");
   const vnp_TransactionNo = urlParams.get("vnp_TransactionNo");
 
@@ -56,12 +58,17 @@ const Payments = () => {
     const newData = {
       ...data,
       tradingCode: vnp_TransactionNo,
+      cardType: vnp_CardType,
       orderdBy: user._id,
       idCart: idCart,
-      username: user.name,
+      username: address.username,
+      email: address.email,
+      phoneNumber: address.phoneNumber,
+      address: address.address,
       products: products.map((product) => product.product),
+      images: products.map((product) => product.images),
     };
-    console.log({ ...data });
+    console.log(newData);
     const status = await createBill(newData);
     if (status === 200) {
       showModal();
@@ -169,21 +176,42 @@ const Payments = () => {
                       <br />
                     </div>
                     <br />
-                    <div>{address}</div>
-                    <div>{console.log("address divv", address)}</div>
                   </div>
                 ))}
 
               <div>
                 <span className="bill">
-                  Tên người đặt hàng:
+                  Tên người đặt hàng
+                  <input
+                    className="input-bill"
+                    type="text"
+                    {...register("username")}
+                    value={address?.username}
+                  />
+                </span>
+                <br />
+                <span className="bill">
+                  Email:
+                  <input
+                    className="input-bill"
+                    type="text"
+                    {...register("email")}
+                    value={address?.email}
+                  />
+                </span>
+                <br />
+                <span className="bill">
+                  Số điện thoại {address?.phoneNumber}
+                </span>
+                <br />
+                <span className="bill">
+                  Địa chỉ: {address?.address}
                   {/* <input
                     className="input-bill"
                     type="text"
                     {...register("email")}
-                    value={user?.email}
+                    value={convertAddress?.address}
                   /> */}
-                  <div>{user?.name}</div>
                 </span>
               </div>
 
@@ -202,6 +230,17 @@ const Payments = () => {
 
               <hr />
               <div>
+                <div>
+                  <span className="bill">
+                    Phương thức thanh toán:
+                    <input
+                      className="input-bill"
+                      type="text"
+                      {...register("cardType")}
+                      value={vnp_CardType}
+                    />
+                  </span>
+                </div>
                 <div>
                   <span className="bill">
                     Mã giao dịch:
