@@ -43,24 +43,37 @@ const columns = [
   {
     title: "Action",
     key: "action",
-    render: () => (
+    render: (_, record) => (
       <Space size="middle">
         <a>Delete</a>
       </Space>
     ),
   },
 ];
-
+const data = [
+  {
+    key: "1",
+    name: "John Brown",
+    age: 32,
+    address: "New York No. 1 Lake Park",
+    tags: ["nice", "developer"],
+  },
+  {
+    key: "2",
+    name: "Jim Green",
+    age: 42,
+    address: "London No. 1 Lake Park",
+    tags: ["nice"],
+  },
+  {
+    key: "3",
+    name: "Joe Black",
+    age: 32,
+    address: "Sydney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
+];
 const Users = () => {
-  const data = [
-    getUser.map(item) =>({
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    })
-  ];
   const [getUser, setListUser] = useState([]);
   useEffect(() => {
     getListUser().then((res) => {

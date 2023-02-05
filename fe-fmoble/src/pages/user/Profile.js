@@ -34,6 +34,7 @@ const Profile = () => {
   }, [id, callApi]);
 
   const onUpdate = async (data) => {
+    console.log("data", data);
     setValue("name", data.name);
     setValue("email", data.email);
     const status = await updateProfileUser(id, data);
@@ -102,7 +103,8 @@ const Profile = () => {
           ]}
           onOk={() => setOpen(false)}
           onCancel={() => setOpen(false)}
-          width={800}>
+          width={800}
+        >
           <form onSubmit={handleSubmit(onUpdate)} id="myForm">
             <h4 className="text-center">Thông tin cá nhân</h4>
             {/* <FileUpload /> */}
@@ -122,7 +124,7 @@ const Profile = () => {
             <input
               className="form-control"
               placeholder="Số điện thoại"
-              {...register("user")}
+              {...register("phone")}
             />
             <label className="h5">Địa chỉ</label>
             <input
@@ -162,7 +164,7 @@ const Profile = () => {
                     </div>
                     <div className="col-sm-9">
                       <p className="text-muted mb-0 fw-normal">
-                        {userUpdate.name}
+                        {userUpdate?.name}
                       </p>
                     </div>
                   </div>
@@ -172,7 +174,7 @@ const Profile = () => {
                       <p className="mb-0">Email</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{userUpdate.email}</p>
+                      <p className="text-muted mb-0">{userUpdate?.email}</p>
                     </div>
                   </div>
                   <hr />
@@ -181,7 +183,7 @@ const Profile = () => {
                       <p className="mb-0">Số điện thoại</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{userUpdate.phone}</p>
+                      <p className="text-muted mb-0">{userUpdate?.phone}</p>
                     </div>
                   </div>
                   <hr />
