@@ -35,7 +35,7 @@ export const MenuAdmin = [
     id: 5,
     icon: "fa-solid fa-user ",
     label: "Quản lý user",
-    path: "/admin/user",
+    path: "/admin/users",
   },
   {
     id: 6,

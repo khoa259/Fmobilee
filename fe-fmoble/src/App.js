@@ -42,6 +42,7 @@ import Profile from "./pages/user/Profile";
 import UserLayout from "./layouts/userLayout";
 import OrderDetails from "./pages/admin/order/OrderDetails";
 import PaymentCOD from "./pages/payments/paymentCOD";
+import User from "./pages/admin/Users/Users";
 // import Spiner from "./component/spinner/spinner";
 
 const Wrapper = ({ children }) => {
@@ -118,7 +119,8 @@ const App = () => {
                 <AdminRoute>
                   <AdminLayout />
                 </AdminRoute>
-              }>
+              }
+            >
               <Route index path="dashboard" element={<Dashboard />} />
               <Route path="category" element={<Category />} />
               <Route path="category/:slug" element={<CategoryUpdate />} />
@@ -127,6 +129,7 @@ const App = () => {
               <Route path="product/:slug" element={<ProductUpdate />} />
               <Route path="order" element={<Order />} />
               <Route path="order/:id" element={<OrderDetails />} />
+              <Route path="users" element={<User />} />
             </Route>
             <Route path="*" element={<Page404 />} />
           </Routes>

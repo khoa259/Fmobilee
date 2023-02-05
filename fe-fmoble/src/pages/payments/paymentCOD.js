@@ -95,6 +95,9 @@ const PaymentCOD = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const handleRedirect = () => {
+    navigate("/");
+  };
   return (
     <>
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
@@ -123,7 +126,8 @@ const PaymentCOD = () => {
         <div className="pt-4 shadow p-3 mb-5 ">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="bg-white rounded container">
+            className="bg-white rounded container"
+          >
             <div className="col">
               {products &&
                 products?.map((p) => (
@@ -259,6 +263,12 @@ const PaymentCOD = () => {
               <div className="text-center mt-5">
                 <button className="btn btn-success text-center rounded">
                   Xác nhận thanh toán
+                </button>
+                <button
+                  onClick={handleRedirect}
+                  className="btn btn-warning text-center rounded ml-3"
+                >
+                  Hủy thanh toán
                 </button>
               </div>
             </div>
