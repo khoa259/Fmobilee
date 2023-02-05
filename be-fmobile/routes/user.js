@@ -9,8 +9,9 @@ import {
   wishlist,
   getwishlist,
   deletewishlist,
+  getallUsers,
 } from "../controller/user.js";
-import { authCheck } from "../middleware/auth.js";
+import { adminCheck, authCheck } from "../middleware/auth.js";
 
 const routerCart = Router();
 
@@ -20,6 +21,7 @@ routerCart.delete("/user/cart/:id/:idProduct", emptyCart); // empty cart
 routerCart.post("/user/address", authCheck, saveAddress);
 routerCart.put("/user/cart/:id", countPrdCard);
 routerCart.get("/user/orders/:id", authCheck, ordersByUser);
+routerCart.get("/users", authCheck, getallUsers);
 
 // wishlist
 

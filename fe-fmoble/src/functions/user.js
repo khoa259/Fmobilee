@@ -69,8 +69,6 @@ export const getWishlist = async (authtoken) => {
       authtoken: authtoken,
     },
   });
-  console.log("__data__", data);
-
   return data;
 };
 
@@ -97,4 +95,9 @@ export const addToWishList = async (productId, authtoken) => {
       },
     }
   );
+};
+
+export const getListUser = async () => {
+  const { data } = await axios.get(`${process.env.REACT_APP_API}/users`);
+  return data;
 };
