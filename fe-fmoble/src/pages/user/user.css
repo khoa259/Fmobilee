@@ -3,6 +3,10 @@
     --white: #fff
 }
 
+.bg-blue {
+    background: #f1f2f3;
+}
+
 .header-box {
     background-color: var(--gray);
     padding: 10px 0;

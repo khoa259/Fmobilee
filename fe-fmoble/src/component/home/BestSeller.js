@@ -7,7 +7,6 @@ import { Pagination } from "antd";
 import Spinner from "../../component/spinner/spinner";
 import { formatCash } from "../formatCash";
 import { useSelector } from "react-redux";
-import { showAverage } from "../../functions/ratings";
 
 const BestSeller = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -50,7 +49,7 @@ const BestSeller = () => {
                     )}
                     <Link to={`/${product.slug}`}>
                       <Card.Img
-                        className="img-fluid"
+                        className="img-fluid-shop"
                         src={
                           product.images && product.images.length
                             ? product.images[0].url
@@ -75,11 +74,14 @@ const BestSeller = () => {
           </div>
         )}
         <div className="w-full text-center mt-4">
-          <Link to="/products">
-            <button className="btn btn-md rounded btn-primary text-center">
-              Xem thêm
-            </button>
-          </Link>
+          <div className="mt-5 text-center">
+            <Link to="/products">
+              <button className="btnViewMore">
+                Xem thêm sản phẩm
+                <i className="fa-solid fa-arrow-right pl-2"></i>
+              </button>
+            </Link>
+          </div>
         </div>
         <Pagination
           current={page}

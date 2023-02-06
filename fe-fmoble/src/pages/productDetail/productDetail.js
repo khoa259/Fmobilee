@@ -246,7 +246,7 @@ const ProductDetail = () => {
                 )}
                 <NavLink to={`/${item.slug}`}>
                   <Card.Img
-                    className="img-fluid"
+                    className="img-fluid-shop"
                     src={
                       item.images && item.images.length
                         ? item.images[0].url

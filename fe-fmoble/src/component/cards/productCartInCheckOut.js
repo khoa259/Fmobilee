@@ -128,6 +128,7 @@ const ProductCartInCheckOut = ({
                 type="number"
                 placeholder={1}
                 min="0"
+                max={10}
                 value={quantityState}
                 // onChange={handleQuantityChange}
               />
