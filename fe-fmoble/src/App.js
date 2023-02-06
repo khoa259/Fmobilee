@@ -122,10 +122,10 @@ const App = () => {
               }>
               {/* <Route index path="dashboard" element={<Dashboard />} /> */}
               <Route index path="order" element={<Order />} />
-              <Route path="dashboard" element={<Dashboard />} />
               <Route path="category" element={<Category />} />
               <Route path="category/:slug" element={<CategoryUpdate />} />
               <Route path="product" element={<ProductCreate />} />
+              <Route path="dashboard" element={<Dashboard />} />
               <Route path="products" element={<ListProducts />} />
               <Route path="product/:slug" element={<ProductUpdate />} />
               <Route path="order" element={<Order />} />

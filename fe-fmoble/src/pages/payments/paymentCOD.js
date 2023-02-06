@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -7,10 +6,12 @@ import { Button, Modal, Result } from "antd";
 
 import "./payment.css";
 
-import { formatCash } from "../../component/formatCash";
 import { getUserCart } from "../../functions/user";
 import { createBill } from "../../functions/Bill";
-import { getAddressSesstionStorage } from "../../utils/functionHelp";
+import {
+  getAddressSesstionStorage,
+  removeAddressLocalStorage,
+} from "../../utils/functionHelp";
 //load stripe outside of components render to avoid
 const PaymentCOD = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -42,18 +43,9 @@ const PaymentCOD = () => {
       setTotal(totalCard);
     });
 
-    // setAddress(sessionStorage.getItem("address"));
     console.log("getAddressLocalStorage", getAddressSesstionStorage);
   }, []);
   console.log("products", products);
-
-  // const getAddres = sessionStorage.getItem("address");
-  // const convertAddress = JSON.parse(getAddres);
-  // console.log("convertAddress", convertAddress);
-  // const converPhone = convertAddress.phoneNumber;
-  // const convertUsername = convertAddress.address;
-
-  // const randomIdBill
 
   //Handle SUbmit form
   const onSubmit = async (data) => {
@@ -85,6 +77,7 @@ const PaymentCOD = () => {
   };
   const handleOk = () => {
     setIsModalOpen(false);
+    sessionStorage.removeItem("address");
     navigate("/");
   };
   const handleOkFail = () => {
@@ -144,7 +137,6 @@ const PaymentCOD = () => {
                         className="input-bill-title"
                         type="text"
                         {...register("images")}
-                        // value={p?.images[0]}
                       />
                     </div>
                     <div className="col-lg-7">
@@ -155,34 +147,14 @@ const PaymentCOD = () => {
                         className="input-bill-title"
                         type="text"
                         {...register("title")}
-                        // value={p?._id}
-                      />{" "}
+                      />
                       <br />
                       Màu sắc:
                       {p?.color}
-                      {/* <input
-                        className="input-bill-title"
-                        type="text"
-                        {...register("color")}
-                        value={p?.color}
-                      /> */}
                       <br />X {p?.count}
-                      {/* <input
-                        className="input-bill-title"
-                        type="text"
-                        {...register("count")}
-                        value=
-                      /> */}
                     </div>
                     <div className="col-lg-3">
                       {p?.product?.price * p?.count}
-                      {/* <input
-                        className="input-bill-title text-center"
-                        type="text"
-                        {...register("price")}
-                        value={formatCash(`${p?.product?.price * p?.count}`)}
-                      /> */}
-
                       <br />
                     </div>
                   </div>
@@ -213,15 +185,7 @@ const PaymentCOD = () => {
                   Số điện thoại {address?.phoneNumber}
                 </span>
                 <br />
-                <span className="bill">
-                  Địa chỉ: {address?.address}
-                  {/* <input
-                    className="input-bill"
-                    type="text"
-                    {...register("email")}
-                    value={convertAddress?.address}
-                  /> */}
-                </span>
+                <span className="bill">Địa chỉ: {address?.address}</span>
               </div>
 
               <div>

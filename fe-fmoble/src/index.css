@@ -131,11 +131,13 @@ a:hover {
 .swiper-pagination-bullet-active {
   background: var(--light) !important;
   border-radius: 0 !important;
+  padding: 4px 2rem !important;
   width: var(--width-panigation) !important;
   height: var(--height-panigation) !important;
 }
 
 .card-prd {
+  min-width: 225px !important;
   position: relative;
   border-radius: 9px !important;
   border-top-right-radius: 0px !important;

@@ -140,7 +140,9 @@ export const countPrdCard = async (req, res) => {
 
 export const ordersByUser = async (req, res) => {
   try {
-    const userBills = await Bills.find().populate("status", "name");
+    const userBills = await Bills.find()
+      .sort({ createdAt: -1 })
+      .populate("status", "name");
     const billData = userBills.filter(
       (dataBill) => dataBill.orderdBy == req.params.id
     );

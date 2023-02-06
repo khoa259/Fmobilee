@@ -166,15 +166,6 @@ const Payments = () => {
                       />
                       <br />
                     </div>
-                    <div className="col-lg-3">
-                      <input
-                        className="input-bill-title"
-                        type="text"
-                        {...register("address")}
-                        value={address}
-                      />
-                      <br />
-                    </div>
                     <br />
                   </div>
                 ))}
@@ -217,7 +208,6 @@ const Payments = () => {
 
               <div>
                 <span className="bill">
-                  Trạng thái đơn hàng:
                   <input
                     className="input-bill"
                     type="text"
@@ -254,7 +244,6 @@ const Payments = () => {
                 </div>
                 <div>
                   <span className="bill">
-                    Thời gian thanh toán:{" "}
                     <input
                       className="input-bill"
                       type="text"
