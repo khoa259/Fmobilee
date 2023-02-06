@@ -41,25 +41,25 @@ const Category = () => {
         if (err.response.status === 400) return toast.error(err.response.data);
       });
   };
-  const handleRemove = async (slug) => {
-    // let answer = window.confirm("Delete?");
-    // console.log(answer, slug);
-    if (window.confirm("Bạn có chắc muốn xóa không")) {
-      setLoading(true);
-      removeCategory(slug, user.token)
-        .then((res) => {
-          setLoading(true);
-          toast.error(`${res.data.name} đã được xóa thành công`);
-          loadCategories();
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            setLoading(false);
-            toast.error(err.response.data);
-          }
-        });
-    }
-  };
+  // const handleRemove = async (slug) => {
+  //   // let answer = window.confirm("Delete?");
+  //   // console.log(answer, slug);
+  //   if (window.confirm("Bạn có chắc muốn xóa không")) {
+  //     setLoading(true);
+  //     removeCategory(slug, user.token)
+  //       .then((res) => {
+  //         setLoading(true);
+  //         toast.error(`${res.data.name} đã được xóa thành công`);
+  //         loadCategories();
+  //       })
+  //       .catch((err) => {
+  //         if (err.response.status === 400) {
+  //           setLoading(false);
+  //           toast.error(err.response.data);
+  //         }
+  //       });
+  //   }
+  // };
   const handleSearchChange = (e) => {
     e.preventDefault();
     setKeyword(e.target.value.toLowerCase());

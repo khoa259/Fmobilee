@@ -37,7 +37,7 @@ const ProductCartInCheckOut = ({
   const saveUpdateQty = useCallback(() => {
     const payload = {
       idProduct: p._id,
-      count: quantityState > 0,
+      count: quantityState,
       cartTotal: total,
     };
     updateQty(idCart, payload);
@@ -78,12 +78,14 @@ const ProductCartInCheckOut = ({
             <div className="row align-items-center">
               <i
                 className="fa-sharp fa-solid fa-circle-xmark remove-cart"
-                onClick={removeItem}></i>
+                onClick={removeItem}
+              ></i>
 
               <div className="col-12 col-md-4 mb-3">
                 <div
                   className="d-flex align-items-center justify-content-center bg-light"
-                  style={{ width: 96, height: 128 }}>
+                  style={{ width: 96, height: 128 }}
+                >
                   <img
                     className="img-fluid"
                     style={{ objectFit: "contain" }}
