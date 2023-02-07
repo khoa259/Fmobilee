@@ -11,6 +11,8 @@ const CategoryUpdate = () => {
   const history = useNavigate();
   const { user } = useSelector((state) => ({ ...state }));
   const { slug } = useParams();
+  const [cateogry, setCateogry] = useState([]);
+
   const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, reset } = useForm();
@@ -18,11 +20,13 @@ const CategoryUpdate = () => {
   useEffect(() => {
     const loadCategory = async () => {
       const { data } = await getCategory(slug);
+      console.log("data", data?.category?.slug);
       reset(data);
-      console.log(data);
+      setCateogry(data);
     };
     loadCategory();
   }, []);
+  console.log("name", cateogry);
   const onSubmit = async (data) => {
     setLoading(true);
     await updateCategory(slug, data, user.token)
@@ -47,8 +51,7 @@ const CategoryUpdate = () => {
           type="text"
           className="form-control"
           {...register("name", { required: true })}
-          // autoFocus
-          required
+          defaultValue={cateogry?.category?.name}
         />
         <br />
         <button className="btn btn-outline-primary">cập nhật</button>

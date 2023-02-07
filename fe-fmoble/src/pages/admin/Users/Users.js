@@ -68,9 +68,9 @@ const Users = () => {
       // width: 340,
     },
     {
-      title: "role",
-      key: "tags",
-      dataIndex: "tags",
+      title: "Phân quyền",
+      key: "Phân quyền",
+      dataIndex: "Phân quyền",
       width: 100,
       render: (_, { tags }) => (
         <>
@@ -93,8 +93,8 @@ const Users = () => {
       width: 200,
     },
     {
-      title: "Action",
-      key: "action",
+      title: "Hoạt động",
+      key: "Hoạt động",
       width: 100,
       render: (_, record) => (
         <Space size="middle">
