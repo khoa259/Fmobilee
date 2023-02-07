@@ -32,11 +32,11 @@ const ListProducts = () => {
   };
 
   const handleRemove = (slug) => {
-    if (window.confirm(`Delete? ${slug}`)) {
+    if (window.confirm(`Bạn có muốn xóa? ${slug}`)) {
       removeProduct(slug, user.token)
         .then((res) => {
           loadAllProducts();
-          toast.error(`${res.data} is deleted`);
+          toast.error(`${res.data} đã được xóa`);
         })
         .catch((err) => {
           if (err.response?.status === 400) toast.error(err.response.data);

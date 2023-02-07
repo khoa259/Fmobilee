@@ -80,6 +80,11 @@ const History = () => {
                             </div>
                             <div className="count-items">
                               <span>
+                                Màu:
+                                <span> {item.color[idx]}</span>
+                                <br />
+                              </span>
+                              <span>
                                 SL:
                                 {item.cardType !== "ATM"
                                   ? "3"

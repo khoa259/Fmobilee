@@ -90,7 +90,11 @@ const OrderDetails = () => {
                       })}
                       {console.log("data.images[i].url", data?.images[i])}
                     </th>
-                    <td className="h5">{item.title}</td>
+                    <td className="h5">
+                      {item.title}
+                      <br />
+                      màu: <span> {data?.color[i]} </span>
+                    </td>
                     {/*  */}
                     <td>{order.cardType !== "ATM" ? "3" : `${data.count}`}</td>
                     <td className="h5">{formatCash(`${item.price}`)} đ</td>

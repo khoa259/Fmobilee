@@ -152,7 +152,7 @@ const CheckOut = () => {
                     id="firstName"
                     placeholder="Họ Tên"
                     {...register("username", { required: true })}
-                    value={user.name}
+                    defaultValue={user.name}
                   />
                   {errors.username && (
                     <p className=" text-validate">Họ tên không được bỏ trống</p>
@@ -169,7 +169,7 @@ const CheckOut = () => {
                   id="email"
                   placeholder="you@gmail.com"
                   {...register("email")}
-                  value={user.email}
+                  defaultValue={user.email}
                 />
               </div>
               <div className="mb-4">
@@ -185,7 +185,6 @@ const CheckOut = () => {
                     required: true,
                     pattern: /(84|0[3|5|7|8|9])+([0-9]{8})/,
                   })}
-                  value="0964184106"
                 />
                 {errors.phoneNumber?.type === "required" && (
                   <p className=" text-validate">
@@ -204,7 +203,6 @@ const CheckOut = () => {
                   id="address"
                   placeholder="Địa chỉ..."
                   {...register("address", { required: true, maxLength: 500 })}
-                  value="0964184106 số 1 hạ đình"
                 />
                 {errors.address?.type === "required" && (
                   <p className=" text-validate">

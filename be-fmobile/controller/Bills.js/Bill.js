@@ -6,6 +6,7 @@ export const createBill = async (req, res) => {
     const {
       products,
       images,
+      color,
       username,
       email,
       address,
@@ -27,6 +28,7 @@ export const createBill = async (req, res) => {
     //check {{products, billTotal, orderdBy} co dung dinh dang model hay ko
     const bill = {
       products,
+      color,
       images,
       username,
       email,

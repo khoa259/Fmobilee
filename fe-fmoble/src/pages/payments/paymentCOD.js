@@ -60,6 +60,7 @@ const PaymentCOD = () => {
       billTotal: total,
       products: products.map((product) => product.product),
       images: products.map((product) => product.images),
+      color: products.map((product) => product.color),
     };
     console.log(newData);
     const status = await createBill(newData);

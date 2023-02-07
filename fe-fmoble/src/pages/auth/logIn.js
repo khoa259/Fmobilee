@@ -22,7 +22,7 @@ const Login = () => {
 
   const roleBasedRedirect = (res) => {
     if (res.data.role === "admin") {
-      history("/admin/dashboard");
+      history("/admin/order");
     } else {
       history("/");
     }

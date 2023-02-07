@@ -9,6 +9,9 @@ const billSchema = new mongoose.Schema(
     count: {
       type: Number,
     },
+    color: {
+      type: Array,
+    },
     products: [
       {
         product: {
@@ -20,9 +23,6 @@ const billSchema = new mongoose.Schema(
         },
         price: {
           type: Number,
-        },
-        color: {
-          type: String,
         },
       },
     ],

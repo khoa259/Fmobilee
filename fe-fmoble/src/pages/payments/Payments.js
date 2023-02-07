@@ -67,6 +67,7 @@ const Payments = () => {
       address: address.address,
       products: products.map((product) => product.product),
       images: products.map((product) => product.images),
+      color: products.map((product) => product.color),
     };
     console.log(newData);
     const status = await createBill(newData);
@@ -147,6 +148,14 @@ const Payments = () => {
                         type="text"
                         {...register("title")}
                         value={p?.product?.title}
+                      />{" "}
+                      <br />
+                      màu :
+                      <input
+                        className="input-bill-title"
+                        type="text"
+                        {...register("color")}
+                        value={p?.color}
                       />{" "}
                       <br />
                       X
